@@ -1,93 +1,114 @@
-/* eslint-disable */ 
-import { getDefaultMiddleware, combineReducers, configureStore, Reducer, EnhancedStore } from '@reduxjs/toolkit';
-import createSagaMiddleware, { Task } from 'redux-saga';
+import { getDefaultMiddleware, combineReducers, configureStore, EnhancedStore } from '@reduxjs/toolkit';
+import createSagaMiddleware from 'redux-saga';
 import { rootInitialState, rootReducer } from './reducer';
-import set from 'set-value'
-import mapState from './map-state'
-import { AuditsPlugin } from '../fronteggAudits'
-import { AuthPlugin } from '../fronteggAuth'
+import { PluginConfig } from '@frontegg/react-core';
+import { all, call } from 'redux-saga/effects';
+import { VueConstructor } from 'vue';
+import { ContextOptions } from '@frontegg/rest-api';
+import { Unsubscribe } from 'redux';
+import set from 'set-value';
+import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
+import mapState from './map-state';
 
-// @ts-ignore
-const combinedPluginsStore = (plugins) => {
-    const sagaMiddleware = createSagaMiddleware();
-    const middleware = [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware];
-    let fronteggStore: EnhancedStore;
-    const devTools = process.env.NODE_ENV === 'development' || props.debugMode ? { name: 'Frontegg Store' } : undefined;
-    const reducer = combineReducers({
-      root: rootReducer,
-      ...plugins.reduce((p, n) => ({ ...p, [n.storeName]: n.reducer }), {}),
-    });
-    const preloadedState = {
-      root: { ...rootInitialState, context: 'init contx' },
-      ...plugins.reduce(
-        (p, n) => ({
-          ...p,
-          [n.storeName]: {
-            ...n.preloadedState,
-          },
-        }),
-        {}
-      ),
-    };
-    return fronteggStore = configureStore({
-      reducer,
-      preloadedState,
-      middleware: [...middleware, ...([])],
-      devTools,
-    });
-}
+/**
+ * receive contextOption and plugins, combine reducers, initial states and construct frontegg store
+ * @param contextOptions
+ * @param plugins
+ */
+const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginConfig[]) => {
+  const sagaMiddleware = createSagaMiddleware();
+  const middleware = [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware];
+
+  const devTools = { name: 'Frontegg Store' };
+  const reducer = combineReducers({
+    root: rootReducer,
+    ...plugins.reduce((p, n) => ({ ...p, [n.storeName]: n.reducer }), {}),
+  });
+  const preloadedState = {
+    root: { ...rootInitialState, context: contextOptions },
+    ...plugins.reduce(
+      (p, n) => ({
+        ...p,
+        [n.storeName]: {
+          ...n.preloadedState,
+        },
+      }),
+      {},
+    ),
+  };
+  const fronteggStore = configureStore({
+    reducer,
+    preloadedState,
+    middleware: [...middleware, ...([])],
+    devTools,
+  });
+
+  function* rootSaga() {
+    yield all(plugins.map(({ sagas }) => call(sagas)));
+  }
+
+  sagaMiddleware.run(rootSaga);
+  return fronteggStore;
+};
 
 export default {
-    install(Vue, options) {
-        const plugins = [AuthPlugin, AuditsPlugin]
-        const store = combinedPluginsStore(plugins)
+  install(Vue: VueConstructor, options: ContextOptions) {
+    let pluginRegistered = false;
+    const plugins: PluginConfig[] = [];
+    let store: EnhancedStore;
 
-        Vue.prototype.registerFronteggPlugin = ({ component, store, actions = {}, binding = 'store' }) => {
-            if (!store) {
-                console.warn(`[fronteggCore]: No store attatched, please provide a redux-store to the connector`)
-                return
-            }
 
-            const syncStateWithComponent = (component, bindings) => () => {
-                const state = store.getState()
-            
-                Object.keys(bindings).forEach(prop => {
-                  const getter = bindings[prop]
-            
-                  if (!getter) {
-                    return
-                  }
-            
-                  set(component._data, prop, getter(state))
-                })
-            }
+    const registerPlugins = () => {
+      console.log('registering plugins', plugins);
+      store = combinedPluginsStore(options, plugins);
+    };
 
-            component.REDUX_VUEX_STORE = binding
+    Vue.registerFronteggPlugin = (pluginConfig: PluginConfig) => {
+      console.log('new register request for plugin', pluginConfig);
+      plugins.push(pluginConfig);
+    };
 
-            if (!component[component.REDUX_VUEX_STORE]) {
-                component[component.REDUX_VUEX_STORE] = store
-            }
+    const syncStateWithComponent = (component: Vue, bindings: any) => () => {
+      const state = store.getState();
+      debugger;
 
-            if (!component.REDUX_VUEX_ACTIONS) {
-                component.REDUX_VUEX_ACTIONS = actions
-            }
+      Object.keys(bindings).forEach(prop => {
+        const getter = bindings[prop];
+        if (!getter) {
+          return;
+        }
+        set(component._data, prop, getter(state));
+      });
+    };
 
-            component.mapState = (...props) => mapState(...props).call(component)
-            // If the helper methods (mapState) registered store bindings, create subscriptions
-            if (component.REDUX_VUEX_BINDINGS) {
-                component.unsubscribe = store.subscribe(
-                syncStateWithComponent(component, component.REDUX_VUEX_BINDINGS)
-                )
-            }
+
+    Vue.mixin({
+      beforeCreate() {
+        console.log('FronteggCore.beforeCreate');
+        if (!pluginRegistered) {
+          pluginRegistered = true;
+          registerPlugins();
+        }
+        // subscribe to state if required
+
+        if (!this[FRONTEGG_STORE_KEY]) {
+          this[FRONTEGG_STORE_KEY] = store;
         }
 
-        Vue.mixin({
-            beforeCreate() {
-                this.registerFronteggPlugin({component: this, store: store})
-            },
-            beforeDestroy () {
-                this.unsubscribe && this.unsubscribe()
-            }
-        })
-    }
-}
+        // @ts-ignore
+        this.mapState = (...props: any[]) => mapState(...props).call(this);
+      },
+      created() {
+        // @ts-ignore
+        if (this.FRONTEGG_REDUX_BINDINGS) {
+          // @ts-ignore
+          this.FRONTEGG_UNSUBSCRIBE = store.subscribe(syncStateWithComponent(this, this.FRONTEGG_REDUX_BINDINGS));
+        }
+      },
+      beforeDestroy() {
+        console.log('FronteggCore.beforeDestroy');
+        (this as Vue).FRONTEGG_UNSUBSCRIBE?.();
+      },
+    });
+  },
+};

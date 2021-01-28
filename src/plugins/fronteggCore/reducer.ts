@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { ContextOptions } from './interfaces';
+import { ContextOptions } from '@frontegg/rest-api';
 
 export interface RootState {
   context?: ContextOptions;

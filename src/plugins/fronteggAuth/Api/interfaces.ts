@@ -1,5 +1,5 @@
 import { ApiTokensState } from './ApiTokensState';
-import { AuthPageProps, AuthPageRoutes } from '../interfaces';
+import { AuthPageRoutes } from '../interfaces';
 import { IUserProfile, RedirectOptions } from '@frontegg/rest-api';
 import { ActivateState } from './ActivateState';
 import { LoginState } from './LoginState';
@@ -18,11 +18,9 @@ export type WithSilentLoad<T> = T & {
 export type WithCallback<T = {}, R = boolean> = T & {
   callback?: (data: R | null, error?: string) => void;
 };
-export type LoaderIndicatorState<T extends string> = Partial<
-  {
-    [key in T]: string | boolean;
-  }
->;
+export type LoaderIndicatorState<T extends string> = Partial<{
+  [key in T]: string | boolean;
+}>;
 
 export interface User extends IUserProfile {
   accessToken: string;
@@ -35,7 +33,7 @@ interface Routes {
   routes: AuthPageRoutes;
 }
 
-export interface AuthState extends Omit<AuthPageProps, 'pageHeader' | 'pageProps'>, Routes {
+export interface AuthState extends Routes {
   onRedirectTo: (path: string, opts?: RedirectOptions) => void;
   error?: any;
   isAuthenticated: boolean;

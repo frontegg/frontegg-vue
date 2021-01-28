@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import { LoaderIndicatorState } from '../interfaces';
 import { ITeamUserRole } from '@frontegg/rest-api';
 
@@ -33,7 +32,7 @@ export interface IApiTokensData {
   description: string;
 }
 
-export interface IUserApiTokensData extends IApiTokensData {}
+export type IUserApiTokensData = IApiTokensData;
 
 export interface ITenantApiTokensData extends IApiTokensData {
   roleIds: Array<string>;

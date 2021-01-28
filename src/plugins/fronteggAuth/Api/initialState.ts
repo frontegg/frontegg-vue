@@ -1,4 +1,3 @@
-/* eslint-disable */ 
 import { loginState } from './LoginState';
 import { AuthState } from './interfaces';
 import { activateState } from './ActivateState';
@@ -46,4 +45,5 @@ export const initialState: AuthState = {
   onRedirectTo: () => {},
 
   ...reinitializeState,
+
 };

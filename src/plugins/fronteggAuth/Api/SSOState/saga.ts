@@ -5,7 +5,6 @@ import { omitProps } from '@frontegg/react-core';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { SSOState } from './interfaces';
 import { WithCallback } from '../interfaces';
-import { SamlVendors } from '../../SSO/SSOConfigureIDPPage/SSOVendors';
 
 function* loadSSOConfigurations() {
   try {
@@ -40,7 +39,7 @@ function* saveSSOConfigurationsFile({ payload: configFile }: PayloadAction<File[
 
 function* saveSSOConfigurations({
   payload: { callback, samlVendor, ...newSamlConfiguration },
-}: PayloadAction<WithCallback<Partial<ISamlConfiguration & { samlVendor?: SamlVendors }>>>) {
+}: PayloadAction<WithCallback<Partial<ISamlConfiguration & { samlVendor?: any }>>>) {
   const oldSamlConfiguration = yield select((state) => state.auth.ssoState.samlConfiguration);
 
   const samlConfiguration = { ...oldSamlConfiguration, ...newSamlConfiguration };
