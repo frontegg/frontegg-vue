@@ -70,7 +70,6 @@ export default {
 
     const syncStateWithComponent = (component: Vue, bindings: any) => () => {
       const state = store.getState();
-      debugger;
 
       Object.keys(bindings).forEach(prop => {
         const getter = bindings[prop];
@@ -84,7 +83,6 @@ export default {
 
     Vue.mixin({
       beforeCreate() {
-        console.log('FronteggCore.beforeCreate');
         if (!pluginRegistered) {
           pluginRegistered = true;
           registerPlugins();

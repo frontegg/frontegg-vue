@@ -10,8 +10,6 @@ const simpleMappers = (props: any, getter: any) => function () {
 
   const slices = [].concat.apply([], props);
   const state = vueInstance[FRONTEGG_STORE_KEY].getState();
-
-  debugger;
   vueInstance.FRONTEGG_REDUX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: getter(prop),
   }), vueInstance.FRONTEGG_REDUX_BINDINGS || {});
