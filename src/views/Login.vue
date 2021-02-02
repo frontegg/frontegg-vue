@@ -1,10 +1,12 @@
 <template>
   <div class="fe-login-page">
     <div class="fe-login-container">
-      <div class="fe-login-header"><img src="../assets/main-logo.svg" /></div>
+      <div class="fe-login-header">
+        <img src="../assets/main-logo.svg">
+      </div>
       <div class="fe-login-component">
-        <LoginWithPassword></LoginWithPassword>
-        <SocialLogins></SocialLogins>
+        <LoginWithPassword />
+        <SocialLogins />
       </div>
     </div>
   </div>
@@ -12,8 +14,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import LoginWithPassword from '@/components/Login/LoginWithPassword'
-import SocialLogins from '@/components/Login/SocialLogins'
+import LoginWithPassword from '@/components/Login/LoginWithPassword.vue';
+import SocialLogins from '@/components/Login/SocialLogins.vue';
 
 export default Vue.extend({
   name: 'Home',

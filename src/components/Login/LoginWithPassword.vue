@@ -5,13 +5,14 @@
       <span
         class="fe-login-component__back-to-sign-up-link"
         data-testid="email-box"
-        >Sign up.</span
-      >
+      >Sign up.</span>
     </div>
     <div class="fe-form">
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
-          <div class="fe-input__label">Email</div>
+          <div class="fe-input__label">
+            Email
+          </div>
         </div>
         <div class="fe-input__inner fe-input__inner-large">
           <input
@@ -21,7 +22,7 @@
             class="fe-input__input"
             type="email"
             value=""
-          />
+          >
         </div>
       </div>
       <span style="visibility: hidden; position: absolute">
@@ -48,7 +49,7 @@
               class="fe-input__input"
               type="password"
               value=""
-            />
+            >
             <svg
               width="2rem"
               height="2rem"
@@ -61,7 +62,7 @@
                 M2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27z
                 M7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2z
                 m4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"
-              ></path>
+              />
             </svg>
           </div>
         </div>

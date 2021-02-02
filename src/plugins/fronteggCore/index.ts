@@ -57,7 +57,6 @@ export default {
     const plugins: PluginConfig[] = [];
     let store: EnhancedStore;
 
-
     const registerPlugins = () => {
       console.log('registering plugins', plugins);
       store = combinedPluginsStore(options, plugins);
@@ -79,7 +78,6 @@ export default {
         set(component._data, prop, getter(state));
       });
     };
-
 
     Vue.mixin({
       beforeCreate() {
@@ -104,7 +102,6 @@ export default {
         }
       },
       beforeDestroy() {
-        console.log('FronteggCore.beforeDestroy');
         (this as Vue).FRONTEGG_UNSUBSCRIBE?.();
       },
     });

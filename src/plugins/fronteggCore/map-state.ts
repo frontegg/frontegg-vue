@@ -4,7 +4,7 @@ import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 // @ts-ignore
 const defaultGetter = prop => state => get(state, prop);
 
-const simpleMappers = (props: any, getter: any) => function () {
+const simpleMappers = (props: any, getter: any) => function() {
   // @ts-ignore
   const vueInstance: any = this;
 
@@ -19,7 +19,7 @@ const simpleMappers = (props: any, getter: any) => function () {
   }), {});
 };
 
-const objectMappers = (obj: any, fallbackGetter: any) => function () {
+const objectMappers = (obj: any, fallbackGetter: any) => function() {
   // @ts-ignore
   const vueInstance: any = this;
 
@@ -55,4 +55,4 @@ export default (...props: any[]) => {
     mapper = simpleMappers(props, defaultGetter);
   }
   return mapper;
-}
+};
