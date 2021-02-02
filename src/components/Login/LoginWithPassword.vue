@@ -1,31 +1,26 @@
 <template>
-  <div>
-    <div>
+  <v-row>
+    <v-col
+      cols="12"
+    >
       Dont have an account?
       <span
         class="fe-login-component__back-to-sign-up-link"
-        data-testid="email-box"
       >Sign up.</span>
-    </div>
-    <div class="fe-form">
-      <div class="fe-input fe-input-full-width fe-input-in-form">
-        <div class="fe-input__header">
-          <div class="fe-input__label">
-            Email
-          </div>
-        </div>
-        <div class="fe-input__inner fe-input__inner-large">
-          <input
-            name="email"
-            placeholder="name@example.com"
-            data-testid="email-box"
-            class="fe-input__input"
-            type="email"
-            value=""
-          >
-        </div>
-      </div>
-      <span style="visibility: hidden; position: absolute">
+    </v-col>
+    <v-col
+      cols="12"
+    >
+    <v-form class="fe-form">
+      <v-text-field
+        name="email"
+        v-model="email"
+        :rules="emailRules"
+        :label="'Email'"
+        placeholder="name@example.com"
+        dense
+      ></v-text-field>
+      <!-- <span style="visibility: hidden; position: absolute">
         <div
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
@@ -66,7 +61,7 @@
             </svg>
           </div>
         </div>
-      </span>
+      </span> -->
       <button
         class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
         :class="{ 'fe-button-disabled': isDisabled }"
@@ -74,8 +69,9 @@
       >
         Continue
       </button>
-    </div>
-  </div>
+    </v-form>
+    </v-col>
+  </v-row>
 </template>
 
 <script lang="ts">
@@ -85,7 +81,12 @@ export default Vue.extend({
   name: "LoginWithPassword",
   data() {
     return {
+      email: '',
       isDisabled: true,
+      emailRules: [
+        (v: string) => !!v || 'The Email is required',
+        (v: string) => !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || 'Must be a valid email'
+      ],
     };
   },
   methods: {
@@ -158,4 +159,19 @@ export default Vue.extend({
   }
 }
 
+.v-input {
+  &.v-text-field.error--text,
+  &.error--text {
+    border-color: var(--color-danger);
+    color: var(--color-danger);
+
+    input {
+      color: var(--color-danger);
+    }
+    .v-messages__message {
+      color: var(--color-danger);
+      padding: 6px 0;
+    }
+  }
+}
 </style>

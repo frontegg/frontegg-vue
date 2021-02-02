@@ -1,6 +1,6 @@
 <template>
   <div class="fe-login-page">
-    <div class="fe-login-container">
+    <v-container class="fe-login-container">
       <div class="fe-login-header">
         <img src="../assets/main-logo.svg">
       </div>
@@ -8,7 +8,7 @@
         <LoginWithPassword />
         <SocialLogins />
       </div>
-    </div>
+    </v-container>
   </div>
 </template>
 
