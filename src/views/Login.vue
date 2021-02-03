@@ -1,17 +1,12 @@
 <template>
   <div class="fe-login-page">
-    <v-container class="fe-login-container">
+    <spinner v-if="isLoading"></spinner>
+    <v-container class="fe-login-container" v-else>
       <div class="fe-login-header">
         <img src="../assets/main-logo.svg" />
       </div>
       <div class="fe-login-component">
-        <v-progress-circular
-        v-if="isLoading"
-        :value="100"
-        color="blue-grey"
-      ></v-progress-circular>
-          
-        <v-stepper v-model="loginStepper" v-else>
+        <v-stepper v-model="loginStepper">
           <v-stepper-items>
             <v-stepper-content v-if="loginStepper === LoginStep.preLogin || loginStepper === LoginStep.loginWithPassword" :step="loginStepper">
               <LoginWithPassword />
@@ -46,20 +41,19 @@ import SocialLogins from "@/components/Login/SocialLogins.vue";
 import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import {mapData} from '@/plugins/fronteggCore/map-state'
+import Spinner from '@/components/Common/Spinner.vue'
 
 export default Vue.extend({
   name: "Home",
   components: {
+    Spinner,
     LoginWithPassword,
     SocialLogins,
   },
-  // data: mapState({
-  //   loginState: (state: { auth: AuthState }) => state.auth.loginState
-  // }),
   data() {
     return {
       ...mapData(this, {
-        loginState: (state: { auth: AuthState }) => state.auth.loginState
+        authState: (state: { auth: AuthState }) => state.auth,
       }),
       LoginStep: LoginStep,
       loginStepper: 'preLogin',
@@ -70,11 +64,17 @@ export default Vue.extend({
       return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginStepper);
     },
     isLoading() {
-      return false
-    }
+      return this.authState.isLoading;
+    },
   },
   mounted() {
     console.log(this.$data)
+    this[FRONTEGG_STORE_KEY].dispatch({
+      type: 'auth/setState',
+      payload: {
+        isLoading: false,
+      }
+    });
   }
 });
 </script>
