@@ -35,7 +35,7 @@ const objectMappers = (obj: any, fallbackGetter: any) => function() {
   }), {});
 };
 
-export const mapData = (component: any, ...props: any[]) => {
+export const mapState = (component: any, ...props: any[]) => {
   const fallbackGetter = prop => state => get(state, prop);
   const [obj] = props;
   // @ts-ignore

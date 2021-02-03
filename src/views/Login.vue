@@ -6,9 +6,9 @@
         <img src="../assets/main-logo.svg" />
       </div>
       <div class="fe-login-component">
-        <v-stepper v-model="loginStepper">
+        <v-stepper v-model="currentStep">
           <v-stepper-items>
-            <v-stepper-content v-if="loginStepper === LoginStep.preLogin || loginStepper === LoginStep.loginWithPassword" :step="loginStepper">
+            <v-stepper-content v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword" :step="currentStep">
               <LoginWithPassword />
               <SocialLogins />
             </v-stepper-content>
@@ -40,7 +40,7 @@ import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
 import SocialLogins from "@/components/Login/SocialLogins.vue";
 import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import {mapData} from '@/plugins/fronteggCore/map-state'
+import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
 
 export default Vue.extend({
@@ -52,23 +52,23 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapData(this, {
+      ...mapState(this, {
         authState: (state: { auth: AuthState }) => state.auth,
       }),
       LoginStep: LoginStep,
-      loginStepper: 'preLogin',
+      currentStep: '',
     }
   },
   computed: {
     showBackBtn() {
-      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginStepper);
+      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.currentStep);
     },
     isLoading() {
       return this.authState.isLoading;
     },
   },
   mounted() {
-    console.log(this.$data)
+    this.currentStep = this.authState.loginState.step;
     this[FRONTEGG_STORE_KEY].dispatch({
       type: 'auth/setState',
       payload: {
@@ -150,5 +150,8 @@ export default Vue.extend({
 <style scoped>
 .v-stepper {
   box-shadow: none;
+}
+.v-stepper__content {
+  padding: 0;
 }
 </style>
