@@ -76,6 +76,9 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
+import mapState from '../plugins/fronteggCore/map-state'
+import {AuthState} from "@/plugins/fronteggAuth/Api";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -90,9 +93,20 @@ export default Vue.extend({
     };
   },
   methods: {
-    loginSubmit() {
-      console.log("call action here");
+    loginSubmit(e) {
+      e.preventDefault()
+      // console.log("store", this[FRONTEGG_STORE_KEY])
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: 'auth/setLoginState',
+        payload: {
+        'step': "loginWithPassword",
+        'loading': false,
+        }
+      });
     },
+  },
+  mounted() {
+    console.log("call action here pp", this[FRONTEGG_STORE_KEY]);
   },
 });
 </script>

@@ -2,27 +2,60 @@
   <div class="fe-login-page">
     <v-container class="fe-login-container">
       <div class="fe-login-header">
-        <img src="../assets/main-logo.svg">
+        <img src="../assets/main-logo.svg" />
       </div>
       <div class="fe-login-component">
-        <LoginWithPassword />
-        <SocialLogins />
+        <v-stepper v-model="loginStepper">
+          <v-stepper-items>
+            <v-stepper-content v-if="loginStepper === LoginStep.preLogin || loginStepper === LoginStep.loginWithPassword" :step="loginStepper">
+              <LoginWithPassword />
+              <SocialLogins />
+            </v-stepper-content>
+
+            <v-stepper-content :step="LoginStep.success">
+                success component
+            </v-stepper-content>
+
+            <v-stepper-content :step="LoginStep.recoverTwoFactor">
+                recoverTwoFactor
+            </v-stepper-content>
+            <Button
+              v-if="showBackBtn"
+              class='fe-login-component__back-to-login'
+              @click="onRedirectTo(routes.loginUrl); resetLoginState();"
+            >
+              Back to Login
+            </Button>
+          </v-stepper-items>
+        </v-stepper>
       </div>
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import LoginWithPassword from '@/components/Login/LoginWithPassword.vue';
-import SocialLogins from '@/components/Login/SocialLogins.vue';
+import Vue from "vue";
+import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
+import SocialLogins from "@/components/Login/SocialLogins.vue";
+import { LoginStep } from '../../src/plugins/fronteggAuth/Api';
 
 export default Vue.extend({
-  name: 'Home',
+  name: "Home",
   components: {
     LoginWithPassword,
     SocialLogins,
   },
+  data() {
+    return {
+      LoginStep: LoginStep,
+      loginStepper: 'preLogin',
+    }
+  },
+  computed: {
+    showBackBtn() {
+      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginStepper);
+    }
+  }
 });
 </script>
 
@@ -91,5 +124,11 @@ export default Vue.extend({
       box-shadow: none;
     }
   }
+}
+</style>
+
+<style scoped>
+.v-stepper {
+  box-shadow: none;
 }
 </style>

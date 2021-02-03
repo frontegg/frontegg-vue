@@ -24,10 +24,7 @@ export default {
     if (!Vue.registerFronteggPlugin) {
       throw Error('FronteggCore plugin must register before, move Vue.use(FronteggCore) to the top');
     }
-
     Vue.registerFronteggPlugin(AuthPlugin(options));
-    console.log('Auth plugin installed');
-
 
     Vue.mixin({
       beforeCreate() {
