@@ -43,9 +43,9 @@
 import Vue from "vue";
 import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
 import SocialLogins from "@/components/Login/SocialLogins.vue";
-import { LoginStep } from '../../src/plugins/fronteggAuth/Api';
+import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import mapState from '../plugins/fronteggCore/map-state'
+import {mapData} from '@/plugins/fronteggCore/map-state'
 
 export default Vue.extend({
   name: "Home",
@@ -53,11 +53,14 @@ export default Vue.extend({
     LoginWithPassword,
     SocialLogins,
   },
-  /* eslint-disable-next-line */
-
+  // data: mapState({
+  //   loginState: (state: { auth: AuthState }) => state.auth.loginState
+  // }),
   data() {
     return {
-      ...mapState({loginState: (state: { auth: AuthState }) => state.auth.loginState}),
+      ...mapData(this, {
+        loginState: (state: { auth: AuthState }) => state.auth.loginState
+      }),
       LoginStep: LoginStep,
       loginStepper: 'preLogin',
     }
