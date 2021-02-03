@@ -5,7 +5,13 @@
         <img src="../assets/main-logo.svg" />
       </div>
       <div class="fe-login-component">
-        <v-stepper v-model="loginStepper">
+        <v-progress-circular
+        v-if="isLoading"
+        :value="100"
+        color="blue-grey"
+      ></v-progress-circular>
+          
+        <v-stepper v-model="loginStepper" v-else>
           <v-stepper-items>
             <v-stepper-content v-if="loginStepper === LoginStep.preLogin || loginStepper === LoginStep.loginWithPassword" :step="loginStepper">
               <LoginWithPassword />
@@ -55,7 +61,7 @@ export default Vue.extend({
     showBackBtn() {
       return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginStepper);
     }
-  }
+  },
 });
 </script>
 

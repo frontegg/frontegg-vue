@@ -77,8 +77,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import mapState from '../plugins/fronteggCore/map-state'
-import {AuthState} from "@/plugins/fronteggAuth/Api";
+import mapState from '../../plugins/fronteggCore/map-state'
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -96,6 +95,20 @@ export default Vue.extend({
     loginSubmit(e) {
       e.preventDefault()
       // console.log("store", this[FRONTEGG_STORE_KEY])
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: 'auth/preLogin',
+        payload: {
+          email: this.email
+        }
+      });
+
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: 'auth/setLoginState',
+        payload: {
+          loading: true,
+        }
+      });
+
       this[FRONTEGG_STORE_KEY].dispatch({
         type: 'auth/setLoginState',
         payload: {
