@@ -10,6 +10,8 @@ import set from 'set-value';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import mapState from './map-state';
 
+const isSSR = typeof window === 'undefined';
+
 /**
  * receive contextOption and plugins, combine reducers, initial states and construct frontegg store
  * @param contextOptions
@@ -18,9 +20,25 @@ import mapState from './map-state';
 const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginConfig[]) => {
   const sagaMiddleware = createSagaMiddleware();
   const middleware = [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware];
-  const onRedirectTo = ()=> {
-    
+
+  const baseName = isSSR
+    ? ''
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf(location.pathname));
+
+  const onRedirectTo = (_path: string, opts?: RedirectOptions) => {
+    console.log("onRedirectTo", _path)
+    let path = _path;
+    if (path.startsWith(baseName)) {
+      path = path.substring(baseName.length);
+    }
+    window.location.href = path
+    // if (opts?.refresh && !isSSR) {
+    //   window.Cypress ? history.push(path) : (window.location.href = path);
+    // } else {
+    //   opts?.replace ? history.replace(path) : history.push(path);
+    // }
   }
+  
   ContextHolder.setOnRedirectTo(onRedirectTo)
   
   const devTools = { name: 'Frontegg Store' };

@@ -18,46 +18,45 @@
             placeholder="name@example.com"
           ></v-text-field>
         </div>
-          <div
-            v-show="step === 'loginWithPassword'"
-            class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
-          >
-            <div class="fe-input__header">
-              <div class="fe-input__label">Password</div>
-              <button
-                class="fe-button fe-input__label-button fe-button-clickable"
-                type="button"
-                test-id="forgot-password-button"
-                tabindex="-1"
-              >
-                Forgot Password?
-              </button>
-            </div>
-            <div class="password">
-              <v-text-field
-                v-if="step === 'loginWithPassword'"
-                v-model="password"
-                tabindex="-1"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-                :rules="rules.password"
-                :type="showPassword ? 'text' : 'password'"
-                name="password"
-                placeholder="Enter Your Password"
-                @click:append="showPassword = !showPassword"
-              ></v-text-field>
-            </div>
-          </div>
-          <div class="continue">
-            <button
-              class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
-              :class="{ 'fe-button-disabled': !isFormValid }"
-              :disabled="!isFormValid"
-              @click="loginSubmit"
+        <div
+          v-if="step === 'loginWithPassword'"
+          class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
+        >
+          <div class="fe-input__header">
+            <div class="fe-input__label">Password</div>
+            <router-link
+              class="fe-button fe-input__label-button fe-button-clickable"
+              to="/account/forget-password"
+              >Forgot Password? </router-link
             >
-              <spinner v-if="isLoading"></spinner>
-              {{ submitText }}
-            </button>
           </div>
+          <div class="password">
+            <v-text-field
+              v-model="password"
+              tabindex="-1"
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="rules.password"
+              :type="showPassword ? 'text' : 'password'"
+              name="password"
+              placeholder="Enter Your Password"
+              @click:append="showPassword = !showPassword"
+            ></v-text-field>
+          </div>
+        </div>
+        <div class="continue">
+          <button
+            class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
+            :class="{ 'fe-button-disabled': !isFormValid }"
+            :disabled="!isFormValid"
+            @click="loginSubmit"
+          >
+            <spinner v-if="isLoading"></spinner>
+            {{ submitText }}
+          </button>
+          <div v-if="loginError" class="fe-error-message">
+            {{ loginError }}
+          </div>
+        </div>
       </v-form>
     </v-col>
   </v-row>
@@ -67,7 +66,7 @@
 import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
-import Spinner from '@/components/Common/Spinner.vue'
+import Spinner from "@/components/Common/Spinner.vue";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -104,42 +103,33 @@ export default Vue.extend({
       return this.loginState.step;
     },
     submitText() {
-      if(this.loginState.loading) {
-        return '';
-      }
-      else if(this.loginState.step === 'preLogin') {
-        return 'Contine';
+      if (this.loginState.loading) {
+        return "";
+      } else if (this.loginState.step === "preLogin") {
+        return "Continue";
       } else {
-        return 'Login';
+        return "Login";
       }
     },
     isLoading() {
       return this.loginState.loading;
-    }
+    },
+    loginError() {
+      if (this.loginState.error) {
+        return this.loginState.error;
+      } else {
+        return null;
+      }
+    },
   },
   methods: {
     loginSubmit(e) {
       e.preventDefault();
-      if(this.loginState.step === 'preLogin') {
+      if (this.loginState.step === "preLogin") {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
           payload: {
             email: this.email,
-          },
-        });
-
-        this[FRONTEGG_STORE_KEY].dispatch({
-          type: "auth/setLoginState",
-          payload: {
-            loading: true,
-          },
-        });
-
-        this[FRONTEGG_STORE_KEY].dispatch({
-          type: "auth/setLoginState",
-          payload: {
-            step: "loginWithPassword",
-            loading: false,
           },
         });
       } else {
@@ -154,7 +144,7 @@ export default Vue.extend({
     },
   },
   mounted() {
-    console.log("call action here pp", this[FRONTEGG_STORE_KEY]);
+    console.log("call action here pp", this);
   },
 });
 </script>
@@ -238,10 +228,10 @@ export default Vue.extend({
 }
 .fe-login-component {
   .v-text-field > .v-input__control > .v-input__slot {
-      &:before,
-      &:after {
-        content: none
-      }
+    &:before,
+    &:after {
+      content: none;
+    }
   }
 }
 

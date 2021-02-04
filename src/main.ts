@@ -10,11 +10,18 @@ Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
 Vue.use(fronteggAuth, {
   routes: {
-    loginUrl: 'AAAAA',
+    authenticatedUrl: 'https://live.frontegg.com/',
+    loginUrl: '/account/login',
+    logoutUrl: '/account/logout',
+    activateUrl: '/account/activate',
+    acceptInvitationUrl: '/account/invitation/accept',
+    forgetPasswordUrl: '/account/forget-password',
+    resetPasswordUrl: '/account/reset-password',
+    socialLoginCallbackUrl: '/account/social/success',
+    signUpUrl: '/account/sign-up',
   },
 });
 Vue.use(fronteggAudits);
-
 
 new Vue({
   router,

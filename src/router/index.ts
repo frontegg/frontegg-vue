@@ -23,6 +23,11 @@ const routes: Array<RouteConfig> = [
     name: 'Login',
     component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
   },
+  {
+    path: '/account/forget-password',
+    name: 'forget-password',
+    component: () => import(/* webpackChunkName: "login" */ '../views/ForgetPassword.vue'),
+  },
 ];
 
 const router = new VueRouter({

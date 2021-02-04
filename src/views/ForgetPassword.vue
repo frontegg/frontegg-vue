@@ -5,80 +5,78 @@
       <div class="fe-login-header">
         <img src="../assets/main-logo.svg" />
       </div>
-      <v-stepper v-model="currentStep">
-        <v-stepper-items>
-          <v-stepper-content v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword" :step="currentStep">
-            <div class="fe-login-component">
-              <LoginWithPassword />
-              <SocialLogins />
+      <div class="fe-forgot-password-component">
+        <div as="div" class="fe-form">
+          <form action="#">
+            <div class="fe-input fe-input-full-width fe-input-in-form">
+              <div class="fe-input__header">
+                <div class="fe-input__label">Enter your email</div>
+              </div>
+              <div class="fe-input__inner">
+                <input
+                  v-model="email"
+                  name="email"
+                  placeholder="name@example.com"
+                  data-test-id="email-box"
+                  class="fe-input__input"
+                  type="text"
+                />
+              </div>
             </div>
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.success">
-            <spinner></spinner>
-              success
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.recoverTwoFactor">
-              recoverTwoFactor
-          </v-stepper-content>
-          <Button
-            v-if="showBackBtn"
-            class='fe-login-component__back-to-login'
-            @click="onRedirectTo(routes.loginUrl); resetLoginState();"
-          >
-            Back to Login
-          </Button>
-        </v-stepper-items>
-      </v-stepper>
+            <button
+              class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
+              type="submit"
+              data-test-id="submit-btn"
+              @click="remindMe"
+            >
+              Remind Me
+            </button>
+          </form>
+        </div>
+      </div>
     </v-container>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
-import SocialLogins from "@/components/Login/SocialLogins.vue";
-import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import Spinner from '@/components/Common/Spinner.vue'
+import { AuthState, LoginStep } from "@/plugins/fronteggAuth/Api";
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
+import { mapState } from "@/plugins/fronteggCore/map-state";
+import Spinner from "@/components/Common/Spinner.vue";
 
 export default Vue.extend({
-  name: "Login",
-  components: {
-    Spinner,
-    LoginWithPassword,
-    SocialLogins,
-  },
+  name: "ForgetPassword",
+  components: {},
   data() {
     return {
       ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
+        forgotPasswordState: (state: { auth: any }) => state.auth.forgotPasswordState,
       }),
-      LoginStep: LoginStep,
-      currentStep: '',
-    }
+      // email: '',
+    };
   },
   computed: {
-    showBackBtn() {
-      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.currentStep);
-    },
     isLoading() {
-      return this.authState.isLoading;
+      return this.forgotPasswordState.isLoading;
+    },
+    email() {
+      return this.forgotPasswordState.email
     },
   },
-  mounted() {
-    this.currentStep = this.authState.loginState.step;
-    this[FRONTEGG_STORE_KEY].dispatch({
-      type: 'auth/setState',
-      payload: {
-        isLoading: false,
-      }
-    });
-  }
+  methods: {
+    remindMe(e) {
+      e.preventDefault()
+      console.log(this.email)
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setForgotPasswordState",
+        payload: { email: this.email },
+      });
+    },
+  },
 });
 </script>
+
 
 <style lang="scss">
 .fe-login-page {
@@ -156,3 +154,4 @@ export default Vue.extend({
   padding: 0;
 }
 </style>
+
