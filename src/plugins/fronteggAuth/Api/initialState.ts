@@ -42,8 +42,8 @@ export const initialState: AuthState = {
     socialLoginCallbackUrl: '/account/social/success',
     signUpUrl: '/account/sign-up',
   },
-  onRedirectTo: () => {
-    console.log('onRedirectTo');
+  onRedirectTo: (...args) => {
+    console.log('onRedirectTo', args);
   },
 
   ...reinitializeState,

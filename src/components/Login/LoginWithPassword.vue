@@ -5,23 +5,24 @@
       <span class="fe-login-component__back-to-sign-up-link">Sign up.</span>
     </v-col>
     <v-col cols="12">
-      <v-form class="fe-form">
+      <v-form class="fe-form" v-model="isFormValid">
         <div class="fe-input__header">
           <div class="fe-input__label">Email</div>
         </div>
-        <v-text-field
-          name="email"
-          v-model="email"
-          :rules="rules.email"
-          placeholder="name@example.com"
-          dense
-        ></v-text-field>
-        <v-container>
-          <v-row
+        <div>
+          <v-text-field
+            name="email"
+            v-model="email"
+            ref="emailField"
+            :rules="rules.email"
+            placeholder="name@example.com"
+          ></v-text-field>
+        </div>
+          <div
             v-show="step === 'loginWithPassword'"
             class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
           >
-            <v-col class="fe-input__header" cols="12">
+            <div class="fe-input__header">
               <div class="fe-input__label">Password</div>
               <button
                 class="fe-button fe-input__label-button fe-button-clickable"
@@ -31,10 +32,10 @@
               >
                 Forgot Password?
               </button>
-            </v-col>
-            <v-col class="fe-input__inner fe-input__inner-large" cols="12">
+            </div>
+            <div class="password">
               <v-text-field
-                class="fe-input__input"
+                v-if="step === 'loginWithPassword'"
                 v-model="password"
                 tabindex="-1"
                 :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
@@ -44,20 +45,19 @@
                 placeholder="Enter Your Password"
                 @click:append="showPassword = !showPassword"
               ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="12">
-              <button
-                class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
-                :class="{ 'fe-button-disabled': isDisabled }"
-                @click="loginSubmit"
-              >
-                Continue
-              </button>
-            </v-col>
-          </v-row>
-        </v-container>
+            </div>
+          </div>
+          <div class="continue">
+            <button
+              class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
+              :class="{ 'fe-button-disabled': !isFormValid }"
+              :disabled="!isFormValid"
+              @click="loginSubmit"
+            >
+              <spinner v-if="isLoading"></spinner>
+              {{ submitText }}
+            </button>
+          </div>
       </v-form>
     </v-col>
   </v-row>
@@ -67,17 +67,21 @@
 import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
+import Spinner from '@/components/Common/Spinner.vue'
 
 export default Vue.extend({
   name: "LoginWithPassword",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       ...mapState(this, {
         loginState: (state: { auth: AuthState }) => state.auth.loginState,
       }),
+      isFormValid: false,
       email: "",
       password: "",
-      isDisabled: true,
       rules: {
         email: [
           (v: string) => !!v || "The Email is required",
@@ -89,7 +93,7 @@ export default Vue.extend({
         password: [
           (v: string) => !!v || "The Password is required",
           (v: string) =>
-            !v || v.length < 6 || "Password must be at least 6 characters",
+            !v || v.length > 6 || "Password must be at least 6 characters",
         ],
       },
       showPassword: false,
@@ -99,31 +103,54 @@ export default Vue.extend({
     step() {
       return this.loginState.step;
     },
+    submitText() {
+      if(this.loginState.loading) {
+        return '';
+      }
+      else if(this.loginState.step === 'preLogin') {
+        return 'Contine';
+      } else {
+        return 'Login';
+      }
+    },
+    isLoading() {
+      return this.loginState.loading;
+    }
   },
   methods: {
     loginSubmit(e) {
       e.preventDefault();
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/preLogin",
-        payload: {
-          email: this.email,
-        },
-      });
+      if(this.loginState.step === 'preLogin') {
+        this[FRONTEGG_STORE_KEY].dispatch({
+          type: "auth/preLogin",
+          payload: {
+            email: this.email,
+          },
+        });
 
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/setLoginState",
-        payload: {
-          loading: true,
-        },
-      });
+        this[FRONTEGG_STORE_KEY].dispatch({
+          type: "auth/setLoginState",
+          payload: {
+            loading: true,
+          },
+        });
 
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/setLoginState",
-        payload: {
-          step: "loginWithPassword",
-          loading: false,
-        },
-      });
+        this[FRONTEGG_STORE_KEY].dispatch({
+          type: "auth/setLoginState",
+          payload: {
+            step: "loginWithPassword",
+            loading: false,
+          },
+        });
+      } else {
+        this[FRONTEGG_STORE_KEY].dispatch({
+          type: "auth/login",
+          payload: {
+            email: this.email,
+            password: this.password,
+          },
+        });
+      }
     },
   },
   mounted() {
@@ -209,25 +236,37 @@ export default Vue.extend({
     }
   }
 }
-</style>
-<style scoped>
-  .v-text-field__slot {
-    --size-font-size: var(--element-font-size-lg);
-    --size-border-radius: var(--element-border-radius-sm);
-    height: var(--size-height);
-    font-size: var(--size-font-size);
-    border-radius: var(--size-border-radius);
-    padding: 0;
-    overflow: hidden;
-    display: inline-flex;
-    position: relative;
-    vertical-align: middle;
-    align-items: center;
-    height: var(--element-height);
-    width: 100%;
-    border-radius: var(--element-border-radius-sm);
-    background-color: var(--color-white);
-    color: var(--color-gray-8);
-    border: 1px solid var(--element-border-color);
+.fe-login-component {
+  .v-text-field > .v-input__control > .v-input__slot {
+      &:before,
+      &:after {
+        content: none
+      }
   }
+}
+
+.v-input__slot {
+  --size-font-size: var(--element-font-size-lg);
+  --size-border-radius: var(--element-border-radius-sm);
+  height: var(--size-height);
+  font-size: var(--size-font-size);
+  border-radius: var(--size-border-radius);
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  position: relative;
+  vertical-align: middle;
+  align-items: center;
+  height: var(--element-height);
+  width: 100%;
+  border-radius: var(--element-border-radius-sm);
+  background-color: var(--color-white);
+  color: var(--color-gray-8);
+  border: 1px solid var(--element-border-color);
+  padding-right: 8px;
+
+  input {
+    padding: 4px 8px;
+  }
+}
 </style>
