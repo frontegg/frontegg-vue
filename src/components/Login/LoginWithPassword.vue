@@ -13,7 +13,6 @@
           <v-text-field
             name="email"
             v-model="email"
-            ref="emailField"
             :rules="rules.email"
             placeholder="name@example.com"
           ></v-text-field>
@@ -24,11 +23,12 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">Password</div>
-            <router-link
-              class="fe-button fe-input__label-button fe-button-clickable"
-              to="/account/forget-password"
-              >Forgot Password? </router-link
-            >
+            <a
+            class="fe-button fe-input__label-button fe-button-clickable"
+            href="#"
+            @click.prevent="navigateForgetPass">
+            Forgot Password?
+            </a>
           </div>
           <div class="password">
             <v-text-field
@@ -45,7 +45,7 @@
         </div>
         <div class="continue">
           <button
-            class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
+            class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
             @click="loginSubmit"
@@ -141,6 +141,13 @@ export default Vue.extend({
           },
         });
       }
+    },
+    navigateForgetPass() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setForgotPasswordState",
+        payload: { email: this.email },
+      });
+      this.$router.push('/account/forget-password');
     },
   },
   mounted() {
