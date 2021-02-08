@@ -106,7 +106,10 @@
     }
 
     &__back-to-login {
-        margin-top: 1rem;
+        margin-top: 0;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--color-gray-5);
     }
 
     .ui.loader.inline {

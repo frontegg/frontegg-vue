@@ -101,7 +101,7 @@ export default Vue.extend({
 });
 </script>
 
-<style scoped>
+<style lang="scss">
 @import '../styles/login.scss';
 
 .v-stepper {
