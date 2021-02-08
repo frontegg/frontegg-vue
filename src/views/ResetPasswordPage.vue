@@ -17,14 +17,6 @@
           <ResetPasswordFailed />
         </div>
       </div>
-
-      <button
-        v-if="showBackBtn"
-        class="fe-login-component__back-to-login"
-        @click="backToLogin()"
-        >
-        Back to Login
-      </button>
     </v-container>
   </div>
 </template>

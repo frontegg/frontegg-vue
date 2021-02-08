@@ -50,7 +50,6 @@
             :disabled="!isFormValid"
             @click="loginSubmit"
           >
-            <Spinner v-if="isLoading"/>
             <spinner v-if="isLoading"></spinner>
             {{ submitText }}
           </button>
