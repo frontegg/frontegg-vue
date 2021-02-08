@@ -18,7 +18,10 @@
       data-test-id="submit-btn"
       @click.prevent="remindMe"
     >
-      Remind Me
+      <spinner v-if="isLoading"></spinner>
+      <span v-else>
+        Remind Me
+      </span>
     </button>
     <div class="fe-error-message">{{ this.backendError }}</div>
   </v-form>
@@ -51,7 +54,7 @@ export default Vue.extend({
   },
   computed: {
     isLoading() {
-      return this.forgotPasswordState.isLoading;
+      return this.forgotPasswordState.loading;
     },
     backendError() {
       return this.forgotPasswordState.error;

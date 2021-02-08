@@ -50,6 +50,7 @@
             :disabled="!isFormValid"
             @click="loginSubmit"
           >
+            <Spinner v-if="isLoading"/>
             <spinner v-if="isLoading"></spinner>
             {{ submitText }}
           </button>
@@ -147,6 +148,10 @@ export default Vue.extend({
         type: "auth/setForgotPasswordState",
         payload: { email: this.email },
       });
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/resetLoginState",
+      });
+
       this.$router.push('/account/forget-password');
     },
   },

@@ -72,6 +72,13 @@ export default Vue.extend({
   mounted() {
     console.log('authState', this.forgotPasswordStep)
     this.currentStep = this.authState.forgotPasswordState.step || this.forgotPasswordStep.forgotPassword;
+
+    this[FRONTEGG_STORE_KEY].dispatch({
+      type: 'auth/setState',
+      payload: {
+        isLoading: false,
+      }
+    });
   },
   methods: {
     resetLoginState() {
