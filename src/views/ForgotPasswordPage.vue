@@ -7,32 +7,25 @@
       </div>
       <v-stepper v-model="currentStep">
         <v-stepper-items>
-          <v-stepper-content :step="LoginStep.preLogin">
-            <div class="fe-login-component">
-              <LoginWithPassword />
-              <SocialLogins />
+          <v-stepper-content :step="forgotPasswordStep.forgotPassword">
+            <div class="fe-forgot-password-component">
+              <FotgotPassword />
             </div>
           </v-stepper-content>
 
-          <v-stepper-content :step="LoginStep.loginWithPassword">
-            <div class="fe-login-component">
-              <LoginWithPassword />
-              <SocialLogins />
+          <v-stepper-content :step="forgotPasswordStep.success">
+            <div class="fe-forgot-password-component">
+              <ForgotPasswordSuccess />
             </div>
           </v-stepper-content>
 
-          <v-stepper-content :step="LoginStep.success">
-            <spinner></spinner>
-              success
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.recoverTwoFactor">
-              recoverTwoFactor
-          </v-stepper-content>
           <button
             v-if="showBackBtn"
-            class='fe-login-component__back-to-login'
-            @click="onRedirectTo(routes.loginUrl); resetLoginState();"
+            class="fe-login-component__back-to-login"
+            @click="
+              onRedirectTo(routes.loginUrl);
+              resetLoginState();
+            "
           >
             Back to Login
           </button>
@@ -44,47 +37,47 @@
 
 <script lang="ts">
 import Vue from "vue";
-import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
-import SocialLogins from "@/components/Login/SocialLogins.vue";
-import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import Spinner from '@/components/Common/Spinner.vue'
+import { AuthState, ForgotPasswordState, ForgotPasswordStep } from "@/plugins/fronteggAuth/Api";
+import FotgotPassword from "@/components/ForgotPassword/ForgotPassword.vue";
+import ForgotPasswordSuccess from "@/components/ForgotPassword/ForgotPasswordSuccess.vue";
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
+import { mapState } from "@/plugins/fronteggCore/map-state";
+import Spinner from "@/components/Common/Spinner.vue";
 
 export default Vue.extend({
-  name: "Login",
+  name: "ForgetPasswordPage",
   components: {
     Spinner,
-    LoginWithPassword,
-    SocialLogins,
+    FotgotPassword,
+    ForgotPasswordSuccess,
   },
   data() {
     return {
       ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
+        authState: (state: { auth: AuthState }) =>
+          state.auth,
       }),
-      LoginStep: LoginStep,
+      forgotPasswordStep: ForgotPasswordStep,
       currentStep: '',
-    }
+    };
   },
   computed: {
-    showBackBtn() {
-      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.currentStep);
-    },
     isLoading() {
       return this.authState.isLoading;
     },
+    showBackBtn() {
+      return this.forgotPasswordStep.success === this.currentStep;
+    },
   },
   mounted() {
-    this.currentStep = this.authState.loginState.step || this.LoginStep.preLogin;
-
-    this[FRONTEGG_STORE_KEY].dispatch({
-      type: 'auth/setState',
-      payload: {
-        isLoading: false,
-      }
-    });
-  }
+    console.log('authState', this.forgotPasswordStep)
+    this.currentStep = this.authState.forgotPasswordState.step || this.forgotPasswordStep.forgotPassword;
+  },
+  methods: {
+    resetLoginState() {
+      console.log('resetLoginState');
+    }
+  },
 });
 </script>
 
@@ -129,18 +122,6 @@ export default Vue.extend({
   > * {
     max-width: 100%;
     max-height: 50px;
-  }
-}
-
-.fe-login-header {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0 3rem;
-  align-items: center;
-  overflow-x: hidden;
-
-  > * {
-    max-width: 100%;
   }
 }
 

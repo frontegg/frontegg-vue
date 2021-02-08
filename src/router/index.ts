@@ -25,8 +25,8 @@ const routes: Array<RouteConfig> = [
   },
   {
     path: '/account/forget-password',
-    name: 'forget-password',
-    component: () => import(/* webpackChunkName: "login" */ '../views/ForgetPassword.vue'),
+    name: 'ForgetPasswordPage',
+    component: () => import(/* webpackChunkName: "ForgetPasswordPage" */ '../views/ForgotPasswordPage.vue'),
   },
 ];
 
