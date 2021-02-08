@@ -41,14 +41,6 @@ import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import Spinner from "@/components/Common/Spinner.vue";
 
-const stateMapper = ({ isLoading, isAuthenticated, loginState, onRedirectTo, routes }: AuthState) => ({
-  isLoading,
-  isAuthenticated,
-  onRedirectTo,
-  routes,
-  ...loginState,
-});
-
 export default Vue.extend({
   name: "ForgetPasswordPage",
   components: {
@@ -63,7 +55,6 @@ export default Vue.extend({
           state.auth,
       }),
       forgotPasswordStep: ForgotPasswordStep,
-      // currentStep: '',
     };
   },
   computed: {
