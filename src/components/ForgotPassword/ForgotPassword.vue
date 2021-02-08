@@ -36,6 +36,9 @@ import Spinner from '@/components/Common/Spinner.vue'
 
 export default Vue.extend({
   name: "ForgtPassword",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       ...mapState(this, {
@@ -77,82 +80,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-.fe-forgot-password-component {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
 
-  .fe-recover-two-factor {
-    a {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-
-  &__back-to-login {
-    margin-top: 1rem;
-  }
-
-  .ui.loader.inline {
-    display: block;
-    margin: 2rem auto 1rem;
-  }
-
-  &__back-to-sign-up-link {
-    cursor: pointer;
-    color: var(--color-primary);
-
-    &:hover {
-      color: var(--color-primary-75);
-    }
-  }
-}
-
-.v-input {
-  &.v-text-field.error--text,
-  &.error--text {
-    border-color: var(--color-danger);
-    color: var(--color-danger);
-
-    input {
-      color: var(--color-danger);
-    }
-    .v-messages__message {
-      color: var(--color-danger);
-      padding: 6px 0;
-    }
-  }
-}
-.fe-forgot-password-component {
-  .v-text-field > .v-input__control > .v-input__slot {
-    &:before,
-    &:after {
-      content: none;
-    }
-  }
-}
-.v-input__slot {
-  --size-font-size: var(--element-font-size-lg);
-  --size-border-radius: var(--element-border-radius-sm);
-  height: var(--size-height);
-  font-size: var(--size-font-size);
-  border-radius: var(--size-border-radius);
-  padding: 0;
-  overflow: hidden;
-  display: inline-flex;
-  position: relative;
-  vertical-align: middle;
-  align-items: center;
-  height: var(--element-height);
-  width: 100%;
-  border-radius: var(--element-border-radius-sm);
-  background-color: var(--color-white);
-  color: var(--color-gray-8);
-  border: 1px solid var(--element-border-color);
-  padding-right: 8px;
-
-  input {
-    padding: 4px 8px;
-  }
-}
 </style>
