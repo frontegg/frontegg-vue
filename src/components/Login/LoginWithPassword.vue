@@ -5,30 +5,38 @@
       <span class="fe-login-component__back-to-sign-up-link">Sign up.</span>
     </v-col>
     <v-col cols="12">
-      <v-form class="fe-form" v-model="isFormValid">
+      <v-form
+        v-model="isFormValid"
+        class="fe-form"
+      >
         <div class="fe-input__header">
-          <div class="fe-input__label">Email</div>
+          <div class="fe-input__label">
+            Email
+          </div>
         </div>
         <div>
           <v-text-field
-            name="email"
-            v-model="email"
             ref="emailField"
+            v-model="email"
+            name="email"
             :rules="rules.email"
             placeholder="name@example.com"
-          ></v-text-field>
+          />
         </div>
         <div
           v-if="step === 'loginWithPassword'"
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
           <div class="fe-input__header">
-            <div class="fe-input__label">Password</div>
+            <div class="fe-input__label">
+              Password
+            </div>
             <router-link
               class="fe-button fe-input__label-button fe-button-clickable"
               to="/account/forget-password"
-              >Forgot Password? </router-link
             >
+              Forgot Password?
+            </router-link>
           </div>
           <div class="password">
             <v-text-field
@@ -40,7 +48,7 @@
               name="password"
               placeholder="Enter Your Password"
               @click:append="showPassword = !showPassword"
-            ></v-text-field>
+            />
           </div>
         </div>
         <div class="continue">
@@ -50,10 +58,13 @@
             :disabled="!isFormValid"
             @click="loginSubmit"
           >
-            <spinner v-if="isLoading"></spinner>
+            <spinner v-if="isLoading" />
             {{ submitText }}
           </button>
-          <div v-if="loginError" class="fe-error-message">
+          <div
+            v-if="loginError"
+            class="fe-error-message"
+          >
             {{ loginError }}
           </div>
         </div>
@@ -122,6 +133,9 @@ export default Vue.extend({
       }
     },
   },
+  mounted() {
+    console.log("call action here pp", this);
+  },
   methods: {
     loginSubmit(e) {
       e.preventDefault();
@@ -142,9 +156,6 @@ export default Vue.extend({
         });
       }
     },
-  },
-  mounted() {
-    console.log("call action here pp", this);
   },
 });
 </script>

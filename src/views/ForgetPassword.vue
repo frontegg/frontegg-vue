@@ -1,16 +1,24 @@
 <template>
   <div class="fe-login-page">
-    <spinner v-if="isLoading"></spinner>
-    <v-container class="fe-login-container" v-else>
+    <spinner v-if="isLoading" />
+    <v-container
+      v-else
+      class="fe-login-container"
+    >
       <div class="fe-login-header">
-        <img src="../assets/main-logo.svg" />
+        <img src="../assets/main-logo.svg">
       </div>
       <div class="fe-forgot-password-component">
-        <div as="div" class="fe-form">
+        <div
+          as="div"
+          class="fe-form"
+        >
           <form action="#">
             <div class="fe-input fe-input-full-width fe-input-in-form">
               <div class="fe-input__header">
-                <div class="fe-input__label">Enter your email</div>
+                <div class="fe-input__label">
+                  Enter your email
+                </div>
               </div>
               <div class="fe-input__inner">
                 <input
@@ -20,7 +28,7 @@
                   data-test-id="email-box"
                   class="fe-input__input"
                   type="text"
-                />
+                >
               </div>
             </div>
             <button
