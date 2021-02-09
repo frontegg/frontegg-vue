@@ -9,15 +9,15 @@
         <img src="../assets/main-logo.svg">
       </div>
 
-      <div class="fe-forgot-password-component">
+      <div class='fe-activate-account-component'>
         <div v-if="!userId || !token">
-          <ResetPasswordFailed />
+          <ActivateAccountFailed />
         </div>
-        <div v-else-if="step === forgotPasswordStep.success">
-          <ResetPasswordSuccess />
+        <div v-else-if="step === activateStep.success">
+          <ActivateAccountSuccess />
         </div>
         <div v-else>
-          <ResetPassword
+          <ActivateAccountForm
             :user-id="userId"
             :token="token"
           />
@@ -29,28 +29,28 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { AuthState, ForgotPasswordStep } from "@/plugins/fronteggAuth/Api";
-import ResetPassword from "@/components/ResetPassword/ResetPassword.vue";
-import ResetPasswordSuccess from "@/components/ResetPassword/ResetPasswordSuccess.vue";
-import ResetPasswordFailed from "@/components/ResetPassword/ResetPasswordFailed.vue";
+import { AuthState, ActivateStep } from "@/plugins/fronteggAuth/Api";
+import ActivateAccountForm from "@/components/ActivateAccount/ActivateAccountForm.vue";
+import ActivateAccountSuccess from "@/components/ActivateAccount/ActivateAccountSuccess.vue";
+import ActivateAccountFailed from "@/components/ActivateAccount/ActivateAccountFailed.vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import Spinner from "@/components/Common/Spinner.vue";
 
 export default Vue.extend({
-  name: "ForgetPasswordPage",
+  name: "ActivateAccount",
   components: {
     Spinner,
-    ResetPassword,
-    ResetPasswordSuccess,
-    ResetPasswordFailed,
+    ActivateAccountForm,
+    ActivateAccountSuccess,
+    ActivateAccountFailed,
   },
   data() {
     return {
       ...mapState(this, {
         authState: (state: { auth: AuthState }) => state.auth,
       }),
-      forgotPasswordStep: ForgotPasswordStep,
+      activateStep: ActivateStep,
       url: new URL(window?.location.href),
     };
   },

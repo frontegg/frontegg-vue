@@ -25,6 +25,11 @@ const routes: Array<RouteConfig> = [
     name: 'ResetPasswordPage',
     component: () => import(/* webpackChunkName: "ResetPasswordPage" */ '../views/ResetPasswordPage.vue'),
   },
+  {
+    path: '/account/activate',
+    name: 'ActivateAccount',
+    component: () => import(/* webpackChunkName: "ActivateAccount" */ '../views/ActivateAccount.vue'),
+  },
 ];
 
 const router = new VueRouter({
