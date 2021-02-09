@@ -71,7 +71,7 @@ export default Vue.extend({
       set(value) {
         console.log("value", value)
       }
-    }
+    },
   },
   mounted() {
     this[FRONTEGG_STORE_KEY].dispatch({

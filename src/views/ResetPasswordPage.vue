@@ -11,7 +11,7 @@
           <ResetPasswordSuccess />
         </div>
         <div v-else-if="userId && token">
-          <ResetPassword />
+          <ResetPassword :userId="userId" :token="token" />
         </div>
         <div v-if="!userId || !token">
           <ResetPasswordFailed />

@@ -92,7 +92,7 @@ export default Vue.extend({
         password: [
           (v: string) => !!v || "The Password is required",
           (v: string) =>
-            !v || v.length > 6 || "Password must be at least 6 characters",
+            !v || v.length >= 6 || "Password must be at least 6 characters",
         ],
       },
       showPassword: false,

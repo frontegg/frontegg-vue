@@ -22,17 +22,12 @@
           </v-stepper-content>
 
           <v-stepper-content :step="LoginStep.success">
-            <spinner></spinner>
-              success
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.recoverTwoFactor">
-              recoverTwoFactor
+              <LoginSuccess />
           </v-stepper-content>
           <button
             v-if="showBackBtn"
             class='fe-login-component__back-to-login'
-            @click="onRedirectTo(routes.loginUrl); resetLoginState();"
+            @click="backToLogin()"
           >
             Back to Login
           </button>
@@ -46,6 +41,7 @@
 import Vue from "vue";
 import LoginWithPassword from "@/components/Login/LoginWithPassword.vue";
 import SocialLogins from "@/components/Login/SocialLogins.vue";
+import LoginSuccess from "@/components/Login/LoginSuccess.vue";
 import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
@@ -57,6 +53,7 @@ export default Vue.extend({
     Spinner,
     LoginWithPassword,
     SocialLogins,
+    LoginSuccess,
   },
   data() {
     return {
@@ -64,7 +61,6 @@ export default Vue.extend({
         authState: (state: { auth: AuthState }) => state.auth,
       }),
       LoginStep: LoginStep,
-      currentStep: '',
     }
   },
   computed: {
@@ -74,17 +70,31 @@ export default Vue.extend({
     isLoading() {
       return this.authState.isLoading;
     },
+    currentStep: {
+      get() {
+        return this.authState.loginState.step || this.LoginStep.preLogin;
+      },
+      set(value) {
+        console.log("value", value)
+      }
+    },
   },
   mounted() {
-    this.currentStep = this.authState.loginState.step || this.LoginStep.preLogin;
-
     this[FRONTEGG_STORE_KEY].dispatch({
       type: 'auth/setState',
       payload: {
         isLoading: false,
       }
     });
-  }
+  },
+  methods: {
+    backToLogin() {
+      this.$router.push(this.authState.routes.loginUrl);
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/resetLoginState",
+      });
+    },
+  },
 });
 </script>
 

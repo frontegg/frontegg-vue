@@ -5,6 +5,9 @@
         <div
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
+          <div class="fe-input__header">
+            <div class="fe-input__label">New Password</div>
+          </div>
           <div class="password">
             <v-text-field
               v-model="password"
@@ -21,14 +24,17 @@
         <div
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
+          <div class="fe-input__header">
+            <div class="fe-input__label">Confirm New Password</div>
+          </div>
           <div class="password">
             <v-text-field
               v-model="confirmPassword"
               tabindex="-1"
               :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="rules.password"
+              :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
-              name="password"
+              name="confirmPassword"
               placeholder="Enter Your Password again"
               @click:append="showConfirmPassword = !showConfirmPassword"
             ></v-text-field>
@@ -39,7 +45,7 @@
             class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
-            @click="resetPassword"
+            @click.prevent="resetPassword"
           >
             <spinner v-if="isLoading"></spinner>
             <span v-else>
@@ -66,6 +72,16 @@ export default Vue.extend({
   components: {
     Spinner,
   },
+  props: {
+    userId: {
+      type: String,
+      required: true,
+    },
+    token: {
+      type: String,
+      required: true,
+    },
+  },
   data() {
     return {
       ...mapState(this, {
@@ -80,8 +96,12 @@ export default Vue.extend({
         password: [
           (v: string) => !!v || "The Password is required",
           (v: string) =>
-            !v || v.length > 6 || "Password must be at least 6 characters",
+            !v || v.length >= 6 || "Password must be at least 6 characters",
         ],
+        confirmPassword: [
+          (v: string) => !!v || "The Password is required",
+          (v: string) => this.password === this.confirmPassword || 'Password must match',
+        ]
       },
     }
   },
@@ -89,11 +109,23 @@ export default Vue.extend({
     isLoading() {
       return this.forgotPasswordState.loading;
     },
+    resetError() {
+      return this.forgotPasswordState.error;
+    }
   },
   methods: {
     resetPassword() {
       console.log('reset password action')
-    }
+
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/resetPassword",
+        payload: {
+          password: this.password,
+          userId: this.userId,
+          token: this.token,
+        }
+      });
+    },
   },
 
 });

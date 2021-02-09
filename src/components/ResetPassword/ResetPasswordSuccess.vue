@@ -1,8 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div class="fe-center">
-          ResetPasswordSuccess
+      <div class="fe-center fe-success-message">
+        Password has been changed
+      </div>
+      <div class='fe-relative fe-mt-4'>
+        <spinner></spinner>
       </div>
     </v-col>
   </v-row>
@@ -10,9 +13,31 @@
 
 <script lang="ts">
 import Vue from "vue";
+import Spinner from "@/components/Common/Spinner.vue";
+import { mapState } from '@/plugins/fronteggCore/map-state'
+import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 
 export default Vue.extend({
   name: "ResetPasswordSuccess",
+  data() {
+    return {
+      ...mapState(this, {
+        authState: (state: { auth: AuthState }) => state.auth,
+      }),
+    }
+  },
+  components: {
+    Spinner,
+  },
+  mounted() {
+    setTimeout(() => {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/resetForgotPasswordState",
+      });
+
+      this.$router.push(this.authState.routes.loginUrl);
+    }, 1000);
+  },
 });
 </script>
 
