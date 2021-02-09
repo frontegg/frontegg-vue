@@ -1,9 +1,12 @@
 <template>
   <div class="fe-login-page">
-    <spinner v-if="isLoading"></spinner>
-    <v-container class="fe-login-container" v-else>
+    <spinner v-if="isLoading" />
+    <v-container
+      v-else
+      class="fe-login-container"
+    >
       <div class="fe-login-header">
-        <img src="../assets/main-logo.svg" />
+        <img src="../assets/main-logo.svg">
       </div>
 
       <div class="fe-forgot-password-component">
@@ -11,7 +14,10 @@
           <ResetPasswordSuccess />
         </div>
         <div v-else-if="userId && token">
-          <ResetPassword :userId="userId" :token="token" />
+          <ResetPassword
+            :user-id="userId"
+            :token="token"
+          />
         </div>
         <div v-if="!userId || !token">
           <ResetPasswordFailed />

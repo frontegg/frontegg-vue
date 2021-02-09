@@ -3,13 +3,13 @@
     <v-col cols="12">
       <div class="fe-error-message">
         Reset Password Failed
-        <br />
+        <br>
         {{ resetError }}
       </div>
       <button
         class="fe-forgot-password-component__back-to-login"
         @click="backToLogin()"
-        >
+      >
         Back to Login
       </button>
     </v-col>

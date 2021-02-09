@@ -1,12 +1,17 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form class="fe-form" v-model="isFormValid">
+      <v-form
+        v-model="isFormValid"
+        class="fe-form"
+      >
         <div
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
           <div class="fe-input__header">
-            <div class="fe-input__label">New Password</div>
+            <div class="fe-input__label">
+              New Password
+            </div>
           </div>
           <div class="password">
             <v-text-field
@@ -18,14 +23,16 @@
               name="password"
               placeholder="Enter Your Password"
               @click:append="showPassword = !showPassword"
-            ></v-text-field>
+            />
           </div>
         </div>
         <div
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
         >
           <div class="fe-input__header">
-            <div class="fe-input__label">Confirm New Password</div>
+            <div class="fe-input__label">
+              Confirm New Password
+            </div>
           </div>
           <div class="password">
             <v-text-field
@@ -37,7 +44,7 @@
               name="confirmPassword"
               placeholder="Enter Your Password again"
               @click:append="showConfirmPassword = !showConfirmPassword"
-            ></v-text-field>
+            />
           </div>
         </div>
         <div class="continue">
@@ -47,12 +54,15 @@
             :disabled="!isFormValid"
             @click.prevent="resetPassword"
           >
-            <spinner v-if="isLoading"></spinner>
+            <spinner v-if="isLoading" />
             <span v-else>
               Reset Password
             </span>
           </button>
-          <div v-if="resetError" class="fe-error-message">
+          <div
+            v-if="resetError"
+            class="fe-error-message"
+          >
             {{ resetError }}
           </div>
         </div>

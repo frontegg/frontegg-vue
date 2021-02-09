@@ -1,9 +1,12 @@
 <template>
   <div class="fe-login-page">
-    <spinner v-if="isLoading"></spinner>
-    <v-container class="fe-login-container" v-else>
+    <spinner v-if="isLoading" />
+    <v-container
+      v-else
+      class="fe-login-container"
+    >
       <div class="fe-login-header">
-        <img src="../assets/main-logo.svg" />
+        <img src="../assets/main-logo.svg">
       </div>
       <v-stepper v-model="currentStep">
         <v-stepper-items>
@@ -22,14 +25,14 @@
           </v-stepper-content>
 
           <v-stepper-content :step="LoginStep.success">
-              <LoginSuccess />
+            <LoginSuccess />
           </v-stepper-content>
           <button
             v-if="showBackBtn"
-            class='fe-login-component__back-to-login'
+            class="fe-login-component__back-to-login"
             @click="backToLogin()"
           >
-            Back to Login
+            {{ $t('auth.login.back-to-login') }}
           </button>
         </v-stepper-items>
       </v-stepper>

@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-center fe-success-message fe-mb-4">
-          A password reset email has been sent to your registered email address
+        A password reset email has been sent to your registered email address
       </div>
     </v-col>
   </v-row>

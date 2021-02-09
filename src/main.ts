@@ -5,6 +5,7 @@ import fronteggCore from './plugins/fronteggCore';
 import fronteggAuth from './plugins/fronteggAuth';
 import fronteggAudits from './plugins/fronteggAudits';
 import vuetify from './plugins/vuetify';
+import i18n from './i18n'
 
 Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
@@ -26,5 +27,6 @@ Vue.use(fronteggAudits);
 new Vue({
   router,
   vuetify,
+  i18n,
   render: h => h(App)
 }).$mount('#app');

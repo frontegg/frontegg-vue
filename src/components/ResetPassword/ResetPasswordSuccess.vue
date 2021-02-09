@@ -4,8 +4,8 @@
       <div class="fe-center fe-success-message">
         Password has been changed
       </div>
-      <div class='fe-relative fe-mt-4'>
-        <spinner></spinner>
+      <div class="fe-relative fe-mt-4">
+        <spinner />
       </div>
     </v-col>
   </v-row>
@@ -19,15 +19,15 @@ import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 
 export default Vue.extend({
   name: "ResetPasswordSuccess",
+  components: {
+    Spinner,
+  },
   data() {
     return {
       ...mapState(this, {
         authState: (state: { auth: AuthState }) => state.auth,
       }),
     }
-  },
-  components: {
-    Spinner,
   },
   mounted() {
     setTimeout(() => {

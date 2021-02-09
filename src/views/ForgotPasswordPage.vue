@@ -1,9 +1,12 @@
 <template>
   <div class="fe-login-page">
-    <spinner v-if="isLoading"></spinner>
-    <v-container class="fe-login-container" v-else>
+    <spinner v-if="isLoading" />
+    <v-container
+      v-else
+      class="fe-login-container"
+    >
       <div class="fe-login-header">
-        <img src="../assets/main-logo.svg" />
+        <img src="../assets/main-logo.svg">
       </div>
       <v-stepper v-model="currentStep">
         <v-stepper-items>

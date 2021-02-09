@@ -1,8 +1,13 @@
 <template>
-  <v-form class="fe-form" v-model="isFormValid">
+  <v-form
+    v-model="isFormValid"
+    class="fe-form"
+  >
     <div class="fe-input fe-input-full-width">
       <div class="fe-input__header">
-        <div class="fe-input__label">Enter your email</div>
+        <div class="fe-input__label">
+          Enter your email
+        </div>
       </div>
       <div>
         <v-text-field
@@ -18,12 +23,14 @@
       data-test-id="submit-btn"
       @click.prevent="remindMe"
     >
-      <spinner v-if="isLoading"></spinner>
+      <spinner v-if="isLoading" />
       <span v-else>
         Remind Me
       </span>
     </button>
-    <div class="fe-error-message">{{ this.backendError }}</div>
+    <div class="fe-error-message">
+      {{ this.backendError }}
+    </div>
   </v-form>
 </template>
 
@@ -63,6 +70,9 @@ export default Vue.extend({
       return this.forgotPasswordState.error;
     },
   },
+  mounted() {
+    this.email = this.forgotPasswordState.email;
+  },
   methods: {
     remindMe() {
       this[FRONTEGG_STORE_KEY].dispatch({
@@ -72,9 +82,6 @@ export default Vue.extend({
         }
       });
     },
-  },
-  mounted() {
-    this.email = this.forgotPasswordState.email;
   }
 });
 </script>

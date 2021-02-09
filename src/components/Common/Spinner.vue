@@ -1,7 +1,7 @@
 <template>
-    <v-container>
-        <span class="fe-loader__inner fe-loader__inner-primary"></span>
-    </v-container>
+  <v-container>
+    <span class="fe-loader__inner fe-loader__inner-primary" />
+  </v-container>
 </template>
 
 <script lang="ts">

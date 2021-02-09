@@ -6,8 +6,8 @@
       <div class="fe-center">
         Login Succeeded
       </div>
-      <div class='fe-relative fe-mt-4'>
-        <spinner></spinner>
+      <div class="fe-relative fe-mt-4">
+        <spinner />
       </div>
     </v-col>
   </v-row>
