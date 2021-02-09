@@ -2,15 +2,15 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-error-message">
-        Reset Password Failed
+        {{ $t('auth.forgot-password.reset-password-failed-title') }}
         <br>
-        {{ resetError }}
+        {{ $t('auth.forgot-password.reset-password-failed-description') }}
       </div>
       <button
         class="fe-forgot-password-component__back-to-login"
         @click="backToLogin()"
       >
-        Back to Login
+        {{ $t('auth.login.back-to-login') }}
       </button>
     </v-col>
   </v-row>
@@ -28,11 +28,6 @@ export default Vue.extend({
       ...mapState(this, {
         authState: (state: { auth: AuthState }) => state.auth,
       }),
-    }
-  },
-  computed: {
-    resetError() {
-      return this.forgotPasswordState.error;
     }
   },
   methods: {

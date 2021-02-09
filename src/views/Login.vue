@@ -8,22 +8,13 @@
       <div class="fe-login-header">
         <img src="../assets/main-logo.svg">
       </div>
-      <v-stepper v-model="currentStep">
+      <div class="fe-login-component" v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
+        <LoginWithPassword />
+        <SocialLogins />
+      </div>
+
+      <v-stepper v-model="currentStep" v-else>
         <v-stepper-items>
-          <v-stepper-content :step="LoginStep.preLogin">
-            <div class="fe-login-component">
-              <LoginWithPassword />
-              <SocialLogins />
-            </div>
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.loginWithPassword">
-            <div class="fe-login-component">
-              <LoginWithPassword />
-              <SocialLogins />
-            </div>
-          </v-stepper-content>
-
           <v-stepper-content :step="LoginStep.success">
             <LoginSuccess />
           </v-stepper-content>

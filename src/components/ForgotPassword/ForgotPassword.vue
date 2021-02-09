@@ -6,7 +6,7 @@
     <div class="fe-input fe-input-full-width">
       <div class="fe-input__header">
         <div class="fe-input__label">
-          Enter your email
+          {{ $t('auth.forgot-password.email-label') }}
         </div>
       </div>
       <div>
@@ -25,7 +25,7 @@
     >
       <spinner v-if="isLoading" />
       <span v-else>
-        Remind Me
+        {{ $t('auth.forgot-password.remind-me') }}
       </span>
     </button>
     <div class="fe-error-message">

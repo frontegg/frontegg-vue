@@ -27,7 +27,7 @@
             class="fe-login-component__back-to-login"
             @click="backToLogin()"
           >
-            Back to Login
+            {{ $t('auth.forgot-password.back-to-login') }}
           </button>
         </v-stepper-items>
       </v-stepper>

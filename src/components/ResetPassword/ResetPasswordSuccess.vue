@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-center fe-success-message">
-        Password has been changed
+        {{ $t('auth.forgot-password.password-has-been-changed') }}
       </div>
       <div class="fe-relative fe-mt-4">
         <spinner />

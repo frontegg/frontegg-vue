@@ -1,8 +1,10 @@
 <template>
   <v-row>
     <v-col cols="12">
-      Dont have an account?
-      <span class="fe-login-component__back-to-sign-up-link">Sign up.</span>
+      {{ $t('auth.login.suggest-sign-up.message') }}
+      <span class="fe-login-component__back-to-sign-up-link">
+        {{ $t('auth.login.suggest-sign-up.sign-up-link') }}
+      </span>
     </v-col>
     <v-col cols="12">
       <v-form
@@ -11,7 +13,7 @@
       >
         <div class="fe-input__header">
           <div class="fe-input__label">
-            Email
+            {{ $t('auth.login.email') }}
           </div>
         </div>
         <div>
@@ -28,14 +30,14 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              Password
+              {{ $t('auth.login.password') }}
             </div>
             <a
               class="fe-button fe-input__label-button fe-button-clickable"
               href="#"
               @click.prevent="navigateForgetPass"
             >
-              Forgot Password?
+              {{ $t('auth.login.forgot-password') }}
             </a>
           </div>
           <div class="password">

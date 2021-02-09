@@ -10,7 +10,7 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              New Password
+              {{ $t('auth.forgot-password.new-password') }}
             </div>
           </div>
           <div class="password">
@@ -31,7 +31,7 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              Confirm New Password
+              {{ $t('auth.forgot-password.confirm-new-password') }}
             </div>
           </div>
           <div class="password">
@@ -56,7 +56,7 @@
           >
             <spinner v-if="isLoading" />
             <span v-else>
-              Reset Password
+              {{ $t('auth.forgot-password.reset-password-button') }}
             </span>
           </button>
           <div

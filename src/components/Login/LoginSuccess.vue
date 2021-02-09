@@ -4,7 +4,7 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-center">
-        Login Succeeded
+        {{ $t('auth.login.authentication-succeeded') }}
       </div>
       <div class="fe-relative fe-mt-4">
         <spinner />
