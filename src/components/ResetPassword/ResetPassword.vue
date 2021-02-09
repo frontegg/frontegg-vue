@@ -125,8 +125,6 @@ export default Vue.extend({
   },
   methods: {
     resetPassword() {
-      console.log('reset password action')
-
       this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/resetPassword",
         payload: {

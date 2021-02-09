@@ -2,15 +2,15 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-error-message">
-        {{ $t('auth.forgot-password.reset-password-failed-title') }}
+        {{ $t('auth.activate-account.failed-title') }}
         <br>
-        {{ $t('auth.forgot-password.reset-password-failed-description') }}
+        {{ $t('auth.activate-account.failed-description') }}
       </div>
       <button
         class="fe-forgot-password-component__back-to-login"
         @click="backToLogin()"
       >
-        {{ $t('auth.login.back-to-login') }}
+        {{ $t('auth.activate-account.back-to-login') }}
       </button>
     </v-col>
   </v-row>
@@ -33,7 +33,7 @@ export default Vue.extend({
   methods: {
     backToLogin() {
       this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetForgotPasswordState",
+        type: "auth/resetActivateState",
       });
 
       this.$router.push(this.authState.routes.loginUrl);

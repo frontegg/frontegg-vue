@@ -10,7 +10,7 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              {{ $t('auth.forgot-password.new-password') }}
+              {{ $t('auth.activate-account.new-password') }}
             </div>
           </div>
           <div class="password">
@@ -21,7 +21,7 @@
               :rules="rules.password"
               :type="showPassword ? 'text' : 'password'"
               name="password"
-              placeholder="Enter Your Password"
+              :placeholder="$t('auth.activate-account.enter-your-password')"
               @click:append="showPassword = !showPassword"
             />
           </div>
@@ -31,7 +31,7 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              {{ $t('auth.forgot-password.confirm-new-password') }}
+              {{ $t('auth.activate-account.confirm-new-password') }}
             </div>
           </div>
           <div class="password">
@@ -42,7 +42,7 @@
               :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
               name="confirmPassword"
-              placeholder="Enter Your Password again"
+              :placeholder="$t('auth.activate-account.enter-your-password-again')"
               @click:append="showConfirmPassword = !showConfirmPassword"
             />
           </div>
@@ -52,11 +52,11 @@
             class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
-            @click.prevent="resetPassword"
+            @click.prevent="activateAccount()"
           >
             <spinner v-if="isLoading" />
             <span v-else>
-              {{ $t('auth.forgot-password.reset-password-button') }}
+              {{ $t('auth.activate-account.activate-account-button') }}
             </span>
           </button>
           <div
@@ -95,7 +95,7 @@ export default Vue.extend({
   data() {
     return {
       ...mapState(this, {
-        forgotPasswordState: (state: { auth: AuthState }) => state.auth.forgotPasswordState,
+        activateState: (state: { auth: AuthState }) => state.auth.activateState,
       }),
       isFormValid: false,
       password: '',
@@ -117,18 +117,16 @@ export default Vue.extend({
   },
   computed: {
     isLoading() {
-      return this.forgotPasswordState.loading;
+      return this.activateState.loading;
     },
     resetError() {
-      return this.forgotPasswordState.error;
+      return this.activateState.error;
     }
   },
   methods: {
-    resetPassword() {
-      console.log('reset password action')
-
+    activateAccount() {
       this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetPassword",
+        type: "auth/activateAccount",
         payload: {
           password: this.password,
           userId: this.userId,
@@ -137,7 +135,6 @@ export default Vue.extend({
       });
     },
   },
-
 });
 </script>
 

@@ -2,7 +2,7 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-center fe-success-message">
-        {{ $t('auth.forgot-password.password-has-been-changed') }}
+        {{ $t('auth.activate-account.activation-succeeded') }}
       </div>
       <div class="fe-relative fe-mt-4">
         <spinner />
@@ -32,10 +32,9 @@ export default Vue.extend({
   mounted() {
     setTimeout(() => {
       this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetForgotPasswordState",
+        type: "auth/resetActivateState",
       });
-
-      this.$router.push(this.authState.routes.loginUrl);
+      this.$router.push(this.authState.routes.logoutUrl);
     }, 1000);
   },
 });
