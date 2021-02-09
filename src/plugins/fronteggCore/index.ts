@@ -31,7 +31,7 @@ const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginCon
     if (path.startsWith(baseName)) {
       path = path.substring(baseName.length);
     }
-    window.location.href = path
+    window.location.href = path;
     // if (opts?.refresh && !isSSR) {
     //   window.Cypress ? history.push(path) : (window.location.href = path);
     // } else {

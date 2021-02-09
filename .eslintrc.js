@@ -16,6 +16,8 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'prefer-spread': 'off',
+    'quotes': ["double", "single"],
+    "comma-dangle": false,
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-this-alias': 'off',
     "@typescript-eslint/naming-convention": [
