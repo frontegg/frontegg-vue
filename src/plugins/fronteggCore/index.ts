@@ -9,6 +9,7 @@ import { Unsubscribe } from 'redux';
 import set from 'set-value';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import mapState from './map-state';
+import router from '@/router';
 
 const isSSR = typeof window === 'undefined';
 
@@ -31,12 +32,11 @@ const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginCon
     if (path.startsWith(baseName)) {
       path = path.substring(baseName.length);
     }
-    window.location.href = path;
-    // if (opts?.refresh && !isSSR) {
-    //   window.Cypress ? history.push(path) : (window.location.href = path);
-    // } else {
-    //   opts?.replace ? history.replace(path) : history.push(path);
-    // }
+    if (opts?.refresh && !isSSR) {
+      window.Cypress ? router.push(path) : (window.location.href = path);
+    } else {
+      opts?.replace ? router.replace(path) : router.push(path);
+    }
   }
   
   ContextHolder.setOnRedirectTo(onRedirectTo)

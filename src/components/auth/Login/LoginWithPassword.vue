@@ -58,7 +58,7 @@
             class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
-            @click="loginSubmit"
+            @click.prevent="loginSubmit"
           >
             <spinner v-if="isLoading" />
             {{ submitText }}
@@ -139,8 +139,7 @@ export default Vue.extend({
     console.log("call action here pp", this);
   },
   methods: {
-    loginSubmit(e) {
-      e.preventDefault();
+    loginSubmit() {
       if (this.loginState.step === "preLogin") {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
