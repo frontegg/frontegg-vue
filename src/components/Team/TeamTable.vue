@@ -5,23 +5,35 @@
 
     
     <div class="fe-table__container">
-      <div class="fe-table" role="table">
+      <div
+        class="fe-table"
+        role="table"
+      >
         <div class="fe-table__table-container">
-          <div class="fe-table__tbody" role="rowgroup">
+          <div
+            class="fe-table__tbody"
+            role="rowgroup"
+          >
             <div class="fe-table__tr">
-              <div class="fe-table__tr-td fe-table__tr-td-empty">No Results Found</div>
+              <div class="fe-table__tr-td fe-table__tr-td-empty">
+                No Results Found
+              </div>
             </div>
           </div>
           <div class="fe-table__thead">
-            <div class="fe-table__thead-tr" role="row" style="display: flex; flex: 1 0 auto;">
+            <div
+              class="fe-table__thead-tr"
+              role="row"
+              style="display: flex; flex: 1 0 auto;"
+            >
               <div
                 class="fe-table__thead-tr-th fe-table__thead-tr-th__first-cell"
                 colspan="1"
                 role="columnheader"
                 style="box-sizing: border-box;"
               >
-                <div style="min-width: 2.25rem; max-width: 2.25rem;"></div>
-                <div class="fe-table__spacer"></div>
+                <div style="min-width: 2.25rem; max-width: 2.25rem;" />
+                <div class="fe-table__spacer" />
               </div>
               <div
                 class="fe-table__thead-tr-th"
@@ -37,10 +49,16 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="fe-icon"
                 >
-                  <path fill="currentColor" d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"></path>
-                  <path fill="currentColor" d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"></path>
+                  <path
+                    fill="currentColor"
+                    d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"
+                  />
                 </svg>
-                <div class="fe-table__spacer"></div>
+                <div class="fe-table__spacer" />
               </div>
               <div
                 class="fe-table__thead-tr-th"
@@ -56,10 +74,16 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="fe-icon"
                 >
-                  <path fill="currentColor" d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"></path>
-                  <path fill="currentColor" d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"></path>
+                  <path
+                    fill="currentColor"
+                    d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"
+                  />
                 </svg>
-                <div class="fe-table__spacer"></div>
+                <div class="fe-table__spacer" />
               </div>
               <div
                 class="fe-table__thead-tr-th"
@@ -75,10 +99,16 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="fe-icon"
                 >
-                  <path fill="currentColor" d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"></path>
-                  <path fill="currentColor" d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"></path>
+                  <path
+                    fill="currentColor"
+                    d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"
+                  />
                 </svg>
-                <div class="fe-table__spacer"></div>
+                <div class="fe-table__spacer" />
               </div>
               <div
                 class="fe-table__thead-tr-th"
@@ -94,14 +124,25 @@
                   xmlns="http://www.w3.org/2000/svg"
                   class="fe-icon"
                 >
-                  <path fill="currentColor" d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"></path>
-                  <path fill="currentColor" d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"></path>
+                  <path
+                    fill="currentColor"
+                    d="M 2.497 3.989 L 9.497 3.989 L 5.997 -0.011 L 2.497 3.989 Z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M 5.997 11.989 L 9.497 7.989 L 2.497 7.989 L 5.997 11.989 Z"
+                  />
                 </svg>
-                <div class="fe-table__spacer"></div>
+                <div class="fe-table__spacer" />
               </div>
-              <div class="fe-table__thead-tr-th" colspan="1" role="columnheader" style="box-sizing: border-box;">
-                <div style="min-width: 3.25rem; max-width: 3.25rem;"></div>
-                <div class="fe-table__spacer"></div>
+              <div
+                class="fe-table__thead-tr-th"
+                colspan="1"
+                role="columnheader"
+                style="box-sizing: border-box;"
+              >
+                <div style="min-width: 3.25rem; max-width: 3.25rem;" />
+                <div class="fe-table__spacer" />
               </div>
             </div>
           </div>
@@ -118,7 +159,7 @@ import { AuthState } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
 export default Vue.extend({
-  name: "Team-table",
+  name: "TeamTable",
   data() {
     return {
       ...mapState(this, {

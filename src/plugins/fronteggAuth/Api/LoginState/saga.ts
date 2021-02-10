@@ -20,7 +20,7 @@ import { AuthPageRoutes } from '../../interfaces';
 import { loadAllowSignUps } from '../SignUp/saga';
 import { MFAStep } from '../MfaState';
 
-const FRONTEGG_AFTER_AUTH_REDIRECT_URL = 'FRONTEGG_AFTER_AUTH_REDIRECT_URL'
+const FRONTEGG_AFTER_AUTH_REDIRECT_URL = 'FRONTEGG_AFTER_AUTH_REDIRECT_URL';
 export function* afterAuthNavigation() {
   const { routes, onRedirectTo } = yield select((state) => state.auth);
   const { loginUrl, logoutUrl } = routes as AuthPageRoutes;

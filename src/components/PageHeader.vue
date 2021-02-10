@@ -2,8 +2,10 @@
   <div class="fe-page-header fe-team__header">
     <div class="fe-left">
       <div class="fe-title">
-        {{pageTitle}}
-        <div class="fe-subtitle">{{subTitle}}</div>
+        {{ pageTitle }}
+        <div class="fe-subtitle">
+          {{ subTitle }}
+        </div>
       </div>
     </div>
   </div>
@@ -13,7 +15,7 @@
 import Vue from "vue";
 
 export default Vue.extend({
-  name: "Page-header",
+  name: "PageHeader",
   props: {
     pageTitle: {
       type: String,

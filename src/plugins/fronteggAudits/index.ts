@@ -20,7 +20,6 @@ export default {
     Vue.registerFronteggPlugin(AuditsPlugin);
     console.log('Audits plugin installed');
 
-
     Vue.mixin({
       beforeCreate() {
         // console.log('AuditsPlugin.beforeCreate');
@@ -31,5 +30,3 @@ export default {
     });
   },
 };
-
-

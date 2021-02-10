@@ -1,4 +1,4 @@
-/* eslint-disable */ 
+/* eslint-disable */
 import { call, put, retry, select, takeEvery, takeLeading } from 'redux-saga/effects';
 import { actions } from '../reducer';
 import { api, IChangePassword, IUserProfile } from '@frontegg/rest-api';

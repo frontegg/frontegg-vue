@@ -14,7 +14,7 @@ import TeamTableToolbar from "@/components/Team/TeamTableToolbar.vue";
 import TeamTable from "@/components/Team/TeamTable.vue";
 
 export default Vue.extend({
-  name: "Team-layout",
+  name: "TeamLayout",
   components: {TeamTableToolbar, TeamTable},
   methods: {
     onSearchChange(val: string) {

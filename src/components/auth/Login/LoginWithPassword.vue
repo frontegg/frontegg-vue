@@ -1,8 +1,10 @@
 <template>
   <v-row>
     <v-col cols="12">
-      Dont have an account?
-      <span class="fe-login-component__back-to-sign-up-link">Sign up.</span>
+      {{ $t('auth.login.suggest-sign-up.message') }}
+      <span class="fe-login-component__back-to-sign-up-link">
+        {{ $t('auth.login.suggest-sign-up.sign-up-link') }}
+      </span>
     </v-col>
     <v-col cols="12">
       <v-form
@@ -11,12 +13,11 @@
       >
         <div class="fe-input__header">
           <div class="fe-input__label">
-            Email
+            {{ $t('auth.login.email') }}
           </div>
         </div>
         <div>
           <v-text-field
-            ref="emailField"
             v-model="email"
             name="email"
             :rules="rules.email"
@@ -29,14 +30,15 @@
         >
           <div class="fe-input__header">
             <div class="fe-input__label">
-              Password
+              {{ $t('auth.login.password') }}
             </div>
-            <router-link
+            <a
               class="fe-button fe-input__label-button fe-button-clickable"
-              to="/account/forget-password"
+              href="#"
+              @click.prevent="navigateForgetPass"
             >
-              Forgot Password?
-            </router-link>
+              {{ $t('auth.login.forgot-password') }}
+            </a>
           </div>
           <div class="password">
             <v-text-field
@@ -53,10 +55,10 @@
         </div>
         <div class="continue">
           <button
-            class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
+            class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
-            @click="loginSubmit"
+            @click.prevent="loginSubmit"
           >
             <spinner v-if="isLoading" />
             {{ submitText }}
@@ -103,7 +105,7 @@ export default Vue.extend({
         password: [
           (v: string) => !!v || "The Password is required",
           (v: string) =>
-            !v || v.length > 6 || "Password must be at least 6 characters",
+            !v || v.length >= 6 || "Password must be at least 6 characters",
         ],
       },
       showPassword: false,
@@ -137,8 +139,7 @@ export default Vue.extend({
     console.log("call action here pp", this);
   },
   methods: {
-    loginSubmit(e) {
-      e.preventDefault();
+    loginSubmit() {
       if (this.loginState.step === "preLogin") {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
@@ -156,118 +157,21 @@ export default Vue.extend({
         });
       }
     },
+    navigateForgetPass() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setForgotPasswordState",
+        payload: { email: this.email },
+      });
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/resetLoginState",
+      });
+
+      this.$router.push('/account/forget-password');
+    },
   },
 });
 </script>
 
 <style lang="scss">
-.fe-section-title {
-  color: var(--color-gray-7);
-  margin-bottom: 1rem;
-  font-size: 1rem;
-}
 
-.fe {
-  &-flex {
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-    align-items: center;
-  }
-
-  &-full-width {
-    width: 100%;
-  }
-
-  &-flex-no-wrap {
-    flex-wrap: nowrap;
-  }
-
-  &-flex-spacer {
-    flex: 1;
-  }
-}
-
-.fe-login-component,
-.fe-forgot-password-component,
-.fe-accept-invitation-component,
-.fe-activate-account-component {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  .fe-recover-two-factor {
-    a {
-      text-decoration: underline;
-      cursor: pointer;
-    }
-  }
-
-  &__back-to-login {
-    margin-top: 1rem;
-  }
-
-  .ui.loader.inline {
-    display: block;
-    margin: 2rem auto 1rem;
-  }
-
-  &__back-to-sign-up-link {
-    cursor: pointer;
-    color: var(--color-primary);
-
-    &:hover {
-      color: var(--color-primary-75);
-    }
-  }
-}
-
-.v-input {
-  &.v-text-field.error--text,
-  &.error--text {
-    border-color: var(--color-danger);
-    color: var(--color-danger);
-
-    input {
-      color: var(--color-danger);
-    }
-    .v-messages__message {
-      color: var(--color-danger);
-      padding: 6px 0;
-    }
-  }
-}
-.fe-login-component {
-  .v-text-field > .v-input__control > .v-input__slot {
-    &:before,
-    &:after {
-      content: none;
-    }
-  }
-}
-
-.v-input__slot {
-  --size-font-size: var(--element-font-size-lg);
-  --size-border-radius: var(--element-border-radius-sm);
-  height: var(--size-height);
-  font-size: var(--size-font-size);
-  border-radius: var(--size-border-radius);
-  padding: 0;
-  overflow: hidden;
-  display: inline-flex;
-  position: relative;
-  vertical-align: middle;
-  align-items: center;
-  height: var(--element-height);
-  width: 100%;
-  border-radius: var(--element-border-radius-sm);
-  background-color: var(--color-white);
-  color: var(--color-gray-8);
-  border: 1px solid var(--element-border-color);
-  padding-right: 8px;
-
-  input {
-    padding: 4px 8px;
-  }
-}
 </style>

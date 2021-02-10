@@ -5,6 +5,7 @@ import fronteggCore from './plugins/fronteggCore';
 import fronteggAuth from './plugins/fronteggAuth';
 import fronteggAudits from './plugins/fronteggAudits';
 import vuetify from './plugins/vuetify';
+import i18n from './i18n'
 
 import "./styles/app.scss";
 
@@ -15,8 +16,7 @@ Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
 Vue.use(fronteggAuth, {
   routes: {
-    // authenticatedUrl: 'https://live.frontegg.com/',
-    authenticatedUrl: 'http://localhost:8081/',
+    authenticatedUrl: '/',
     loginUrl: '/account/login',
     logoutUrl: '/account/logout',
     activateUrl: '/account/activate',
@@ -35,5 +35,6 @@ Vue.component("default-layout", DefaultLayout);
 new Vue({
   router,
   vuetify,
+  i18n,
   render: h => h(App)
 }).$mount('#app');
