@@ -13,22 +13,22 @@ const routes: Array<RouteConfig> = [
   {
     path: '/account/login',
     name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/Login.vue'),
+    component: () => import(/* webpackChunkName: "login" */ '../views/auth/Login.vue'),
   },
   {
     path: '/account/forget-password',
-    name: 'ForgetPasswordPage',
-    component: () => import(/* webpackChunkName: "ForgetPasswordPage" */ '../views/ForgotPasswordPage.vue'),
+    name: 'ForgetPassword',
+    component: () => import(/* webpackChunkName: "ForgetPassword" */ '../views/auth/ForgotPassword.vue'),
   },
   {
     path: '/account/reset-password',
-    name: 'ResetPasswordPage',
-    component: () => import(/* webpackChunkName: "ResetPasswordPage" */ '../views/ResetPasswordPage.vue'),
+    name: 'ResetPassword',
+    component: () => import(/* webpackChunkName: "ResetPassword" */ '../views/auth/ResetPassword.vue'),
   },
   {
     path: '/account/activate',
     name: 'ActivateAccount',
-    component: () => import(/* webpackChunkName: "ActivateAccount" */ '../views/ActivateAccount.vue'),
+    component: () => import(/* webpackChunkName: "ActivateAccount" */ '../views/auth/ActivateAccount.vue'),
   },
 ];
 
