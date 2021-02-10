@@ -26,7 +26,13 @@ const routes: Array<RouteConfig> = [
   {
     path: '/account/forget-password',
     name: 'forget-password',
-    component: () => import(/* webpackChunkName: "login" */ '../views/ForgetPassword.vue'),
+    component: () => import(/* webpackChunkName: "ForgetPassword" */ '../views/ForgetPassword.vue'),
+  },
+  {
+    path: '/team',
+    name: 'team',
+    meta: { layout: "main" },
+    component: () => import(/* webpackChunkName: "Team" */ '../views/Team.vue'),
   },
 ];
 

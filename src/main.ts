@@ -6,11 +6,17 @@ import fronteggAuth from './plugins/fronteggAuth';
 import fronteggAudits from './plugins/fronteggAudits';
 import vuetify from './plugins/vuetify';
 
+import "./styles/app.scss";
+
+import MainLayout from './Layouts/MainLayout.vue';
+import DefaultLayout from './Layouts/DefaultLayout.vue';
+
 Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
 Vue.use(fronteggAuth, {
   routes: {
-    authenticatedUrl: 'https://live.frontegg.com/',
+    // authenticatedUrl: 'https://live.frontegg.com/',
+    authenticatedUrl: 'http://localhost:8081/',
     loginUrl: '/account/login',
     logoutUrl: '/account/logout',
     activateUrl: '/account/activate',
@@ -22,6 +28,9 @@ Vue.use(fronteggAuth, {
   },
 });
 Vue.use(fronteggAudits);
+
+Vue.component("main-layout", MainLayout);
+Vue.component("default-layout", DefaultLayout);
 
 new Vue({
   router,

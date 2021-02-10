@@ -1,9 +1,23 @@
 <template>
   <div id="app">
-    <router-view />
+    <component :is="layout">
+      <router-view :layout.sync="layout" />
+    </component>
   </div>
 </template>
 
-<style lang="scss">
-  @import './styles/app.scss';
-</style>
+<script lang="ts">
+import Vue from "vue";
+
+const defaultLayout = "default";
+export default Vue.extend({
+  name: "App",
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || defaultLayout) + "-layout";
+    }
+  }
+});
+</script>
+
+<style lang="scss"></style>
