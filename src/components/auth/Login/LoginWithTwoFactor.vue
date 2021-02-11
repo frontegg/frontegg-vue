@@ -17,17 +17,18 @@
             <v-text-field
               v-model="code"
               name="code"
-              :rules="rules.email"
+              :rules="rules.code"
               aria-autocomplete="none"
               autocomplete="off"
             />
           </div>
         </div>
         <button
-          class="fe-button fe-button-disabled fe-button-large fe-button-clickable fe-button-full-width"
-          type="submit"
+          class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
+          :class="!isFormValid? 'fe-button-disabled': ''"
           data-test-id="submit-btn"
-          disabled=""
+          :disabled="!isFormValid"
+          @click.prevent="loginWithMfa()"
         >
           {{ $t("auth.login.login") }}
         </button>
@@ -36,12 +37,18 @@
             {{ $t("auth.login.disable-two-factor-title") }}
           </div>
           <div class="fe-note-description fe-recover-two-factor">
-            <a test-id="recover-two-factor-button">{{
-              $t("common.click-here")
-            }}</a>
+            <a 
+              @click.prevent="recoverTwoFactor()"
+              test-id="recover-two-factor-button">
+            {{ $t("common.click-here") }}
+            </a>
             &nbsp;
             {{ $t("auth.login.disable-two-factor-description") }}
           </div>
+        </div>
+
+        <div v-if="error" class="fe-error-message">
+          {{ error }}
         </div>
       </v-form>
     </v-col>
@@ -51,10 +58,12 @@
 <script lang="ts">
 import Vue from "vue";
 import { mapState } from "@/plugins/fronteggCore/map-state";
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import Spinner from "@/components/Common/Spinner.vue";
+import { LoginStep } from '@/plugins/fronteggAuth/Api';
 
 export default Vue.extend({
-  name: "LoginSuccess",
+  name: "LoginWithTwoFactor",
   components: {
   },
     data() {
@@ -66,12 +75,40 @@ export default Vue.extend({
       code: '',
       rules: {
         code: [
-          (v: string) => !!v || "The Password is required",
+          (v: string) => !!v || "The code is required",
           (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
+            !v || v.length === 6 || "Code must be at least 6 characters",
         ],
       },
-    };
+    }
+  },
+  computed: {
+    mfaToken() {
+      return this.loginState.mfaToken
+    },
+    error() {
+      return this.loginState.error
+    },
+  },
+  methods: {
+    loginWithMfa() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/loginWithMfa",
+        payload: {
+          mfaToken: this.mfaToken,
+          value: this.code,
+        },
+      });
+    },
+    recoverTwoFactor() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setLoginState",
+        payload: {
+          step: LoginStep.recoverTwoFactor,
+          error: '',
+        },
+      });
+    },
   },
 });
 </script>
