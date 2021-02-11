@@ -4,18 +4,18 @@
       @onSearchChange="onSearchChange"
       @onOpenModal="onOpenModal"
     />
-    <TeamTable />
+    <TeamTable2 />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
 import TeamTableToolbar from "@/components/Team/TeamTableToolbar.vue";
-import TeamTable from "@/components/Team/TeamTable.vue";
+import TeamTable2 from "@/components/Team/TeamTable2.vue";
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: {TeamTableToolbar, TeamTable},
+  components: {TeamTableToolbar, TeamTable2},
   methods: {
     onSearchChange(val: string) {
       console.log('onSearchChange:', val);
