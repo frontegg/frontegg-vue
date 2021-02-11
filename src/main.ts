@@ -11,7 +11,7 @@ Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
 Vue.use(fronteggAuth, {
   routes: {
-    authenticatedUrl: 'https://live.frontegg.com/',
+    authenticatedUrl: '/',
     loginUrl: '/account/login',
     logoutUrl: '/account/logout',
     activateUrl: '/account/activate',
