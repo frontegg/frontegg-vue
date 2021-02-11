@@ -2,7 +2,7 @@
   border: unset !important;
 }
 
-.fe-button {
+.fe-button, .table-pagination .v-pagination .v-pagination__navigation{
   position: relative;
   background: var(--color-white);
   height: var(--element-height);
