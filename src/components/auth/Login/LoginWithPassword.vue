@@ -63,6 +63,9 @@
             <spinner v-if="isLoading" />
             {{ submitText }}
           </button>
+          <FButton :params="{type: 'submit', fullWidth: true, variant:'primary', loading: isLoading, 'data-test-id': 'sumbit-btn'}">
+            {{ submitText }}
+          </FButton>
           <div
             v-if="loginError"
             class="fe-error-message"
@@ -80,11 +83,13 @@ import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import Spinner from "@/components/Common/Spinner.vue";
+import FButton from "@/components/core/elements/Button/FButton.vue"
 
 export default Vue.extend({
   name: "LoginWithPassword",
   components: {
     Spinner,
+    FButton
   },
   data() {
     return {
