@@ -4,7 +4,7 @@
       <router-link
         class="fe-button fe-button-primary fe-button-large fe-button-clickable"
         tag="button"
-        to="/login"
+        to="/account/login"
       >
         login
       </router-link>

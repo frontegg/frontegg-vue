@@ -15,20 +15,23 @@
         <LoginWithPassword />
         <SocialLogins />
       </div>
-
-      <v-stepper
-        v-else
-        v-model="currentStep"
-      >
+      <v-stepper v-model="currentStep" v-else>
         <v-stepper-items>
-          <v-stepper-content :step="LoginStep.success">
-            <div class="fe-login-component">
-              <LoginSuccess />
-            </div>
-          </v-stepper-content>
           <v-stepper-content :step="LoginStep.loginWithTwoFactor">
             <div class="fe-login-component">
               <LoginWithTwoFactor />
+            </div>
+          </v-stepper-content>
+
+          <v-stepper-content :step="LoginStep.recoverTwoFactor">
+            <div class="fe-login-component">
+              <RecoverTwoFactor />
+            </div>
+          </v-stepper-content>
+
+          <v-stepper-content :step="LoginStep.success">
+            <div class="fe-login-component">
+              <LoginSuccess />
             </div>
           </v-stepper-content>
         </v-stepper-items>
@@ -46,24 +49,26 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
-import LoginWithPassword from "@/components/auth/Login/LoginWithPassword.vue";
-import SocialLogins from "@/components/auth/Login/SocialLogins.vue";
-import LoginSuccess from "@/components/auth/Login/LoginSuccess.vue";
-import LoginWithTwoFactor from "@/components/auth/Login/LoginWithTwoFactor.vue";
+import Vue from 'vue';
+import LoginWithPassword from '@/components/auth/Login/LoginWithPassword.vue';
+import SocialLogins from '@/components/auth/Login/SocialLogins.vue';
+import LoginSuccess from '@/components/auth/Login/LoginSuccess.vue';
+import LoginWithTwoFactor from '@/components/auth/Login/LoginWithTwoFactor.vue';
+import RecoverTwoFactor from '@/components/auth/Login/RecoverTwoFactor.vue'
 import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
 
 export default Vue.extend({
-  name: "Login",
+  name: 'Login',
   components: {
     Spinner,
     LoginWithPassword,
     SocialLogins,
     LoginSuccess,
     LoginWithTwoFactor,
+    RecoverTwoFactor,
   },
   data() {
     return {
