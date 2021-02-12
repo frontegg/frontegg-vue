@@ -57,6 +57,7 @@
             text
             class="fe-button fe-button-large"
             v-if="inviteForm"
+            :class="{'fe-button-disabled': !isFormValid}"
             @click.prevent="inviteSubmit "
           >
             {{ btnRightText }}

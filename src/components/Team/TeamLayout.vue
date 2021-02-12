@@ -18,8 +18,8 @@
 
     <FModal
       :open-modal="openModal"
-      :btnLeftText="'Cancel'"
-      :btnRightText="'Invite'"
+      :btnLeftText="$t('common.cancel')"
+      :btnRightText="$t('common.invite')"
       :headText="'Invite New Teammate'"
       :inviteForm="true"
       @onCloseModal="onCloseModal"
