@@ -21,11 +21,9 @@
       :btnLeftText="'Cancel'"
       :btnRightText="'Invite'"
       :headText="'Invite New Teammate'"
+      :inviteForm="true"
       @onCloseModal="onCloseModal"
     >
-      <template v-slot:content>
-        <TeamInviteForm />
-      </template>
     </FModal>
   </div>
 </template>
@@ -40,7 +38,6 @@ import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import TeamTableToolbar from "@/components/Team/TeamTableToolbar.vue";
 import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
-import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
 
@@ -57,7 +54,7 @@ interface TableOptions {
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: { TeamTableToolbar, TeamTable, TeamPagination, TeamInviteForm, FModal },
+  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal },
   data() {
     return {
       ...mapState(this, {
