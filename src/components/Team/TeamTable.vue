@@ -6,43 +6,33 @@
         :items="tableItems"
         :options.sync="options"
         :loading="loading"
-        :server-items-length="totalItems"
+        
         :items-per-page="pageSize"
         hide-default-footer
-      />
-      <v-pagination
-        v-if="totalPages > 0"
-        v-model="options.page"
-        :length="totalPages"
       />
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import Vue from "vue";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import { AuthState } from "@/plugins/fronteggAuth/Api";
-import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
-interface TableOptions {
-  page: number;
-  itemsPerPage: number;
-  sortBy: [];
-  sortDesc: [];
-  groupBy: [];
-  groupDesc: [];
-  mustSort: boolean;
-  multiSort: boolean;
-}
-
-export default {
+export default Vue.extend({
+  props: {
+    page: {
+      default: 0,
+      type: Number
+    }
+  },
   data() {
     return {
       ...mapState(this, {
         membersList: (state: { auth: AuthState }) => state.auth.teamState
       }),
 
-      options: {} as TableOptions,
+      options: {},
       headers: [
         {
           text: "Name",
@@ -76,14 +66,8 @@ export default {
     pageSize() {
       return this.membersList.pageSize;
     },
-    totalPages() {
-      return this.membersList.totalPages;
-    },
     tableItems() {
       return this.membersList.users;
-    },
-    totalItems() {
-      return this.membersList.totalItems ? this.membersList.totalItems : 0;
     },
     loading() {
       return this.membersList.loaders.USERS
@@ -92,35 +76,13 @@ export default {
   watch: {
     options: {
       handler() {
-        this.fetchTableData();
+        this.$emit('fetchTableData', this.options)
       },
       deep: true
-    }
-  },
-  methods: {
-    async fetchTableData() {
-      interface Payload {
-        pageOffset: number;
-        sort?: [{
-          id: any;
-          desc: any;
-        }];
-      }
-
-      const payload: Payload = {
-        pageOffset: this.options.page - 1,
-      }
-      if(this.options.sortBy.length > 0) {
-        payload.sort = [{
-          id: this.options.sortBy[0],
-          desc: this.options.sortDesc[0]
-        }]
-      }
-      await this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/loadUsers",
-        payload: {...payload}
-      });
+    },
+    page(val) {
+      this.options.page = val;
     }
   }
-};
+})
 </script>
