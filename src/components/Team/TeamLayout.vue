@@ -9,11 +9,47 @@
       @fetchTableData="changeOptions"
       :page.sync="currentPage"
     />
+    
     <TeamPagination
       v-if="totalPages > 0"
       v-model="currentPage"
       :current-page.sync="currentPage" 
       :total-pages.sync="totalPages"  />
+
+    <FModal
+      :open-modal="openModal"
+      :btnLeftText="'Cancel'"
+      :btnRightText="'Invite'"
+      :headText="'Invite New Teammate'"
+      @onCloseModal="onCloseModal"
+    >
+      <template v-slot:content>
+        <v-form  class="fe-form">
+          <div class="fe-input__header">
+            <div class="fe-input__label">
+              Name
+            </div>
+          </div>
+          <div>
+            <v-text-field
+              name="name"
+              placeholder="Enter name"
+            />
+          </div>
+          <div class="fe-input__header">
+            <div class="fe-input__label">
+              Email
+            </div>
+          </div>
+          <div>
+            <v-text-field
+              name="email"
+              placeholder="Enter email"
+            />
+          </div>
+        </v-form>
+      </template>
+    </FModal>
   </div>
 </template>
 
@@ -27,8 +63,7 @@ import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import TeamTableToolbar from "@/components/Team/TeamTableToolbar.vue";
 import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
-
-import { actions } from '@/plugins/fronteggAuth/Api/reducer.ts';
+import FModal from "@/components/core/elements/Modal/FModal.vue";
 
 
 interface TableOptions {
@@ -44,7 +79,7 @@ interface TableOptions {
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: {TeamTableToolbar, TeamTable, TeamPagination},
+  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal },
   data() {
     return {
       ...mapState(this, {
@@ -53,7 +88,9 @@ export default Vue.extend({
 
       currentPage: 1,
       searchFilter: "",
-      options: {} as TableOptions
+      options: {} as TableOptions,
+
+      openModal: false
     }
   },
   computed: {
@@ -63,7 +100,12 @@ export default Vue.extend({
   },
   methods: {
     onOpenModal() {
-      console.log('onOpenModal')
+      console.log("onOpenModal");
+      this.openModal = true;
+    },
+    onCloseModal() {
+      console.log("onCloseModal");
+      this.openModal = false;
     },
     changeOptions(options: TableOptions) {
       this.options = {...options}
@@ -112,11 +154,6 @@ export default Vue.extend({
       }
     },
     searchFilter(val) {
-      if(!val) {
-        // this.membersList.filter = [];
-        actions.resetTeamState('filter');
-        console.log('обунл', this.membersList.filter)
-      }
       this.fetchTableData();
     }
   }
@@ -124,5 +161,4 @@ export default Vue.extend({
 </script>
 
 <style lang="scss" scoped>
-
 </style>

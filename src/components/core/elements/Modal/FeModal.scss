@@ -1,0 +1,49 @@
+.v-overlay__scrim {
+  background-color: var(--color-black-10);
+}
+.fe-modal.v-dialog {
+  .v-card__title {
+    display: flex; 
+    justify-content: space-between;
+    color: var(--color-gray-8);
+    padding: 0 2rem;
+    height: 4.5rem;
+    .v-btn--icon {
+      width: fit-content;
+    }
+  }
+  .headline {
+    font-size: 1.1rem !important;
+    line-height: 1.5rem;
+    font-weight: 700;
+  }
+  .v-btn--icon .v-icon{
+    cursor: pointer;
+    border: 0;
+    background: transparent;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    filter: alpha(opacity=20);
+    opacity: 0.2;
+    text-decoration: none;
+    outline: none;
+    &:before {
+      font-weight: 700;
+    }
+    &:hover{
+      opacity: 1;
+
+    }
+  }
+
+  .fe-form {
+    padding: 2rem;
+  }
+  
+}
+  
+  
+  
