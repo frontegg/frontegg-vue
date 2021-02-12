@@ -18,30 +18,7 @@
       @onCloseModal="onCloseModal"
     >
       <template v-slot:content>
-        <v-form  class="fe-form">
-          <div class="fe-input__header">
-            <div class="fe-input__label">
-              Name
-            </div>
-          </div>
-          <div>
-            <v-text-field
-              name="name"
-              placeholder="Enter name"
-            />
-          </div>
-          <div class="fe-input__header">
-            <div class="fe-input__label">
-              Email
-            </div>
-          </div>
-          <div>
-            <v-text-field
-              name="email"
-              placeholder="Enter email"
-            />
-          </div>
-        </v-form>
+        <TeamInviteForm />
       </template>
     </FModal>
   </div>
@@ -52,11 +29,12 @@ import Vue from "vue";
 import TeamTableToolbar from "@/components/Team/TeamTableToolbar.vue";
 import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
+import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal },
+  components: { TeamTableToolbar, TeamTable, TeamPagination, TeamInviteForm, FModal },
   data() {
     return {
       currentPage: 2,

@@ -16,8 +16,8 @@
         </v-card-title>
         <slot name="content"></slot>
         <v-card-actions>
-          <v-btn color="blue darken-1" text @click="close"> {{btnLeftText}} </v-btn>
-          <v-btn color="blue darken-1" text @click="close"> {{btnRightText}} </v-btn>
+          <v-btn text @click="close" class="fe-button fe-button-large"> {{btnLeftText}} </v-btn>
+          <v-btn text @click="close" class="fe-button"> {{btnRightText}} </v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>

@@ -57,8 +57,8 @@
 
     &.selected-option, &--active {
       font-weight: bold;
-      background: var(--color-primary-lighter);
-      color: var(--color-primary);
+      background: var(--color-primary-lighter) !important;
+      color: var(--color-primary) !important;
     }
   }
 
