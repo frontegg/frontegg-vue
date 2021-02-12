@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     changePage(val) {
-      this.$emit('changePage', val)
+      this.$emit('input', val)
     }
   }
 };

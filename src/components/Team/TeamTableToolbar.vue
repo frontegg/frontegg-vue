@@ -8,7 +8,7 @@
               placeholder="Search by any text"
               class="fe-input__input"
               type="text"
-              @keyup="onSearchChange"
+              v-model="inputField"
             >
             <svg
               width="2rem"
@@ -55,10 +55,17 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "TeamTableToolbar",
+  data() {
+    return {
+      inputField: ""
+    }
+  },
+  watch: {
+    inputField(val) {
+      this.$emit("input", val);
+    }
+  },
   methods: {
-    onSearchChange(val: string) {
-      this.$emit("onSearchChange", val);
-    },
     onModalOpenClick() {
       this.$emit("onOpenModal");
     }
