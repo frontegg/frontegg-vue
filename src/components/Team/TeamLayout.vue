@@ -1,7 +1,7 @@
 <template>
   <div class="fe-team__layout">
     <TeamTableToolbar
-      v-model="searchFilter"
+      v-model="searchValue"
       @onOpenModal="onOpenModal"
     />
     
@@ -18,12 +18,12 @@
 
     <FModal
       :open-modal="openModal"
-      :btnLeftText="$t('common.cancel')"
-      :btnRightText="$t('common.invite')"
       :headText="'Invite New Teammate'"
-      :inviteForm="true"
       @onCloseModal="onCloseModal"
     >
+      <template #content>
+        <TeamInviteForm @onCloseModal="onCloseModal" />
+      </template>
     </FModal>
   </div>
 </template>
@@ -40,12 +40,15 @@ import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
+import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
+
+import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 
 interface TableOptions {
   page: number;
   itemsPerPage: number;
-  sortBy: [];
-  sortDesc: [];
+  sortBy: string[];
+  sortDesc: string[];
   groupBy: [];
   groupDesc: [];
   mustSort: boolean;
@@ -54,18 +57,17 @@ interface TableOptions {
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal },
+  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamInviteForm },
   data() {
     return {
       ...mapState(this, {
-        membersList: (state: { auth: AuthState }) => state.auth.teamState
+        membersList: (state: { auth: AuthState }) => state.auth.teamState,
+        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open,
       }),
 
       currentPage: 1,
-      searchFilter: "",
+      searchValue: "",
       options: {} as TableOptions,
-
-      openModal: false
     }
   },
   computed: {
@@ -76,11 +78,15 @@ export default Vue.extend({
   methods: {
     onOpenModal() {
       console.log("onOpenModal");
-      this.openModal = true;
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(
+        teamActions.openAddUserDialog()
+      );
     },
     onCloseModal() {
       console.log("onCloseModal");
-      this.openModal = false;
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(
+        teamActions.closeAddUserDialog()
+      );
     },
     changeOptions(options: TableOptions) {
       this.options = {...options}
@@ -90,12 +96,12 @@ export default Vue.extend({
       interface Payload {
         pageOffset: number;
         sort?: [{
-          id: any;
-          desc: any;
+          id: string;
+          desc: string;
         }];
         filter?: [{
-          id: any;
-          value: any;
+          id: string;
+          value: string;
         }];
       }
 
@@ -108,16 +114,15 @@ export default Vue.extend({
           desc: this.options.sortDesc[0]
         }]
       }
-      if(this.searchFilter) {
-        payload.filter = [{
-          id: 'searchFilter',
-          value: this.searchFilter
-        }]
-      }
-      console.log('payload:', payload);
+      
+      payload.filter = [{
+        id: 'searchFilter',
+        value: this.searchValue
+      }]
+      
       await this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/loadUsers",
-        payload: {...payload}
+        payload,
       });
     }
   },
@@ -128,7 +133,7 @@ export default Vue.extend({
        this.fetchTableData();
       }
     },
-    searchFilter(val) {
+    searchValue() {
       this.fetchTableData();
     }
   }

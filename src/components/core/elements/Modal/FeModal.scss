@@ -62,9 +62,9 @@
         }
       }
     }
-    .v-text-field__details {
-      display: none;
-    }
+    // .v-text-field__details {
+    //   display: none;
+    // }
     
     .v-text-field__slot{
       overflow: hidden;
@@ -86,9 +86,26 @@
       font-size: 14px;
 
     }
-    .input-error .v-text-field__slot{
+    .input-error .v-text-field__slot,
+    .v-input.error--text .v-text-field__slot{
       border-color: var(--color-danger);
       color: var(--color-danger);
+    }
+    .v-input.error--text {
+      input {
+        color: var(--color-danger);
+        &::placeholder {
+          color: var(--color-danger);
+        }
+      }
+    }
+
+    .v-messages {
+      &__message {
+        line-height: inherit;
+        color: var(--color-danger);
+        font-size: var(--element-font-size-sm);
+      }
     }
     input {
       padding: 0 var(--element-padding);
