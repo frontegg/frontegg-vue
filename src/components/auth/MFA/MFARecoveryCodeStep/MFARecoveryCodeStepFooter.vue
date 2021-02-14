@@ -1,10 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div v-if="step === MFAStep.recoveryCode" class='fe-mfa__recovery-code-step'>
-        <MFARecoveryCodeStepMessage />
-        <MFARecoveryCodeStepForm />
-        <Footer />
+      <div class='fe-dialog__footer'>
+        <div class='fe-flex-spacer' />
+        <button class="fe-button fe-button-primary fe-button-large fe-button-clickable"  @click="onClose">
+          {{ $t('common.done') }}
+        </button>
       </div>
     </v-col>
   </v-row>
@@ -12,30 +13,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { MFARecoveryCodeStepMessage } from './MFARecoveryCodeStepMessage';
-import { MFARecoveryCodeStepForm } from './MFARecoveryCodeStepForm';
-import { MFARecoveryCodeStepFooter } from './MFARecoveryCodeStepFooter';
-import { MFAStep } from '@/plugins/fronteggAuth/Api';
 
 export default Vue.extend({
-  name: "ForgotPasswordSuccess",
-  components: {
-    MFARecoveryCodeStepMessage,
-    MFARecoveryCodeStepForm,
-    MFARecoveryCodeStepFooter,
-  },
-  data() {
-    return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
-      MFAStep,
+  name: "MFARecoveryCodeStepFooter",
+  methods: {
+    onClose() {
+      // close modal
     }
-  },
-  computed: {
-    step() {
-      return this.mfaState.step;
-    },
   }
 });
 </script>

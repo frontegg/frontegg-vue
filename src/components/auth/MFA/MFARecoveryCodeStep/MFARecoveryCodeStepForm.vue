@@ -18,7 +18,8 @@
 <script lang="ts">
 import Vue from "vue";
 import copy from 'clipboard-copy';
-import { mapState } from '@/plugins/fronteggCore/map-state'
+import { AuthState } from '@/plugins/fronteggAuth/Api';
+import { mapState } from '@/plugins/fronteggCore/map-state';
 
 export default Vue.extend({
   name: "MFARecoveryCodeStepForm",

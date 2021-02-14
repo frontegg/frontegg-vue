@@ -4,7 +4,10 @@
       <div v-if="step === MFAStep.recoveryCode" class='fe-mfa__recovery-code-step'>
         <MFARecoveryCodeStepMessage />
         <MFARecoveryCodeStepForm />
-        <Footer />
+        <slot></slot>
+        <div v-if="!hasSlot">
+          <MFARecoveryCodeStepFooter />
+        </div>
       </div>
     </v-col>
   </v-row>
@@ -15,7 +18,7 @@ import Vue from "vue";
 import MFARecoveryCodeStepMessage from './MFARecoveryCodeStepMessage.vue';
 import MFARecoveryCodeStepForm  from './MFARecoveryCodeStepForm.vue';
 import MFARecoveryCodeStepFooter from './MFARecoveryCodeStepFooter.vue';
-import { MFAStep } from '@/plugins/fronteggAuth/Api';
+import { MFAStep, AuthState } from '@/plugins/fronteggAuth/Api';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 
 export default Vue.extend({
@@ -37,6 +40,9 @@ export default Vue.extend({
     step() {
       return this.mfaState.step;
     },
+    hasSlot() {
+      return !!this.$slots.default;
+    }
   }
 });
 </script>
