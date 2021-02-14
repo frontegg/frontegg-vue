@@ -50,7 +50,6 @@ import SocialLogins from '@/components/auth/Login/SocialLogins.vue';
 import RedirectToSSO from '@/components/auth/Login/RedirectToSSO.vue';
 import LoginWithSSOFailed from '@/components/auth/Login/LoginWithSSOFailed.vue';
 import ForceEnrollMfa from '@/components/auth/Login/ForceEnrollMfa.vue';
-
 import LoginSuccess from '@/components/auth/Login/LoginSuccess.vue';
 import LoginWithTwoFactor from '@/components/auth/Login/LoginWithTwoFactor.vue';
 import RecoverTwoFactor from '@/components/auth/Login/RecoverTwoFactor.vue'
@@ -116,5 +115,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/styles/login.scss';
+@import '@/styles/auth/login.scss';
 </style>
