@@ -106,15 +106,17 @@ export default Vue.extend({
       await this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/verifyMfaAfterForce",
         payload: {
-          mfaToken: this.mfaToken || '',
+          mfaToken: this.mfaToken || '', //cef9809f-d722-483e-ac31-644989f9bb30
           value: this.token,
           callback: (success) => {
             if (success) {
-              console.log("success", success)
-              // setMfaState({ this.recoveryCode });
+              this[FRONTEGG_STORE_KEY].dispatch({
+                type: "auth/setMfaState",
+                payload: {
+                  recoveryCode: this.recoveryCode,
+                },
+              });
             }
-            console.log("failed", success)
-            // setSubmitting(false);
           },
         },
       });

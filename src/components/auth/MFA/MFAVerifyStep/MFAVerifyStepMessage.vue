@@ -1,8 +1,9 @@
-
-
 <template>
   <div class='fe-section-title'>
-    {{ $t('auth.mfa.verify.message') }}
+    <slot></slot>
+    <span v-if="!hasSlot">
+      {{ $t('auth.mfa.verify.message') }}
+    </span>
   </div>
 </template>
 
@@ -11,5 +12,10 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "MFAVerifyStepMessage",
+  computed: {
+    hasSlot() {
+      return !!this.$slots.default;
+    }
+  }
 });
 </script>

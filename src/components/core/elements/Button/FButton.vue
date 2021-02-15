@@ -8,7 +8,7 @@
   >
     <slot></slot>
     {{ params.children }}
-    <FeLoader v-if="params.loading" :size="params.size === 'small' ? 18 : 24" />
+    <Spinner v-if="params.loading" :size="params.size === 'small' ? 18 : 24" />
   </button>
 </template>
 
@@ -17,9 +17,13 @@ import Vue, { PropType } from 'vue'
 import { ButtonProps } from './interfaces'
 import { ClassNameGenerator } from '@/styles/';
 import classNames from 'classnames';
+import Spinner from "@/components/Common/Spinner.vue";
 
 export default Vue.extend({
   name: 'FButton' as string,
+  components: {
+    Spinner,
+  },
   props: {
     params: {
       type: Object as PropType<ButtonProps>,

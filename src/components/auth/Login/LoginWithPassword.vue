@@ -63,8 +63,8 @@
             <spinner v-if="isLoading" />
             {{ submitText }}
           </button>
-          <FButton @click.prevent="loginSubmit" :params="{type: 'submit', fullWidth: true, variant:'primary', loading: isLoading, 'data-test-id': 'sumbit-btn'}">
-            <!-- {{ submitText }} -->
+          <FButton style="display: none;" @click.prevent="loginSubmit" :params="{type: 'submit', fullWidth: true, variant:'primary', loading: isLoading, 'data-test-id': 'sumbit-btn'}">
+            {{ submitText }}
           </FButton>
           <div
             v-if="loginError"
