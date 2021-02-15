@@ -10,13 +10,11 @@
       </div>
       <div class="fe-login-component">
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
-          
-          <MFAVerifyStep />
+          <LoginWithPassword />
+          <SocialLogins />
         </div>
         <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
           <LoginWithTwoFactor />
-          <LoginWithPassword />
-          <SocialLogins />
         </div>
         <div v-else-if="currentStep === LoginStep.recoverTwoFactor">
           <RecoverTwoFactor />
@@ -59,7 +57,6 @@ import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
-import MFAVerifyStep from '@/components/auth/MFA/MFAVerifyStep/MFAVerifyStep.vue'
 
 export default Vue.extend({
   name: 'Login',
@@ -73,7 +70,6 @@ export default Vue.extend({
     LoginSuccess,
     LoginWithTwoFactor,
     RecoverTwoFactor,
-    MFAVerifyStep
   },
   data() {
     return {
