@@ -1,80 +1,78 @@
 <template>
-  <div>
-    <div class="fe-team__table">
-      <div class="fe-table__container">
-        <div class="spinner-icon" v-if="loading">
-          <spinner />
-        </div>
-        <v-data-table
-          :headers="headers"
-          :items="tableItems"
-          :options.sync="options"
-          :loading="loading"
-          :items-per-page="pageSize"
-          :fixed-header="true"
-          hide-default-footer
-        >
-          <template v-slot:item.profileImageUrl="{ item }">
-            <div class="d-flex justify-center">
-              <img
-                :src="item.profileImageUrl"
-                alt="icon"
-                class="fe-table-cell__avatar-img"
-              />
-            </div>
-          </template>
-          <template v-slot:item.roleIds="{ item }">
-            <div
-              class="fe-flex fe-full-width fe-flex-no-wrap"
-              v-if="item.roleIds && item.roleIds.length > 0"
-            >
-              <div class="fe-flex">
-                <div
-                  class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
-                  v-for="role in item.roleIds"
-                  :key="role"
-                >
-                  {{ getRoleName(role) }}
-                </div>
+  <div class="fe-team__table">
+    <div class="fe-table__container">
+      <div class="spinner-icon" v-if="loading">
+        <spinner />
+      </div>
+      <v-data-table
+        :headers="headers"
+        :items="tableItems"
+        :options.sync="options"
+        :loading="loading"
+        :items-per-page="pageSize"
+        :fixed-header="true"
+        hide-default-footer
+      >
+        <template v-slot:item.profileImageUrl="{ item }">
+          <div class="d-flex justify-center">
+            <img
+              :src="item.profileImageUrl"
+              alt="icon"
+              class="fe-table-cell__avatar-img"
+            />
+          </div>
+        </template>
+        <template v-slot:item.roleIds="{ item }">
+          <div
+            class="fe-flex fe-full-width fe-flex-no-wrap"
+            v-if="item.roleIds && item.roleIds.length > 0"
+          >
+            <div class="fe-flex">
+              <div
+                class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
+                v-for="role in item.roleIds"
+                :key="role"
+              >
+                {{ getRoleName(role) }}
               </div>
             </div>
-          </template>
-          <template v-slot:item.createdAt="{ item }">
-            <div class="datetime" v-if="item.createdAt">
-              <span class="date">{{ parseDate(item.createdAt) }}</span>
-              <span class="left-time"
-                >{{ leftTime(item.createdAt) }} days ago</span
-              >
-            </div>
-            <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
-              <span class="date">{{ $t("common.pendingApproval") }}</span>
-            </div>
-          </template>
-          <template v-slot:item.lastLogin="{ item }">
-            <div class="datetime" v-if="item.lastLogin">
-              <span class="date">{{ parseDate(item.lastLogin) }}</span>
-              <span class="left-time"
-                >{{
-                  leftTime(item.lastLogin)
-                    ? leftTime(item.lastLogin) + "days ago"
-                    : "today"
-                }}
-              </span>
-            </div>
-            <span v-else>N/A</span>
-          </template>
-          <template v-slot:item.id="{ item }">
-            <TeamDropList
-              @deleteUser="userDeleteModal(item.id)"
-              :sendEmail="!item.lastLogin"
-            ></TeamDropList>
-          </template>
-        </v-data-table>
-      </div>
+          </div>
+        </template>
+        <template v-slot:item.createdAt="{ item }">
+          <div class="datetime" v-if="item.createdAt">
+            <span class="date">{{ parseDate(item.createdAt) }}</span>
+            <span class="left-time"
+              >{{ leftTime(item.createdAt) }} days ago</span
+            >
+          </div>
+          <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
+            <span class="date">{{ $t("common.pendingApproval") }}</span>
+          </div>
+        </template>
+        <template v-slot:item.lastLogin="{ item }">
+          <div class="datetime" v-if="item.lastLogin">
+            <span class="date">{{ parseDate(item.lastLogin) }}</span>
+            <span class="left-time"
+              >{{
+                leftTime(item.lastLogin)
+                  ? leftTime(item.lastLogin) + "days ago"
+                  : "today"
+              }}
+            </span>
+          </div>
+          <span v-else>N/A</span>
+        </template>
+        <template v-slot:item.id="{ item }">
+          <TeamDropList
+            @deleteUser="userDeleteModal(item.id)"
+            :sendEmail="!item.lastLogin"
+          ></TeamDropList>
+        </template>
+      </v-data-table>
     </div>
     <FModal
       :open-modal="showUserDeleteModal"
-      :onCloseModal="onCloseModal"
+      @onCloseModal="onCloseModal"
       :headText="'Delete team member'"
     >
       <template #content>
@@ -349,6 +347,12 @@ export default Vue.extend({
   overflow: hidden;
   white-space: pre-wrap;
   word-break: break-word;
+}
+.v-data-table {
+  height: 100%;
+}
+.v-data-table__wrapper {
+  height: 100%
 }
 .v-data-table__wrapper tbody td.text-start {
   padding: 1rem !important;
