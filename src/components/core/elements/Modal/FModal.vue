@@ -18,34 +18,28 @@
         <v-form class="fe-form" v-model="isFormValid" v-if="inviteForm">
           <div class="fe-input fe-input-full-width fe-input-in-form">
             <div class="fe-input__header">
-              <div class="fe-input__label"> {{ $t('common.name') }}</div>
+              <div class="fe-input__label">{{ $t("common.name") }}</div>
             </div>
-            <div :class="{ 'input-error': error.name }">
+            <div>
               <v-text-field
                 name="name"
                 v-model="name"
                 :rules="rules.name"
                 :placeholder="$t('common.enter-name')"
               />
-              <div class="fe-input__error" v-if="error.name">
-                The Name is required
-              </div>
             </div>
           </div>
           <div class="fe-input fe-input-full-width fe-input-in-form">
             <div class="fe-input__header">
-              <div class="fe-input__label">{{ $t('common.email') }}</div>
+              <div class="fe-input__label">{{ $t("common.email") }}</div>
             </div>
-            <div :class="{ 'input-error': error.email }">
+            <div>
               <v-text-field
                 name="email"
                 v-model="email"
                 :rules="rules.email"
                 :placeholder="$t('common.enter-email')"
               />
-              <div class="fe-input__error" v-if="error.email">
-                The Email is required
-              </div>
             </div>
           </div>
         </v-form>
@@ -53,20 +47,15 @@
           <v-btn text @click="close" class="fe-button">
             {{ btnLeftText }}
           </v-btn>
-           <v-btn
+          <v-btn
             text
             class="fe-button fe-button-large"
             v-if="inviteForm"
-            :class="{'fe-button-disabled': !isFormValid}"
-            @click.prevent="inviteSubmit "
-          >
-            {{ btnRightText }}
-          </v-btn>
-          <v-btn
-            text
-            @click="close"
-            class="fe-button fe-button-large"
-            v-else
+            :class="{
+              'fe-button-disabled': !isFormValid,
+              'fe-button-primary': isFormValid,
+            }"
+            @click.prevent="rightBtnClick"
           >
             {{ btnRightText }}
           </v-btn>
@@ -106,17 +95,13 @@ export default {
       isFormValid: false,
       email: "",
       name: "",
-      error: {
-        email: false,
-        name: false,
-      },
       rules: {
         email: [
-          (v: string) => !!v || false,
+          (v: string) => !!v || "The Email is required",
           (v: string) =>
             !v ||
             /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-            false,
+            "Must be a valid email",
         ],
         name: [(v: string) => !!v || "The Name is required"],
       },
@@ -125,22 +110,24 @@ export default {
   methods: {
     close() {
       this.$emit("onCloseModal", false);
-      this.clearFields()
+      this.clearFields();
     },
     inviteSubmit() {
-      if(this.isFormValid) {
+      if (this.isFormValid) {
         this.close();
-      } else {
-        !this.name ? this.error.name = true : 0
-        !this.email ? this.error.email = true : 0
       }
     },
     clearFields() {
-      this.error.name = false
-      this.error.email = false
-      this.name = ''
-      this.email = ''
-    }
+      this.name = "";
+      this.email = "";
+    },
+    rightBtnClick() {
+      if (this.inviteForm) {
+        this.inviteSubmit();
+      } else {
+        this.close();
+      }
+    },
   },
 };
 </script>
