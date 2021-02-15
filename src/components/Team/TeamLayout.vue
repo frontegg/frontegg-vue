@@ -9,12 +9,11 @@
       @fetchTableData="changeOptions"
       :page.sync="currentPage"
     />
-    
     <TeamPagination
       v-if="totalPages > 0"
       v-model="currentPage"
       :current-page.sync="currentPage" 
-      :total-pages.sync="totalPages"  />
+      :total-pages.sync="totalPages"/>
 
     <FModal
       :open-modal="openModal"
@@ -22,7 +21,7 @@
       @onCloseModal="onCloseModal"
     >
       <template #content>
-        <TeamInviteForm @onCloseModal="onCloseModal" />
+        <TeamInviteForm @onCloseModal="onCloseModal" @itemCreated="fetchTableData" />
       </template>
     </FModal>
   </div>
@@ -52,7 +51,7 @@ export default Vue.extend({
   data() {
     return {
       ...mapState(this, {
-        membersList: (state: { auth: AuthState }) => state.auth.teamState,
+        teamState: (state: { auth: AuthState }) => state.auth.teamState,
         openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open,
       }),
 
@@ -63,7 +62,7 @@ export default Vue.extend({
   },
   computed: {
     totalPages() {
-      return this.membersList.totalPages;
+      return this.teamState.totalPages;
     },
   },
   methods: {
@@ -82,7 +81,6 @@ export default Vue.extend({
     changeOptions(options: TableOptions) {
       this.options = {...options}
     },
-
     async fetchTableData() {
       interface Payload {
         pageOffset: number;
@@ -106,10 +104,10 @@ export default Vue.extend({
         }]
       }
       
-      // payload.filter = [{
-      //   id: 'searchFilter',
-      //   value: this.searchValue
-      // }]
+      payload.filter = [{
+        id: 'searchFilter',
+        value: this.searchValue
+      }],
       
       await this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/loadUsers",
@@ -118,6 +116,13 @@ export default Vue.extend({
     }
   },
   watch: {
+    teamState: {
+      deep: true,
+      handler(newVal, oldVal) {
+        console.log('newVal:', newVal);
+        console.log('oldVal:', oldVal);
+      }
+    },
     options: {
       deep: true,
       handler() {

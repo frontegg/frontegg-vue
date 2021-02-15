@@ -19,7 +19,7 @@
       </template>
       <v-list :class="'delete-modal fe-menu'">
         <v-list-item >
-          <v-list-item-title class="fe-menu-item fe-menu-item__with-icons" v-if="sendEmail">
+          <v-list-item-title class="fe-menu-item fe-menu-item__with-icons" v-if="sendEmail" @click="resendActivationLink">
             <svg
               width="1rem"
               height="1rem"
@@ -73,6 +73,9 @@ export default {
     deleteUser() {
       this.$emit("deleteUser");
     },
+    resendActivationLink() {
+      this.$emit("resendActivationLink");
+    }
   },
 };
 </script>

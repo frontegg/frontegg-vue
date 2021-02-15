@@ -1,5 +1,5 @@
 <template>
-  <div class="fe-team__table">
+  <div class="fe-team__table fe-table">
     <div class="fe-table__container">
       <div class="spinner-icon" v-if="loading">
         <spinner />
@@ -64,14 +64,15 @@
         </template>
         <template v-slot:item.id="{ item }">
           <TeamDropList
-            @deleteUser="userDeleteModal(item.id)"
+            @deleteUser="setDeleteModal(item.id)"
             :sendEmail="!item.lastLogin"
+            @resendActivationLink="resendActivationLink(item.id)"
           ></TeamDropList>
         </template>
       </v-data-table>
     </div>
     <FModal
-      :open-modal="showUserDeleteModal"
+      :open-modal="openModal"
       @onCloseModal="onCloseModal"
       :headText="'Delete team member'"
     >
@@ -95,6 +96,7 @@
             text
             class="fe-button fe-button-large fe-button-danger"
             @click="deleteUser"
+            :loading="loadingDelete"
           >
             {{ $t("common.delete") }}
           </v-btn>
@@ -131,6 +133,10 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
+        openModal: (state: { auth: AuthState }) =>
+          state.auth.teamState.deleteUserDialogState.open,
+        loadingDelete: (state: { auth: AuthState }) =>
+          state.auth.teamState.deleteUserDialogState.loading,
       }),
       showUserDeleteModal: false,
       textUserDeleteModal: "",
@@ -201,15 +207,29 @@ export default Vue.extend({
     },
   },
   methods: {
-    userDeleteModal(id) {
-      this.showUserDeleteModal = true;
+    onOpenModal() {
+      console.log("onOpenModal");
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.openDeleteUserDialog());
+    },
+    onCloseModal() {
+      console.log("onCloseModal");
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.closeDeleteUserDialog());
+    },
+    deleteUser() {
+      if (this.idUserDeleteModal) {
+        this?.[FRONTEGG_STORE_KEY]?.dispatch(
+          teamActions.deleteUser({
+            userId: this.idUserDeleteModal,
+          })
+        );
+      }
+    },
+    setDeleteModal(id) {
+      this.onOpenModal();
       this.idUserDeleteModal = id;
       this.textUserDeleteModal = this.tableItems.find(
         (item) => item.id === id
       ).email;
-    },
-    onCloseModal() {
-      this.showUserDeleteModal = false;
     },
     getRoleName(roleId: string) {
       const roleObj = this.roles.find((i) => i.id === roleId);
@@ -224,154 +244,18 @@ export default Vue.extend({
         1
       );
     },
-    deleteUser() {
-      if (this.idUserDeleteModal) {
-        this?.[FRONTEGG_STORE_KEY]?.dispatch(
-          teamActions.deleteUser({
-            userId: this.idUserDeleteModal,
-          })
-        );
-        this.onCloseModal();
-      }
-    },
     resendActivationLink(id: string) {
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.resendActivationLink({
           userId: id,
         })
       );
+      console.log('resend activation link ')
     },
   },
 });
 </script>
 
 <style lang="scss">
-.fe-table__thead-tr,
-.v-data-table-header {
-  background: var(--fe-table-header-bg);
-  align-items: stretch;
-  border-radius: var(--element-border-radius-sm);
-}
-.fe-table__container {
-  position: relative;
-}
-.fe-table__container .spinner-icon {
-  position: absolute;
-  z-index: 10;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
-.fe-table__container .v-data-table__progress {
-  display: none;
-  opacity: 0;
-}
-
-.fe-table__thead-tr-th,
-.v-data-table-header th {
-  color: var(--fe-table-header-font-color);
-  padding: var(--fe-table-header-padding);
-  text-align: var(--fe-table-header-align);
-  font-size: var(--fe-table-header-font-size);
-  line-height: var(--fe-table-header-font-size);
-  text-transform: uppercase;
-  position: sticky;
-  top: 0;
-  display: flex;
-  align-items: center;
-  border-top: 3px solid transparent;
-  border-bottom: 3px solid transparent;
-  transition: border 0.3s;
-}
-.fe-table__container
-  .v-data-table
-  .v-data-table__wrapper
-  table
-  thead.v-data-table-header
-  tr
-  th {
-  display: table-cell;
-  background: var(--color-gray-0);
-  border-bottom: none;
-  box-shadow: none;
-  &.sortable {
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
-  }
-  &.asc {
-    border-top-color: var(--color-gray-3);
-    .v-icon.mdi {
-      &:after {
-        border-bottom-color: var(--color-primary-dark);
-      }
-    }
-  }
-  &.desc {
-    border-bottom-color: var(--color-gray-3);
-    .v-icon.mdi {
-      &:before {
-        border-top-color: var(--color-primary-dark);
-      }
-    }
-  }
-}
-.v-data-table-header .v-icon.mdi {
-  display: inline-flex;
-  flex-direction: column;
-  margin: 0 0.5rem;
-  opacity: 1;
-  height: 13px;
-  transform: none !important;
-  &:before,
-  &:after {
-    all: unset;
-    content: "";
-    position: absolute;
-    border-top: 4px solid var(--color-gray-5);
-    border-left: 4px solid transparent;
-    border-right: 4px solid transparent;
-    left: 0;
-  }
-  &:before {
-    bottom: 0;
-  }
-  &:after {
-    top: 0;
-    border-top: 0;
-    border-bottom: 4px solid var(--color-gray-5);
-  }
-}
-.fe-table-cell__description,
-.v-data-table__wrapper tbody tr td:nth-child(2) {
-  font-size: 0.9rem;
-  color: var(--color-gray-6);
-  overflow: hidden;
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-.v-data-table {
-  height: 100%;
-}
-.v-data-table__wrapper {
-  height: 100%
-}
-.v-data-table__wrapper tbody td.text-start {
-  padding: 1rem !important;
-  border-bottom: 1px solid var(--color-gray-2) !important;
-}
-.v-data-table__wrapper tbody .datetime {
-  display: flex;
-  flex-direction: column;
-  max-width: 150px;
-
-  .time,
-  .date {
-    color: var(--color-black);
-    font-size: 0.9rem;
-  }
-  .left-time {
-    font-size: 0.85rem;
-    color: var(--color-gray-6);
-  }
-}
+@import "@/styles/FeTable.scss";
 </style>

@@ -22,7 +22,7 @@
 
 <script lang="ts">
 export default {
-  name: "TeamInviteModal",
+  name: "FModal",
   props: {
     openModal: {
       type: Boolean,

@@ -91,18 +91,25 @@ export default {
             }),
           (v: string) =>
             !v ||
-            /.+@.+\..+/.test(v) ||
+            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
             this.$t("validation.must-be-a-valid-email"),
         ],
       },
     };
   },
   methods: {
-    submitForm() {
-      console.log("clcik");
+    async submitForm() {
       const valid = this.$refs.form.validate();
       if (valid) {
-        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(this.form));
+        try {
+          await this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(this.form));
+          console.log("was added new user");
+          this.$emit('itemCreated')
+          this.$refs.form.reset();
+          this.$refs.form.resetValidation();
+        } catch (e) {
+          console.log(e)
+        }
       }
     },
     onCancel() {
