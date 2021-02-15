@@ -19,7 +19,7 @@
       </template>
       <v-list :class="'delete-modal fe-menu'">
         <v-list-item >
-          <v-list-item-title class="fe-menu-item fe-menu-item__with-icons">
+          <v-list-item-title class="fe-menu-item fe-menu-item__with-icons" v-if="sendEmail">
             <svg
               width="1rem"
               height="1rem"

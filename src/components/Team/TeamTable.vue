@@ -82,7 +82,6 @@
             account. Are you sure?</span
           >
         </div>
-
         <v-card-actions>
           <v-btn
             :class="{ 'fe-button-disabled': loading }"
