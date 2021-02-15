@@ -75,7 +75,7 @@
     "selected":"Selected",
     "sms":"SMS",
     "status":"Status",
-    "step":"Step {{num}}",
+    "step":"Step {num}",
     "success":"Success",
     "title":"Title",
     "validate":"Validate",
@@ -275,7 +275,7 @@
     },
     "team":{
       "title":"Team Management",
-      "subtitle":"Total of {{totalItems}} team members",
+      "subtitle":"Total of {totalItems} team members",
       "invite-user":"Invite User",
       "search-users":"Search by any text",
       "resendActivation":"Resend activation email",
@@ -286,15 +286,15 @@
       },
       "deleteDialog":{
         "title":"Delete team member",
-        "message":"You are about to remove '{{email}}' from this account. Are you sure?"
+        "message":"You are about to remove '{email}' from this account. Are you sure?"
       }
     },
     "social-logins":{
       "login":{
-        "button-text":"Login with {{providerName}}"
+        "button-text":"Login with {providerName}"
       },
       "signup":{
-        "button-text":"Sign up with {{providerName}}"
+        "button-text":"Sign up with {providerName}"
       },
       "error":{
         "invalid-callback-url":"Invalid callback url"
@@ -324,10 +324,10 @@
     "must-be-a-valid-domain":"Must be a valid domain",
     "must-be-a-valid-url":"Must be a valid URL",
     "passwords-must-match":"Passwords must match",
-    "required-field":"The {{name}} is required",
-    "min-length":"{{name}} must be at least {{limit}} characters",
-    "max-length":"{{name}} must be up to {{limit}} characters",
-    "length":"{{name}} must be {{limit}} characters",
+    "required-field":"The {name} is required",
+    "min-length":"{name} must be at least {limit} characters",
+    "max-length":"{name} must be up to {limit} characters",
+    "length":"{name} must be {limit} characters",
     "invalid-phone":"Invalid phone number"
   },
   "reports":{
@@ -348,9 +348,9 @@
     "headerTitle":"Connectivity",
     "inputName":"Input name...",
     "manageCategories":"Manage categories",
-    "queryDeleteWebhook":"Are you sure what you want delete the \"{{name}}\" webhook?",
+    "queryDeleteWebhook":"Are you sure what you want delete the \"{name}\" webhook?",
     "secretKeyHelp":"JWT signed with this secret will be sent in the header \"x-webhook-secret\" of the webhook request",
-    "selectAll":"SELECT ALL IN THE {{name}} CATEGORY",
+    "selectAll":"SELECT ALL IN THE {name} CATEGORY",
     "selectEvents":"Select events",
     "shortDescription":"Add short description",
     "slack":"Slack",

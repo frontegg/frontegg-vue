@@ -53,6 +53,8 @@
 <script lang="ts">
 import Vue from "vue";
 
+import debounce from 'lodash/debounce';
+
 export default Vue.extend({
   name: "TeamTableToolbar",
   data() {
@@ -61,9 +63,9 @@ export default Vue.extend({
     }
   },
   watch: {
-    inputField(val) {
+    inputField: debounce( function (val) {
       this.$emit("input", val);
-    }
+    }, 400)
   },
   methods: {
     onModalOpenClick() {
