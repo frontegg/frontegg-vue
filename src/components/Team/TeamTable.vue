@@ -266,6 +266,7 @@ export default Vue.extend({
   display: none;
   opacity: 0;
 }
+
 .fe-table__thead-tr-th,
 .v-data-table-header th {
   color: var(--fe-table-header-font-color);
@@ -292,6 +293,7 @@ export default Vue.extend({
   display: table-cell;
   background: var(--color-gray-0);
   border-bottom: none;
+  box-shadow: none;
   &.sortable {
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
