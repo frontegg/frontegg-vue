@@ -50,10 +50,9 @@
           <v-btn
             text
             class="fe-button fe-button-large"
-            v-if="inviteForm"
             :class="{
-              'fe-button-disabled': !isFormValid,
-              'fe-button-primary': isFormValid,
+              'fe-button-disabled': !isFormValid && inviteForm,
+              'fe-button-primary': isFormValid || !inviteForm,
             }"
             @click.prevent="rightBtnClick"
           >
