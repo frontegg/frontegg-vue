@@ -18,6 +18,8 @@
         <li>
           {{ $t('auth.mfa.verify.enter-generated-code') }}
           <v-text-field
+            @input="updateValue($event.target.value)"
+            :rules="rules.code"
             aria-autocomplete="false"
             autoComplete='off'
             name='token'
@@ -42,11 +44,22 @@ export default Vue.extend({
   components: {
     Spinner,
   },
+  props: {
+    value: {
+      type: String
+    }
+  },
   data() {
     return {
       ...mapState(this, {
         mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
       }),
+      rules: {
+        code: [
+          (v: string) => !!v || this.$t('validation.required-field', { name: 'code' }),
+          (v: string) => !v || v.length === 6 || this.$t('validation.min-length', { name: 'code', limit: 6 }),
+        ],
+      },
     }
   },
   computed: {
@@ -63,6 +76,9 @@ export default Vue.extend({
     }
   },
   methods: {
+    updateValue: function (value) {
+      this.$emit('input', value)
+    },
     enrollMfa() {
       this[FRONTEGG_STORE_KEY].dispatch({
         type: 'auth/enrollMfa'

@@ -19,10 +19,10 @@
       </div>
       <div v-else>
         <v-form v-model="isFormValid" class="fe-form">
-          <MFAVerifyStepMessage>{{
-            $t("auth.mfa.verify.forceMfaMessage")
-          }}</MFAVerifyStepMessage>
-          <MFAVerifyStepForm />
+          <MFAVerifyStepMessage>
+            {{ $t("auth.mfa.verify.forceMfaMessage") }}
+          </MFAVerifyStepMessage>
+          <MFAVerifyStepForm v-model="token" />
           <MFAVerifyStepErrorMessage />
 
           <div class="fe-dialog__footer">
@@ -72,12 +72,28 @@ export default Vue.extend({
       }),
       MFAStep,
       isFormValid: false,
+      token: '',
+      style: null,
     };
   },
   computed: {
     step() {
       return this.mfaState.step;
     },
+  },
+  mounted() {
+    const head = document.head || document.getElementsByTagName('head')[0];
+    this.style = document.createElement('style');
+    this.style.type = 'text/css';
+    this.style.appendChild(
+      document.createTextNode(`:root {
+      --fe-auth-container-width: 500px;
+    }`)
+    );
+    head.appendChild(this.style);
+  },
+  destroyed() {
+    this.style.remove();
   },
 });
 </script>
