@@ -1,5 +1,3 @@
-
-
 <template>
   <div class="fe-error-message">
     {{ error }}
