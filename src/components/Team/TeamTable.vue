@@ -14,20 +14,26 @@
       >
         <template v-slot:item.profileImageUrl="{ item }">
           <div class="d-flex justify-center">
-            <img
-              :src="item.profileImageUrl"
-              alt="icon"
-              class="fe-table-cell__avatar-img"
-            />
+            <img :src="item.profileImageUrl" alt="icon" class="fe-table-cell__avatar-img" />
+          </div>
+        </template>
+        <template v-slot:item.roleIds="{ item }">
+          <div class="fe-flex fe-full-width fe-flex-no-wrap" v-if="item.roleIds && item.roleIds.length > 0">
+            <div class="fe-flex">
+              <div
+                class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
+                v-for="role in item.roleIds"
+                :key="role"
+              >
+                {{ getRoleName(role) }}
+              </div>
+            </div>
           </div>
         </template>
         <template v-slot:item.createdAt="{ item }">
           <div class="datetime" v-if="item.createdAt">
             <span class="date">{{ parseDate(item.createdAt) }}</span>
-            <span class="time">{{ parseTime(item.createdAt) }}</span>
-            <span class="left-time"
-              >{{ leftTime(item.createdAt) }} days ago</span
-            >
+            <span class="left-time">{{ leftTime(item.createdAt) }} days ago</span>
           </div>
           <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
             <span class="date">{{ $t("common.pendingApproval") }}</span>
@@ -36,13 +42,8 @@
         <template v-slot:item.lastLogin="{ item }">
           <div class="datetime" v-if="item.lastLogin">
             <span class="date">{{ parseDate(item.lastLogin) }}</span>
-            <span class="time">{{ parseTime(item.lastLogin) }}</span>
             <span class="left-time"
-              >{{
-                leftTime(item.lastLogin)
-                  ? leftTime(item.lastLogin) + "days ago"
-                  : "today"
-              }}
+              >{{ leftTime(item.lastLogin) ? leftTime(item.lastLogin) + "days ago" : "today" }}
             </span>
           </div>
           <span v-else>N/A</span>
@@ -62,110 +63,119 @@ import { AuthState } from "@/plugins/fronteggAuth/Api";
 import Spinner from "@/components/Common/Spinner.vue";
 import DeleteModal from "@/components/core/elements/Modal/DeleteModal.vue";
 
+import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
+
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
+
+import { TableOptions } from './interfaces';
+
+
 export default Vue.extend({
   name: "TeamTable",
   components: { Spinner, DeleteModal },
   props: {
     page: {
       default: 0,
-      type: Number,
-    },
+      type: Number
+    }
   },
   data() {
     return {
       ...mapState(this, {
-        membersList: (state: { auth: AuthState }) => state.auth.teamState,
+        teamState: (state: { auth: AuthState }) => state.auth.teamState
       }),
-      options: {},
-      dateOptions: {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-      },
-      timeOptions: {
-        hour: "2-digit",
-        minute: "numeric",
-        hour12: true,
-      },
+      options: {} as TableOptions,
+
       headers: [
         {
           text: "",
           sortable: false,
-          value: "profileImageUrl",
+          value: "profileImageUrl"
         },
         {
           text: "Name",
           sortable: true,
-          value: "name",
+          value: "name"
         },
         {
           text: "Email",
           sortable: true,
-          value: "email",
+          value: "email"
         },
         {
           text: "Roles",
           sortable: false,
-          value: "roleIds",
+          value: "roleIds"
         },
         {
           text: "Joined Team",
           sortable: true,
-          value: "createdAt",
+          value: "createdAt"
         },
         {
           text: "Last Login",
           sortable: true,
-          value: "lastLogin",
+          value: "lastLogin"
         },
         {
           text: "",
           sortable: false,
-          value: "id",
-        },
-      ],
+          value: "id"
+        }
+      ]
     };
   },
   computed: {
     pageSize() {
-      return this.membersList.pageSize;
+      return this.teamState.pageSize;
     },
     tableItems() {
-      return this.membersList.users;
+      return this.teamState.users;
+    },
+    roles() {
+      return this.teamState.roles;
     },
     loading() {
-      return this.membersList.loaders.USERS;
-    },
+      return this.teamState.loaders.USERS;
+    }
   },
   watch: {
     options: {
       handler() {
         this.$emit("fetchTableData", this.options);
       },
-      deep: true,
+      deep: true
     },
     page(val) {
       this.options.page = val;
-    },
-  },
-  methods: {
-    parseDate(date) {
-      return new Date(date).toLocaleDateString("en-US", this.dateOptions);
-    },
-    parseTime(date) {
-      return new Date(date).toLocaleTimeString([], this.timeOptions);
-    },
-    leftTime(date) {
-      return (
-        new Date(new Date().getTime() - new Date(date).getTime()).getUTCDate() -
-        1
-      );
-    },
-    deleteUser(id) {
-      console.log('user had id ' + id + 'was removed')
     }
   },
+  methods: {
+    getRoleName(roleId: string) {
+      const roleObj = this.roles.find(i => i.id === roleId);
+      return roleObj ? roleObj.name : null;
+    },
+    parseDate(date: string) {
+      return this.$moment(date).format('LLLL');
+    },
+    leftTime(date: string) {
+      return new Date(new Date().getTime() - new Date(date).getTime()).getUTCDate() - 1;
+    },
+    deleteUser(id: string) {
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(
+        teamActions.deleteUser({
+          userId: id
+        })
+      );
+    },
+    resendActivationLink(id: string) {
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(
+        teamActions.resendActivationLink({
+          userId: id
+        })
+      );
+    }
+  }
 });
 </script>
 
@@ -206,13 +216,7 @@ export default Vue.extend({
   border-bottom: 3px solid transparent;
   transition: border 0.3s;
 }
-.fe-table__container
-  .v-data-table
-  .v-data-table__wrapper
-  table
-  thead.v-data-table-header
-  tr
-  th {
+.fe-table__container .v-data-table .v-data-table__wrapper table thead.v-data-table-header tr th {
   display: table-cell;
   background: var(--color-gray-0);
   border-bottom: none;
@@ -282,7 +286,6 @@ export default Vue.extend({
 
   .time,
   .date {
-    white-space: nowrap;
     color: var(--color-black);
     font-size: 0.9rem;
   }

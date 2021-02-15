@@ -6,6 +6,8 @@ import fronteggAuth from './plugins/fronteggAuth';
 import fronteggAudits from './plugins/fronteggAudits';
 import vuetify from './plugins/vuetify';
 
+require('./plugins/moment')
+
 import i18n from './i18n';
 
 import "./styles/app.scss";
@@ -29,6 +31,7 @@ Vue.use(fronteggAuth, {
   },
 });
 Vue.use(fronteggAudits);
+
 
 
 Vue.component("main-layout", MainLayout);

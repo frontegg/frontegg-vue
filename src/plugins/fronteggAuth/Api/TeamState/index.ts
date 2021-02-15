@@ -9,7 +9,7 @@ export * from './interfaces';
 export const teamState: TeamState = {
   loaders: {},
   pageOffset: 0,
-  pageSize: 2,
+  pageSize: 20,
   errors: {},
   users: [],
   roles: [],

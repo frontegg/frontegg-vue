@@ -44,16 +44,7 @@ import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 
-interface TableOptions {
-  page: number;
-  itemsPerPage: number;
-  sortBy: string[];
-  sortDesc: string[];
-  groupBy: [];
-  groupDesc: [];
-  mustSort: boolean;
-  multiSort: boolean;
-}
+import { TableOptions } from './interfaces';
 
 export default Vue.extend({
   name: "TeamLayout",
@@ -115,10 +106,10 @@ export default Vue.extend({
         }]
       }
       
-      payload.filter = [{
-        id: 'searchFilter',
-        value: this.searchValue
-      }]
+      // payload.filter = [{
+      //   id: 'searchFilter',
+      //   value: this.searchValue
+      // }]
       
       await this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/loadUsers",
