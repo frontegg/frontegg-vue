@@ -10,14 +10,14 @@
           <span style="color: green;">Google Authenticator</span>
           &nbsp;
           {{ $t('auth.mfa.verify.scan-qr-description-2') }}
-          <div className='fe-mfa__qr'>
+          <div class='fe-mfa__qr'>
             <Spinner v-if="loading && !qrCode" />
             <img v-else alt='Multi-factor QR' :src="qrCode" />
           </div>
         </li>
         <li>
           {{ $t('auth.mfa.verify.enter-generated-code') }}
-          <v-input-text
+          <v-text-field
             aria-autocomplete="false"
             autoComplete='off'
             name='token'

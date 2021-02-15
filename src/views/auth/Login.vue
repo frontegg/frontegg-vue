@@ -115,5 +115,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/styles/auth/login.scss';
+@import '@/styles/auth/auth.scss';
 </style>

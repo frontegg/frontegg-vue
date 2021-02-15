@@ -71,6 +71,7 @@ export default Vue.extend({
         mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
       }),
       MFAStep,
+      isFormValid: false,
     };
   },
   computed: {
