@@ -56,6 +56,9 @@
     &.fe-button-primary {
       color: white
     }
+    &.fe-button-danger {
+      color: var(--color-red-5)
+    }
   }
   .fe-form {
     padding: 2rem;
@@ -68,9 +71,13 @@
         }
       }
     }
-    // .v-text-field__details {
-    //   display: none;
-    // }
+    .v-messages{
+      display: none;
+      &.error--text {
+        display: block;
+        margin-top: 5px;
+      }
+    }
     
     .v-text-field__slot{
       overflow: hidden;

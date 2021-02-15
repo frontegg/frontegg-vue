@@ -14,8 +14,6 @@
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
-
-
         <slot name="content"></slot>
       </v-card>
     </v-dialog>
