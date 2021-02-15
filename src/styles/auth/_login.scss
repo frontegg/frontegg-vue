@@ -137,13 +137,15 @@
         &.error--text {
             border-color: var(--color-danger);
             color: var(--color-danger);
-
             input {
                 color: var(--color-danger);
             }
             .v-messages__message {
                 color: var(--color-danger);
                 padding: 6px 0;
+            }
+            .v-input__slot {
+              border-color: var(--color-danger);
             }
         }
     }

@@ -1,5 +1,3 @@
-
-
 <template>
   <v-row>
     <v-col cols="12">
@@ -18,7 +16,7 @@
         <li>
           {{ $t('auth.mfa.verify.enter-generated-code') }}
           <v-text-field
-            @input="updateValue($event.target.value)"
+            @input="updateValue($event)"
             :rules="rules.code"
             aria-autocomplete="false"
             autoComplete='off'

@@ -1,5 +1,3 @@
-
-
 <template>
   <v-row>
     <v-col cols="12">
@@ -34,6 +32,7 @@
                   :disabled="!isFormValid"
                   type="submit"
                   data-test-id="sumbit-btn"
+                  @click.prevent="verifyMfaAfterForce"
                 >
                   {{ $t("common.verify") }}
                 </button>
@@ -49,6 +48,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Spinner from "@/components/Common/Spinner.vue";
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { AuthState, MFAStep } from "@/plugins/fronteggAuth/Api";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import MFAVerifyStepForm from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepForm.vue";
@@ -80,6 +80,15 @@ export default Vue.extend({
     step() {
       return this.mfaState.step;
     },
+    loading() {
+      return this.mfaState.loading;
+    },
+    mfaToken() {
+      return this.mfaState.mfaToken;
+    },
+    recoveryCode() {
+      return this.mfaState.recoveryCode;
+    },
   },
   mounted() {
     const head = document.head || document.getElementsByTagName('head')[0];
@@ -91,6 +100,25 @@ export default Vue.extend({
     }`)
     );
     head.appendChild(this.style);
+  },
+  methods: {
+    async verifyMfaAfterForce() {
+      await this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/verifyMfaAfterForce",
+        payload: {
+          mfaToken: this.mfaToken || '',
+          value: this.token,
+          callback: (success) => {
+            if (success) {
+              console.log("success", success)
+              // setMfaState({ this.recoveryCode });
+            }
+            console.log("failed", success)
+            // setSubmitting(false);
+          },
+        },
+      });
+    }
   },
   destroyed() {
     this.style.remove();
