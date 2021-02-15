@@ -2,7 +2,7 @@ export interface TableOptions {
   page: number;
   itemsPerPage: number;
   sortBy: string[];
-  sortDesc: string[];
+  sortDesc: boolean[];
   groupBy: [];
   groupDesc: [];
   mustSort: boolean;

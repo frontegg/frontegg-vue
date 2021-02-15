@@ -1,6 +1,6 @@
 <template>
   <div class="fe-table__pagination table-pagination">
-    <v-pagination v-model="current" :length="total" @input="changePage" />
+    <v-pagination v-model="current" :length="total" />
   </div>
 </template>
 
@@ -19,9 +19,12 @@ export default {
   },
   computed: {
     current: {
-      get: function () {
+      get () {
         return this.currentPage;
       },
+      set(val) {
+        this.$emit("input", val);
+      }
     },
     total() {
       return this.totalPages;

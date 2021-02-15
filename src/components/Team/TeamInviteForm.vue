@@ -98,23 +98,26 @@ export default {
     };
   },
   methods: {
+    formReset() {
+      this.$refs.form.reset();
+      this.$refs.form.resetValidation();
+    },
+    itemCreated() {
+      this.$emit('itemCreated');
+      this.formReset();
+    },
     async submitForm() {
       const valid = this.$refs.form.validate();
       if (valid) {
-        try {
-          await this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(this.form));
-          console.log("was added new user");
-          this.$emit('itemCreated')
-          this.$refs.form.reset();
-          this.$refs.form.resetValidation();
-        } catch (e) {
-          console.log(e)
+        const data = {
+          callback: () => this.itemCreated(),
+          ...this.form,
         }
+        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(data));
       }
     },
     onCancel() {
-      this.$refs.form.reset();
-      this.$refs.form.resetValidation();
+      this.formReset();
       this.$emit("onCloseModal", false);
     },
   },

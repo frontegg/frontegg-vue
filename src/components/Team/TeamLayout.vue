@@ -7,8 +7,10 @@
     
     <TeamTable
       @fetchTableData="changeOptions"
+      @itemDeleted="fetchTableData"
       :page.sync="currentPage"
     />
+    
     <TeamPagination
       v-if="totalPages > 0"
       v-model="currentPage"
@@ -17,7 +19,7 @@
 
     <FModal
       :open-modal="openModal"
-      :headText="'Invite New Teammate'"
+      :headText="$t('auth.team.add-dialog.title')"
       @onCloseModal="onCloseModal"
     >
       <template #content>
@@ -43,7 +45,9 @@ import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 
+// interfaces
 import { TableOptions } from './interfaces';
+import { ILoadUsers } from '@frontegg/rest-api';
 
 export default Vue.extend({
   name: "TeamLayout",
@@ -67,13 +71,11 @@ export default Vue.extend({
   },
   methods: {
     onOpenModal() {
-      console.log("onOpenModal");
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.openAddUserDialog()
       );
     },
     onCloseModal() {
-      console.log("onCloseModal");
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.closeAddUserDialog()
       );
@@ -82,19 +84,8 @@ export default Vue.extend({
       this.options = {...options}
     },
     async fetchTableData() {
-      interface Payload {
-        pageOffset: number;
-        sort?: [{
-          id: string;
-          desc: string;
-        }];
-        filter?: [{
-          id: string;
-          value: string;
-        }];
-      }
 
-      const payload: Payload = {
+      const payload: ILoadUsers = {
         pageOffset: this.options.page - 1,
       }
       if(this.options.sortBy.length > 0) {
@@ -108,21 +99,13 @@ export default Vue.extend({
         id: 'searchFilter',
         value: this.searchValue
       }],
-      
-      await this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/loadUsers",
-        payload,
-      });
+
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(
+        teamActions.loadUsers(payload)
+      );
     }
   },
   watch: {
-    teamState: {
-      deep: true,
-      handler(newVal, oldVal) {
-        console.log('newVal:', newVal);
-        console.log('oldVal:', oldVal);
-      }
-    },
     options: {
       deep: true,
       handler() {

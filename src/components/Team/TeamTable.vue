@@ -4,6 +4,7 @@
       <div class="spinner-icon" v-if="loading">
         <spinner />
       </div>
+      
       <v-data-table
         :headers="headers"
         :items="tableItems"
@@ -40,37 +41,29 @@
         </template>
         <template v-slot:item.createdAt="{ item }">
           <div class="datetime" v-if="item.createdAt">
-            <span class="date">{{ parseDate(item.createdAt) }}</span>
-            <span class="left-time"
-              >{{ leftTime(item.createdAt) }} days ago</span
-            >
+            <span class="date">{{item.createdAt ? $moment(item.createdAt).format('LLLL') : 'N/A'}}</span>
+            <span class="left-time">{{item.createdAt ? $moment(item.createdAt).fromNow() : 'N/A'}}</span>
           </div>
           <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
             <span class="date">{{ $t("common.pendingApproval") }}</span>
           </div>
         </template>
         <template v-slot:item.lastLogin="{ item }">
-          <div class="datetime" v-if="item.lastLogin">
-            <span class="date">{{ parseDate(item.lastLogin) }}</span>
-            <span class="left-time"
-              >{{
-                leftTime(item.lastLogin)
-                  ? leftTime(item.lastLogin) + "days ago"
-                  : "today"
-              }}
-            </span>
+          <div class="datetime">
+            <span class="date">{{item.lastLogin ? $moment(item.lastLogin).format('LLLL') : 'N/A'}}</span>
+            <span class="left-time" v-if="item.lastLogin">{{item.lastLogin ? $moment(item.lastLogin).fromNow() : 'N/A'}}</span>
           </div>
-          <span v-else>N/A</span>
         </template>
         <template v-slot:item.id="{ item }">
           <TeamDropList
-            @deleteUser="setDeleteModal(item.id)"
+            @deleteUser="setDeleteModal(item.id, item.email)"
             :sendEmail="!item.lastLogin"
             @resendActivationLink="resendActivationLink(item.id)"
           ></TeamDropList>
         </template>
       </v-data-table>
     </div>
+    
     <FModal
       :open-modal="openModal"
       @onCloseModal="onCloseModal"
@@ -138,9 +131,8 @@ export default Vue.extend({
         loadingDelete: (state: { auth: AuthState }) =>
           state.auth.teamState.deleteUserDialogState.loading,
       }),
-      showUserDeleteModal: false,
       textUserDeleteModal: "",
-      idUserDeleteModal: null,
+      idUserDeleteModal: "",
       options: {} as TableOptions,
       headers: [
         {
@@ -208,41 +200,30 @@ export default Vue.extend({
   },
   methods: {
     onOpenModal() {
-      console.log("onOpenModal");
       this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.openDeleteUserDialog());
     },
     onCloseModal() {
-      console.log("onCloseModal");
       this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.closeDeleteUserDialog());
     },
     deleteUser() {
       if (this.idUserDeleteModal) {
+        const data = {
+          callback: () => this.$emit('itemDeleted'),
+          userId: this.idUserDeleteModal,
+        };
         this?.[FRONTEGG_STORE_KEY]?.dispatch(
-          teamActions.deleteUser({
-            userId: this.idUserDeleteModal,
-          })
+          teamActions.deleteUser(data)
         );
       }
     },
-    setDeleteModal(id) {
+    setDeleteModal(id: string, email: string) {
       this.onOpenModal();
       this.idUserDeleteModal = id;
-      this.textUserDeleteModal = this.tableItems.find(
-        (item) => item.id === id
-      ).email;
+      this.textUserDeleteModal = email;
     },
     getRoleName(roleId: string) {
-      const roleObj = this.roles.find((i) => i.id === roleId);
+      const roleObj = this.roles.find((i: {id: string}) => i.id === roleId);
       return roleObj ? roleObj.name : null;
-    },
-    parseDate(date: string) {
-      return this.$moment(date).format("LLLL");
-    },
-    leftTime(date: string) {
-      return (
-        new Date(new Date().getTime() - new Date(date).getTime()).getUTCDate() -
-        1
-      );
     },
     resendActivationLink(id: string) {
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
@@ -250,7 +231,6 @@ export default Vue.extend({
           userId: id,
         })
       );
-      console.log('resend activation link ')
     },
   },
 });
