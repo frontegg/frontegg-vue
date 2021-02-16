@@ -1,7 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12">
-
+      <div class="fe-error-message">
+        {{ error }}
+      </div>
     </v-col>
   </v-row>
 </template>
@@ -18,14 +20,15 @@ export default Vue.extend({
   },
   data() {
     return {
-
+      ...mapState(this, {
+        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
+      }),
     }
   },
   computed: {
-
+    error() {
+      return this.mfaState.error;
+    },
   }
 });
 </script>
-
-<style lang="scss">
-</style>
