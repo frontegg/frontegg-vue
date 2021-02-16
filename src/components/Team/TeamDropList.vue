@@ -86,16 +86,9 @@ export default {
 .delete-modal {
   cursor: pointer;
   padding:  0;
-  // &:hover {
-  //   background: var(--color-gray-2);
-  // }
   .v-list-item {
     min-height: 1px;
     padding: 0;
-    // &__title {
-    //   display: flex;
-    //   align-items: center;
-    // }
   }
 }
 </style>

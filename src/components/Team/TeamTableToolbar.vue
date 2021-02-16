@@ -5,7 +5,7 @@
         <div class="fe-input fe-input-full-width fe-input-with-suffix-icon">
           <div class="fe-input__inner">
             <input
-              placeholder="Search by any text"
+              :placeholder="$t('auth.team.search-users')"
               class="fe-input__input"
               type="text"
               v-model="inputField"
@@ -31,7 +31,7 @@
           type="button"
           @click="onModalOpenClick"
         >
-          Invite User
+        {{ $t("auth.team.invite-user")}}
           <svg
             width="2rem"
             height="2rem"

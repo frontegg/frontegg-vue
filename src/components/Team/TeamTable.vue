@@ -4,7 +4,7 @@
       <div class="spinner-icon" v-if="loading">
         <spinner />
       </div>
-      
+
       <v-data-table
         :headers="headers"
         :items="tableItems"
@@ -41,8 +41,12 @@
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           <div class="datetime" v-if="item.createdAt">
-            <span class="date">{{item.createdAt ? $moment(item.createdAt).format('LLLL') : 'N/A'}}</span>
-            <span class="left-time">{{item.createdAt ? $moment(item.createdAt).fromNow() : 'N/A'}}</span>
+            <span class="date">{{
+              item.createdAt ? $moment(item.createdAt).format("LLLL") : "N/A"
+            }}</span>
+            <span class="left-time">{{
+              item.createdAt ? $moment(item.createdAt).fromNow() : "N/A"
+            }}</span>
           </div>
           <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
             <span class="date">{{ $t("common.pendingApproval") }}</span>
@@ -50,8 +54,12 @@
         </template>
         <template v-slot:[`item.lastLogin`]="{ item }">
           <div class="datetime">
-            <span class="date">{{item.lastLogin ? $moment(item.lastLogin).format('LLLL') : 'N/A'}}</span>
-            <span class="left-time" v-if="item.lastLogin">{{item.lastLogin ? $moment(item.lastLogin).fromNow() : 'N/A'}}</span>
+            <span class="date">{{
+              item.lastLogin ? $moment(item.lastLogin).format("LLLL") : "N/A"
+            }}</span>
+            <span class="left-time" v-if="item.lastLogin">{{
+              item.lastLogin ? $moment(item.lastLogin).fromNow() : "N/A"
+            }}</span>
           </div>
         </template>
         <template v-slot:[`item.id`]="{ item }">
@@ -63,18 +71,19 @@
         </template>
       </v-data-table>
     </div>
-    
+
     <FModal
       :open-modal="openModal"
       @onCloseModal="onCloseModal"
-      :headText="'Delete team member'"
+      :headText="$t('auth.team.deleteDialog.title')"
     >
       <template #content>
         <div class="fe-dialog-body">
-          <span
-            >You are about to remove {{ textUserDeleteModal }} from this
-            account. Are you sure?</span
-          >
+          <span>{{
+            $t("auth.team.deleteDialog.message", {
+              email: textUserDeleteModal,
+            })
+          }}</span>
         </div>
         <v-card-actions>
           <v-btn
@@ -208,12 +217,10 @@ export default Vue.extend({
     deleteUser() {
       if (this.idUserDeleteModal) {
         const data = {
-          callback: () => this.$emit('itemDeleted'),
+          callback: () => this.$emit("itemDeleted"),
           userId: this.idUserDeleteModal,
         };
-        this?.[FRONTEGG_STORE_KEY]?.dispatch(
-          teamActions.deleteUser(data)
-        );
+        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.deleteUser(data));
       }
     },
     setDeleteModal(id: string, email: string) {
@@ -222,7 +229,7 @@ export default Vue.extend({
       this.textUserDeleteModal = email;
     },
     getRoleName(roleId: string) {
-      const roleObj = this.roles.find((i: {id: string}) => i.id === roleId);
+      const roleObj = this.roles.find((i: { id: string }) => i.id === roleId);
       return roleObj ? roleObj.name : null;
     },
     resendActivationLink(id: string) {

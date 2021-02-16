@@ -33,6 +33,9 @@
           />
         </div>
       </div>
+      <div v-if="inviteError" class="fe-error-message">
+        {{ inviteError }}
+      </div>
     </v-form>
     <v-card-actions>
       <v-btn
@@ -46,7 +49,10 @@
       <v-btn
         text
         class="fe-button fe-button-large"
-        :class="{ 'fe-button-disabled': !isFormValid, 'fe-button-primary': isFormValid}"
+        :class="{
+          'fe-button-disabled': !isFormValid,
+          'fe-button-primary': isFormValid,
+        }"
         :loading="loading"
         @click.prevent="submitForm"
       >
@@ -68,6 +74,8 @@ export default {
       ...mapState(this, {
         loading: (state: { auth: AuthState }) =>
           state.auth.teamState.addUserDialogState.loading,
+        teamState: (state: { auth: AuthState }) =>
+          state.auth.teamState.addUserDialogState.error,
       }),
       isFormValid: false,
       form: {
@@ -97,14 +105,25 @@ export default {
       },
     };
   },
+  computed: {
+    inviteError() {
+      if (this.teamState) {
+        return this.teamState;
+      } else {
+        return null;
+      }
+    },
+  },
   methods: {
     formReset() {
       this.$refs.form.reset();
       this.$refs.form.resetValidation();
     },
     itemCreated() {
-      this.$emit('itemCreated');
-      this.formReset();
+      if (!this.inviteError) {
+        this.$emit("itemCreated");
+        this.formReset();
+      }
     },
     async submitForm() {
       const valid = this.$refs.form.validate();
@@ -112,7 +131,7 @@ export default {
         const data = {
           callback: () => this.itemCreated(),
           ...this.form,
-        }
+        };
         this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(data));
       }
     },
