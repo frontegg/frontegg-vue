@@ -1,5 +1,5 @@
 <template>
-  <v-row>
+  <v-row v-if="error">
     <v-col cols="12">
       <div class="fe-error-message">
         {{ error }}

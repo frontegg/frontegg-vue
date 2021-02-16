@@ -174,3 +174,62 @@
     width: 100% !important;
   }
 }
+
+.fe-input {
+  .v-input.v-text-field--outlined {
+    .v-text-field__details {
+      padding: 0;
+    }
+
+    .v-input__slot {
+      &:hover {
+        fieldset {
+          border-color: var(--color-gray-5);
+        }
+      }
+  
+      &:focus-within {
+        fieldset {
+          border-color: var(--theme-color);
+        }
+      }
+    }
+
+    & > .v-input__control > .v-input__slot {
+      min-height: 32px;
+      margin-bottom: 4px;
+    }
+
+    &.v-input--is-focused fieldset,
+    &.v-input--has-state fieldset {
+      border-radius: 0.5rem;
+      border: 1px solid var(--element-border-color);
+    }
+  }
+
+  .v-input.error--text {
+    input,
+    .v-messages__message {
+      color: var(--color-danger);
+    }
+
+    .v-input__slot {
+      &:hover {
+        fieldset {
+          border-color: var(--color-danger);
+        }
+      }
+  
+      &:focus-within {
+        fieldset {
+          border-color: var(--color-danger);
+        }
+      }
+    }
+
+    &.v-input--is-focused fieldset,
+    &.v-input--has-state fieldset {
+      border-color: var(--color-danger);
+    }
+  }
+}

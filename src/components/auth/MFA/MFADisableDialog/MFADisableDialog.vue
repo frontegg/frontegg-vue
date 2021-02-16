@@ -11,7 +11,9 @@
           <span class="fe-dialog-close-x"></span>
         </button>
         <v-card-title class="fe-dialog-header">
-          {{ $t("auth.mfa.disable-title") }}
+          <div class="fe-dialog-title" id="rcDialogTitle0">
+            {{ $t("auth.mfa.disable-title") }}
+          </div>
         </v-card-title>
         <v-card-text class="fe-dialog-body">
           <v-form
@@ -20,7 +22,7 @@
             @submit.prevent="disableMfa"
           >
             <MFADisableDialogMessage />
-            <MFADisableDialogForm />
+            <MFADisableDialogForm v-model="token" />
             <MFADisableDialogErrorMessage />
             <MFADisableDialogFooter :isFormValid="isFormValid" />
           </v-form>
@@ -54,6 +56,7 @@ export default Vue.extend({
       }),
       isFormValid: false,
       dialog: false,
+      token: ''
     };
   },
   computed: {},
@@ -65,5 +68,12 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style scopped lang="scss">
+.v-dialog > .v-card > .v-card__text {
+  padding: 2rem;
+}
+
+.v-dialog__content {
+  align-items: start;
+}
 </style>
