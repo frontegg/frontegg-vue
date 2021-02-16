@@ -4,11 +4,11 @@
       <div>Your recovery code</div>
       <div class="fe-mfa__recovery-code" :class="copiedMgsVisible? 'copied' : ''" @click="copyRecoverCode">
         <span>{{ copiedMgsVisible ? $t('common.copied') : recoveryCode }}</span>
-        <v-icon name='mdi-content-copy' />
+        <v-icon> mdi-content-copy </v-icon>
       </div>
 
       <div class='fe-mfa__recovery-note'>
-        <v-icon name='mdi-alert' />
+        <v-icon color="#5a6ff5"> mdi-alert </v-icon>
         <span>{{ $t('auth.mfa.recovery-code.copy-and-save-code') }}</span>
       </div>
     </v-col>
