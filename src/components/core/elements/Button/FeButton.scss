@@ -52,10 +52,6 @@
       transform: translate(-50%, -50%);
       visibility: visible;
     }
-
-    & > *:not(.fe-loader) {
-      visibility: hidden;
-    }
   }
 
   & > svg {

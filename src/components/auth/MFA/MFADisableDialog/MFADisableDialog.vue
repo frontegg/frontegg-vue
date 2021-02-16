@@ -1,13 +1,13 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="600">
+    <v-dialog v-model="dialog" max-width="600" :persistent="true">
       <template v-slot:activator="{ on, attrs }">
         <v-btn color="primary" dark v-bind="attrs" v-on="on">
           {{ $t("auth.mfa.disable-button") }}
         </v-btn>
       </template>
       <v-card class="fe-dialog-content">
-        <button type="button" aria-label="Close" class="fe-dialog-close">
+        <button type="button" aria-label="Close" class="fe-dialog-close" @click="closeDialog">
           <span class="fe-dialog-close-x"></span>
         </button>
         <v-card-title class="fe-dialog-header">
@@ -24,7 +24,7 @@
             <MFADisableDialogMessage />
             <MFADisableDialogForm v-model="token" />
             <MFADisableDialogErrorMessage />
-            <MFADisableDialogFooter :isFormValid="isFormValid" />
+            <MFADisableDialogFooter @close-dialog="closeDialog" :isFormValid="isFormValid" />
           </v-form>
         </v-card-text>
       </v-card>
@@ -34,6 +34,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import MFADisableDialogMessage from "./MFADisableDialogMessage.vue";
 import MFADisableDialogFooter from "./MFADisableDialogFooter.vue";
 import MFADisableDialogForm from "./MFADisableDialogForm.vue";
@@ -62,8 +63,16 @@ export default Vue.extend({
   computed: {},
   methods: {
     disableMfa() {
-      console.log('disableMfa')
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/disableMfa",
+        payload: {
+          token: this.token,
+        }
+      });
     },
+    closeDialog() {
+      this.dialog = false;
+    }
   }
 });
 </script>

@@ -6,8 +6,8 @@
     :test-id="params.testId"
     @click="onClick($event)"
   >
-    <slot></slot>
     <Spinner v-if="params.loading" />
+    <slot v-else></slot>
   </button>
 </template>
 
@@ -64,4 +64,7 @@ export default Vue.extend({
 
 <style lang="scss">
   @import './FeButton.scss';
+  .fe-button-loader>:not(.fe-loader) {
+    visibility: visible;
+  }
 </style>

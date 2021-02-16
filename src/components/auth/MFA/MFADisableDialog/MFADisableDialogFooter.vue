@@ -1,35 +1,31 @@
-<template>
-  <v-row>
-    <v-col cols="12">
-      <div class="fe-dialog__footer">
-        <div class="fe-grid fe-container">
-          <div class="fe-grid fe-item fe-grid-xs-true">
-            <button
-              class="fe-button fe-button-large fe-button-clickable"
-              type="button"
-              @click="closeDialog"
-            >
-              {{ $t('common.cancel') }}
-            </button>
-          </div>
-          <div class="fe-grid fe-item fe-grid-xs-true fe-text-align-end">
-            <FButton
-              :params="{
-                type: 'submit',
-                fullWidth: false,
-                variant:'danger',
-                disabled: !isFormValid,
-                loading: isLoading,
-                'data-test-id': 'disabled-btn'
-              }"
-            >
-              {{ $t('common.disable') }}
-            </FButton>
-          </div>
-        </div>
+<template>  
+  <div class="fe-dialog__footer">
+    <div class="fe-grid fe-container">
+      <div class="fe-grid fe-item fe-grid-xs-true">
+        <button
+          class="fe-button fe-button-large fe-button-clickable"
+          type="button"
+          @click="closeDialog"
+        >
+          {{ $t('common.cancel') }}
+        </button>
       </div>
-    </v-col>
-  </v-row>
+      <div class="fe-grid fe-item fe-grid-xs-true fe-text-align-end">
+        <FButton
+          :params="{
+            type: 'submit',
+            fullWidth: false,
+            variant:'danger',
+            disabled: !isFormValid,
+            loading: isLoading,
+            'data-test-id': 'disabled-btn'
+          }"
+        >
+          {{ $t('common.disable') }}
+        </FButton>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -61,11 +57,14 @@ export default Vue.extend({
   },
   methods: {
     closeDialog() {
-      // 
+      this.$emit('close-dialog');
     }
   }
 });
 </script>
 
-<style lang="scss">
+<style scopped lang="scss">
+ .fe-dialog__footer .fe-button-danger {
+   min-width: 72px;
+ }
 </style>
