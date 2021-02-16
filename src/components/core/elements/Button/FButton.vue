@@ -7,8 +7,7 @@
     @click="onClick"
   >
     <slot></slot>
-    {{ params.children }}
-    <Spinner v-if="params.loading" :size="params.size === 'small' ? 18 : 24" />
+    <Spinner v-if="params.loading" />
   </button>
 </template>
 
@@ -18,6 +17,7 @@ import { ButtonProps } from './interfaces'
 import { ClassNameGenerator } from '@/styles/';
 import classNames from 'classnames';
 import Spinner from "@/components/Common/Spinner.vue";
+const prefixCls = 'fe-button';
 
 export default Vue.extend({
   name: 'FButton' as string,
@@ -36,10 +36,10 @@ export default Vue.extend({
     }
   },
   mounted() {
-    this.classes =  ClassNameGenerator.generate({
+    this.classes = ClassNameGenerator.generate({
       className: this.params.class,
-      prefixCls: this.params.prefixCls,
-      size: this.params.prefixCls,
+      prefixCls: prefixCls,
+      size: this.params.size,
       theme: this.params.disabled ? 'disabled' : this.params.variant,
       isClickable: true,
       isFullWidth: this.params.fullWidth,

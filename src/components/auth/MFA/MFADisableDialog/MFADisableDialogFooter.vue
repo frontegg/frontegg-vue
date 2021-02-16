@@ -42,6 +42,11 @@ export default Vue.extend({
   components: {
     FButton,
   },
+  props: {
+    isFormValid: {
+      type: Boolean
+    }
+  },
   data() {
     return {
       ...mapState(this, {
@@ -52,6 +57,11 @@ export default Vue.extend({
   computed: {
     isLoading() {
       return this.mfaState.loading;
+    }
+  },
+  methods: {
+    closeDialog() {
+      // 
     }
   }
 });

@@ -1,4 +1,4 @@
-import { Theme } from '@/styles';
+import { Theme, Size } from '@/styles';
 
 export interface ButtonProps {
   fullWidth?: boolean;
@@ -11,7 +11,7 @@ export interface ButtonProps {
   disabled?: boolean;
   ref?: string;
   class?: string;
-
+  size?: Size;
   // @deprecated
   submit?: boolean;
   testId?: string;
