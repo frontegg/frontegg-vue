@@ -14,7 +14,7 @@
         :fixed-header="true"
         hide-default-footer
       >
-        <template v-slot:item.profileImageUrl="{ item }">
+        <template v-slot:[`item.profileImageUrl`]="{ item }">
           <div class="d-flex justify-center">
             <img
               :src="item.profileImageUrl"
@@ -23,7 +23,7 @@
             />
           </div>
         </template>
-        <template v-slot:item.roleIds="{ item }">
+        <template v-slot:[`item.roleIds`]="{ item }">
           <div
             class="fe-flex fe-full-width fe-flex-no-wrap"
             v-if="item.roleIds && item.roleIds.length > 0"
@@ -39,7 +39,7 @@
             </div>
           </div>
         </template>
-        <template v-slot:item.createdAt="{ item }">
+        <template v-slot:[`item.createdAt`]="{ item }">
           <div class="datetime" v-if="item.createdAt">
             <span class="date">{{item.createdAt ? $moment(item.createdAt).format('LLLL') : 'N/A'}}</span>
             <span class="left-time">{{item.createdAt ? $moment(item.createdAt).fromNow() : 'N/A'}}</span>
@@ -48,13 +48,13 @@
             <span class="date">{{ $t("common.pendingApproval") }}</span>
           </div>
         </template>
-        <template v-slot:item.lastLogin="{ item }">
+        <template v-slot:[`item.lastLogin`]="{ item }">
           <div class="datetime">
             <span class="date">{{item.lastLogin ? $moment(item.lastLogin).format('LLLL') : 'N/A'}}</span>
             <span class="left-time" v-if="item.lastLogin">{{item.lastLogin ? $moment(item.lastLogin).fromNow() : 'N/A'}}</span>
           </div>
         </template>
-        <template v-slot:item.id="{ item }">
+        <template v-slot:[`item.id`]="{ item }">
           <TeamDropList
             @deleteUser="setDeleteModal(item.id, item.email)"
             :sendEmail="!item.lastLogin"
