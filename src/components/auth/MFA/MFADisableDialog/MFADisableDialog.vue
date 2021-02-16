@@ -59,7 +59,7 @@ export default Vue.extend({
   computed: {},
   methods: {
     disableMfa() {
-      // 
+      console.log('disableMfa')
     },
   }
 });

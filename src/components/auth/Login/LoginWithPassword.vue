@@ -54,16 +54,18 @@
           </div>
         </div>
         <div class="continue">
-          <button
-            class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
-            :class="{ 'fe-button-disabled': !isFormValid }"
-            :disabled="!isFormValid"
-            @click.prevent="loginSubmit"
+          <FButton 
+          @click="loginSubmit($event)"
+          :params="{
+            type: 'submit',
+            fullWidth: true,
+            variant:'primary',
+            size: 'large',
+            loading: isLoading,
+            disabled: !isFormValid,
+            'data-test-id': 'sumbit-btn'
+            }"
           >
-            <spinner v-if="isLoading" />
-            {{ submitText }}
-          </button>
-          <FButton style="display: none;" @click.prevent="loginSubmit" :params="{type: 'submit', fullWidth: true, variant:'primary', loading: isLoading, 'data-test-id': 'sumbit-btn'}">
             {{ submitText }}
           </FButton>
           <div
@@ -82,14 +84,12 @@
 import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
-import Spinner from "@/components/Common/Spinner.vue";
-import FButton from "@/components/core/elements/Button/FButton.vue"
+import FButton from "@/components/core/elements/Button/FButton.vue";
 
 export default Vue.extend({
   name: "LoginWithPassword",
   components: {
-    Spinner,
-    FButton
+    FButton,
   },
   data() {
     return {
@@ -144,7 +144,8 @@ export default Vue.extend({
     console.log("call action here pp", this);
   },
   methods: {
-    loginSubmit() {
+    loginSubmit(e) {
+      e.preventDefault();
       if (this.loginState.step === "preLogin") {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",

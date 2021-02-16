@@ -4,7 +4,7 @@
     :class="classNames(classes, { ['fe-icon-button']: params.iconButton, ['fe-button-transparent']: params.transparent })"
     :type="params.type"
     :test-id="params.testId"
-    @click="onClick"
+    @click="onClick($event)"
   >
     <slot></slot>
     <Spinner v-if="params.loading" />
@@ -35,20 +35,28 @@ export default Vue.extend({
       classNames,
     }
   },
+  watch: {
+    params() {
+      this.updateClasses();
+    },
+  },
   mounted() {
-    this.classes = ClassNameGenerator.generate({
-      className: this.params.class,
-      prefixCls: prefixCls,
-      size: this.params.size,
-      theme: this.params.disabled ? 'disabled' : this.params.variant,
-      isClickable: true,
-      isFullWidth: this.params.fullWidth,
-      isLoading: this.params.loading,
-    });
+    this.updateClasses();
   },
   methods: {
-    onClick() {
-      this.$emit('click')
+    onClick(event) {
+      this.$emit('click', event)
+    },
+    updateClasses() {
+      this.classes = ClassNameGenerator.generate({
+        className: this.params.class,
+        prefixCls: prefixCls,
+        size: this.params.size,
+        theme: this.params.disabled ? 'disabled' : this.params.variant,
+        isClickable: true,
+        isFullWidth: this.params.fullWidth,
+        isLoading: this.params.loading,
+      });
     },
   },
 });
