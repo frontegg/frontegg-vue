@@ -1,5 +1,5 @@
 <template>
-  <div class="fe-page-header fe-team__header">
+  <div class="fe-page-header">
     <div class="fe-left">
       <div class="fe-title">
         {{ pageTitle }}
