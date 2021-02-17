@@ -47,7 +47,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from "@/components/Common/Spinner.vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { AuthState, MFAStep } from "@/plugins/fronteggAuth/Api";
 import { mapState } from "@/plugins/fronteggCore/map-state";
@@ -106,7 +105,7 @@ export default Vue.extend({
       await this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/verifyMfaAfterForce",
         payload: {
-          mfaToken: this.mfaToken || '', //cef9809f-d722-483e-ac31-644989f9bb30
+          mfaToken: this.mfaToken || 'cef9809f-d722-483e-ac31-644989f9bb30', //cef9809f-d722-483e-ac31-644989f9bb30
           value: this.token,
           callback: (success) => {
             if (success) {
@@ -118,6 +117,14 @@ export default Vue.extend({
               });
             }
           },
+        },
+      });
+    },
+    requestAuthorize(firstTime) {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/requestAuthorize",
+        payload: {
+          firstTime
         },
       });
     }
