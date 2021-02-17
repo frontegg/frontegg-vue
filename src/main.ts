@@ -5,7 +5,15 @@ import fronteggCore from './plugins/fronteggCore';
 import fronteggAuth from './plugins/fronteggAuth';
 import fronteggAudits from './plugins/fronteggAudits';
 import vuetify from './plugins/vuetify';
-import i18n from './i18n'
+
+require('./plugins/moment')
+
+import i18n from './i18n';
+
+import "./styles/app.scss";
+
+import MainLayout from './Layouts/MainLayout.vue';
+import DefaultLayout from './Layouts/DefaultLayout.vue';
 
 Vue.config.productionTip = false;
 Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
@@ -23,6 +31,11 @@ Vue.use(fronteggAuth, {
   },
 });
 Vue.use(fronteggAudits);
+
+
+
+Vue.component("main-layout", MainLayout);
+Vue.component("default-layout", DefaultLayout);
 
 new Vue({
   router,

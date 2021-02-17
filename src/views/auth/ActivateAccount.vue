@@ -9,7 +9,7 @@
         <img src="@/assets/main-logo.svg">
       </div>
 
-      <div class='fe-activate-account-component'>
+      <div class="fe-activate-account-component">
         <div v-if="!userId || !token">
           <ActivateAccountFailed />
         </div>

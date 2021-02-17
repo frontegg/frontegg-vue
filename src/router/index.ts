@@ -30,6 +30,12 @@ const routes: Array<RouteConfig> = [
     name: 'ActivateAccount',
     component: () => import(/* webpackChunkName: "ActivateAccount" */ '../views/auth/ActivateAccount.vue'),
   },
+  {
+    path: '/team_management',
+    name: 'team',
+    meta: { layout: "main" },
+    component: () => import(/* webpackChunkName: "Team" */ '../views/Team.vue'),
+  },
 ];
 
 const router = new VueRouter({
