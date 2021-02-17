@@ -10,7 +10,7 @@
               type="text"
               v-model="inputField"
             />
-            <img src="@/assets/icon-search.svg" alt="icon" class="fe-icon fe-icon-clickable" />
+            <FeIcon :iconName="'search'" />
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
           @click="onModalOpenClick"
         >
           {{ $t("auth.team.invite-user") }}
-          <img src="@/assets/icon-invite.svg" alt="icon" class="fe-icon fe-ml-1" />
+          <FeIcon :iconName="'invite'" />
         </button>
       </div>
     </div>
@@ -32,9 +32,13 @@
 import Vue from "vue";
 
 import debounce from "lodash/debounce";
+import FeIcon from "@/components/core/elements/Icons/FeIcon";
 
 export default Vue.extend({
   name: "TeamTableToolbar",
+  components: {
+    FeIcon
+  },
   data() {
     return {
       inputField: ""

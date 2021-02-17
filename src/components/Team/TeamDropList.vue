@@ -2,8 +2,8 @@
   <div class="delete-modal-holder">
     <v-menu :close-on-click="closeOnClick" bottom right>
       <template v-slot:activator="{ on, attrs }">
-        <div class="open-fe-menu" v-on="on" v-bind="attrs">
-          <img src="@/assets/icon-drop-menu.svg" alt="icon" />
+        <div class="open-fe-menu " v-on="on" v-bind="attrs">
+          <FeIcon :iconName="'vertical-dots'" />
         </div>
       </template>
       <v-list :class="'delete-modal fe-menu'">
@@ -13,13 +13,14 @@
             v-if="sendEmail"
             @click="resendActivationLink"
           >
-            <img src="@/assets/icon-resend.svg" alt="icon" class="fe-icon fe-menu-item__icon" />
+            <FeIcon :iconName="'resend'" :className="['fe-icon', 'fe-menu-item__icon']" />
             <span>{{ $t("auth.team.resendActivation") }}</span>
           </v-list-item-title>
         </v-list-item>
         <v-list-item>
           <v-list-item-title @click="deleteUser" class="fe-menu-item fe-menu-item__with-icons">
-            <img src="@/assets/icon-delete.svg" alt="icon" class="fe-icon fe-menu-item__icon" />
+            <FeIcon :iconName="'delete'" :className="['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']" />
+            <!-- <img src="@/assets/icon-delete.svg" alt="icon" class="fe-icon fe-menu-item__icon" /> -->
             <span>{{ $t("auth.team.deleteUser") }}</span>
           </v-list-item-title>
         </v-list-item>
@@ -28,8 +29,12 @@
   </div>
 </template>
 <script>
+import FeIcon from "@/components/core/elements/Icons/FeIcon";
 export default {
   name: "TeamDropList",
+  components: {
+    FeIcon
+  },
   props: {
     sendEmail: {
       type: Boolean
@@ -51,6 +56,11 @@ export default {
 };
 </script>
 <style lang="scss">
+.open-fe-menu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .delete-modal-holder {
   position: relative;
 }
