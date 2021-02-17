@@ -1,23 +1,27 @@
 <template>
   <component
-    :is="'icon-' + iconName"
-    :fill="fill"
-    :width="width"
-    :height="height"
-    :view-box="viewBox"
-    :xmlns="xmlns"
-    :class="className"
+    :is="'icon-' + params.iconName"
+    :fill="params.fill"
+    :width="params.width"
+    :height="params.height"
+    :view-box="params.viewBox"
+    :xmlns="params.xmlns"
+    :class="params.className"
   />
 </template>
 
 <script lang="ts">
-import Delete from "./svgs/Delete";
-import VerticalDots from "./svgs/VerticalDots";
-import Invite from "./svgs/Invite";
-import Resend from "./svgs/Resend";
-import Search from "./svgs/Search";
-import Google from "./svgs/Google";
-import Github from "./svgs/Github";
+import { PropType } from 'vue'
+import { IconProps } from './interfaces'
+
+import Delete from "./svgs/Delete.vue";
+import VerticalDots from "./svgs/VerticalDots.vue";
+import Invite from "./svgs/Invite.vue";
+import Resend from "./svgs/Resend.vue";
+import Search from "./svgs/Search.vue";
+import Google from "./svgs/Google.vue";
+import Github from "./svgs/Github.vue";
+
 export default {
   name: "FeIcon",
   components: {
@@ -30,27 +34,9 @@ export default {
     "icon-vertical-dots": VerticalDots
   },
   props: {
-    iconName: {
-      type: String
+    params: {
+      type: Object as PropType<IconProps>,
     },
-    fill: {
-      type: String
-    },
-    width: {
-      type: String
-    },
-    height: {
-      type: String
-    },
-    viewBox: {
-      type: String
-    },
-    xmlns: {
-      type: String
-    },
-    className: {
-      type: Array
-    }
   }
 };
 </script>

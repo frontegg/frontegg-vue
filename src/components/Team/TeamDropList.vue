@@ -11,7 +11,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          <FeIcon :icon-name="'vertical-dots'" />
+          <FeIcon :params="{iconName:'vertical-dots'}" />
         </div>
       </template>
       <v-list :class="'delete-modal fe-menu'">
@@ -21,9 +21,10 @@
             class="fe-menu-item fe-menu-item__with-icons"
             @click="resendActivationLink"
           >
-            <FeIcon
-              :icon-name="'resend'"
-              :class-name="['fe-icon', 'fe-menu-item__icon']"
+            <FeIcon :params="{
+                iconName:'resend',
+                className: ['fe-icon', 'fe-menu-item__icon']
+              }"
             />
             <span>{{ $t("auth.team.resendActivation") }}</span>
           </v-list-item-title>
@@ -33,9 +34,10 @@
             class="fe-menu-item fe-menu-item__with-icons"
             @click="deleteUser"
           >
-            <FeIcon
-              :icon-name="'delete'"
-              :class-name="['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']"
+            <FeIcon :params="{
+                iconName:'delete',
+                className: ['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']
+              }"
             />
             <!-- <img src="@/assets/icon-delete.svg" alt="icon" class="fe-icon fe-menu-item__icon" /> -->
             <span>{{ $t("auth.team.deleteUser") }}</span>

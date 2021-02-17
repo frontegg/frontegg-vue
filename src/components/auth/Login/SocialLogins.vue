@@ -11,7 +11,7 @@
       >
         <div class="fe-row fe-center">
           <div>
-            <FeIcon :iconName="'google'" />
+            <FeIcon :params="{iconName:'google'}" />
           </div>
           <div>Login with Google</div>
         </div>
@@ -25,7 +25,7 @@
       >
         <div class="fe-row fe-center">
           <div>
-            <FeIcon :iconName="'github'" />
+            <FeIcon :params="{iconName:'github'}" />
           </div>
           <div>Login with Github</div>
         </div>
