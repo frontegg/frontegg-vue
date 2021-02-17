@@ -131,7 +131,7 @@ export default Vue.extend({
       type: Number,
     },
   },
-  data() {
+  data(): any {
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
@@ -183,16 +183,16 @@ export default Vue.extend({
     };
   },
   computed: {
-    pageSize() {
+    pageSize(): any {
       return this.teamState.pageSize;
     },
-    tableItems() {
+    tableItems(): any {
       return this.teamState.users;
     },
-    roles() {
+    roles(): any {
       return this.teamState.roles;
     },
-    loading() {
+    loading(): any {
       return this.teamState.loaders.USERS;
     },
   },

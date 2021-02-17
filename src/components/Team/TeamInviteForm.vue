@@ -69,7 +69,7 @@ import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
 export default {
-  data() {
+  data(): any {
     return {
       ...mapState(this, {
         loading: (state: { auth: AuthState }) =>
@@ -106,7 +106,7 @@ export default {
     };
   },
   computed: {
-    inviteError() {
+    inviteError(): any {
       if (this.teamState) {
         return this.teamState;
       } else {

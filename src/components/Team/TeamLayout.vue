@@ -52,7 +52,7 @@ import { ILoadUsers } from '@frontegg/rest-api';
 export default Vue.extend({
   name: "TeamLayout",
   components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamInviteForm },
-  data() {
+  data(): any {
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
@@ -65,7 +65,7 @@ export default Vue.extend({
     }
   },
   computed: {
-    totalPages() {
+    totalPages(): any {
       return this.teamState.totalPages;
     },
   },
