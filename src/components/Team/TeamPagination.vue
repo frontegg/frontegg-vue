@@ -1,6 +1,9 @@
 <template>
   <div class="fe-table__pagination table-pagination">
-    <v-pagination v-model="current" :length="total" />
+    <v-pagination
+      v-model="current"
+      :length="total"
+    />
   </div>
 </template>
 

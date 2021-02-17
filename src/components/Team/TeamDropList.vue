@@ -1,25 +1,42 @@
 <template>
   <div class="delete-modal-holder">
-    <v-menu :close-on-click="closeOnClick" bottom right>
+    <v-menu
+      :close-on-click="closeOnClick"
+      bottom
+      right
+    >
       <template v-slot:activator="{ on, attrs }">
-        <div class="open-fe-menu " v-on="on" v-bind="attrs">
-          <FeIcon :iconName="'vertical-dots'" />
+        <div
+          class="open-fe-menu "
+          v-bind="attrs"
+          v-on="on"
+        >
+          <FeIcon :icon-name="'vertical-dots'" />
         </div>
       </template>
       <v-list :class="'delete-modal fe-menu'">
         <v-list-item>
           <v-list-item-title
-            class="fe-menu-item fe-menu-item__with-icons"
             v-if="sendEmail"
+            class="fe-menu-item fe-menu-item__with-icons"
             @click="resendActivationLink"
           >
-            <FeIcon :iconName="'resend'" :className="['fe-icon', 'fe-menu-item__icon']" />
+            <FeIcon
+              :icon-name="'resend'"
+              :class-name="['fe-icon', 'fe-menu-item__icon']"
+            />
             <span>{{ $t("auth.team.resendActivation") }}</span>
           </v-list-item-title>
         </v-list-item>
         <v-list-item>
-          <v-list-item-title @click="deleteUser" class="fe-menu-item fe-menu-item__with-icons">
-            <FeIcon :iconName="'delete'" :className="['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']" />
+          <v-list-item-title
+            class="fe-menu-item fe-menu-item__with-icons"
+            @click="deleteUser"
+          >
+            <FeIcon
+              :icon-name="'delete'"
+              :class-name="['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']"
+            />
             <!-- <img src="@/assets/icon-delete.svg" alt="icon" class="fe-icon fe-menu-item__icon" /> -->
             <span>{{ $t("auth.team.deleteUser") }}</span>
           </v-list-item-title>

@@ -1,7 +1,10 @@
 <template>
   <div class="fe-team__table fe-table">
     <div class="fe-table__container">
-      <div class="spinner-icon" v-if="loading">
+      <div
+        v-if="loading"
+        class="spinner-icon"
+      >
         <spinner />
       </div>
 
@@ -20,19 +23,19 @@
               :src="item.profileImageUrl"
               alt="icon"
               class="fe-table-cell__avatar-img"
-            />
+            >
           </div>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
           <div
-            class="fe-flex fe-full-width fe-flex-no-wrap"
             v-if="item.roleIds && item.roleIds.length > 0"
+            class="fe-flex fe-full-width fe-flex-no-wrap"
           >
             <div class="fe-flex">
               <div
-                class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
                 v-for="role in item.roleIds"
                 :key="role"
+                class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
               >
                 {{ getRoleName(role) }}
               </div>
@@ -40,7 +43,10 @@
           </div>
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
-          <div class="datetime" v-if="item.createdAt">
+          <div
+            v-if="item.createdAt"
+            class="datetime"
+          >
             <span class="date">{{
               item.createdAt ? $moment(item.createdAt).format("LLLL") : "N/A"
             }}</span>
@@ -48,7 +54,10 @@
               item.createdAt ? $moment(item.createdAt).fromNow() : "N/A"
             }}</span>
           </div>
-          <div class="fe-tag fe-tag-primary fe-tag-small" v-else>
+          <div
+            v-else
+            class="fe-tag fe-tag-primary fe-tag-small"
+          >
             <span class="date">{{ $t("common.pendingApproval") }}</span>
           </div>
         </template>
@@ -57,25 +66,28 @@
             <span class="date">{{
               item.lastLogin ? $moment(item.lastLogin).format("LLLL") : "N/A"
             }}</span>
-            <span class="left-time" v-if="item.lastLogin">{{
+            <span
+              v-if="item.lastLogin"
+              class="left-time"
+            >{{
               item.lastLogin ? $moment(item.lastLogin).fromNow() : "N/A"
             }}</span>
           </div>
         </template>
         <template v-slot:[`item.id`]="{ item }">
           <TeamDropList
+            :send-email="!item.lastLogin"
             @deleteUser="setDeleteModal(item.id, item.email)"
-            :sendEmail="!item.lastLogin"
             @resendActivationLink="resendActivationLink(item.id)"
-          ></TeamDropList>
+          />
         </template>
       </v-data-table>
     </div>
 
     <FModal
       :open-modal="openModal"
+      :head-text="$t('auth.team.deleteDialog.title')"
       @onCloseModal="onCloseModal"
-      :headText="$t('auth.team.deleteDialog.title')"
     >
       <template #content>
         <div class="fe-dialog-body">
@@ -89,16 +101,16 @@
           <v-btn
             :class="{ 'fe-button-disabled': loading }"
             text
-            @click="onCloseModal"
             class="fe-button"
+            @click="onCloseModal"
           >
             {{ $t("common.cancel") }}
           </v-btn>
           <v-btn
             text
             class="fe-button fe-button-large fe-button-danger"
-            @click="deleteUser"
             :loading="loadingDelete"
+            @click="deleteUser"
           >
             {{ $t("common.delete") }}
           </v-btn>

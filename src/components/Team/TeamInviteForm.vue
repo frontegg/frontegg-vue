@@ -8,7 +8,9 @@
     >
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
-          <div class="fe-input__label">{{ $t("common.name") }}</div>
+          <div class="fe-input__label">
+            {{ $t("common.name") }}
+          </div>
         </div>
         <div>
           <v-text-field
@@ -22,7 +24,9 @@
 
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
-          <div class="fe-input__label">{{ $t("common.email") }}</div>
+          <div class="fe-input__label">
+            {{ $t("common.email") }}
+          </div>
         </div>
         <div>
           <v-text-field
@@ -33,7 +37,10 @@
           />
         </div>
       </div>
-      <div v-if="inviteError" class="fe-error-message">
+      <div
+        v-if="inviteError"
+        class="fe-error-message"
+      >
         {{ inviteError }}
       </div>
     </v-form>
@@ -41,8 +48,8 @@
       <v-btn
         :class="{ 'fe-button-disabled': loading }"
         text
-        @click="onCancel"
         class="fe-button"
+        @click="onCancel"
       >
         {{ $t("common.cancel") }}
       </v-btn>

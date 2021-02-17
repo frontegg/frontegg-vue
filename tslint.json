@@ -28,9 +28,6 @@
       "member-ordering": [
         false
       ],
-      "interface-name": [
-        false
-      ],
       "interface-over-type-literal": false,
       "max-classes-per-file": false,
       "arrow-parens": false,

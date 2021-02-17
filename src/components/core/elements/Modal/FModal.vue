@@ -10,11 +10,15 @@
       <v-card>
         <v-card-title>
           <span class="headline"> {{ headText }} </span>
-          <v-btn icon dark @click="close">
+          <v-btn
+            icon
+            dark
+            @click="close"
+          >
             <v-icon>mdi-close</v-icon>
           </v-btn>
         </v-card-title>
-        <slot name="content"></slot>
+        <slot name="content" />
       </v-card>
     </v-dialog>
   </div>

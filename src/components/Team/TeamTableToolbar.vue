@@ -5,12 +5,12 @@
         <div class="fe-input fe-input-full-width fe-input-with-suffix-icon">
           <div class="fe-input__inner">
             <input
+              v-model="inputField"
               :placeholder="$t('auth.team.search-users')"
               class="fe-input__input"
               type="text"
-              v-model="inputField"
-            />
-            <FeIcon :iconName="'search'" />
+            >
+            <FeIcon :icon-name="'search'" />
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
           @click="onModalOpenClick"
         >
           {{ $t("auth.team.invite-user") }}
-          <FeIcon :iconName="'invite'" />
+          <FeIcon :icon-name="'invite'" />
         </button>
       </div>
     </div>

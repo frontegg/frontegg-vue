@@ -6,24 +6,28 @@
     />
     
     <TeamTable
+      :page.sync="currentPage"
       @fetchTableData="changeOptions"
       @itemDeleted="fetchTableData"
-      :page.sync="currentPage"
     />
     
     <TeamPagination
       v-if="totalPages > 0"
       v-model="currentPage"
       :current-page.sync="currentPage" 
-      :total-pages.sync="totalPages"/>
+      :total-pages.sync="totalPages"
+    />
 
     <FModal
       :open-modal="openModal"
-      :headText="$t('auth.team.add-dialog.title')"
+      :head-text="$t('auth.team.add-dialog.title')"
       @onCloseModal="onCloseModal"
     >
       <template #content>
-        <TeamInviteForm @onCloseModal="onCloseModal" @itemCreated="fetchTableData" />
+        <TeamInviteForm
+          @onCloseModal="onCloseModal"
+          @itemCreated="fetchTableData"
+        />
       </template>
     </FModal>
   </div>
@@ -69,6 +73,17 @@ export default Vue.extend({
       return this.teamState.totalPages;
     },
   },
+  watch: {
+    options: {
+      deep: true,
+      handler() {
+       this.fetchTableData();
+      }
+    },
+    searchValue() {
+      this.fetchTableData();
+    }
+  },
   methods: {
     onOpenModal() {
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
@@ -103,17 +118,6 @@ export default Vue.extend({
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.loadUsers(payload)
       );
-    }
-  },
-  watch: {
-    options: {
-      deep: true,
-      handler() {
-       this.fetchTableData();
-      }
-    },
-    searchValue() {
-      this.fetchTableData();
     }
   }
 });

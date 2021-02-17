@@ -4,10 +4,10 @@
     :fill="fill"
     :width="width"
     :height="height"
-    :viewBox="viewBox"
+    :view-box="viewBox"
     :xmlns="xmlns"
     :class="className"
-  ></component>
+  />
 </template>
 
 <script lang="ts">
