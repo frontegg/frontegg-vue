@@ -1,9 +1,12 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div class='fe-dialog__footer'>
-        <div class='fe-flex-spacer' />
-        <button class="fe-button fe-button-primary fe-button-large fe-button-clickable"  @click="onClose">
+      <div class="fe-dialog__footer">
+        <div class="fe-flex-spacer" />
+        <button
+          class="fe-button fe-button-primary fe-button-large fe-button-clickable"
+          @click="onClose"
+        >
           {{ $t('common.done') }}
         </button>
       </div>

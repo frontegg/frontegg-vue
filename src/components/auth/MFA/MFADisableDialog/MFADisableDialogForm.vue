@@ -6,14 +6,14 @@
       </div>
     </div>
     <v-text-field
-      @input="updateValue($event)"
       :rules="rules.code"
       name="token"
       :disabled="loading"
       placeholder="Ex. 1 2 3 4 5 6"
       :outlined="true"
       aria-autocomplete="false"
-      autoComplete='off'
+      auto-complete="off"
+      @input="updateValue($event)"
     />
   </div>
 </template>

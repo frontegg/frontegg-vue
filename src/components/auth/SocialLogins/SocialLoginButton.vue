@@ -1,15 +1,18 @@
 <template>
   <FButton
-  :params="{
-    class: `fe-social-login__button fe-social-login__button__${name.toLowerCase()}`,
-    fullWidth: true,
-    'data-test-id': `${name.toLowerCase()}SocialLogin-btn`
-  }"
+    :params="{
+      class: `fe-social-login__button fe-social-login__button__${name.toLowerCase()}`,
+      fullWidth: true,
+      'data-test-id': `${name.toLowerCase()}SocialLogin-btn`
+    }"
+  >
+    <div
+      className="{'fe-row"
+      fe-center'}
     >
-      <div className={'fe-row fe-center'}>
-        <slot></slot>
-        <div>{{ $t(`auth.social-logins.${action.toLowerCase()}.button-text`, { providerName }) }}</div>
-      </div>
+      <slot />
+      <div>{{ $t(`auth.social-logins.${action.toLowerCase()}.button-text`, { providerName }) }}</div>
+    </div>
   </FButton>
 </template>
 

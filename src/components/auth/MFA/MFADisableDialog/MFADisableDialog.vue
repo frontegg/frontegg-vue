@@ -1,17 +1,34 @@
 <template>
   <v-row justify="center">
-    <v-dialog v-model="dialog" max-width="600" :persistent="true">
+    <v-dialog
+      v-model="dialog"
+      max-width="600"
+      :persistent="true"
+    >
       <template v-slot:activator="{ on, attrs }">
-        <v-btn color="primary" dark v-bind="attrs" v-on="on">
+        <v-btn
+          color="primary"
+          dark
+          v-bind="attrs"
+          v-on="on"
+        >
           {{ $t("auth.mfa.disable-button") }}
         </v-btn>
       </template>
       <v-card class="fe-dialog-content">
-        <button type="button" aria-label="Close" class="fe-dialog-close" @click="closeDialog">
-          <span class="fe-dialog-close-x"></span>
+        <button
+          type="button"
+          aria-label="Close"
+          class="fe-dialog-close"
+          @click="closeDialog"
+        >
+          <span class="fe-dialog-close-x" />
         </button>
         <v-card-title class="fe-dialog-header">
-          <div class="fe-dialog-title" id="rcDialogTitle0">
+          <div
+            id="rcDialogTitle0"
+            class="fe-dialog-title"
+          >
             {{ $t("auth.mfa.disable-title") }}
           </div>
         </v-card-title>
@@ -24,7 +41,10 @@
             <MFADisableDialogMessage />
             <MFADisableDialogForm v-model="token" />
             <MFADisableDialogErrorMessage />
-            <MFADisableDialogFooter @close-dialog="closeDialog" :isFormValid="isFormValid" />
+            <MFADisableDialogFooter
+              :is-form-valid="isFormValid"
+              @close-dialog="closeDialog"
+            />
           </v-form>
         </v-card-text>
       </v-card>

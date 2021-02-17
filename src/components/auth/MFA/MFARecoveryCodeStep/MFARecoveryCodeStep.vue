@@ -1,10 +1,13 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div v-if="step === MFAStep.recoveryCode" class='fe-mfa__recovery-code-step'>
+      <div
+        v-if="step === MFAStep.recoveryCode"
+        class="fe-mfa__recovery-code-step"
+      >
         <MFARecoveryCodeStepMessage />
         <MFARecoveryCodeStepForm />
-        <slot></slot>
+        <slot />
         <div v-if="!hasSlot">
           <MFARecoveryCodeStepFooter />
         </div>

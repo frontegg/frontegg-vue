@@ -2,7 +2,10 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form v-model="isFormValid" class="fe-form">
+      <v-form
+        v-model="isFormValid"
+        class="fe-form"
+      >
         <div class="fe-input fe-input-full-width fe-input-in-form">
           <div class="fe-input__header">
             <div class="fe-input__label">
@@ -27,7 +30,10 @@
           {{ $t('auth.login.disable-mfa') }}
         </button>
 
-        <div v-if="error" class="fe-error-message">
+        <div
+          v-if="error"
+          class="fe-error-message"
+        >
           {{ error }}
         </div>
       </v-form>
