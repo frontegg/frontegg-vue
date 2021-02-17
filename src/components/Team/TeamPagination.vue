@@ -9,17 +9,15 @@ export default {
   name: "TeamPagination",
   props: {
     currentPage: {
-      type: Number,
-      default: 1,
+      type: Number
     },
     totalPages: {
-      type: Number,
-      default: 3,
-    },
+      type: Number
+    }
   },
   computed: {
     current: {
-      get () {
+      get() {
         return this.currentPage;
       },
       set(val) {
@@ -28,13 +26,13 @@ export default {
     },
     total() {
       return this.totalPages;
-    },
+    }
   },
   methods: {
     changePage(val) {
       this.$emit("input", val);
-    },
-  },
+    }
+  }
 };
 </script>
 
