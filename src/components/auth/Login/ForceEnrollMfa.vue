@@ -16,7 +16,10 @@
         </MFARecoveryCodeStep>
       </div>
       <div v-else>
-        <v-form v-model="isFormValid" class="fe-form">
+        <v-form
+          v-model="isFormValid"
+          class="fe-form"
+        >
           <MFAVerifyStepMessage>
             {{ $t("auth.mfa.verify.forceMfaMessage") }}
           </MFAVerifyStepMessage>
@@ -100,6 +103,9 @@ export default Vue.extend({
     );
     head.appendChild(this.style);
   },
+  destroyed() {
+    this.style.remove();
+  },
   methods: {
     async verifyMfaAfterForce() {
       await this[FRONTEGG_STORE_KEY].dispatch({
@@ -128,9 +134,6 @@ export default Vue.extend({
         },
       });
     }
-  },
-  destroyed() {
-    this.style.remove();
   },
 });
 </script>

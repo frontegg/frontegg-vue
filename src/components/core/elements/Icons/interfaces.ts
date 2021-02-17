@@ -1,9 +1,9 @@
 export interface IconProps {
-  iconName?: String;
-  fill?: String;
-  width?: String;
-  height?: String;
-  viewBox?: String;
-  xmlns?: String;
-  className?: [String];
+  iconName?: string;
+  fill?: string;
+  width?: string;
+  height?: string;
+  viewBox?: string;
+  xmlns?: string;
+  className?: [string];
 }

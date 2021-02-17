@@ -1,8 +1,11 @@
 <template>
   <div @click="FronteggContext.onRedirectTo(redirectUrl, { replace: true, refresh: true })">
-    <slot>
-    </slot>
-    <SocialLoginButton v-if="!hasSlot" name={SocialLoginsProviders.Github} action={action}>
+    <slot />
+    <SocialLoginButton
+      v-if="!hasSlot"
+      name="{SocialLoginsProviders.Github}"
+      action="{action}"
+    >
       <GithubIcon />
     </SocialLoginButton>
   </div>

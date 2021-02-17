@@ -1,28 +1,32 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <ol class='fe-mfa__verify-form-ol'>
+      <ol class="fe-mfa__verify-form-ol">
         <li>
           {{ $t('auth.mfa.verify.scan-qr-description-1') }}
           &nbsp;
           <span style="color: green;">Google Authenticator</span>
           &nbsp;
           {{ $t('auth.mfa.verify.scan-qr-description-2') }}
-          <div class='fe-mfa__qr'>
+          <div class="fe-mfa__qr">
             <Spinner v-if="loading && !qrCode" />
-            <img v-else alt='Multi-factor QR' :src="qrCode" />
+            <img
+              v-else
+              alt="Multi-factor QR"
+              :src="qrCode"
+            >
           </div>
         </li>
         <li>
           {{ $t('auth.mfa.verify.enter-generated-code') }}
           <v-text-field
-            @input="updateValue($event)"
             :rules="rules.code"
             aria-autocomplete="false"
-            autoComplete='off'
-            name='token'
+            auto-complete="off"
+            name="token"
             :disabled="loading"
-            placeholder='Ex. 1 2 3 4 5 6'
+            placeholder="Ex. 1 2 3 4 5 6"
+            @input="updateValue($event)"
           />
         </li>
       </ol>

@@ -38,16 +38,20 @@
           </div>
           <div class="fe-note-description fe-recover-two-factor">
             <a 
+              test-id="recover-two-factor-button"
               @click.prevent="recoverTwoFactor()"
-              test-id="recover-two-factor-button">
-            {{ $t("common.click-here") }}
+            >
+              {{ $t("common.click-here") }}
             </a>
             &nbsp;
             {{ $t("auth.login.disable-two-factor-description") }}
           </div>
         </div>
 
-        <div v-if="error" class="fe-error-message">
+        <div
+          v-if="error"
+          class="fe-error-message"
+        >
           {{ error }}
         </div>
       </v-form>

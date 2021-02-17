@@ -10,7 +10,7 @@
               class="fe-input__input"
               type="text"
             >
-            <FeIcon :params="{ iconName:'search' }"/>
+            <FeIcon :params="{ iconName:'search' }" />
           </div>
         </div>
       </div>
@@ -21,7 +21,7 @@
           @click="onModalOpenClick"
         >
           {{ $t("auth.team.invite-user") }}
-          <FeIcon :params="{ iconName:'invite' }"/>
+          <FeIcon :params="{ iconName:'invite' }" />
         </button>
       </div>
     </div>

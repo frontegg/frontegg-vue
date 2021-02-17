@@ -7,7 +7,7 @@
     @click="onClick($event)"
   >
     <Spinner v-if="params.loading" />
-    <slot v-else></slot>
+    <slot v-else />
   </button>
 </template>
 

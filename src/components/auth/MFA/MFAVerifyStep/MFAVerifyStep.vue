@@ -1,11 +1,15 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <v-form v-model="isFormValid" class="fe-form" @submit.prevent="verifyMfa">
+      <v-form
+        v-model="isFormValid"
+        class="fe-form"
+        @submit.prevent="verifyMfa"
+      >
         <MFAVerifyStepMessage />
         <MFAVerifyStepForm v-model="token" />
         <MFAVerifyStepErrorMessage />
-        <MFAVerifyStepFooter :isFormValid="isFormValid" />
+        <MFAVerifyStepFooter :is-form-valid="isFormValid" />
       </v-form>
     </v-col>
   </v-row>

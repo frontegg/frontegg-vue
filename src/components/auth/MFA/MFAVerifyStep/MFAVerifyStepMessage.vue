@@ -1,6 +1,6 @@
 <template>
-  <div class='fe-section-title'>
-    <slot></slot>
+  <div class="fe-section-title">
+    <slot />
     <span v-if="!hasSlot">
       {{ $t('auth.mfa.verify.message') }}
     </span>

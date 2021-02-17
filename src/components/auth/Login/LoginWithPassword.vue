@@ -55,16 +55,16 @@
         </div>
         <div class="continue">
           <FButton 
-          @click="loginSubmit($event)"
-          :params="{
-            type: 'submit',
-            fullWidth: true,
-            variant:'primary',
-            size: 'large',
-            loading: isLoading,
-            disabled: !isFormValid,
-            'data-test-id': 'sumbit-btn'
+            :params="{
+              type: 'submit',
+              fullWidth: true,
+              variant:'primary',
+              size: 'large',
+              loading: isLoading,
+              disabled: !isFormValid,
+              'data-test-id': 'sumbit-btn'
             }"
+            @click="loginSubmit($event)"
           >
             {{ submitText }}
           </FButton>

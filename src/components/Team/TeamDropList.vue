@@ -21,7 +21,8 @@
             class="fe-menu-item fe-menu-item__with-icons"
             @click="resendActivationLink"
           >
-            <FeIcon :params="{
+            <FeIcon
+              :params="{
                 iconName:'resend',
                 className: ['fe-icon', 'fe-menu-item__icon']
               }"
@@ -34,7 +35,8 @@
             class="fe-menu-item fe-menu-item__with-icons"
             @click="deleteUser"
           >
-            <FeIcon :params="{
+            <FeIcon
+              :params="{
                 iconName:'delete',
                 className: ['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']
               }"

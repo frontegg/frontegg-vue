@@ -1,7 +1,7 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div class='fe-section-title'>
+      <div class="fe-section-title">
         {{ $t('auth.mfa.recovery-code.message') }}
       </div>
     </v-col>

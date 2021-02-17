@@ -1,7 +1,9 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div class='fe-section-title'>{{ $t('auth.mfa.disable.message') }}</div>
+      <div class="fe-section-title">
+        {{ $t('auth.mfa.disable.message') }}
+      </div>
     </v-col>
   </v-row>
 </template>
