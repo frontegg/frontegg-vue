@@ -12,10 +12,4 @@ export interface ButtonProps {
   ref?: string;
   class?: string;
   size?: Size;
-  // @deprecated
-  submit?: boolean;
-  testId?: string;
-
-  // internal use
-  formikDisableIfNotDirty?: boolean; // default true
 }
