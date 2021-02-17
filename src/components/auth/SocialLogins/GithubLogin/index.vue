@@ -1,39 +1,81 @@
 <template>
-  <div @click="FronteggContext.onRedirectTo(redirectUrl, { replace: true, refresh: true })">
+  <div @click="redirect">
     <slot />
     <SocialLoginButton
       v-if="!hasSlot"
-      name="{SocialLoginsProviders.Github}"
-      action="{action}"
+      :name="socialLoginType"
+      :action="action"
     >
-      <GithubIcon />
+      <FeIcon :params="{iconName:'github'}" />
     </SocialLoginButton>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
-import SocialLoginButton from '../SocialLoginButton';
-import GithubIcon from './GithubIcon';
-import { FronteggContext, SocialLoginsProviders } from '@frontegg/rest-api';
+import SocialLoginButton from '../SocialLoginButton.vue';
+import { UrlCreatorConfigType, SocialLoginsProviders, SocialLoginsActions, ISocialLoginCallbackState } from '../types';
+import FeIcon from "@/components/core/elements/Icons/FeIcon";
+import { ContextHolder } from '@frontegg/rest-api';
+import { mapState } from '@/plugins/fronteggCore/map-state'
 
 export default Vue.extend({
   name: 'GithupLogin',
   components: {
-    GithubIcon,
+    FeIcon,
     SocialLoginButton
   },
   data() {
     return {
-      
+      ...mapState(this, {
+        socialLoginsState: (state: { auth: AuthState }) => state.auth.socialLoginsState,
+      }),
+      socialLoginType: SocialLoginsProviders.Github,
+      action: SocialLoginsActions.Login,
     }
   },
   computed: {
     hasSlot() {
       return !!this.$slots.default;
-    }
+    },
+    config() {
+      return this.socialLoginsState.socialLoginsConfig?.find(({ type }) => type.toLowerCase() === this.socialLoginType.toLowerCase());
+    },
+  },
+  mounted() {
+    // 
   },
   methods: {
+    createGithubUrl({ clientId, redirectUrl, state }: UrlCreatorConfigType): string {
+      const searchParams: URLSearchParams = new URLSearchParams({
+        /* eslint-disable @typescript-eslint/camelcase */
+        client_id: clientId,
+        redirect_uri: redirectUrl,
+        scope: 'read:user user:email',
+        state,
+      });
+      const url: URL = new URL('https://github.com/login/oauth/authorize');
+      url.search = searchParams.toString();
+      return url.toString();
+    },
+    createSocialLoginState(state: ISocialLoginCallbackState): string {
+      return JSON.stringify(state);
+    },
+    redirectUrl(): string {
+      const redirectUrl = this.createGithubUrl({
+        ...this.config,
+        state: this.createSocialLoginState({ provider: this.socialLoginType, action: this.action }),
+      });
+
+      if (!this.config?.active || !redirectUrl) {
+        return '';
+      }
+
+      return redirectUrl;
+    },
+    redirect() {
+      ContextHolder.onRedirectTo(this.redirectUrl(), { replace: true, refresh: true })
+    }
   },
 });
 </script>

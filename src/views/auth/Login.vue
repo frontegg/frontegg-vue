@@ -1,5 +1,5 @@
 <template>
-  <div class="fe-login-page">
+  <div data-app class="fe-login-page">
     <spinner v-if="isLoading" />
     <v-container
       v-else
@@ -12,6 +12,7 @@
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
           <LoginWithPassword />
           <SocialLogins />
+          <!-- <GithubLogin /> -->
         </div>
         <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
           <LoginWithTwoFactor />
@@ -57,6 +58,7 @@ import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
+import GithubLogin from '@/components/auth/SocialLogins/GithubLogin/index.vue';
 
 export default Vue.extend({
   name: 'Login',
@@ -70,6 +72,7 @@ export default Vue.extend({
     LoginSuccess,
     LoginWithTwoFactor,
     RecoverTwoFactor,
+    GithubLogin
   },
   data() {
     return {
