@@ -4,11 +4,10 @@
     :class="classNames(classes, { ['fe-icon-button']: params.iconButton, ['fe-button-transparent']: params.transparent })"
     :type="params.type"
     :test-id="params.testId"
-    @click="onClick"
+    @click="onClick($event)"
   >
-    <slot></slot>
-    {{ params.children }}
-    <FeLoader v-if="params.loading" :size="params.size === 'small' ? 18 : 24" />
+    <Spinner v-if="params.loading" />
+    <slot v-else></slot>
   </button>
 </template>
 
@@ -17,9 +16,14 @@ import Vue, { PropType } from 'vue'
 import { ButtonProps } from './interfaces'
 import { ClassNameGenerator } from '@/styles/';
 import classNames from 'classnames';
+import Spinner from "@/components/Common/Spinner.vue";
+const prefixCls = 'fe-button';
 
 export default Vue.extend({
   name: 'FButton' as string,
+  components: {
+    Spinner,
+  },
   props: {
     params: {
       type: Object as PropType<ButtonProps>,
@@ -31,20 +35,28 @@ export default Vue.extend({
       classNames,
     }
   },
+  watch: {
+    params() {
+      this.updateClasses();
+    },
+  },
   mounted() {
-    this.classes =  ClassNameGenerator.generate({
-      className: this.params.class,
-      prefixCls: this.params.prefixCls,
-      size: this.params.prefixCls,
-      theme: this.params.disabled ? 'disabled' : this.params.variant,
-      isClickable: true,
-      isFullWidth: this.params.fullWidth,
-      isLoading: this.params.loading,
-    });
+    this.updateClasses();
   },
   methods: {
-    onClick() {
-      this.$emit('click')
+    onClick(event) {
+      this.$emit('click', event)
+    },
+    updateClasses() {
+      this.classes = ClassNameGenerator.generate({
+        className: this.params.class,
+        prefixCls: prefixCls,
+        size: this.params.size,
+        theme: this.params.disabled ? 'disabled' : this.params.variant,
+        isClickable: true,
+        isFullWidth: this.params.fullWidth,
+        isLoading: this.params.loading,
+      });
     },
   },
 });
@@ -52,4 +64,7 @@ export default Vue.extend({
 
 <style lang="scss">
   @import './FeButton.scss';
+  .fe-button-loader>:not(.fe-loader) {
+    visibility: visible;
+  }
 </style>

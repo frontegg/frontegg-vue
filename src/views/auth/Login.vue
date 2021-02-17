@@ -8,35 +8,30 @@
       <div class="fe-login-header">
         <img src="@/assets/main-logo.svg">
       </div>
-      <div
-        v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword"
-        class="fe-login-component"
-      >
-        <LoginWithPassword />
-        <SocialLogins />
+      <div class="fe-login-component">
+        <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
+          <LoginWithPassword />
+          <SocialLogins />
+        </div>
+        <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
+          <LoginWithTwoFactor />
+        </div>
+        <div v-else-if="currentStep === LoginStep.recoverTwoFactor">
+          <RecoverTwoFactor />
+        </div>
+        <div v-else-if="currentStep === LoginStep.redirectToSSO">
+          <RedirectToSSO />
+        </div>
+        <div v-else-if="currentStep === LoginStep.loginWithSSOFailed">
+          <LoginWithSSOFailed />
+        </div>
+        <div v-else-if="currentStep === LoginStep.forceTwoFactor">
+          <ForceEnrollMfa />
+        </div>
+        <div v-else-if="currentStep === LoginStep.success">
+          <LoginSuccess />
+        </div>
       </div>
-      <v-stepper v-model="currentStep" v-else>
-        <v-stepper-items>
-          <v-stepper-content :step="LoginStep.loginWithTwoFactor">
-            <div class="fe-login-component">
-              <LoginWithTwoFactor />
-            </div>
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.recoverTwoFactor">
-            <div class="fe-login-component">
-              <RecoverTwoFactor />
-            </div>
-          </v-stepper-content>
-
-          <v-stepper-content :step="LoginStep.success">
-            <div class="fe-login-component">
-              <LoginSuccess />
-            </div>
-          </v-stepper-content>
-        </v-stepper-items>
-      </v-stepper>
-
       <button
         v-if="showBackBtn"
         class="fe-login-component__back-to-login"
@@ -52,6 +47,9 @@
 import Vue from 'vue';
 import LoginWithPassword from '@/components/auth/Login/LoginWithPassword.vue';
 import SocialLogins from '@/components/auth/Login/SocialLogins.vue';
+import RedirectToSSO from '@/components/auth/Login/RedirectToSSO.vue';
+import LoginWithSSOFailed from '@/components/auth/Login/LoginWithSSOFailed.vue';
+import ForceEnrollMfa from '@/components/auth/Login/ForceEnrollMfa.vue';
 import LoginSuccess from '@/components/auth/Login/LoginSuccess.vue';
 import LoginWithTwoFactor from '@/components/auth/Login/LoginWithTwoFactor.vue';
 import RecoverTwoFactor from '@/components/auth/Login/RecoverTwoFactor.vue'
@@ -65,6 +63,9 @@ export default Vue.extend({
   components: {
     Spinner,
     LoginWithPassword,
+    RedirectToSSO,
+    LoginWithSSOFailed,
+    ForceEnrollMfa,
     SocialLogins,
     LoginSuccess,
     LoginWithTwoFactor,
@@ -114,11 +115,5 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/styles/login.scss';
-.v-stepper {
-  box-shadow: none;
-}
-.v-stepper__content {
-  padding: 0;
-}
+@import '@/styles/auth/auth.scss';
 </style>

@@ -96,7 +96,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-@import '@/styles/login.scss';
+@import '@/styles/auth/login.scss';
 
 .v-stepper {
   box-shadow: none;
