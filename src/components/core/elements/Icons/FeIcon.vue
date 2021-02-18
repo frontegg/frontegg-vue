@@ -7,6 +7,7 @@
     :view-box="params.viewBox"
     :xmlns="params.xmlns"
     :class="params.className"
+    class="fe-icon"
   />
 </template>
 

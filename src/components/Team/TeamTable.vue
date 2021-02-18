@@ -43,8 +43,9 @@
           </div>
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
+          
           <div
-            v-if="item.createdAt"
+            v-if="item.lastLogin && item.createdAt"
             class="datetime"
           >
             <span class="date">{{
