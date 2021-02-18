@@ -5,18 +5,17 @@
         <img src="@/assets/main-logo.svg">
       </div>
       <Spinner v-if="isLoading" />
-      <div v-else>
-        <div class="fe-error-message">{{ error }}</div>
-        <FButton
-          @click="backToLogin()"
-          :params="{
-            type: 'button',
-            fullWidth: true,
-          }"
-        >
-          {{ $t('auth.login.back-to-login') }}
-        </FButton>
-      </div>
+      <div v-if="!isLoading" class="fe-error-message">{{ error }}</div>
+      <FButton
+        v-if="!isLoading"
+        @click="backToLogin()"
+        :params="{
+          type: 'button',
+          fullWidth: true,
+        }"
+      >
+        {{ $t('auth.login.back-to-login') }}
+      </FButton>
     </v-container>
   </div>
 </template>

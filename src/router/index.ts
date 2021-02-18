@@ -26,7 +26,7 @@ const routes: Array<RouteConfig> = [
     component: () => import(/* webpackChunkName: "socialLoginCallback" */ '@/components/auth/SocialLogins/SocailLoginsSuccess.vue'),
   },
   {
-    path: '/social',
+    path: '/account/reset-password',
     name: 'ResetPassword',
     component: () => import(/* webpackChunkName: "ResetPassword" */ '../views/auth/ResetPassword.vue'),
   },

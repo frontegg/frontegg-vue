@@ -71,7 +71,9 @@ export default Vue.extend({
       return redirectUrl;
     },
     redirect() {
-      ContextHolder.onRedirectTo(this.redirectUrl(), { replace: true, refresh: true })
+      if(this.redirectUrl().length) {
+        ContextHolder.onRedirectTo(this.redirectUrl(), { replace: true, refresh: true })
+      }
     }
   },
 });
