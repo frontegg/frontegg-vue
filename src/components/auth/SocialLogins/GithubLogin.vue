@@ -13,14 +13,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import SocialLoginButton from '../SocialLoginButton.vue';
-import { UrlCreatorConfigType, SocialLoginsProviders, SocialLoginsActions, ISocialLoginCallbackState } from '../types';
-import FeIcon from "@/components/core/elements/Icons/FeIcon";
+import SocialLoginButton from './SocialLoginButton.vue';
+import { UrlCreatorConfigType, SocialLoginsProviders, SocialLoginsActions, ISocialLoginCallbackState } from './types';
+import FeIcon from "@/components/core/elements/Icons/FeIcon.vue";
 import { ContextHolder } from '@frontegg/rest-api';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 
 export default Vue.extend({
-  name: 'GithupLogin',
+  name: 'GithubLogin',
   components: {
     FeIcon,
     SocialLoginButton
@@ -41,9 +41,6 @@ export default Vue.extend({
     config() {
       return this.socialLoginsState.socialLoginsConfig?.find(({ type }) => type.toLowerCase() === this.socialLoginType.toLowerCase());
     },
-  },
-  mounted() {
-    // 
   },
   methods: {
     createGithubUrl({ clientId, redirectUrl, state }: UrlCreatorConfigType): string {

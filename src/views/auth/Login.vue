@@ -12,7 +12,6 @@
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
           <LoginWithPassword />
           <SocialLogins />
-          <!-- <GithubLogin /> -->
         </div>
         <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
           <LoginWithTwoFactor />
@@ -47,7 +46,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import LoginWithPassword from '@/components/auth/Login/LoginWithPassword.vue';
-import SocialLogins from '@/components/auth/Login/SocialLogins.vue';
+import SocialLogins from '@/components/auth/SocialLogins/SocialLogins.vue';
 import RedirectToSSO from '@/components/auth/Login/RedirectToSSO.vue';
 import LoginWithSSOFailed from '@/components/auth/Login/LoginWithSSOFailed.vue';
 import ForceEnrollMfa from '@/components/auth/Login/ForceEnrollMfa.vue';
@@ -58,7 +57,6 @@ import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
-import GithubLogin from '@/components/auth/SocialLogins/GithubLogin/index.vue';
 
 export default Vue.extend({
   name: 'Login',
@@ -72,7 +70,6 @@ export default Vue.extend({
     LoginSuccess,
     LoginWithTwoFactor,
     RecoverTwoFactor,
-    GithubLogin
   },
   data() {
     return {
