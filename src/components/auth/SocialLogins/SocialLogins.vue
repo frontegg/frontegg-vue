@@ -18,6 +18,7 @@ import GoogleLogin from "./GoogleLogin.vue";
 import GithubLogin from "./GithubLogin.vue";
 import Spinner from "@/components/Common/Spinner.vue";
 import { mapState } from '@/plugins/fronteggCore/map-state';
+import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
 export default Vue.extend({
   name: 'SocialLogins',
@@ -43,9 +44,6 @@ export default Vue.extend({
     issocialLoginsConfig() {
       return this.socialLoginsConfig?.length && this.socialLoginsConfig.some(({ active }) => active)
     },
-    loadSocialLoginsConfiguration() {
-      return this.socialLoginsState.loadSocialLoginsConfiguration;
-    },
     error() {
       return this.socialLoginsState.error;
     },
@@ -56,6 +54,13 @@ export default Vue.extend({
         this.loadSocialLoginsConfiguration();
       }
     }
+  },
+  methods: {
+    loadSocialLoginsConfiguration() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/loadSocialLoginsConfiguration",
+      });
+    },
   },
 });
 </script>

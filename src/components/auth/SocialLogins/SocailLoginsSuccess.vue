@@ -4,20 +4,18 @@
       <div class="fe-login-header">
         <img src="@/assets/main-logo.svg">
       </div>
-      <div class="fe-login-component">
-        <Spinner v-if="firstLoad" />
-        <div v-else>
-          <div v-if="error" class="fe-error-message">{{ error }}</div>
-          <FButton
-            @click="backToLogin()"
-            :params="{
-              type: 'button',
-              fullWidth: true,
-            }"
-          >
-            {{ $t('auth.login.back-to-login') }}
-          </FButton>
-        </div>
+      <Spinner v-if="isLoading" />
+      <div v-else>
+        <div class="fe-error-message">{{ error }}</div>
+        <FButton
+          @click="backToLogin()"
+          :params="{
+            type: 'button',
+            fullWidth: true,
+          }"
+        >
+          {{ $t('auth.login.back-to-login') }}
+        </FButton>
       </div>
     </v-container>
   </div>
@@ -29,6 +27,7 @@ import Spinner from "@/components/Common/Spinner.vue";
 import FButton from "@/components/core/elements/Button/FButton.vue";
 import { mapState } from '@/plugins/fronteggCore/map-state';
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
+import { ISocialLoginCallbackState, SocialLoginsActions } from './types';
 
 export default Vue.extend({
   name: 'SocailLoginsSuccess',
@@ -39,26 +38,69 @@ export default Vue.extend({
   data() {
     return {
       ...mapState(this, {
-        socialLoginsState: (state: { auth: AuthState }) => state.auth.socialLoginsState,
+        authState: (state: { auth: AuthState }) => state.auth,
       }),
     }
   },
   computed: {
     isLoading() {
-      return this.socialLoginsState.firstLoad || this.socialLoginsState.loading;
+      return this.authState.socialLoginsState.firstLoad || this.authState.socialLoginsState.loading;
+    },
+    errorMsg() {
+      return this.$t('auth.social-logins.error.invalid-callback-url');
     },
     error() {
-      return this.socialLoginsState.error;
+      return this.authState.socialLoginsState.error;
     },
+  },
+  mounted() {
+    const params: URLSearchParams = new URLSearchParams(location.search);
+    const state = params.get('state');
+    const code = params.get('code');
+    let parsedState: ISocialLoginCallbackState;
+
+    if (!state || !code) {
+      this.setSocialLoginError({ error: this.errorMsg });
+    }
+
+    try {
+      parsedState = JSON.parse(state);
+    } catch (e) {
+      this.setSocialLoginError({ error: this.errorMsg });
+    }
+
+    if (!parsedState.action || !parsedState.provider) {
+      this.setSocialLoginError({ error: this.errorMsg });
+    }
+
+    switch (parsedState.action) {
+      case SocialLoginsActions.Login:
+      case SocialLoginsActions.SignUp:
+        this.loginViaSocialLogin({ code, ...parsedState });
+        break;
+      default:
+        this.setSocialLoginError({ error: this.errorMsg });
+    }
   },
   methods: {
     backToLogin() {
       this[FRONTEGG_STORE_KEY].dispatch({
         type: "auth/resetActivateState",
       });
-
       this.$router.push(this.authState.routes.loginUrl);
-    }
+    },
+    setSocialLoginError(payload) {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setSocialLoginError",
+        payload
+      });
+    },
+    loginViaSocialLogin(payload) {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/loginViaSocialLogin",
+        payload
+      });
+    },
   },
 });
 </script>
