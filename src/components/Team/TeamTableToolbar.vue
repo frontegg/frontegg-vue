@@ -10,7 +10,7 @@
               class="fe-input__input"
               type="text"
             >
-            <FeIcon :params="{ iconName:'search' }" />
+            <FeIcon :params="{ iconName:'search', width: '21', height: '21' }" />
           </div>
         </div>
       </div>
