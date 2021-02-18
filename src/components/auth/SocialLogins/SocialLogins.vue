@@ -1,6 +1,7 @@
 <template>
   <div class="fe-col fe-center" v-if="issocialLoginsConfig">
     <Spinner v-if="firstLoad" />
+    <div v-else-if="error" class='fe-error-message'> {{ error }}</div>
     <div v-else>
       <div class="fe-social-login__or-container">
         <span>OR</span>
@@ -44,7 +45,10 @@ export default Vue.extend({
     },
     loadSocialLoginsConfiguration() {
       return this.socialLoginsState.loadSocialLoginsConfiguration;
-    }
+    },
+    error() {
+      return this.socialLoginsState.error;
+    },
   },
   watch: {
     firstLoad(value) {
