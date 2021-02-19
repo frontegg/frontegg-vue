@@ -373,7 +373,7 @@ $gray-5: #E0EBFD;
 
 }
 
-.v-menu__content {
+.add-user-menu.v-menu__content {
   .v-list {
     padding: 0;
   }
@@ -403,3 +403,5 @@ $gray-5: #E0EBFD;
   }
 
 }
+
+.roles-menu.v-menu__content {}

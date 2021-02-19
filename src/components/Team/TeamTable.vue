@@ -24,16 +24,7 @@
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
-          <div v-if="item.roleIds && item.roleIds.length > 0" class="fe-flex fe-full-width fe-flex-no-wrap">
-            <div class="fe-flex">
-              <div v-for="(role, index) in item.roleIds" :key="role">
-                <div class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small" v-if="index <= 2">
-                  {{ getRoleName(role) }}
-                </div>
-              </div>
-              <span v-if="item.roleIds.length > 3"> {{ item.roleIds.length - 3 }} more</span>
-            </div>
-          </div>
+          <TeamTableRoleField :item="item" :roles="roles" :checkMe="item.email === loginState.email"/>
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           <div v-if="item.lastLogin && item.createdAt" class="datetime">
@@ -88,6 +79,7 @@ import { mapState } from "@/plugins/fronteggCore/map-state";
 import { AuthState } from "@/plugins/fronteggAuth/Api";
 import Spinner from "@/components/Common/Spinner.vue";
 import TeamDeleteUserDialog from "./TeamDeleteUserDialog.vue";
+import TeamTableRoleField from "./TeamTableRoleField.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
@@ -98,7 +90,7 @@ import { TableOptions } from "./interfaces";
 
 export default Vue.extend({
   name: "TeamTable",
-  components: { Spinner, TeamDeleteUserDialog, FModal },
+  components: { Spinner, TeamDeleteUserDialog, FModal, TeamTableRoleField },
   props: {
     page: {
       default: 0,
@@ -181,10 +173,9 @@ export default Vue.extend({
       this.options.page = val;
     },
     tableItems(val) {
-      const rolesLength = val.filter((item: any) => item.roleIds.length).length;
-      if (!rolesLength && this.headers.includes(this.rolesField)) {
+      if (!this.roles.length && this.headers.includes(this.rolesField)) {
         this.headers = this.headers.filter((item: any) => item !== this.rolesField);
-      } else if(!this.headers.includes(this.rolesField)){
+      } else if (!this.headers.includes(this.rolesField)) {
         this.headers.splice(this.rolesIndex, 0, this.rolesField);
       }
     }
@@ -215,10 +206,6 @@ export default Vue.extend({
       this.onOpenModal();
       this.idUserDeleteModal = id;
       this.textUserDeleteModal = email;
-    },
-    getRoleName(roleId: string) {
-      const roleObj = this.roles.find((i: { id: string }) => i.id === roleId);
-      return roleObj ? roleObj.name : null;
     },
     resendActivationLink(id: string) {
       this?.[FRONTEGG_STORE_KEY]?.dispatch(

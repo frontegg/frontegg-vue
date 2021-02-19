@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-form
-      ref="form"
-      v-model="isFormValid"
-      class="fe-form"
-      @keyup.native.enter="submitForm"
-    >
+    <v-form ref="form" v-model="isFormValid" class="fe-form" @keyup.native.enter="submitForm">
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
@@ -36,10 +31,7 @@
           />
         </div>
       </div>
-      <div
-        v-if="inviteError"
-        class="fe-error-message"
-      >
+      <div v-if="inviteError" class="fe-error-message">
         {{ inviteError }}
       </div>
       <v-autocomplete
@@ -51,6 +43,7 @@
         clearable
         :label="$t('common.roles')"
         multiple
+        :menu-props="{ contentClass: 'add-user-menu' }"
       >
         <template v-slot:selection="{ attrs, item, select, selected }">
           <v-chip
@@ -67,12 +60,7 @@
       </v-autocomplete>
     </v-form>
     <v-card-actions>
-      <v-btn
-        :class="{ 'fe-button-disabled': loading }"
-        text
-        class="fe-button"
-        @click="onCancel"
-      >
+      <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
         {{ $t("common.cancel") }}
       </v-btn>
       <v-btn
