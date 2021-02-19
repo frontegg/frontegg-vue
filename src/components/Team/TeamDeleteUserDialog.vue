@@ -11,7 +11,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          <FeIcon :params="{iconName:'vertical-dots'}" />
+          <FeIcon :params="{ iconName: 'vertical-dots' }" />
         </div>
       </template>
       <v-list :class="'delete-modal fe-menu'">
@@ -23,8 +23,8 @@
           >
             <FeIcon
               :params="{
-                iconName:'resend',
-                className: ['fe-icon', 'fe-menu-item__icon']
+                iconName: 'resend',
+                className: ['fe-menu-item__icon']
               }"
             />
             <span>{{ $t("auth.team.resendActivation") }}</span>
@@ -37,11 +37,10 @@
           >
             <FeIcon
               :params="{
-                iconName:'delete',
-                className: ['fe-color-danger', 'fe-icon', 'fe-menu-item__icon']
+                iconName: 'delete',
+                className: ['fe-color-danger', 'fe-menu-item__icon']
               }"
             />
-            <!-- <img src="@/assets/icon-delete.svg" alt="icon" class="fe-icon fe-menu-item__icon" /> -->
             <span>{{ $t("auth.team.deleteUser") }}</span>
           </v-list-item-title>
         </v-list-item>
@@ -52,13 +51,17 @@
 <script>
 import FeIcon from "@/components/core/elements/Icons/FeIcon";
 export default {
-  name: "TeamDropList",
+  name: "TeamDeleteUserDialog",
   components: {
     FeIcon
   },
   props: {
     sendEmail: {
       type: Boolean
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -68,7 +71,9 @@ export default {
   },
   methods: {
     deleteUser() {
-      this.$emit("deleteUser");
+      if (!this.disable) {
+        this.$emit("deleteUser");
+      }
     },
     resendActivationLink() {
       this.$emit("resendActivationLink");

@@ -6,10 +6,7 @@
       'data-test-id': `${name.toLowerCase()}SocialLogin-btn`
     }"
   >
-    <div
-      className="{'fe-row"
-      fe-center'}
-    >
+    <div class="fe-row fe-center">
       <slot />
       <div>{{ $t(`auth.social-logins.${action.toLowerCase()}.button-text`, { providerName }) }}</div>
     </div>
@@ -25,9 +22,19 @@ export default Vue.extend({
   components: {
     FButton,
   },
-  data() {
-    return {
-      
+  props: {
+    name: {
+      type: String,
+      required: true
+    },
+    action: {
+      type: String,
+      required: true
+    }
+  },
+  computed: {
+    providerName() {
+      return this.name.charAt(0).toUpperCase() + this.name.slice(1);
     }
   },
 });
