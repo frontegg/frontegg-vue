@@ -10,10 +10,9 @@
       </router-link>
     </div>
     <PageHeader
-      page-title="Team Management"
-      sub-title="Total of 0 team members"
+      :page-title="$t('auth.team.title')"
+      :sub-title="subTitle"
     />
-
     <TeamLayout />
   </div>
 </template>
@@ -21,11 +20,26 @@
 <script lang="ts">
 import Vue from "vue";
 import PageHeader from "@/components/PageHeader.vue";
-import TeamLayout from "@/components/Team/TeamLayout.vue"
+import TeamLayout from "@/components/Team/TeamLayout.vue";
+
+import { mapState } from "@/plugins/fronteggCore/map-state";
+import { AuthState } from "@/plugins/fronteggAuth/Api";
 
 export default Vue.extend({
   name: "TeamView",
-  components: { PageHeader, TeamLayout }
+  components: { PageHeader, TeamLayout },
+  data(): any {
+    return {
+      ...mapState(this, {
+        totalItems: (state: { auth: AuthState }) => state.auth.teamState.totalItems,
+      }),
+    }
+  },
+  computed: {
+    subTitle() {
+      return this.$t('auth.team.subtitle', {totalItems: this.totalItems})
+    }
+  }
 });
 </script>
 

@@ -1,47 +1,8 @@
 import Vue from 'vue';
-import VueRouter, { RouteConfig } from 'vue-router';
-import Home from '../views/Home.vue';
+import VueRouter from 'vue-router';
+import routes from './routes';
 
 Vue.use(VueRouter);
-
-const routes: Array<RouteConfig> = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home,
-  },
-  {
-    path: '/account/login',
-    name: 'Login',
-    component: () => import(/* webpackChunkName: "login" */ '../views/auth/Login.vue'),
-  },
-  {
-    path: '/account/forget-password',
-    name: 'ForgetPassword',
-    component: () => import(/* webpackChunkName: "ForgetPassword" */ '../views/auth/ForgotPassword.vue'),
-  },
-  {
-    path: '/account/social/success',
-    name: 'socialLoginCallback',
-    component: () => import(/* webpackChunkName: "socialLoginCallback" */ '@/components/auth/SocialLogins/SocailLoginsSuccess.vue'),
-  },
-  {
-    path: '/account/reset-password',
-    name: 'ResetPassword',
-    component: () => import(/* webpackChunkName: "ResetPassword" */ '../views/auth/ResetPassword.vue'),
-  },
-  {
-    path: '/account/activate',
-    name: 'ActivateAccount',
-    component: () => import(/* webpackChunkName: "ActivateAccount" */ '../views/auth/ActivateAccount.vue'),
-  },
-  {
-    path: '/team_management',
-    name: 'team',
-    meta: { layout: "main" },
-    component: () => import(/* webpackChunkName: "Team" */ '../views/Team.vue'),
-  },
-];
 
 const router = new VueRouter({
   mode: 'history',

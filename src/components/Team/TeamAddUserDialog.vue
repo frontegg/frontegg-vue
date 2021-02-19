@@ -1,11 +1,6 @@
 <template>
   <div>
-    <v-form
-      ref="form"
-      v-model="isFormValid"
-      class="fe-form"
-      @keyup.native.enter="submitForm"
-    >
+    <v-form ref="form" v-model="isFormValid" class="fe-form" @keyup.native.enter="submitForm">
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
@@ -21,7 +16,6 @@
           />
         </div>
       </div>
-
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
@@ -37,20 +31,36 @@
           />
         </div>
       </div>
-      <div
-        v-if="inviteError"
-        class="fe-error-message"
-      >
+      <div v-if="inviteError" class="fe-error-message">
         {{ inviteError }}
       </div>
+      <v-autocomplete
+        v-if="loginState.email"
+        v-model="roleValues"
+        class="fe-select fe-select-full-width fe-input__in-form"
+        :items="rolesSet"
+        chips
+        clearable
+        :label="$t('common.roles')"
+        multiple
+        :menu-props="{ contentClass: 'add-user-menu' }"
+      >
+        <template v-slot:selection="{ attrs, item, select, selected }">
+          <v-chip
+            v-if="item"
+            v-bind="attrs"
+            :input-value="selected"
+            close
+            @click="select"
+            @click:close="removeSelectedRole(item)"
+          >
+            {{ item }}
+          </v-chip>
+        </template>
+      </v-autocomplete>
     </v-form>
     <v-card-actions>
-      <v-btn
-        :class="{ 'fe-button-disabled': loading }"
-        text
-        class="fe-button"
-        @click="onCancel"
-      >
+      <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
         {{ $t("common.cancel") }}
       </v-btn>
       <v-btn
@@ -58,7 +68,7 @@
         class="fe-button fe-button-large"
         :class="{
           'fe-button-disabled': !isFormValid,
-          'fe-button-primary': isFormValid,
+          'fe-button-primary': isFormValid
         }"
         :loading="loading"
         @click.prevent="submitForm"
@@ -76,40 +86,45 @@ import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
 export default {
+  name: "TeamAddUserDialog",
+  props: {
+    roles: {
+      type: Array
+    }
+  },
   data(): any {
     return {
       ...mapState(this, {
-        loading: (state: { auth: AuthState }) =>
-          state.auth.teamState.addUserDialogState.loading,
-        teamState: (state: { auth: AuthState }) =>
-          state.auth.teamState.addUserDialogState.error,
+        loading: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.loading,
+        teamState: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error,
+        loginState: (state: { auth: AuthState }) => state.auth.loginState
       }),
       isFormValid: false,
       form: {
         name: "",
         email: "",
-        roleIds: [],
+        roleIds: []
       },
       formRules: {
         nameRules: [
           (v: string) =>
             !!v ||
             this.$t("validation.required-field", {
-              name: this.$t("common.name"),
-            }),
+              name: this.$t("common.name")
+            })
         ],
         emailRules: [
           (v: string) =>
             !!v ||
             this.$t("validation.required-field", {
-              name: this.$t("common.email"),
+              name: this.$t("common.email")
             }),
           (v: string) =>
-            !v ||
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-            this.$t("validation.must-be-a-valid-email"),
-        ],
+            !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t("validation.must-be-a-valid-email")
+        ]
       },
+      roleValues: "",
+      searchInput: ""
     };
   },
   computed: {
@@ -120,6 +135,16 @@ export default {
         return null;
       }
     },
+    rolesSet(): any {
+      return this.roles.map((role: any) => role.name);
+    }
+  },
+  watch: {
+    roleValues() {
+      this.form.roleIds = this.roleValues
+        .flatMap((r: any) => this.roles.filter((role: any) => r === role.name))
+        .map((role: any) => role.id);
+    }
   },
   methods: {
     formReset() {
@@ -137,7 +162,7 @@ export default {
       if (valid) {
         const data = {
           callback: () => this.itemCreated(),
-          ...this.form,
+          ...this.form
         };
         this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.addUser(data));
       }
@@ -146,7 +171,14 @@ export default {
       this.formReset();
       this.$emit("onCloseModal", false);
     },
-  },
+    removeSelectedRole(item: string) {
+      this.roleValues.splice(this.roleValues.indexOf(item), 1);
+      this.roleValues = [...this.roleValues];
+    },
+    clear() {
+      console.log(1);
+    }
+  }
 };
 </script>
 

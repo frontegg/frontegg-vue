@@ -74,13 +74,14 @@ const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginCon
   return fronteggStore;
 };
 
+let store: EnhancedStore;
 export default {
   install(Vue: VueConstructor, options: ContextOptions) {
     ContextHolder.setContext(options);
     
     let pluginRegistered = false;
     const plugins: PluginConfig[] = [];
-    let store: EnhancedStore;
+    
 
     const registerPlugins = () => {
       console.log('registering plugins', plugins);
@@ -132,3 +133,5 @@ export default {
     });
   },
 };
+
+export  {store}

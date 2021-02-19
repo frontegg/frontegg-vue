@@ -4,27 +4,29 @@
       v-model="searchValue"
       @onOpenModal="onOpenModal"
     />
-    
+
     <TeamTable
       :page.sync="currentPage"
       @fetchTableData="changeOptions"
       @itemDeleted="fetchTableData"
     />
-    
+
     <TeamPagination
       v-if="totalPages > 0"
       v-model="currentPage"
-      :current-page.sync="currentPage" 
+      :current-page.sync="currentPage"
       :total-pages.sync="totalPages"
     />
 
     <FModal
+      v-if="openModal"
       :open-modal="openModal"
       :head-text="$t('auth.team.add-dialog.title')"
       @onCloseModal="onCloseModal"
     >
       <template #content>
-        <TeamInviteForm
+        <TeamAddUserDialog
+          :roles="roles"
           @onCloseModal="onCloseModal"
           @itemCreated="fetchTableData"
         />
@@ -45,39 +47,43 @@ import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
-import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
+import TeamAddUserDialog from "@/components/Team/TeamAddUserDialog.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 
 // interfaces
-import { TableOptions } from './interfaces';
-import { ILoadUsers } from '@frontegg/rest-api';
+import { TableOptions } from "./interfaces";
+import { ILoadUsers } from "@frontegg/rest-api";
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamInviteForm },
+  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamAddUserDialog },
   data(): any {
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
-        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open,
+        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open
       }),
 
       currentPage: 1,
       searchValue: "",
-      options: {} as TableOptions,
-    }
+      options: {} as TableOptions
+    };
   },
   computed: {
     totalPages(): any {
       return this.teamState.totalPages;
     },
+    roles(): any {
+      return this.teamState.roles;
+    }
   },
+
   watch: {
     options: {
       deep: true,
       handler() {
-       this.fetchTableData();
+        this.fetchTableData();
       }
     },
     searchValue() {
@@ -86,42 +92,37 @@ export default Vue.extend({
   },
   methods: {
     onOpenModal() {
-      this?.[FRONTEGG_STORE_KEY]?.dispatch(
-        teamActions.openAddUserDialog()
-      );
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.openAddUserDialog());
     },
     onCloseModal() {
-      this?.[FRONTEGG_STORE_KEY]?.dispatch(
-        teamActions.closeAddUserDialog()
-      );
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.closeAddUserDialog());
     },
     changeOptions(options: TableOptions) {
-      this.options = {...options}
+      this.options = { ...options };
     },
     async fetchTableData() {
-
       const payload: ILoadUsers = {
-        pageOffset: this.options.page - 1,
+        pageOffset: this.options.page - 1
+      };
+      if (this.options.sortBy.length > 0) {
+        payload.sort = [
+          {
+            id: this.options.sortBy[0],
+            desc: this.options.sortDesc[0]
+          }
+        ];
       }
-      if(this.options.sortBy.length > 0) {
-        payload.sort = [{
-          id: this.options.sortBy[0],
-          desc: this.options.sortDesc[0]
-        }]
-      }
-      
-      payload.filter = [{
-        id: 'searchFilter',
-        value: this.searchValue
-      }],
 
-      this?.[FRONTEGG_STORE_KEY]?.dispatch(
-        teamActions.loadUsers(payload)
-      );
+      (payload.filter = [
+        {
+          id: "searchFilter",
+          value: this.searchValue
+        }
+      ]),
+        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
     }
   }
 });
 </script>
 
-<style lang="scss" scoped>
-</style>
+<style lang="scss" scoped></style>
