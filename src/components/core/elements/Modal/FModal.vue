@@ -2,8 +2,6 @@
   <div data-app>
     <v-dialog
       v-model="openModal"
-      persistent
-      transition="dialog-top-transition"
       max-width="600px"
       :content-class="'fe-modal'"
     >

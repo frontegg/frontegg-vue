@@ -34,7 +34,29 @@
       <div v-if="inviteError" class="fe-error-message">
         {{ inviteError }}
       </div>
-      <v-select v-model="roleValues" :items="rolesSet" attach chips label="Chips" multiple></v-select>
+      <v-autocomplete
+        class="fe-select fe-select-full-width fe-input__in-form"
+        v-if="loginState.email"
+        v-model="roleValues"
+        :items="rolesSet"
+        chips
+        clearable
+        :label="$t('common.roles')"
+        multiple
+      >
+        <template v-slot:selection="{ attrs, item, select, selected }">
+          <v-chip
+            v-if="item"
+            v-bind="attrs"
+            :input-value="selected"
+            close
+            @click="select"
+            @click:close="removeSelectedRole(item)"
+          >
+            {{ item }}
+          </v-chip>
+        </template>
+      </v-autocomplete>
     </v-form>
     <v-card-actions>
       <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
@@ -72,7 +94,8 @@ export default {
     return {
       ...mapState(this, {
         loading: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.loading,
-        teamState: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error
+        teamState: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error,
+        loginState: (state: { auth: AuthState }) => state.auth.loginState
       }),
       isFormValid: false,
       form: {
@@ -98,7 +121,8 @@ export default {
             !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t("validation.must-be-a-valid-email")
         ]
       },
-      roleValues: ""
+      roleValues: "",
+      searchInput: ""
     };
   },
   computed: {
@@ -109,11 +133,17 @@ export default {
         return null;
       }
     },
-    rolesSet(): void {
+    rolesSet(): any {
       return this.roles.map((role: any) => role.name);
     }
   },
-
+  watch: {
+    roleValues() {
+      this.form.roleIds = this.roleValues
+        .flatMap((r: any) => this.roles.filter((role: any) => r === role.name))
+        .map((role: any) => role.id);
+    }
+  },
   methods: {
     formReset() {
       this.$refs.form.reset();
@@ -138,6 +168,13 @@ export default {
     onCancel() {
       this.formReset();
       this.$emit("onCloseModal", false);
+    },
+    removeSelectedRole(item: string) {
+      this.roleValues.splice(this.roleValues.indexOf(item), 1);
+      this.roleValues = [...this.roleValues];
+    },
+    clear() {
+      console.log(1);
     }
   }
 };

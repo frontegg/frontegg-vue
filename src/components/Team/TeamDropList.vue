@@ -30,10 +30,10 @@
             <span>{{ $t("auth.team.resendActivation") }}</span>
           </v-list-item-title>
         </v-list-item>
-        <v-list-item>
+        <v-list-item >
           <v-list-item-title
             class="fe-menu-item fe-menu-item__with-icons"
-            @click="deleteUser"
+            @click="!disable?deleteUser:false"
           >
             <FeIcon
               :params="{
@@ -58,6 +58,9 @@ export default {
   },
   props: {
     sendEmail: {
+      type: Boolean
+    },
+    disable: {
       type: Boolean
     }
   },

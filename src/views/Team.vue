@@ -1,5 +1,14 @@
 <template>
   <div class="fe-team__page">
+    <div style="position: absolute; justify-content: flex-end; right: 1rem; top: 1rem;">
+      <router-link
+        class="fe-button fe-button-primary fe-button-large fe-button-clickable"
+        tag="button"
+        to="/account/login"
+      >
+        login
+      </router-link>
+    </div>
     <PageHeader
       :page-title="$t('auth.team.title')"
       :sub-title="subTitle"

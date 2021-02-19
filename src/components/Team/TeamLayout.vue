@@ -11,7 +11,7 @@
       :total-pages.sync="totalPages"
     />
 
-    <FModal :open-modal="openModal" :head-text="$t('auth.team.add-dialog.title')" @onCloseModal="onCloseModal" >
+    <FModal :open-modal="openModal" v-if="openModal" :head-text="$t('auth.team.add-dialog.title')" @onCloseModal="onCloseModal" >
       <template #content>
         <TeamInviteForm @onCloseModal="onCloseModal" @itemCreated="fetchTableData" :roles="roles"/>
       </template>

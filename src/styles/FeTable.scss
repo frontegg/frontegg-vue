@@ -135,6 +135,8 @@
     border-bottom: 3px solid transparent !important;
     border-top: 3px solid transparent !important;
 
+
+
     &.asc {
       border-top-color: var(--color-gray-3) !important;
 
@@ -194,6 +196,12 @@
     &.is-expanded {
       border-bottom: var(--fe-table-row-divider-width) solid transparent;
     }
+  }
+
+  .v-data-table .v-data-table__wrapper tbody tr td {
+    color: var(--fe-table-header-font-color);
+    padding: var(--fe-table-cell-padding);
+    font-size: var(--fe-table-cell-font-size);
   }
 
   &__tr-td {
@@ -340,6 +348,7 @@
   }
 }
 
+
 .fe-table-cell__description,
 .v-data-table .v-data-table__wrapper tbody tr td:nth-child(2) {
   font-size: 1rem;
@@ -357,6 +366,11 @@
 
 .v-data-table {
   height: 100%;
+
+  .name {
+    white-space: nowrap;
+
+  }
 }
 
 .v-data-table__wrapper {
