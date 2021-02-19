@@ -20,7 +20,7 @@
         </template>
         <template v-slot:[`item.name`]="{ item }">
           <span class="name">
-            {{ item.email === loginState.email ? item.name + " (Me)" : item.name }}
+            {{ item.email === loginState.email ? `${item.name} ${$t('common.me')}` : item.name }}
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
@@ -109,12 +109,23 @@ export default Vue.extend({
       idUserDeleteModal: "",
       options: {} as TableOptions,
       rolesIndex: 3,
-      rolesField: {
-        text: "Roles",
-        sortable: false,
-        value: "roleIds"
-      },
-      headers: [
+    };
+  },
+  computed: {
+    pageSize(): any {
+      return this.teamState.pageSize;
+    },
+    tableItems(): any {
+      return this.teamState.users;
+    },
+    roles(): any {
+      return this.teamState.roles;
+    },
+    loading(): any {
+      return this.teamState.loaders.USERS;
+    },
+    headers() {
+      const columns = [
         {
           text: "",
           sortable: false,
@@ -145,21 +156,16 @@ export default Vue.extend({
           sortable: false,
           value: "id"
         }
-      ]
-    };
-  },
-  computed: {
-    pageSize(): any {
-      return this.teamState.pageSize;
-    },
-    tableItems(): any {
-      return this.teamState.users;
-    },
-    roles(): any {
-      return this.teamState.roles;
-    },
-    loading(): any {
-      return this.teamState.loaders.USERS;
+      ];
+      const roleColumn = {
+        text: "Roles",
+        sortable: false,
+        value: "roleIds"
+      };
+      if(this.roles.length > 0) {
+        columns.splice(3, 0, roleColumn)
+      }
+      return columns;
     }
   },
   watch: {
@@ -172,13 +178,6 @@ export default Vue.extend({
     page(val) {
       this.options.page = val;
     },
-    tableItems(val) {
-      if (!this.roles.length && this.headers.includes(this.rolesField)) {
-        this.headers = this.headers.filter((item: any) => item !== this.rolesField);
-      } else if (!this.headers.includes(this.rolesField)) {
-        this.headers.splice(this.rolesIndex, 0, this.rolesField);
-      }
-    }
   },
   methods: {
     dayFormat(date: any) {

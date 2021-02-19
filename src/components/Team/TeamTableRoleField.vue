@@ -1,6 +1,6 @@
 <template>
   <div class="fe-flex fe-full-width fe-flex-no-wrap">
-    <div class="fe-flex" v-if="!checkMe">
+    <div class="fe-flex">
       <div v-for="(role, index) in item.roleIds" :key="role">
         <div class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small" v-if="index < rolesHideLength">
           {{ getRoleName(role) }}
@@ -12,7 +12,6 @@
       v-model="myCheckedRoles"
       :items="rolesSet"
       multiple
-      v-else
       class="roles-select"
       :menu-props="{ top: true, right: true, offsetY: true, contentClass: 'roles-menu' }"
     >
@@ -64,6 +63,7 @@ export default {
   },
   methods: {
     getRoleName(roleId: string): any {
+      console.log('this.roles:', this.roles);
       const roleObj = this.roles.find((role: any) => role.id === roleId);
       return roleObj ? roleObj.name : null;
     }
