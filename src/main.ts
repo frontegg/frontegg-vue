@@ -16,7 +16,7 @@ import MainLayout from './Layouts/MainLayout.vue';
 import DefaultLayout from './Layouts/DefaultLayout.vue';
 
 Vue.config.productionTip = false;
-Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080' });
+Vue.use(fronteggCore, { baseUrl: 'http://localhost:8080', requestCredentials: 'include', });
 Vue.use(fronteggAuth, {
   routes: {
     authenticatedUrl: '/',
