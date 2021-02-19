@@ -1,8 +1,15 @@
 <template>
   <div class="fe-team__layout">
-    <TeamTableToolbar v-model="searchValue" @onOpenModal="onOpenModal" />
+    <TeamTableToolbar
+      v-model="searchValue"
+      @onOpenModal="onOpenModal"
+    />
 
-    <TeamTable :page.sync="currentPage" @fetchTableData="changeOptions" @itemDeleted="fetchTableData" />
+    <TeamTable
+      :page.sync="currentPage"
+      @fetchTableData="changeOptions"
+      @itemDeleted="fetchTableData"
+    />
 
     <TeamPagination
       v-if="totalPages > 0"
@@ -11,9 +18,18 @@
       :total-pages.sync="totalPages"
     />
 
-    <FModal :open-modal="openModal" v-if="openModal" :head-text="$t('auth.team.add-dialog.title')" @onCloseModal="onCloseModal" >
+    <FModal
+      v-if="openModal"
+      :open-modal="openModal"
+      :head-text="$t('auth.team.add-dialog.title')"
+      @onCloseModal="onCloseModal"
+    >
       <template #content>
-        <TeamInviteForm @onCloseModal="onCloseModal" @itemCreated="fetchTableData" :roles="roles"/>
+        <TeamAddUserDialog
+          :roles="roles"
+          @onCloseModal="onCloseModal"
+          @itemCreated="fetchTableData"
+        />
       </template>
     </FModal>
   </div>
@@ -31,7 +47,7 @@ import TeamTable from "@/components/Team/TeamTable.vue";
 import TeamPagination from "@/components/Team/TeamPagination.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
-import TeamInviteForm from "@/components/Team/TeamInviteForm.vue";
+import TeamAddUserDialog from "@/components/Team/TeamAddUserDialog.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 
@@ -41,7 +57,7 @@ import { ILoadUsers } from "@frontegg/rest-api";
 
 export default Vue.extend({
   name: "TeamLayout",
-  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamInviteForm },
+  components: { TeamTableToolbar, TeamTable, TeamPagination, FModal, TeamAddUserDialog },
   data(): any {
     return {
       ...mapState(this, {

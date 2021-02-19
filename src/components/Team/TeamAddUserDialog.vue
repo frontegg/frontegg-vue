@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-form ref="form" v-model="isFormValid" class="fe-form" @keyup.native.enter="submitForm">
+    <v-form
+      ref="form"
+      v-model="isFormValid"
+      class="fe-form"
+      @keyup.native.enter="submitForm"
+    >
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
@@ -31,13 +36,16 @@
           />
         </div>
       </div>
-      <div v-if="inviteError" class="fe-error-message">
+      <div
+        v-if="inviteError"
+        class="fe-error-message"
+      >
         {{ inviteError }}
       </div>
       <v-autocomplete
-        class="fe-select fe-select-full-width fe-input__in-form"
         v-if="loginState.email"
         v-model="roleValues"
+        class="fe-select fe-select-full-width fe-input__in-form"
         :items="rolesSet"
         chips
         clearable
@@ -59,7 +67,12 @@
       </v-autocomplete>
     </v-form>
     <v-card-actions>
-      <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
+      <v-btn
+        :class="{ 'fe-button-disabled': loading }"
+        text
+        class="fe-button"
+        @click="onCancel"
+      >
         {{ $t("common.cancel") }}
       </v-btn>
       <v-btn
@@ -85,6 +98,7 @@ import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
 export default {
+  name: "TeamAddUserDialog",
   props: {
     roles: {
       type: Array

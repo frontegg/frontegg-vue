@@ -4,6 +4,7 @@
       v-model="openModal"
       max-width="600px"
       :content-class="'fe-modal'"
+      persistent
     >
       <v-card>
         <v-card-title>

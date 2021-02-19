@@ -4,7 +4,6 @@
       <div v-if="loading" class="spinner-icon">
         <spinner />
       </div>
-
       <v-data-table
         :headers="headers"
         :items="tableItems"
@@ -14,7 +13,6 @@
         :fixed-header="true"
         hide-default-footer
       >
-        <!-- this.loginState.email -->
         <template v-slot:[`item.profileImageUrl`]="{ item }">
           <div class="d-flex justify-center">
             <img :src="item.profileImageUrl" alt="icon" class="fe-table-cell__avatar-img" />
@@ -33,14 +31,14 @@
                   {{ getRoleName(role) }}
                 </div>
               </div>
-              <span v-if="item.roleIds.length > 3"> {{item.roleIds.length - 3}} more</span>
+              <span v-if="item.roleIds.length > 3"> {{ item.roleIds.length - 3 }} more</span>
             </div>
           </div>
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           <div v-if="item.lastLogin && item.createdAt" class="datetime">
-            <span class="date">{{ item.createdAt ? $moment(item.createdAt).format("LLLL") : "N/A" }}</span>
-            <span class="left-time">{{ item.createdAt ? $moment(item.createdAt).fromNow() : "N/A" }}</span>
+            <span class="date">{{ dayFormat(item.createdAt) }}</span>
+            <span class="left-time">{{ leftTimeFormat(item.createdAt) }}</span>
           </div>
           <div v-else class="fe-tag fe-tag-primary fe-tag-small">
             <span class="date">{{ $t("common.pendingApproval") }}</span>
@@ -48,14 +46,12 @@
         </template>
         <template v-slot:[`item.lastLogin`]="{ item }">
           <div class="datetime">
-            <span class="date">{{ item.lastLogin ? $moment(item.lastLogin).format("LLLL") : "N/A" }}</span>
-            <span v-if="item.lastLogin" class="left-time">{{
-              item.lastLogin ? $moment(item.lastLogin).fromNow() : "N/A"
-            }}</span>
+            <span class="date">{{ dayFormat(item.lastLogin) }}</span>
+            <span v-if="item.lastLogin" class="left-time">{{ leftTimeFormat(item.lastLogin) }}</span>
           </div>
         </template>
         <template v-slot:[`item.id`]="{ item }">
-          <TeamDropList
+          <TeamDeleteUserDialog
             :send-email="!item.lastLogin"
             :disable="item.email === loginState.email ? true : false"
             @deleteUser="setDeleteModal(item.id, item.email)"
@@ -64,7 +60,6 @@
         </template>
       </v-data-table>
     </div>
-
     <FModal :open-modal="openModal" :head-text="$t('auth.team.deleteDialog.title')" @onCloseModal="onCloseModal">
       <template #content>
         <div class="fe-dialog-body">
@@ -92,7 +87,7 @@ import Vue from "vue";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import { AuthState } from "@/plugins/fronteggAuth/Api";
 import Spinner from "@/components/Common/Spinner.vue";
-import TeamDropList from "./TeamDropList.vue";
+import TeamDeleteUserDialog from "./TeamDeleteUserDialog.vue";
 import FModal from "@/components/core/elements/Modal/FModal.vue";
 
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
@@ -103,7 +98,7 @@ import { TableOptions } from "./interfaces";
 
 export default Vue.extend({
   name: "TeamTable",
-  components: { Spinner, TeamDropList, FModal },
+  components: { Spinner, TeamDeleteUserDialog, FModal },
   props: {
     page: {
       default: 0,
@@ -121,6 +116,12 @@ export default Vue.extend({
       textUserDeleteModal: "",
       idUserDeleteModal: "",
       options: {} as TableOptions,
+      rolesIndex: 3,
+      rolesField: {
+        text: "Roles",
+        sortable: false,
+        value: "roleIds"
+      },
       headers: [
         {
           text: "",
@@ -136,11 +137,6 @@ export default Vue.extend({
           text: "Email",
           sortable: true,
           value: "email"
-        },
-        {
-          text: "Roles",
-          sortable: false,
-          value: "roleIds"
         },
         {
           text: "Joined Team",
@@ -183,9 +179,23 @@ export default Vue.extend({
     },
     page(val) {
       this.options.page = val;
+    },
+    tableItems(val) {
+      const rolesLength = val.filter((item: any) => item.roleIds.length).length;
+      if (!rolesLength && this.headers.includes(this.rolesField)) {
+        this.headers = this.headers.filter((item: any) => item !== this.rolesField);
+      } else if(!this.headers.includes(this.rolesField)){
+        this.headers.splice(this.rolesIndex, 0, this.rolesField);
+      }
     }
   },
   methods: {
+    dayFormat(date: any) {
+      return date ? this.$moment(date).format("LLLL") : "N/A";
+    },
+    leftTimeFormat(time: any) {
+      return time ? this.$moment(time).fromNow() : "N/A";
+    },
     onOpenModal() {
       this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.openDeleteUserDialog());
     },
