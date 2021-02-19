@@ -1,5 +1,5 @@
 <template>
-  <div class="fe-login-page">
+  <div data-app class="fe-login-page">
     <spinner v-if="isLoading" />
     <v-container
       v-else
@@ -46,7 +46,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import LoginWithPassword from '@/components/auth/Login/LoginWithPassword.vue';
-import SocialLogins from '@/components/auth/Login/SocialLogins.vue';
+import SocialLogins from '@/components/auth/SocialLogins/SocialLogins.vue';
 import RedirectToSSO from '@/components/auth/Login/RedirectToSSO.vue';
 import LoginWithSSOFailed from '@/components/auth/Login/LoginWithSSOFailed.vue';
 import ForceEnrollMfa from '@/components/auth/Login/ForceEnrollMfa.vue';
