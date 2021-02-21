@@ -85,6 +85,7 @@ import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import FButton from "@/components/core/elements/Button/FButton.vue";
+import { validateEmail, validatePassword } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -100,18 +101,8 @@ export default Vue.extend({
       email: "",
       password: "",
       rules: {
-        email: [
-          (v: string) => !!v || "The Email is required",
-          (v: string) =>
-            !v ||
-            /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-            "Must be a valid email",
-        ],
-        password: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
-        ],
+        email: validateEmail(),
+        password: validatePassword(),
       },
       showPassword: false,
     };
@@ -139,9 +130,6 @@ export default Vue.extend({
         return null;
       }
     },
-  },
-  mounted() {
-    console.log("call action here pp", this);
   },
   methods: {
     loginSubmit(e) {
