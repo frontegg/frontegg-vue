@@ -31,11 +31,8 @@
           />
         </div>
       </div>
-      <div v-if="inviteError" class="fe-error-message">
-        {{ inviteError }}
-      </div>
       <v-autocomplete
-        v-if="loginState.email"
+        v-if="isAuthenticated"
         v-model="roleValues"
         class="fe-select fe-select-full-width fe-input__in-form"
         :items="rolesSet"
@@ -58,6 +55,9 @@
           </v-chip>
         </template>
       </v-autocomplete>
+      <div v-if="inviteError" class="fe-error-message">
+        {{ inviteError }}
+      </div>
     </v-form>
     <v-card-actions>
       <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
@@ -97,7 +97,7 @@ export default {
       ...mapState(this, {
         loading: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.loading,
         teamState: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error,
-        loginState: (state: { auth: AuthState }) => state.auth.loginState
+        isAuthenticated: (state: { auth: AuthState }) => state.auth.isAuthenticated
       }),
       isFormValid: false,
       form: {

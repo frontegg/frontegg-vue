@@ -44,9 +44,9 @@
         <template v-slot:[`item.id`]="{ item }">
           <TeamDeleteUserDialog
             :send-email="!item.lastLogin"
-            :disable="item.email === loginState.email ? true : false"
-            @deleteUser="setDeleteModal(item.id, item.email)"
-            @resendActivationLink="resendActivationLink(item.id)"
+            :item="item"
+            @deleteUser="setDeleteModal()"
+            @resendActivationLink="resendActivationLink()"
           />
         </template>
       </v-data-table>
