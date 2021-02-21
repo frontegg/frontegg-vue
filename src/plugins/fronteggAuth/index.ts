@@ -83,22 +83,32 @@ export default {
 
     let pluginListener = false;
     Vue.mixin({
-      beforeCreate() {
-        // console.log('AuthPlugin.beforeDestroy');
+      data() {
+        return {
+          ...mapState(this, {
+            authState: (state: { auth: AuthState }) => state.auth,
+            isLoggedIn: (state) => state.auth.isAuthenticated,
+          })
+        }
       },
       mounted() {
-        const authStore = this[FRONTEGG_STORE_KEY];
-        const authState = mapState(this, {
-          authState: (state: { auth: AuthState }) => state.auth,
-        });
-        updateSessionTimer(authStore, authState, authState.isAuthenticated)
-        updateAuthenticationOnStorage(authState)
         if(!pluginListener) {
-          console.log('pluginListener', authState);
-
+          const authStore = this[FRONTEGG_STORE_KEY];
+          updateSessionTimer(authStore, this.authState, true);
+          updateAuthenticationOnStorage(this.authState);
+          addStorageListener(authStore);
           pluginListener = true;
-          updateSessionTimer(authStore, authState, true)
-          addStorageListener(authStore)
+        }
+      },
+      watch: {
+        isLoggedIn(value) {
+          // run once on the top root component
+          if(!this.$root || !this.$parent) {
+            console.log("isAuthenticated", value);
+            const authStore = this[FRONTEGG_STORE_KEY];
+            updateSessionTimer(authStore, this.authState, value);
+            updateAuthenticationOnStorage(this.authState);
+          }
         }
       },
       beforeDestroy() {
