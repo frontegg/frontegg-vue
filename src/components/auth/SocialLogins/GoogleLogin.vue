@@ -1,5 +1,5 @@
 <template>
-  <div @click="redirect">
+  <div v-if="active" @click="redirect">
     <slot />
     <SocialLoginButton
       v-if="!hasSlot"
@@ -41,9 +41,9 @@ export default Vue.extend({
     config() {
       return this.socialLoginsState.socialLoginsConfig?.find(({ type }) => type.toLowerCase() === this.socialLoginType.toLowerCase());
     },
-  },
-  mounted() {
-    // 
+    active() {
+      return this.config?.active;
+    }
   },
   methods: {
     createGoogleUrl({ clientId, redirectUrl, state }: UrlCreatorConfigType): string {
@@ -69,7 +69,7 @@ export default Vue.extend({
         state: this.createSocialLoginState({ provider: this.socialLoginType, action: this.action }),
       });
 
-      if (!this.config?.active || !redirectUrl) {
+      if (!this.active || !redirectUrl) {
         return '';
       }
 
