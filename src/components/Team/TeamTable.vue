@@ -1,7 +1,10 @@
 <template>
   <div class="fe-team__table fe-table">
     <div class="fe-table__container">
-      <div v-if="loading" class="spinner-icon">
+      <div
+        v-if="loading"
+        class="spinner-icon"
+      >
         <spinner />
       </div>
       <v-data-table
@@ -15,43 +18,64 @@
       >
         <template v-slot:[`item.profileImageUrl`]="{ item }">
           <div class="d-flex justify-center">
-            <img :src="item.profileImageUrl" alt="icon" class="fe-table-cell__avatar-img" />
+            <img
+              :src="item.profileImageUrl"
+              alt="icon"
+              class="fe-table-cell__avatar-img"
+            >
           </div>
         </template>
         <template v-slot:[`item.name`]="{ item }">
           <span class="name">
-            {{ item.email === loginState.email ? item.name + " (Me)" : item.name }}
+            {{ item.email === loginState.email ? `${item.name} ${$t('common.me')}` : item.name }}
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
-          <TeamTableRoleField :item="item" :roles="roles" :checkMe="item.email === loginState.email"/>
+          <TeamTableRoleField
+            :item="item"
+            :roles="roles"
+            :check-me="item.email === loginState.email"
+          />
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
-          <div v-if="item.lastLogin && item.createdAt" class="datetime">
+          <div
+            v-if="item.lastLogin && item.createdAt"
+            class="datetime"
+          >
             <span class="date">{{ dayFormat(item.createdAt) }}</span>
             <span class="left-time">{{ leftTimeFormat(item.createdAt) }}</span>
           </div>
-          <div v-else class="fe-tag fe-tag-primary fe-tag-small">
+          <div
+            v-else
+            class="fe-tag fe-tag-primary fe-tag-small"
+          >
             <span class="date">{{ $t("common.pendingApproval") }}</span>
           </div>
         </template>
         <template v-slot:[`item.lastLogin`]="{ item }">
           <div class="datetime">
             <span class="date">{{ dayFormat(item.lastLogin) }}</span>
-            <span v-if="item.lastLogin" class="left-time">{{ leftTimeFormat(item.lastLogin) }}</span>
+            <span
+              v-if="item.lastLogin"
+              class="left-time"
+            >{{ leftTimeFormat(item.lastLogin) }}</span>
           </div>
         </template>
         <template v-slot:[`item.id`]="{ item }">
           <TeamDeleteUserDialog
             :send-email="!item.lastLogin"
-            :disable="item.email === loginState.email ? true : false"
-            @deleteUser="setDeleteModal(item.id, item.email)"
-            @resendActivationLink="resendActivationLink(item.id)"
+            :item="item"
+            @deleteUser="setDeleteModal()"
+            @resendActivationLink="resendActivationLink()"
           />
         </template>
       </v-data-table>
     </div>
-    <FModal :open-modal="openModal" :head-text="$t('auth.team.deleteDialog.title')" @onCloseModal="onCloseModal">
+    <FModal
+      :open-modal="openModal"
+      :head-text="$t('auth.team.deleteDialog.title')"
+      @onCloseModal="onCloseModal"
+    >
       <template #content>
         <div class="fe-dialog-body">
           <span>{{
@@ -61,10 +85,20 @@
           }}</span>
         </div>
         <v-card-actions>
-          <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCloseModal">
+          <v-btn
+            :class="{ 'fe-button-disabled': loading }"
+            text
+            class="fe-button"
+            @click="onCloseModal"
+          >
             {{ $t("common.cancel") }}
           </v-btn>
-          <v-btn text class="fe-button fe-button-large fe-button-danger" :loading="loadingDelete" @click="deleteUser">
+          <v-btn
+            text
+            class="fe-button fe-button-large fe-button-danger"
+            :loading="loadingDelete"
+            @click="deleteUser"
+          >
             {{ $t("common.delete") }}
           </v-btn>
         </v-card-actions>
@@ -109,12 +143,23 @@ export default Vue.extend({
       idUserDeleteModal: "",
       options: {} as TableOptions,
       rolesIndex: 3,
-      rolesField: {
-        text: "Roles",
-        sortable: false,
-        value: "roleIds"
-      },
-      headers: [
+    };
+  },
+  computed: {
+    pageSize(): any {
+      return this.teamState.pageSize;
+    },
+    tableItems(): any {
+      return this.teamState.users;
+    },
+    roles(): any {
+      return this.teamState.roles;
+    },
+    loading(): any {
+      return this.teamState.loaders.USERS;
+    },
+    headers() {
+      const columns = [
         {
           text: "",
           sortable: false,
@@ -145,21 +190,16 @@ export default Vue.extend({
           sortable: false,
           value: "id"
         }
-      ]
-    };
-  },
-  computed: {
-    pageSize(): any {
-      return this.teamState.pageSize;
-    },
-    tableItems(): any {
-      return this.teamState.users;
-    },
-    roles(): any {
-      return this.teamState.roles;
-    },
-    loading(): any {
-      return this.teamState.loaders.USERS;
+      ];
+      const roleColumn = {
+        text: "Roles",
+        sortable: false,
+        value: "roleIds"
+      };
+      if(this.roles.length > 0) {
+        columns.splice(3, 0, roleColumn)
+      }
+      return columns;
     }
   },
   watch: {
@@ -172,13 +212,6 @@ export default Vue.extend({
     page(val) {
       this.options.page = val;
     },
-    tableItems(val) {
-      if (!this.roles.length && this.headers.includes(this.rolesField)) {
-        this.headers = this.headers.filter((item: any) => item !== this.rolesField);
-      } else if (!this.headers.includes(this.rolesField)) {
-        this.headers.splice(this.rolesIndex, 0, this.rolesField);
-      }
-    }
   },
   methods: {
     dayFormat(date: any) {

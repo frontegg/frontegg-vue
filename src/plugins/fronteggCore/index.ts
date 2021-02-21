@@ -10,6 +10,7 @@ import set from 'set-value';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import mapState from './map-state';
 import router from '@/router';
+import VueMoment from 'vue-moment';
 
 const isSSR = typeof window === 'undefined';
 
@@ -82,6 +83,7 @@ export default {
     let pluginRegistered = false;
     const plugins: PluginConfig[] = [];
     
+    Vue.use(VueMoment);
 
     const registerPlugins = () => {
       console.log('registering plugins', plugins);

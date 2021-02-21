@@ -1,13 +1,21 @@
 <template>
-  <div class="fe-col fe-center" v-if="issocialLoginsConfig">
+  <div
+    v-if="issocialLoginsConfig"
+    class="fe-col fe-center"
+  >
     <Spinner v-if="firstLoad" />
-    <div v-else-if="error" class='fe-error-message'> {{ error }}</div>
+    <div
+      v-else-if="error"
+      class="fe-error-message"
+    >
+      {{ error }}
+    </div>
     <div v-else>
       <div class="fe-social-login__or-container">
         <span>OR</span>
       </div>
-          <GoogleLogin />
-          <GithubLogin />
+      <GoogleLogin />
+      <GithubLogin />
     </div>
   </div>
 </template>

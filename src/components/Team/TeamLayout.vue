@@ -119,7 +119,7 @@ export default Vue.extend({
           value: this.searchValue
         }
       ]),
-        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
     }
   }
 });

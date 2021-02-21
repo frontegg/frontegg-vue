@@ -1,18 +1,23 @@
 <template>
-  <div class='fe-login-page'>
+  <div class="fe-login-page">
     <v-container class="fe-login-container">
       <div class="fe-login-header">
         <img src="@/assets/main-logo.svg">
       </div>
       <Spinner v-if="isLoading" />
-      <div v-if="!isLoading" class="fe-error-message">{{ error }}</div>
+      <div
+        v-if="!isLoading"
+        class="fe-error-message"
+      >
+        {{ error }}
+      </div>
       <FButton
         v-if="!isLoading"
-        @click="backToLogin()"
         :params="{
           type: 'button',
           fullWidth: true,
         }"
+        @click="backToLogin()"
       >
         {{ $t('auth.login.back-to-login') }}
       </FButton>
