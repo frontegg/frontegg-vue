@@ -11,8 +11,11 @@
           v-bind="attrs"
           v-on="on"
         >
-          <spinner v-if="loading === item.id "/>
-          <FeIcon  v-else :params="{ iconName: 'vertical-dots' }" />
+          <spinner v-if="loading === item.id " />
+          <FeIcon
+            v-else
+            :params="{ iconName: 'vertical-dots' }"
+          />
         </div>
       </template>
       <v-list :class="'delete-modal fe-menu'">

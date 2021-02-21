@@ -1,8 +1,14 @@
 <template>
   <div class="fe-flex fe-full-width fe-flex-no-wrap">
     <div class="fe-flex">
-      <div v-for="(role, index) in item.roleIds" :key="role">
-        <div class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small" v-if="index < rolesHideLength">
+      <div
+        v-for="(role, index) in item.roleIds"
+        :key="role"
+      >
+        <div
+          v-if="index < rolesHideLength"
+          class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
+        >
           {{ getRoleName(role) }}
         </div>
       </div>
@@ -19,19 +25,31 @@
           v-bind="attrs"
           v-on="on"
         >
-          <svg width="2rem" height="2rem" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" class="fe-icon"><path d="M 6 13.4 L 4.6 12 L 8.6 8 L 4.6 4 L 6 2.6 L 11.4 8 Z" fill="currentColor" fill-rule="evenodd" transform="matrix(0, 1, -1, 0, 16, 0)"></path></svg>
+          <svg
+            width="2rem"
+            height="2rem"
+            viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg"
+            class="fe-icon"
+          ><path
+            d="M 6 13.4 L 4.6 12 L 8.6 8 L 4.6 4 L 6 2.6 L 11.4 8 Z"
+            fill="currentColor"
+            fill-rule="evenodd"
+            transform="matrix(0, 1, -1, 0, 16, 0)"
+          /></svg>
         </div>
       </template>
       <v-card>
         <v-list>
           <v-list-item
             v-for="role in roles"
-            :key="role.id">
+            :key="role.id"
+          >
             <v-checkbox      
-              @change="onRolesChange"  
-              v-model="myCheckedRoles"
+              v-model="myCheckedRoles"  
               :label="role.name"
               :value="role.id"
+              @change="onRolesChange"
             />
           </v-list-item>
         </v-list>
@@ -94,6 +112,17 @@
         return this.item.roleIds.length - this.rolesHideLength + " more";
       },
     },
+    watch: {
+      "item.roleIds": {
+        deep: true,
+        immediate: true,
+        handler(val) {
+          if(val) {
+            this.myCheckedRoles = val;
+          }
+        }
+      }
+    },
     methods: {
       getRoleName(roleId: string): any {
         const roleObj = this.roles.find((role: any) => role.id === roleId);
@@ -106,17 +135,6 @@
           name: this.item.name,
           roleIds: val
         }));
-      }
-    },
-    watch: {
-      "item.roleIds": {
-        deep: true,
-        immediate: true,
-        handler(val) {
-          if(val) {
-            this.myCheckedRoles = val;
-          }
-        }
       }
     }
   };

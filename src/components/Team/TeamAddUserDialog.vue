@@ -60,7 +60,10 @@
           </v-chip>
         </template>
       </v-autocomplete>
-      <div v-if="inviteError" class="fe-error-message">
+      <div
+        v-if="inviteError"
+        class="fe-error-message"
+      >
         {{ inviteError }}
       </div>
     </v-form>
