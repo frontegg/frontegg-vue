@@ -42,7 +42,6 @@ export type AuthPageRoutes = {
   signUpUrl: string;
 };
 
-
 export interface HideOption {
   hide?: boolean;
 }

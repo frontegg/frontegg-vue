@@ -111,7 +111,6 @@ function* validateSSODomain({ payload: { callback } = {} }: PayloadAction<WithCa
 }
 
 function* getAuthorizationRoles() {
-  console.log('getAuthorizationRoles');
   try {
     const data = yield call(api.auth.getSamlRoles);
     yield put(

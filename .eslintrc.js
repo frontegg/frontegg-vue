@@ -18,5 +18,6 @@ module.exports = {
     'prefer-spread': 'off',
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/no-this-alias': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off',
   },
 };

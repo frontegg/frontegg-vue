@@ -4,11 +4,15 @@ import { rootInitialState, rootReducer } from './reducer';
 import { PluginConfig } from '@frontegg/react-core';
 import { all, call } from 'redux-saga/effects';
 import { VueConstructor } from 'vue';
-import { ContextOptions } from '@frontegg/rest-api';
+import { ContextHolder, ContextOptions } from '@frontegg/rest-api';
 import { Unsubscribe } from 'redux';
 import set from 'set-value';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import mapState from './map-state';
+import router from '@/router';
+import VueMoment from 'vue-moment';
+
+const isSSR = typeof window === 'undefined';
 
 /**
  * receive contextOption and plugins, combine reducers, initial states and construct frontegg store
@@ -19,18 +23,38 @@ const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginCon
   const sagaMiddleware = createSagaMiddleware();
   const middleware = [...getDefaultMiddleware({ thunk: false, serializableCheck: false }), sagaMiddleware];
 
+  const baseName = isSSR
+    ? ''
+    : window.location.pathname.substring(0, window.location.pathname.lastIndexOf(location.pathname));
+
+  const onRedirectTo = (_path: string, opts?: RedirectOptions) => {
+    console.log("onRedirectTo", _path)
+    let path = _path;
+    if (path.startsWith(baseName)) {
+      path = path.substring(baseName.length);
+    }
+    if (opts?.refresh && !isSSR) {
+      window.Cypress ? router.push(path) : (window.location.href = path);
+    } else {
+      opts?.replace ? router.replace(path) : router.push(path);
+    }
+  }
+  
+  ContextHolder.setOnRedirectTo(onRedirectTo)
+  
   const devTools = { name: 'Frontegg Store' };
   const reducer = combineReducers({
     root: rootReducer,
     ...plugins.reduce((p, n) => ({ ...p, [n.storeName]: n.reducer }), {}),
   });
   const preloadedState = {
-    root: { ...rootInitialState, context: contextOptions },
+    root: { ...rootInitialState, context: contextOptions,  },
     ...plugins.reduce(
       (p, n) => ({
         ...p,
         [n.storeName]: {
           ...n.preloadedState,
+          onRedirectTo,
         },
       }),
       {},
@@ -51,12 +75,15 @@ const combinedPluginsStore = (contextOptions: ContextOptions, plugins: PluginCon
   return fronteggStore;
 };
 
+let store: EnhancedStore;
 export default {
   install(Vue: VueConstructor, options: ContextOptions) {
+    ContextHolder.setContext(options);
+    
     let pluginRegistered = false;
     const plugins: PluginConfig[] = [];
-    let store: EnhancedStore;
-
+    
+    Vue.use(VueMoment);
 
     const registerPlugins = () => {
       console.log('registering plugins', plugins);
@@ -70,7 +97,6 @@ export default {
 
     const syncStateWithComponent = (component: Vue, bindings: any) => () => {
       const state = store.getState();
-      debugger;
 
       Object.keys(bindings).forEach(prop => {
         const getter = bindings[prop];
@@ -81,10 +107,8 @@ export default {
       });
     };
 
-
     Vue.mixin({
       beforeCreate() {
-        console.log('FronteggCore.beforeCreate');
         if (!pluginRegistered) {
           pluginRegistered = true;
           registerPlugins();
@@ -106,9 +130,10 @@ export default {
         }
       },
       beforeDestroy() {
-        console.log('FronteggCore.beforeDestroy');
         (this as Vue).FRONTEGG_UNSUBSCRIBE?.();
       },
     });
   },
 };
+
+export  {store}

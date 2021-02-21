@@ -4,14 +4,12 @@ import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 // @ts-ignore
 const defaultGetter = prop => state => get(state, prop);
 
-const simpleMappers = (props: any, getter: any) => function () {
+const simpleMappers = (props: any, getter: any) => function() {
   // @ts-ignore
   const vueInstance: any = this;
 
   const slices = [].concat.apply([], props);
   const state = vueInstance[FRONTEGG_STORE_KEY].getState();
-
-  debugger;
   vueInstance.FRONTEGG_REDUX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
     [prop]: getter(prop),
   }), vueInstance.FRONTEGG_REDUX_BINDINGS || {});
@@ -21,7 +19,7 @@ const simpleMappers = (props: any, getter: any) => function () {
   }), {});
 };
 
-const objectMappers = (obj: any, fallbackGetter: any) => function () {
+const objectMappers = (obj: any, fallbackGetter: any) => function() {
   // @ts-ignore
   const vueInstance: any = this;
 
@@ -36,6 +34,24 @@ const objectMappers = (obj: any, fallbackGetter: any) => function () {
     [prop]: typeof obj[prop] === 'function' ? obj[prop].call(vueInstance, state) : fallbackGetter(obj[prop])(state),
   }), {});
 };
+
+export const mapState = (component: any, ...props: any[]) => {
+  const fallbackGetter = prop => state => get(state, prop);
+  const [obj] = props;
+  // @ts-ignore
+  const vueInstance: any = component;
+
+  const slices = Object.keys(obj);
+  const state = vueInstance[FRONTEGG_STORE_KEY].getState();
+
+  vueInstance.FRONTEGG_REDUX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
+    [prop]: typeof obj[prop] === 'function' ? obj[prop].bind(vueInstance) : fallbackGetter(obj[prop]),
+  }), vueInstance.FRONTEGG_REDUX_BINDINGS || {});
+
+  return slices.reduce((result, prop) => Object.assign({}, result, {
+    [prop]: typeof obj[prop] === 'function' ? obj[prop].call(vueInstance, state) : fallbackGetter(obj[prop])(state),
+  }), {});
+}
 
 /**
  * maps redux state to data attributes
@@ -57,4 +73,4 @@ export default (...props: any[]) => {
     mapper = simpleMappers(props, defaultGetter);
   }
   return mapper;
-}
+};

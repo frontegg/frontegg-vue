@@ -1,9 +1,9 @@
 <template>
   <div class="hello">
-    <slot></slot>
-    <br/>
+    <slot />
+    <br>
     email: {{ loginState.email }}
-    <br/>
+    <br>
     loading: {{ loginState.loading }}
   </div>
 </template>
