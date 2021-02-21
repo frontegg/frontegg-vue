@@ -1,5 +1,7 @@
 <template>
-  <div data-app class="fe-login-page">
+  <div
+    class="fe-login-page"
+  >
     <spinner v-if="isLoading || isAuthenticated" />
     <v-container
       v-else

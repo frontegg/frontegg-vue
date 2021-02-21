@@ -1,7 +1,10 @@
 <template>
   <div class="fe-team__table fe-table">
     <div class="fe-table__container">
-      <div v-if="loading" class="spinner-icon">
+      <div
+        v-if="loading"
+        class="spinner-icon"
+      >
         <spinner />
       </div>
       <v-data-table
@@ -15,7 +18,11 @@
       >
         <template v-slot:[`item.profileImageUrl`]="{ item }">
           <div class="d-flex justify-center">
-            <img :src="item.profileImageUrl" alt="icon" class="fe-table-cell__avatar-img" />
+            <img
+              :src="item.profileImageUrl"
+              alt="icon"
+              class="fe-table-cell__avatar-img"
+            >
           </div>
         </template>
         <template v-slot:[`item.name`]="{ item }">
@@ -24,21 +31,34 @@
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
-          <TeamTableRoleField :item="item" :roles="roles" :checkMe="item.email === loginState.email"/>
+          <TeamTableRoleField
+            :item="item"
+            :roles="roles"
+            :check-me="item.email === loginState.email"
+          />
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
-          <div v-if="item.lastLogin && item.createdAt" class="datetime">
+          <div
+            v-if="item.lastLogin && item.createdAt"
+            class="datetime"
+          >
             <span class="date">{{ dayFormat(item.createdAt) }}</span>
             <span class="left-time">{{ leftTimeFormat(item.createdAt) }}</span>
           </div>
-          <div v-else class="fe-tag fe-tag-primary fe-tag-small">
+          <div
+            v-else
+            class="fe-tag fe-tag-primary fe-tag-small"
+          >
             <span class="date">{{ $t("common.pendingApproval") }}</span>
           </div>
         </template>
         <template v-slot:[`item.lastLogin`]="{ item }">
           <div class="datetime">
             <span class="date">{{ dayFormat(item.lastLogin) }}</span>
-            <span v-if="item.lastLogin" class="left-time">{{ leftTimeFormat(item.lastLogin) }}</span>
+            <span
+              v-if="item.lastLogin"
+              class="left-time"
+            >{{ leftTimeFormat(item.lastLogin) }}</span>
           </div>
         </template>
         <template v-slot:[`item.id`]="{ item }">
@@ -51,7 +71,11 @@
         </template>
       </v-data-table>
     </div>
-    <FModal :open-modal="openModal" :head-text="$t('auth.team.deleteDialog.title')" @onCloseModal="onCloseModal">
+    <FModal
+      :open-modal="openModal"
+      :head-text="$t('auth.team.deleteDialog.title')"
+      @onCloseModal="onCloseModal"
+    >
       <template #content>
         <div class="fe-dialog-body">
           <span>{{
@@ -61,10 +85,20 @@
           }}</span>
         </div>
         <v-card-actions>
-          <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCloseModal">
+          <v-btn
+            :class="{ 'fe-button-disabled': loading }"
+            text
+            class="fe-button"
+            @click="onCloseModal"
+          >
             {{ $t("common.cancel") }}
           </v-btn>
-          <v-btn text class="fe-button fe-button-large fe-button-danger" :loading="loadingDelete" @click="deleteUser">
+          <v-btn
+            text
+            class="fe-button fe-button-large fe-button-danger"
+            :loading="loadingDelete"
+            @click="deleteUser"
+          >
             {{ $t("common.delete") }}
           </v-btn>
         </v-card-actions>

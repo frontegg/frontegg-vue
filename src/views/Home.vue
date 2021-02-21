@@ -1,7 +1,16 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="@/assets/logo.png" style="margin: 0 auto" class="d-block" />
-    <v-card class="mx-auto" max-width="300" tile>
+    <img
+      alt="Vue logo"
+      src="@/assets/logo.png"
+      style="margin: 0 auto"
+      class="d-block"
+    >
+    <v-card
+      class="mx-auto"
+      max-width="300"
+      tile
+    >
       <v-list>
         <v-list-item-group>
           <v-list-item :to="'/team_management'">

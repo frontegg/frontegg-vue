@@ -1,23 +1,35 @@
 <template>
   <div class="fe-flex fe-full-width fe-flex-no-wrap">
-    <div class="fe-flex" v-if="!checkMe">
-      <div v-for="(role, index) in item.roleIds" :key="role">
-        <div class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small" v-if="index < rolesHideLength">
+    <div
+      v-if="!checkMe"
+      class="fe-flex"
+    >
+      <div
+        v-for="(role, index) in item.roleIds"
+        :key="role"
+      >
+        <div
+          v-if="index < rolesHideLength"
+          class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
+        >
           {{ getRoleName(role) }}
         </div>
       </div>
       <span v-if="showTooltip">{{ textTooltip }}</span>
     </div>
     <v-select
+      v-else
       v-model="myCheckedRoles"
       :items="rolesSet"
       multiple
-      v-else
       class="roles-select"
       :menu-props="{ top: true, right: true, offsetY: true, contentClass: 'roles-menu' }"
     >
       <template v-slot:selection="{ item, index }">
-        <v-chip v-if="index < rolesHideLength" class="fe-tag">
+        <v-chip
+          v-if="index < rolesHideLength"
+          class="fe-tag"
+        >
           <span>{{ item }}</span>
         </v-chip>
         <span

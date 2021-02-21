@@ -1,5 +1,8 @@
 <template>
-  <div v-if="active" @click="redirect">
+  <div
+    v-if="active"
+    @click="redirect"
+  >
     <slot />
     <SocialLoginButton
       v-if="!hasSlot"

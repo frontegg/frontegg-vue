@@ -91,15 +91,6 @@ export default {
           })
         }
       },
-      mounted() {
-        if(!pluginListener) {
-          const authStore = this[FRONTEGG_STORE_KEY];
-          updateSessionTimer(authStore, this.authState, true);
-          updateAuthenticationOnStorage(this.authState);
-          addStorageListener(authStore);
-          pluginListener = true;
-        }
-      },
       watch: {
         isLoggedIn(value) {
           // run once on the top root component
@@ -109,6 +100,15 @@ export default {
             updateSessionTimer(authStore, this.authState, value);
             updateAuthenticationOnStorage(this.authState);
           }
+        }
+      },
+      mounted() {
+        if(!pluginListener) {
+          const authStore = this[FRONTEGG_STORE_KEY];
+          updateSessionTimer(authStore, this.authState, true);
+          updateAuthenticationOnStorage(this.authState);
+          addStorageListener(authStore);
+          pluginListener = true;
         }
       },
       beforeDestroy() {
