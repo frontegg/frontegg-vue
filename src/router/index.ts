@@ -13,7 +13,7 @@ const router = new VueRouter({
 });
 
 router.afterEach((to, from) => {
-  if(store && to?.path.includes('account')) {
+  if(to?.path.includes('account') && store?.getState().auth.routes.isAuthenticated) {
     ContextHolder.onRedirectTo(store?.getState().auth.routes.authenticatedUrl, { replace: true, refresh: false })
   }
 })
