@@ -1,6 +1,8 @@
 <template>
-  <div data-app class="fe-login-page">
-    <spinner v-if="isLoading" />
+  <div
+    class="fe-login-page"
+  >
+    <spinner v-if="isLoading || isAuthenticated" />
     <v-container
       v-else
       class="fe-login-container"
@@ -85,6 +87,9 @@ export default Vue.extend({
     },
     isLoading() {
       return this.authState.isLoading;
+    },
+    isAuthenticated() {
+      return this.authState.isAuthenticated;
     },
     currentStep: {
       get() {

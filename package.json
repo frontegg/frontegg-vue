@@ -37,7 +37,8 @@
     "vue-lodash": "^2.1.2",
     "vue-moment": "^4.1.0",
     "vue-router": "^3.2.0",
-    "vuetify": "^2.4.0"
+    "vuetify": "^2.4.0",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^1.0.0",

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <v-form ref="form" v-model="isFormValid" class="fe-form" @keyup.native.enter="submitForm">
+    <v-form
+      ref="form"
+      v-model="isFormValid"
+      class="fe-form"
+      @keyup.native.enter="submitForm"
+    >
       <div class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
@@ -60,7 +65,12 @@
       </div>
     </v-form>
     <v-card-actions>
-      <v-btn :class="{ 'fe-button-disabled': loading }" text class="fe-button" @click="onCancel">
+      <v-btn
+        :class="{ 'fe-button-disabled': loading }"
+        text
+        class="fe-button"
+        @click="onCancel"
+      >
         {{ $t("common.cancel") }}
       </v-btn>
       <v-btn
