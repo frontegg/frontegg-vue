@@ -3,15 +3,16 @@
     v-model="isFormValid"
     class="fe-form"
   >
-    <div class="fe-input fe-input-full-width">
+    <div class="fe-input fe-input-full-width fe-input-in-form">
       <div class="fe-input__header">
         <div class="fe-input__label">
           {{ $t('auth.forgot-password.email-label') }}
         </div>
       </div>
-      <div>
+      <div class="fe-input__inner-small">
         <v-text-field
           v-model="email"
+          :outlined="true"
           :rules="emailRules"
           name="email"
           placeholder="name@example.com"
