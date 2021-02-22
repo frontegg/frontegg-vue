@@ -27,14 +27,14 @@
         </template>
         <template v-slot:[`item.name`]="{ item }">
           <span class="name">
-            {{ item.email === loginState.email ? `${item.name} ${$t('common.me')}` : item.name }}
+            {{ item.email === user.email ? `${item.name} ${$t('common.me')}` : item.name }}
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
           <TeamTableRoleField
             :item="item"
             :roles="roles"
-            :check-me="item.email === loginState.email"
+            :check-me="item.email === user.email"
           />
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
@@ -137,9 +137,7 @@ export default Vue.extend({
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
         openModal: (state: { auth: AuthState }) => state.auth.teamState.deleteUserDialogState.open,
         loadingDelete: (state: { auth: AuthState }) => state.auth.teamState.deleteUserDialogState.loading,
-        loginState: (state: { auth: AuthState }) => state.auth.user,
-
-
+        user: (state: { auth: AuthState }) => state.auth.user,
       }),
       textUserDeleteModal: "",
       idUserDeleteModal: "",
