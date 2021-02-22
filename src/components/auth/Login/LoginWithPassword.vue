@@ -28,7 +28,7 @@
           </div>
         </div>
         <div
-          v-if="step === 'loginWithPassword'"
+          v-if="shouldDisplayPassword"
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon mb-0"
         >
           <div class="fe-input fe-input-full-width fe-input-in-form">
@@ -92,6 +92,7 @@ import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import FButton from "@/components/core/elements/Button/FButton.vue";
 import { validateEmail, validatePassword } from '@/plugins/fronteggCore/helpers/validates';
+import { LoginStep, AuthState } from "@/plugins/fronteggAuth/Api";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -102,6 +103,7 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         loginState: (state: { auth: AuthState }) => state.auth.loginState,
+        isSSOAuth: (state: { auth: AuthState }) => state.auth.isSSOAuth,
       }),
       isFormValid: false,
       email: "",
@@ -120,10 +122,10 @@ export default Vue.extend({
     submitText() {
       if (this.loginState.loading) {
         return "";
-      } else if (this.loginState.step === "preLogin") {
-        return "Continue";
+      } else if (this.shouldDisplayPassword) {
+        return this.$t('auth.login.login');
       } else {
-        return "Login";
+        return this.$t('auth.login.continue');
       }
     },
     isLoading() {
@@ -136,11 +138,14 @@ export default Vue.extend({
         return null;
       }
     },
+    shouldDisplayPassword() {
+      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword
+    },
   },
   methods: {
     loginSubmit(e) {
       e.preventDefault();
-      if (this.loginState.step === "preLogin") {
+      if (!this.shouldDisplayPassword) {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
           payload: {
