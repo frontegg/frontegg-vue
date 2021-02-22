@@ -1,5 +1,11 @@
 <template>
-  <svg :width="width" :height="height" :viewBox="viewBox" :xmlns="xmlns" :class="className">
+  <svg
+    :width="width"
+    :height="height"
+    :viewBox="viewBox"
+    :xmlns="xmlns"
+    :class="className"
+  >
     <path
       d="M 6 13.4 L 4.6 12 L 8.6 8 L 4.6 4 L 6 2.6 L 11.4 8 Z"
       :fill="fill"

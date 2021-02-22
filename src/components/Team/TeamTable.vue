@@ -137,7 +137,8 @@ export default Vue.extend({
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
         openModal: (state: { auth: AuthState }) => state.auth.teamState.deleteUserDialogState.open,
         loadingDelete: (state: { auth: AuthState }) => state.auth.teamState.deleteUserDialogState.loading,
-        loginState: (state: { auth: AuthState }) => state.auth.user
+        loginState: (state: { auth: AuthState }) => state.auth.user,
+
 
       }),
       textUserDeleteModal: "",

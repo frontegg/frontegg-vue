@@ -1,23 +1,46 @@
 <template>
   <div class="fe-flex fe-full-width fe-flex-no-wrap roles-row">
     <div class="fe-flex roles-checked">
-      <div v-for="(role, index) in item.roleIds" :key="role">
-        <div v-if="index < rolesHideLength" class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small">
+      <div
+        v-for="(role, index) in item.roleIds"
+        :key="role"
+      >
+        <div
+          v-if="index < rolesHideLength"
+          class="fe-tag fe-mr-1 fe-mb-1 fe-mt-1 fe-tag-default fe-tag-small"
+        >
           {{ getRoleName(role) }}
         </div>
       </div>
       <span v-if="showTooltip">{{ textTooltip }}</span>
     </div>
-    <v-menu :close-on-click="true" bottom right contentClass="roles-menu">
+    <v-menu
+      :close-on-click="true"
+      bottom
+      right
+      content-class="roles-menu"
+    >
       <template v-slot:activator="{ on, attrs }">
-        <div class="open-fe-menu open-roles-menu" v-bind="attrs" v-on="on">
+        <div
+          class="open-fe-menu open-roles-menu"
+          v-bind="attrs"
+          v-on="on"
+        >
           <FeIcon :params="{ iconName: 'arrow-down', width: '14', height: '14' }" />
         </div>
       </template>
       <v-card>
         <v-list>
-          <v-list-item v-for="role in roles" :key="role.id">
-            <v-checkbox v-model="myCheckedRoles" :label="role.name" :value="role.id" @change="onRolesChange" />
+          <v-list-item
+            v-for="role in roles"
+            :key="role.id"
+          >
+            <v-checkbox
+              v-model="myCheckedRoles"
+              :label="role.name"
+              :value="role.id"
+              @change="onRolesChange"
+            />
           </v-list-item>
         </v-list>
       </v-card>
@@ -71,6 +94,7 @@ export default {
   },
   methods: {
     getRoleName(roleId: string): any {
+      console.log('')
       const roleObj = this.roles.find((role: any) => role.id === roleId);
       return roleObj ? roleObj.name : null;
     },
@@ -91,12 +115,15 @@ export default {
 <style lang="scss">
 @import "@/styles/colors.scss";
 .roles-row {
-  min-width: 164px;
+  min-width: 194px;
   display: flex;
   flex-wrap: nowrap;
 
   .roles-checked {
     flex-grow: 1;
+    display: flex; 
+    flex-wrap: wrap;
+    align-items: center;
   }
 }
 .open-roles-menu {

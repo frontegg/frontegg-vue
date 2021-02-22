@@ -11,7 +11,7 @@
           v-bind="attrs"
           v-on="on"
         >
-          <spinner  v-if="loading === item.id "/>
+          <spinner v-if="loading === item.id " />
           <FeIcon
             v-else
             :params="{ iconName: 'vertical-dots' }"

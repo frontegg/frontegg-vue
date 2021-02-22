@@ -62,7 +62,8 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
-        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open
+        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open,
+        pageOffset: (state: { auth: AuthState }) => state.auth.teamState.pageOffset
       }),
 
       currentPage: 1,
@@ -101,25 +102,27 @@ export default Vue.extend({
       this.options = { ...options };
     },
     async fetchTableData() {
-      const payload: ILoadUsers = {
-        pageOffset: this.options.page - 1
-      };
-      if (this.options.sortBy.length > 0) {
-        payload.sort = [
-          {
-            id: this.options.sortBy[0],
-            desc: this.options.sortDesc[0]
-          }
-        ];
-      }
-
-      (payload.filter = [
-        {
-          id: "searchFilter",
-          value: this.searchValue
+      setTimeout(() => {
+        const payload: ILoadUsers = {
+          pageOffset: this.options.page - 1
+        };
+        if (this.options.sortBy.length > 0) {
+          payload.sort = [
+            {
+              id: this.options.sortBy[0],
+              desc: this.options.sortDesc[0]
+            }
+          ];
         }
-      ]),
-      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
+
+        (payload.filter = [
+          {
+            id: "searchFilter",
+            value: this.searchValue
+          }
+        ]),
+          this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
+      }, 1500);
     }
   }
 });
