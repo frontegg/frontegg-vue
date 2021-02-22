@@ -119,10 +119,9 @@ export default Vue.extend({
           id: "searchFilter",
           value: this.searchValue
         }
-      ]),
-      setTimeout(() => {
-        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
-      }, 200);
+      ]);
+
+      this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
     }
   }
 });
