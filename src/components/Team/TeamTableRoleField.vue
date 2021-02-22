@@ -99,6 +99,7 @@ export default {
       return roleObj ? roleObj.name : null;
     },
     onRolesChange(val: string[]) {
+      console.log('change')
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.updateUser({
           id: this.item.id,
@@ -139,8 +140,7 @@ export default {
     padding: 0;
   }
   .v-list-item {
-    padding: 0.9375rem;
-    padding-right: 2rem;
+    padding: 0;
     min-height: 1px;
     transition: all 0.5s ease;
     cursor: pointer;
@@ -163,6 +163,8 @@ export default {
     }
     &__slot {
       margin-bottom: 0;
+      padding: 0.9375rem;
+      padding-right: 2rem;
     }
 
     .v-messages {
