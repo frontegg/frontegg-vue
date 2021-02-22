@@ -22,6 +22,7 @@ import Resend from "./svgs/Resend.vue";
 import Search from "./svgs/Search.vue";
 import Google from "./svgs/Google.vue";
 import Github from "./svgs/Github.vue";
+import ArrowDown from "./svgs/ArrowDown.vue";
 
 export default {
   name: "FeIcon",
@@ -32,7 +33,8 @@ export default {
     "icon-resend": Resend,
     "icon-google": Google,
     "icon-github": Github,
-    "icon-vertical-dots": VerticalDots
+    "icon-vertical-dots": VerticalDots,
+    'icon-arrow-down': ArrowDown
   },
   props: {
     params: {
