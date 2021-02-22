@@ -16,6 +16,7 @@
     </div>
     <v-menu
       :close-on-click="true"
+      :close-on-content-click="false"
       bottom
       right
       content-class="roles-menu"

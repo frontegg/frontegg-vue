@@ -102,27 +102,27 @@ export default Vue.extend({
       this.options = { ...options };
     },
     async fetchTableData() {
-      setTimeout(() => {
-        const payload: ILoadUsers = {
-          pageOffset: this.options.page - 1
-        };
-        if (this.options.sortBy.length > 0) {
-          payload.sort = [
-            {
-              id: this.options.sortBy[0],
-              desc: this.options.sortDesc[0]
-            }
-          ];
-        }
-
-        (payload.filter = [
+      const payload: ILoadUsers = {
+        pageOffset: this.options.page - 1
+      };
+      if (this.options.sortBy.length > 0) {
+        payload.sort = [
           {
-            id: "searchFilter",
-            value: this.searchValue
+            id: this.options.sortBy[0],
+            desc: this.options.sortDesc[0]
           }
-        ]),
-          this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
-      }, 1500);
+        ];
+      }
+
+      (payload.filter = [
+        {
+          id: "searchFilter",
+          value: this.searchValue
+        }
+      ]),
+      setTimeout(() => {
+        this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
+      }, 200);
     }
   }
 });
