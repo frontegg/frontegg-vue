@@ -23,7 +23,7 @@ const getMaxRoleLevel = (roleIds: string[], roles: ITeamUserRole[]) => {
 export const checkRoleAccess = (roles: ITeamUserRole[], user: User | null): TRoles[] => {
   const context = ContextHolder.getContext();
   let currnetUserRoleLevel: number;
-  let currentUserRolesIds = user?.roles.map((r) => r.id);
+  const currentUserRolesIds = user?.roles.map((r) => r.id);
 
   if (context.currentUserRoles && context.currentUserRoles.length > 0) {
     currnetUserRoleLevel = getMaxRoleLevel(context.currentUserRoles, roles);

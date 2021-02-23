@@ -100,7 +100,7 @@ import { AuthState } from "@/plugins/fronteggAuth/Api";
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
-import { checkRoleAccess } from "@/Mixins/Team/helpers.ts"
+import { checkRoleAccess } from "./helpers.ts"
 
 export default {
   name: "TeamAddUserDialog",
