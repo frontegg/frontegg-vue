@@ -17,6 +17,7 @@
             <v-text-field
               v-model="password"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
               :type="showPassword ? 'text' : 'password'"
@@ -38,6 +39,7 @@
             <v-text-field
               v-model="confirmPassword"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
