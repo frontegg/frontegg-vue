@@ -2,7 +2,7 @@
   <div
     class="fe-login-page"
   >
-    <spinner v-if="isLoading || isAuthenticated" />
+    <spinner v-if="isLoading" />
     <v-container
       v-else
       class="fe-login-container"
@@ -59,6 +59,7 @@ import { AuthState, LoginStep } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
+import { AuthStateKey } from '@/plugins/fronteggAuth';
 
 export default Vue.extend({
   name: 'Login',
@@ -79,6 +80,7 @@ export default Vue.extend({
         authState: (state: { auth: AuthState }) => state.auth,
       }),
       LoginStep: LoginStep,
+      loading: false,
     }
   },
   computed: {
@@ -86,10 +88,10 @@ export default Vue.extend({
       return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.currentStep);
     },
     isLoading() {
-      return this.authState.isLoading;
+      return this.authState.isLoading || this.loading;
     },
     isAuthenticated() {
-      return this.authState.isAuthenticated;
+      return this.authState?.isAuthenticated;
     },
     currentStep: {
       get() {
@@ -101,6 +103,11 @@ export default Vue.extend({
     },
   },
   mounted() {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    if(isAuthenticated) {
+      this.loading = true;
+    }
+
     this[FRONTEGG_STORE_KEY].dispatch({
       type: 'auth/setState',
       payload: {
@@ -116,6 +123,14 @@ export default Vue.extend({
       });
     },
   },
+  beforeRouteEnter(to, from, next) {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    next(vm => {
+      if(isAuthenticated) {
+        vm.$router.push(vm.authState.routes.authenticatedUrl);
+      }
+    })
+  }
 });
 </script>
 
