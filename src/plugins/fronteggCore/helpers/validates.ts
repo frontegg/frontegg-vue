@@ -46,32 +46,49 @@ export const validateTwoFactorRecoveryCode = (t: any) =>
     .min(8, i18n.t('validation.max-length', { name: 'code', limit: 8 }))
     .required(i18n.t('validation.required-field', { name: 'code' }));
 
-export const validatePasswordConfirmation = (t: any, field = 'password') =>
-  Yup.string()
-    .required(i18n.t('validation.required-field', { name: 'confirmation of the password' }))
-    .when('password', {
-      is: (val) => !!(val && val.length > 0),
-      then: Yup.string().oneOf([Yup.ref(field)], i18n.t('validation.passwords-must-match', 'Passwords must match')),
-    });
+export const validatePasswordConfirmation = (ref) => {
+  const confirmPass = (v) => {
+    const confirmPassSchema = Yup.object().shape({
+      confirmPassword: Yup.string()
+        .oneOf([Yup.ref('password'), null])
+    })
+    if(!ref?.password?.value.length) {
+      return true;
+    }
+    return confirmPassSchema.isValidSync({'confirmPassword': v, 'password': ref?.password?.value});
+  }
+  return [
+    (v: string) => !!v || i18n.t('validation.required-field', { name: i18n.t('common.password') }),
+    (v: string) => confirmPass(v) || i18n.t('validation.passwords-must-match')
+  ]
+}
 
-export const validatePasswordUsingOWASP = (testConfig: Partial<TestConfig> | null) =>
-  Yup.string()
-    .required()
-    .test('validate_owasp', 'Invalid Password', async function (value) {
-      // Use function to access Yup 'this' context
+export const requiredPassword = () => {
+  const requiredSchema = Yup.object().shape({
+    password: Yup.string().required()
+  });
+  const requiredMsg = i18n.t('validation.required-field', { name: i18n.t('common.password') });
+  return [v => requiredSchema.isValidSync({'password': v }) || requiredMsg]
+}
 
+export const validatePasswordUsingOWASP = async (testConfig: Partial<TestConfig> | null, val: string) =>
+  new Promise((resolve, reject) => {
+    // owasp validation
+    const validatePass =  async function (value) {
       if (value == null) {
-        return true;
+        resolve([]);
       }
       testConfig && owasp.config(testConfig);
       const { errors } = owasp.test(value);
-      // validate using owasp
-
       if (errors?.length) {
-        return this.createError({ message: errors[0] });
+        resolve(errors[0]);
       }
-      return true;
-    });
+      resolve([]);
+    }
+    validatePass(val).then(error => {
+      resolve(error) 
+    })
+  })
 
 export const validateDomain = (t: any) =>
   Yup.string()
