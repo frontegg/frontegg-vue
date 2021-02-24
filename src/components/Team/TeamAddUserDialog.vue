@@ -38,9 +38,11 @@
       </div>
       <v-autocomplete
         v-if="isAuthenticated"
-        v-model="roleValues"
+        v-model="form.roleIds"
         class="fe-select fe-select-full-width fe-input__in-form"
-        :items="rolesSet"
+        :items="avaliableRoles"
+        item-value="value"
+        item-text="label"
         chips
         clearable
         :label="$t('common.roles')"
@@ -56,7 +58,7 @@
             @click="select"
             @click:close="removeSelectedRole(item)"
           >
-            {{ item }}
+            {{ item.name }}
           </v-chip>
         </template>
       </v-autocomplete>
@@ -98,6 +100,8 @@ import { AuthState } from "@/plugins/fronteggAuth/Api";
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 
+import { checkRoleAccess } from "./helpers.ts"
+
 export default {
   name: "TeamAddUserDialog",
   props: {
@@ -109,8 +113,9 @@ export default {
     return {
       ...mapState(this, {
         loading: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.loading,
-        teamState: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error,
-        isAuthenticated: (state: { auth: AuthState }) => state.auth.isAuthenticated
+        addUserDialogError: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.error,
+        isAuthenticated: (state: { auth: AuthState }) => state.auth.isAuthenticated,
+        user: (state: { auth: AuthState }) => state.auth.user
       }),
       isFormValid: false,
       form: {
@@ -142,21 +147,14 @@ export default {
   },
   computed: {
     inviteError(): any {
-      if (this.teamState) {
-        return this.teamState;
+      if (this.addUserDialogError) {
+        return this.addUserDialogError;
       } else {
         return null;
       }
     },
-    rolesSet(): any {
-      return this.roles.map((role: any) => role.name);
-    }
-  },
-  watch: {
-    roleValues() {
-      this.form.roleIds = this.roleValues
-        .flatMap((r: any) => this.roles.filter((role: any) => r === role.name))
-        .map((role: any) => role.id);
+    avaliableRoles(): any {
+      return checkRoleAccess(this.roles, this.user);
     }
   },
   methods: {
@@ -185,8 +183,8 @@ export default {
       this.$emit("onCloseModal", false);
     },
     removeSelectedRole(item: string) {
-      this.roleValues.splice(this.roleValues.indexOf(item), 1);
-      this.roleValues = [...this.roleValues];
+      this.form.roleIds.splice(this.form.roleIds.indexOf(item), 1);
+      this.form.roleIds = [...this.form.roleIds];
     },
     clear() {
       console.log(1);

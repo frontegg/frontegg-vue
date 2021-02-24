@@ -33,13 +33,13 @@
       <v-card>
         <v-list>
           <v-list-item
-            v-for="role in roles"
+            v-for="role in avaliableRoles"
             :key="role.id"
           >
             <v-checkbox
               v-model="myCheckedRoles"
-              :label="role.name"
-              :value="role.id"
+              :label="role.label"
+              :value="role.value"
               @change="onRolesChange"
             />
           </v-list-item>
@@ -53,6 +53,9 @@
 import { teamActions } from "@/plugins/fronteggAuth/Api/TeamState/index.ts";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import FeIcon from "@/components/core/elements/Icons/FeIcon";
+import { checkRoleAccess } from "./helpers.ts";
+import { AuthState } from "@/plugins/fronteggAuth/Api";
+import { mapState } from "@/plugins/fronteggCore/map-state";
 
 export default {
   name: "TeamTableRoleField",
@@ -70,8 +73,11 @@ export default {
   },
   data() {
     return {
+      ...mapState(this, {
+        user: (state: { auth: AuthState }) => state.auth.user,
+      }),
       rolesHideLength: 3,
-      myCheckedRoles: ""
+      myCheckedRoles: "",
     };
   },
   computed: {
@@ -80,6 +86,9 @@ export default {
     },
     textTooltip(): any {
       return this.item.roleIds.length - this.rolesHideLength + " more";
+    },
+    avaliableRoles(): any {
+      return checkRoleAccess(this.roles, this.user);
     }
   },
   watch: {
@@ -91,16 +100,14 @@ export default {
           this.myCheckedRoles = val;
         }
       }
-    }
+    },
   },
   methods: {
     getRoleName(roleId: string): any {
-      console.log('')
       const roleObj = this.roles.find((role: any) => role.id === roleId);
       return roleObj ? roleObj.name : null;
     },
     onRolesChange(val: string[]) {
-      console.log('change')
       this?.[FRONTEGG_STORE_KEY]?.dispatch(
         teamActions.updateUser({
           id: this.item.id,
@@ -134,6 +141,7 @@ export default {
 .roles-menu {
   box-shadow: none;
   border-radius: 0;
+  transform: translateX(30px);
   .v-card {
     border-radius: 0;
   }
