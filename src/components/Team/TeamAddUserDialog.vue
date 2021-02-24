@@ -14,7 +14,6 @@
         </div>
         <div>
           <v-text-field
-            
             v-model="form.name"
             :rules="formRules.nameRules"
             required
@@ -31,7 +30,6 @@
         <div>
           <v-text-field
             v-model="form.email"
-            
             :rules="formRules.emailRules"
             required
             :placeholder="$t('common.enter-email')"
