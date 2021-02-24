@@ -68,7 +68,7 @@ export default Vue.extend({
   },
   props: {
     item: {
-      default: () => {},
+      // default: () => {},
       type: Object
     },
     sendEmail: {
@@ -82,13 +82,14 @@ export default Vue.extend({
           state.auth.teamState.loaders.RESEND_ACTIVATE_LINK || 
           state.auth.teamState.loaders.UPDATE_USER || 
           state.auth.teamState.loaders.DELETE_USER,
-        loginState: (state: { auth: AuthState }) => state.auth.loginState
+        user: (state: { auth: AuthState }) => state.auth.user
       }),
     };
   },
+  
   computed: {
     disable(): any {
-      return this.item.email === this.loginState.email
+      return this.item.email === this.user.email
     }
   },
   methods: {
@@ -112,6 +113,16 @@ export default Vue.extend({
 }
 .delete-modal-holder {
   position: relative;
+  .container {
+    position: absolute;
+    right: 0;
+    top: -15px;
+  }
+  .fe-loader__inner{ 
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
 }
 .delete-modal {
   cursor: pointer;
@@ -120,5 +131,6 @@ export default Vue.extend({
     min-height: 1px;
     padding: 0;
   }
+  
 }
 </style>

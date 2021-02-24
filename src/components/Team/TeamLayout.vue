@@ -62,7 +62,8 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         teamState: (state: { auth: AuthState }) => state.auth.teamState,
-        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open
+        openModal: (state: { auth: AuthState }) => state.auth.teamState.addUserDialogState.open,
+        pageOffset: (state: { auth: AuthState }) => state.auth.teamState.pageOffset
       }),
 
       currentPage: 1,
@@ -118,7 +119,8 @@ export default Vue.extend({
           id: "searchFilter",
           value: this.searchValue
         }
-      ]),
+      ]);
+
       this?.[FRONTEGG_STORE_KEY]?.dispatch(teamActions.loadUsers(payload));
     }
   }
