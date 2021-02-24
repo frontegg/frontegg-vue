@@ -43,6 +43,7 @@ import ForgotPasswordSuccess from "@/components/auth/ForgotPassword/ForgotPasswo
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import Spinner from "@/components/Common/Spinner.vue";
+import { AuthStateKey } from '@/plugins/fronteggAuth';
 
 export default Vue.extend({
   name: "ForgetPassword",
@@ -58,11 +59,12 @@ export default Vue.extend({
           state.auth,
       }),
       forgotPasswordStep: ForgotPasswordStep,
+      loading: false,
     };
   },
   computed: {
     isLoading() {
-      return this.authState.isLoading;
+      return this.authState.isLoading || this.loading;
     },
     showBackBtn() {
       return this.forgotPasswordStep.success === this.currentStep;
@@ -77,6 +79,11 @@ export default Vue.extend({
     },
   },
   mounted() {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    if(isAuthenticated) {
+      this.loading = true;
+    }
+
     this[FRONTEGG_STORE_KEY].dispatch({
       type: 'auth/setState',
       payload: {
@@ -92,6 +99,14 @@ export default Vue.extend({
       });
     },
   },
+  beforeRouteEnter(to, from, next) {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    next(vm => {1
+      if(isAuthenticated) {
+        vm.$router.push(vm.authState.routes.authenticatedUrl);
+      }
+    })
+  }
 });
 </script>
 

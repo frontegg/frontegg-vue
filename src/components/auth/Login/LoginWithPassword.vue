@@ -1,56 +1,62 @@
 <template>
-  <v-row>
-    <v-col cols="12">
+  <v-row class="ma-0">
+    <v-col cols="12" class="pa-0">
       {{ $t('auth.login.suggest-sign-up.message') }}
       <span class="fe-login-component__back-to-sign-up-link">
         {{ $t('auth.login.suggest-sign-up.sign-up-link') }}
       </span>
     </v-col>
-    <v-col cols="12">
+    <v-col cols="12" class="pa-0">
       <v-form
         v-model="isFormValid"
         class="fe-form"
       >
-        <div class="fe-input__header">
-          <div class="fe-input__label">
-            {{ $t('auth.login.email') }}
-          </div>
-        </div>
-        <div>
-          <v-text-field
-            v-model="email"
-            name="email"
-            :rules="rules.email"
-            placeholder="name@example.com"
-          />
-        </div>
-        <div
-          v-if="step === 'loginWithPassword'"
-          class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon"
-        >
+        <div class="fe-input fe-input-full-width fe-input-in-form">
           <div class="fe-input__header">
             <div class="fe-input__label">
-              {{ $t('auth.login.password') }}
+              {{ $t('auth.login.email') }}
             </div>
-            <a
-              class="fe-button fe-input__label-button fe-button-clickable"
-              href="#"
-              @click.prevent="navigateForgetPass"
-            >
-              {{ $t('auth.login.forgot-password') }}
-            </a>
           </div>
-          <div class="password">
+          <div class="fe-input__inner-large">
             <v-text-field
-              v-model="password"
-              tabindex="-1"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="rules.password"
-              :type="showPassword ? 'text' : 'password'"
-              name="password"
-              placeholder="Enter Your Password"
-              @click:append="showPassword = !showPassword"
+              v-model="email"
+              name="email"
+              :outlined="true"
+              :rules="rules.email"
+              placeholder="name@example.com"
             />
+          </div>
+        </div>
+        <div
+          v-if="shouldDisplayPassword"
+          class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon mb-0"
+        >
+          <div class="fe-input fe-input-full-width fe-input-in-form">
+            <div class="fe-input__header">
+              <div class="fe-input__label">
+                {{ $t('auth.login.password') }}
+              </div>
+              <a
+                class="fe-button fe-input__label-button fe-button-clickable mb-0"
+                href="#"
+                @click.prevent="navigateForgetPass"
+              >
+                {{ $t('auth.login.forgot-password') }}
+              </a>
+            </div>
+            <div class="fe-input__inner-large">
+              <v-text-field
+                v-model="password"
+                tabindex="-1"
+                :outlined="true"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
+                :rules="rules.password"
+                :type="showPassword ? 'text' : 'password'"
+                name="password"
+                placeholder="Enter Your Password"
+                @click:append="showPassword = !showPassword"
+              />
+            </div>
           </div>
         </div>
         <div class="continue">
@@ -86,6 +92,7 @@ import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import FButton from "@/components/core/elements/Button/FButton.vue";
 import { validateEmail, validatePassword } from '@/plugins/fronteggCore/helpers/validates';
+import { LoginStep, AuthState } from "@/plugins/fronteggAuth/Api";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -96,6 +103,7 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         loginState: (state: { auth: AuthState }) => state.auth.loginState,
+        isSSOAuth: (state: { auth: AuthState }) => state.auth.isSSOAuth,
       }),
       isFormValid: false,
       email: "",
@@ -114,10 +122,10 @@ export default Vue.extend({
     submitText() {
       if (this.loginState.loading) {
         return "";
-      } else if (this.loginState.step === "preLogin") {
-        return "Continue";
+      } else if (this.shouldDisplayPassword) {
+        return this.$t('auth.login.login');
       } else {
-        return "Login";
+        return this.$t('auth.login.continue');
       }
     },
     isLoading() {
@@ -130,11 +138,14 @@ export default Vue.extend({
         return null;
       }
     },
+    shouldDisplayPassword() {
+      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword
+    },
   },
   methods: {
     loginSubmit(e) {
       e.preventDefault();
-      if (this.loginState.step === "preLogin") {
+      if (!this.shouldDisplayPassword) {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
           payload: {
@@ -166,6 +177,12 @@ export default Vue.extend({
 });
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
+a.fe-button { 
+  color: var(--color-gray-8);
 
+  &:hover {
+    background: transparent;
+  }
+}
 </style>

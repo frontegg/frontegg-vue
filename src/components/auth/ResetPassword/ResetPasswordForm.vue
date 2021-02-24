@@ -13,10 +13,11 @@
               {{ $t('auth.forgot-password.new-password') }}
             </div>
           </div>
-          <div class="password">
+          <div class="fe-input__inner-small">
             <v-text-field
               v-model="password"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
               :type="showPassword ? 'text' : 'password'"
@@ -34,11 +35,12 @@
               {{ $t('auth.forgot-password.confirm-new-password') }}
             </div>
           </div>
-          <div class="password">
+          <div class="fe-input__inner-small">
             <v-text-field
               v-model="confirmPassword"
               tabindex="-1"
               :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
+              :outlined="true"
               :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
               name="confirmPassword"

@@ -12,10 +12,4 @@ const router = new VueRouter({
   routes,
 });
 
-router.afterEach((to, from) => {
-  if(to?.path.includes('account') && store?.getState().auth.routes.isAuthenticated) {
-    ContextHolder.onRedirectTo(store?.getState().auth.routes.authenticatedUrl, { replace: true, refresh: false })
-  }
-})
-
 export default router;

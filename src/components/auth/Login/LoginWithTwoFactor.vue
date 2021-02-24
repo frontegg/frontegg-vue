@@ -15,6 +15,7 @@
           </div>
           <div>
             <v-text-field
+              :outlined="true"
               v-model="code"
               name="code"
               :rules="rules.code"

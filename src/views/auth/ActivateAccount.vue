@@ -36,6 +36,7 @@ import ActivateAccountFailed from "@/components/auth/ActivateAccount/ActivateAcc
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import Spinner from "@/components/Common/Spinner.vue";
+import { AuthStateKey } from '@/plugins/fronteggAuth';
 
 export default Vue.extend({
   name: "ActivateAccount",
@@ -52,11 +53,12 @@ export default Vue.extend({
       }),
       activateStep: ActivateStep,
       url: new URL(window?.location.href),
+      loading: false,
     };
   },
   computed: {
     isLoading() {
-      return this.authState.isLoading;
+      return this.authState.isLoading || this.loading;
     },
     step() {
       return this.authState.forgotPasswordState.step || this.forgotPasswordStep.forgotPassword;
@@ -69,6 +71,10 @@ export default Vue.extend({
     },
   },
   mounted() {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    if(isAuthenticated) {
+      this.loading = true;
+    }
     this[FRONTEGG_STORE_KEY].dispatch({
       type: "auth/setState",
       payload: {
@@ -76,6 +82,14 @@ export default Vue.extend({
       },
     });
   },
+  beforeRouteEnter(to, from, next) {
+    const isAuthenticated = localStorage.getItem(AuthStateKey);
+    next(vm => {
+      if(isAuthenticated) {
+        vm.$router.push(vm.authState.routes.authenticatedUrl);
+      }
+    })
+  }
 });
 </script>
 

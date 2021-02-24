@@ -35,6 +35,11 @@ export default Vue.extend({
       classNames,
     }
   },
+  computed: {
+    disabled() {
+      return this.params.disabled || this.params.loading;
+    }
+  },
   watch: {
     params() {
       this.updateClasses();
@@ -52,7 +57,7 @@ export default Vue.extend({
         className: this.params.class,
         prefixCls: prefixCls,
         size: this.params.size,
-        theme: this.params.disabled ? 'disabled' : this.params.variant,
+        theme: this.disabled ? 'disabled' : this.params.variant,
         isClickable: true,
         isFullWidth: this.params.fullWidth,
         isLoading: this.params.loading,

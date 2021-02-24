@@ -7,6 +7,7 @@ import { AuthPluginOptions } from './interfaces';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import set from 'set-value';
 import { mapState } from '@/plugins/fronteggCore/map-state'
+import { AuthStateKey } from './constants'
 
 const AuthPlugin = (options?: AuthPluginOptions): PluginConfig => ({
   storeName,
@@ -22,8 +23,6 @@ const AuthPlugin = (options?: AuthPluginOptions): PluginConfig => ({
   sagas,
   // Listener: AuthListener,
 });
-
-const AuthStateKey = 'fe-auth-state';
 
 export default {
   install(Vue: VueConstructor, options: AuthPluginOptions) {
@@ -42,7 +41,7 @@ export default {
         // actions.requestAuthorize(firstTime);
         authStore.dispatch({
           type: "auth/requestAuthorize",
-          payload: firstTime,
+          payload: {firstTime},
         });
       } else {
         if (authState.isAuthenticated) {
@@ -59,7 +58,7 @@ export default {
     };
 
     const updateAuthenticationOnStorage = (authState) => {
-      if (authState.isLoading) return;
+      if (authState.isLoading && !authState.isAuthenticated) return;
       localStorage.setItem(AuthStateKey, JSON.stringify(authState.isAuthenticated));
     };
 
@@ -102,10 +101,17 @@ export default {
           }
         }
       },
-      mounted() {
-        if(!pluginListener) {
+      beforeCreate() {
+        if(!this.$root || !this.$parent) {
+          console.log("dispatch req auth")
           const authStore = this[FRONTEGG_STORE_KEY];
           updateSessionTimer(authStore, this.authState, true);
+        }
+      },
+      created() {
+        if(!pluginListener) {
+          const authStore = this[FRONTEGG_STORE_KEY];
+          //updateSessionTimer(authStore, this.authState, true);
           updateAuthenticationOnStorage(this.authState);
           addStorageListener(authStore);
           pluginListener = true;
@@ -117,3 +123,5 @@ export default {
     });
   },
 };
+
+export * from './constants'

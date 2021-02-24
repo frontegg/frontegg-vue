@@ -3,6 +3,7 @@
     <v-col cols="12">
       <v-form
         v-model="isFormValid"
+        ref="form"
         class="fe-form"
       >
         <div
@@ -17,9 +18,12 @@
             <v-text-field
               v-model="password"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
+              :error-messages="passError"
               :type="showPassword ? 'text' : 'password'"
+              ref="password"
               name="password"
               :placeholder="$t('auth.activate-account.enter-your-password')"
               @click:append="showPassword = !showPassword"
@@ -38,6 +42,7 @@
             <v-text-field
               v-model="confirmPassword"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
@@ -76,6 +81,7 @@ import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
+import { requiredPassword, validatePasswordUsingOWASP, validatePasswordConfirmation, } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: 'ResetPassword',
@@ -96,22 +102,17 @@ export default Vue.extend({
     return {
       ...mapState(this, {
         activateState: (state: { auth: AuthState }) => state.auth.activateState,
+        forgotPasswordState: (state: { auth: AuthState }) => state.auth.forgotPasswordState,
       }),
       isFormValid: false,
       password: '',
       confirmPassword: '',
       showPassword: false,
       showConfirmPassword: false,
+      passError: [],
       rules: {
-        password: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
-        ],
-        confirmPassword: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) => this.password === this.confirmPassword || 'Password must match',
-        ]
+        password: requiredPassword(),
+        confirmPassword: validatePasswordConfirmation(this.$refs),
       },
     }
   },
@@ -121,6 +122,22 @@ export default Vue.extend({
     },
     resetError() {
       return this.activateState.error;
+    },
+    passwordConfig() {
+      return this.forgotPasswordState.passwordConfig
+    }
+  },
+  mounted() {
+    this.loadPasswordConfig();
+  },
+  watch: {
+    password(value) {
+      validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
+        this.passError = error;
+        if(this.confirmPassword.length) {
+          this.$refs.form.validate();
+        }
+      })
     }
   },
   methods: {
@@ -132,6 +149,11 @@ export default Vue.extend({
           userId: this.userId,
           token: this.token,
         }
+      });
+    },
+    loadPasswordConfig() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/loadPasswordConfig",
       });
     },
   },
