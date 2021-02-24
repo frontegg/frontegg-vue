@@ -14,7 +14,7 @@
         </div>
         <div>
           <v-text-field
-            :outlined="true"
+            
             v-model="form.name"
             :rules="formRules.nameRules"
             required
@@ -31,7 +31,7 @@
         <div>
           <v-text-field
             v-model="form.email"
-            :outlined="true"
+            
             :rules="formRules.emailRules"
             required
             :placeholder="$t('common.enter-email')"
