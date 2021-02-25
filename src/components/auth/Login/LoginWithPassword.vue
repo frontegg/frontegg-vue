@@ -2,7 +2,7 @@
   <v-row class="ma-0">
     <v-col cols="12" class="pa-0">
       {{ $t('auth.login.suggest-sign-up.message') }}
-      <span class="fe-login-component__back-to-sign-up-link">
+      <span @click="redirectToSignUp" class="fe-login-component__back-to-sign-up-link">
         {{ $t('auth.login.suggest-sign-up.sign-up-link') }}
       </span>
     </v-col>
@@ -24,6 +24,7 @@
               :outlined="true"
               :rules="rules.email"
               placeholder="name@example.com"
+              @change="shouldBackToLoginIfEmailChanged ? backToPreLogin() : undefined"
             />
           </div>
         </div>
@@ -70,7 +71,7 @@
               disabled: !isFormValid,
               'data-test-id': 'sumbit-btn'
             }"
-            @click="loginSubmit($event)"
+            @click.prevent="loginSubmit"
           >
             {{ submitText }}
           </FButton>
@@ -102,6 +103,7 @@ export default Vue.extend({
   data() {
     return {
       ...mapState(this, {
+        authState:  (state: { auth: AuthState }) => state.auth,
         loginState: (state: { auth: AuthState }) => state.auth.loginState,
         isSSOAuth: (state: { auth: AuthState }) => state.auth.isSSOAuth,
       }),
@@ -120,13 +122,10 @@ export default Vue.extend({
       return this.loginState.step;
     },
     submitText() {
-      if (this.loginState.loading) {
-        return "";
-      } else if (this.shouldDisplayPassword) {
-        return this.$t('auth.login.login');
-      } else {
+      if (!this.shouldDisplayPassword) {
         return this.$t('auth.login.continue');
       }
+      return this.$t('auth.login.login');
     },
     isLoading() {
       return this.loginState.loading;
@@ -139,12 +138,22 @@ export default Vue.extend({
       }
     },
     shouldDisplayPassword() {
-      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword
+      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword;
     },
+    shouldBackToLoginIfEmailChanged() {
+      return this.isSSOAuth && this.shouldDisplayPassword;
+    }
   },
   methods: {
-    loginSubmit(e) {
-      e.preventDefault();
+    backToPreLogin() {
+      this[FRONTEGG_STORE_KEY].dispatch({
+        type: "auth/setLoginState",
+        payload: {
+          step: 'preLogin'
+        },
+      });
+    },
+    loginSubmit() {
       if (!this.shouldDisplayPassword) {
         this[FRONTEGG_STORE_KEY].dispatch({
           type: "auth/preLogin",
@@ -171,7 +180,10 @@ export default Vue.extend({
         type: "auth/resetLoginState",
       });
 
-      this.$router.push('/account/forget-password');
+      this.$router.push(this.authState.routes.forgetPasswordUrl);
+    },
+    redirectToSignUp() {
+      this.$router.push(this.authState.routes.signUpUrl);
     },
   },
 });

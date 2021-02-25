@@ -287,6 +287,9 @@
 
       input {
         padding: 0 var(--element-padding);
+        &[name="password"] {
+          padding-right: 32px;
+        }
       }
     }
 
@@ -310,7 +313,7 @@
       font-size: var(--element-font-size-sm);
     }
 
-    .v-messages__message {
+    .v-messages__message  {
       margin-top: 6px;
     }
 
