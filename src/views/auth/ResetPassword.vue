@@ -69,12 +69,17 @@ export default Vue.extend({
     token() {
       return this.url.searchParams.get('token') || '';
     },
+    isAuthenticated() {
+      return this.authState?.isAuthenticated;
+    },
   },
-  mounted() {
-    const isAuthenticated = localStorage.getItem(AuthStateKey);
+  created() {
+    const isAuthenticated = localStorage.getItem(AuthStateKey) || this.isAuthenticated;
     if(isAuthenticated) {
       this.loading = true;
     }
+  },
+  mounted() {
     this[FRONTEGG_STORE_KEY].dispatch({
       type: "auth/setState",
       payload: {
@@ -83,13 +88,15 @@ export default Vue.extend({
     });
   },
   beforeRouteEnter(to, from, next) {
-    const isAuthenticated = localStorage.getItem(AuthStateKey);
     next(vm => {
+      const isAuthenticated = localStorage.getItem(AuthStateKey) || vm.isAuthenticated;
       if(isAuthenticated) {
-        vm.$router.push(vm.authState.routes.authenticatedUrl);
+        vm.$nextTick(() => {
+          vm.$router.push(vm.authState.routes.authenticatedUrl);
+        })
       }
     })
-  }
+  },
 });
 </script>
 
