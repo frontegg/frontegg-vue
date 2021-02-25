@@ -3,6 +3,7 @@
     <v-col cols="12">
       <v-form
         v-model="isFormValid"
+        ref="form"
         class="fe-form"
       >
         <div
@@ -20,7 +21,9 @@
               :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
+              :error-messages="passError"
               :type="showPassword ? 'text' : 'password'"
+              ref="password"
               name="password"
               placeholder="Enter Your Password"
               @click:append="showPassword = !showPassword"
@@ -78,6 +81,7 @@ import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
+import { validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation, } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: 'ResetPasswordForm',
@@ -104,16 +108,10 @@ export default Vue.extend({
       confirmPassword: '',
       showPassword: false,
       showConfirmPassword: false,
+      passError: [],
       rules: {
-        password: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
-        ],
-        confirmPassword: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) => this.password === this.confirmPassword || 'Password must match',
-        ]
+        password: validateRequired('Password'),
+        confirmPassword: validatePasswordConfirmation(this.$refs),
       },
     }
   },
@@ -123,6 +121,16 @@ export default Vue.extend({
     },
     resetError() {
       return this.forgotPasswordState.error;
+    }
+  },
+  watch: {
+    password(value) {
+      validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
+        this.passError = error;
+        if(this.confirmPassword.length) {
+          this.$refs.form.validate();
+        }
+      })
     }
   },
   methods: {
@@ -137,7 +145,6 @@ export default Vue.extend({
       });
     },
   },
-
 });
 </script>
 

@@ -66,6 +66,7 @@ import { mapState } from "@/plugins/fronteggCore/map-state";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import Spinner from "@/components/Common/Spinner.vue";
 import { LoginStep } from '@/plugins/fronteggAuth/Api';
+import { validateTwoFactorCode } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "LoginWithTwoFactor",
@@ -79,11 +80,7 @@ export default Vue.extend({
       isFormValid: false,
       code: '',
       rules: {
-        code: [
-          (v: string) => !!v || "The code is required",
-          (v: string) =>
-            !v || v.length === 6 || "Code must be at least 6 characters",
-        ],
+        code: validateTwoFactorCode(),
       },
     }
   },

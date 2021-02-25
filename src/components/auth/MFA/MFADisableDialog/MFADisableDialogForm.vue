@@ -22,6 +22,7 @@
 import Vue from "vue";
 import { AuthState } from "@/plugins/fronteggAuth/Api";
 import { mapState } from "@/plugins/fronteggCore/map-state";
+import { validateTwoFactorCode } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "MFADisableDialogForm",
@@ -36,14 +37,7 @@ export default Vue.extend({
         mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
       }),
       rules: {
-        code: [
-          (v: string) =>
-            !!v || this.$t("validation.required-field", { name: "code" }),
-          (v: string) =>
-            !v ||
-            v.length === 6 ||
-            this.$t("validation.min-length", { name: "code", limit: 6 }),
-        ],
+        code: validateTwoFactorCode(),
       },
     };
   },

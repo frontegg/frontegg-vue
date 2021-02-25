@@ -17,7 +17,7 @@
             >
           </div>
         </li>
-        <li>
+        <li class="fe-input fe-input-full-width fe-input-in-form">
           {{ $t('auth.mfa.verify.enter-generated-code') }}
           <v-text-field
             :rules="rules.code"
@@ -41,6 +41,7 @@ import Spinner from '@/components/Common/Spinner.vue'
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import { AuthState } from "@/plugins/fronteggAuth/Api";
+import { validateTwoFactorCode } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "MFAVerifyStepForm",
@@ -58,10 +59,7 @@ export default Vue.extend({
         mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
       }),
       rules: {
-        code: [
-          (v: string) => !!v || this.$t('validation.required-field', { name: 'code' }),
-          (v: string) => !v || v.length === 6 || this.$t('validation.min-length', { name: 'code', limit: 6 }),
-        ],
+        code: validateTwoFactorCode(),
       },
     }
   },

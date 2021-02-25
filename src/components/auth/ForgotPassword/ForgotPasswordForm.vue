@@ -41,6 +41,7 @@ import { AuthState, ForgotPasswordState } from '@/plugins/fronteggAuth/Api';
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
+import { validateEmail } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "ForgotPasswordForm",
@@ -53,13 +54,7 @@ export default Vue.extend({
         forgotPasswordState: (state: { auth: AuthState }) => state.auth.forgotPasswordState,
       }),
       email: '',
-      emailRules: [
-        (v: string) => !!v || "The Email is required",
-        (v: string) =>
-          !v ||
-          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "Must be a valid email",
-      ],
+      emailRules: validateEmail(),
       isFormValid: false,
     };
   },

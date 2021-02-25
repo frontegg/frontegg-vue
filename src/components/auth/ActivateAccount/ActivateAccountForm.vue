@@ -81,7 +81,7 @@ import Vue from "vue";
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import { mapState } from '@/plugins/fronteggCore/map-state'
 import Spinner from '@/components/Common/Spinner.vue'
-import { requiredPassword, validatePasswordUsingOWASP, validatePasswordConfirmation, } from '@/plugins/fronteggCore/helpers/validates';
+import { validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation, } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: 'ResetPassword',
@@ -111,7 +111,7 @@ export default Vue.extend({
       showConfirmPassword: false,
       passError: [],
       rules: {
-        password: requiredPassword(),
+        password: validateRequired('Password'),
         confirmPassword: validatePasswordConfirmation(this.$refs),
       },
     }

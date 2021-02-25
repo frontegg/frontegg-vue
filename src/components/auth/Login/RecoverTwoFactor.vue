@@ -46,8 +46,7 @@
 import Vue from "vue";
 import { mapState } from "@/plugins/fronteggCore/map-state";
 import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
-import Spinner from "@/components/Common/Spinner.vue";
-import { LoginStep } from "@/plugins/fronteggAuth/Api";
+import { validateTwoFactorRecoveryCode } from '@/plugins/fronteggCore/helpers/validates';
 
 export default Vue.extend({
   name: "RecoverTwoFactor",
@@ -60,11 +59,7 @@ export default Vue.extend({
       isFormValid: false,
       code: "",
       rules: {
-        code: [
-          (v: string) => !!v || "The code is required",
-          (v: string) =>
-            !v || v.length >= 8 || "Code must be at least 8 characters",
-        ],
+        code: validateTwoFactorRecoveryCode(),
       },
     };
   },
@@ -92,6 +87,6 @@ export default Vue.extend({
 
 <style scopped lang="scss">
 .fe-button {
-      margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 </style>
