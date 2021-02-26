@@ -2,10 +2,11 @@
   "packages": [
     "packages/*"
   ],
-  "version": "1.19.1",
+  "version": "0.1.0",
   "npmClient": "yarn",
   "useWorkspaces": true,
   "publishConfig": {
-    "registry": "https://registry.npmjs.org"
+    "registry": "https://registry.npmjs.org",
+    "directory": "dist"
   }
 }

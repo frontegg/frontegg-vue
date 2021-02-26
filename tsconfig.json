@@ -1,43 +1,40 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "esnext",
-    "strict": true,
-    "jsx": "preserve",
-    "importHelpers": true,
-    "moduleResolution": "node",
-    "skipLibCheck": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
     "allowSyntheticDefaultImports": true,
+    "jsx": "react",
     "sourceMap": true,
-    "baseUrl": ".",
-    "types": [
-      "vuetify",
-      "mocha",
-      "chai",
-      "webpack",
-      "webpack-env"
-    ],
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+    "declaration": true,
     "lib": [
+      "es2015",
+      "es2016",
+      "es2017",
+      "es2018",
+      "es2019",
+      "es2020",
       "esnext",
-      "dom",
-      "dom.iterable",
-      "scripthost"
+      "dom"
+    ],
+    "target": "es5",
+    "module": "es6",
+    "noEmitHelpers": true,
+    "importHelpers": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "experimentalDecorators": true,
+    "noUnusedLocals": false,
+    "moduleResolution": "node",
+    "strictPropertyInitialization": true,
+    "skipLibCheck": true,
+    "alwaysStrict": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "types": [
+      "cypress"
     ]
-  },
-  "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "src/**/*.vue",
-    "tests/**/*.ts",
-    "tests/**/*.tsx"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  }
 }
