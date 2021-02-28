@@ -1,11 +1,9 @@
 import { EnhancedStore } from '@reduxjs/toolkit';
 import { Unsubscribe } from 'redux';
 import { FronteggPluginService } from './interfaces';
-import { FronteggAuthService } from './auth/service';
 
 declare module 'vue/types/vue' {
   interface VueConstructor {
-    fronteggAuth: FronteggAuthService
     registerFronteggPlugin: (plugin: FronteggPluginService) => void;
     fronteggPlugins: FronteggPluginService[];
   }

@@ -30,6 +30,7 @@ import authPlugin, {
   securityPolicyActions, User, AuthState, authInitialState,
 } from '@frontegg/redux-store/auth';
 import { AuthActions } from '@frontegg/redux-store';
+import { ActionsHolder } from './ActionsHolder';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
   const reducerKeys = Object.keys(reducer);
@@ -56,20 +57,20 @@ export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
   private store?: EnhancedStore<FronteggStore>;
   private state: AuthState = authInitialState;
-  protected loginActions!: LoginActions;
-  protected socialLoginsActions!: SocialLoginActions;
-  protected activateAccountActions!: ActivateAccountActions;
-  protected acceptInvitationActions!: AcceptInvitationActions;
-  protected forgotPasswordActions!: ForgotPasswordActions;
-  protected signUpActions!: SignUpActions;
-  protected profileActions!: ProfileActions;
-  protected ssoActions!: SSOActions;
-  protected mfaActions!: MfaActions;
-  protected teamActions!: TeamActions;
-  protected apiTokensActions!: ApiTokensActions;
-  protected securityPolicyActions!: SecurityPolicyActions;
+  loginActions!: LoginActions;
+  socialLoginsActions!: SocialLoginActions;
+  activateAccountActions!: ActivateAccountActions;
+  acceptInvitationActions!: AcceptInvitationActions;
+  forgotPasswordActions!: ForgotPasswordActions;
+  signUpActions!: SignUpActions;
+  profileActions!: ProfileActions;
+  ssoActions!: SSOActions;
+  mfaActions!: MfaActions;
+  teamActions!: TeamActions;
+  apiTokensActions!: ApiTokensActions;
+  securityPolicyActions!: SecurityPolicyActions;
 
-  constructor(private options: AuthPluginOptions) {
+  constructor(options: AuthPluginOptions) {
     this.pluginConfig = AuthPlugin(options);
   }
 
@@ -88,7 +89,6 @@ export class FronteggAuthService implements FronteggPluginService {
   }
 
   init = (store: EnhancedStore<FronteggStore>) => {
-    console.log('init', this.options);
     this.store = store;
 
     Object.entries({
@@ -108,7 +108,11 @@ export class FronteggAuthService implements FronteggPluginService {
       Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
     });
 
-    console.log('init finished');
+
+    const detachableActions = bindActionCreators(authActions, this.store!.dispatch);
+    ActionsHolder.setActions(detachableActions);
+
+
     this.accessTokenUpdater(true);
     this.store.subscribe(this.storeSubscriber);
   };

@@ -2,10 +2,10 @@
   "name": "@frontegg/vue-core",
   "version": "0.1.0",
   "description": "",
-  "main": "dist/frontegg-core.ssr.js",
-  "browser": "dist/frontegg-core.esm.js",
-  "module": "dist/frontegg-core.esm.js",
-  "unpkg": "dist/frontegg-core.min.js",
+  "main": "dist/index.ssr.js",
+  "browser": "dist/index.js",
+  "module": "dist/index.js",
+  "unpkg": "dist/index.min.js",
   "types": "dist/index.d.ts",
   "typings": "dist/index.d.ts",
   "files": [
@@ -17,7 +17,6 @@
     "serve": "vue-cli-service serve dev/serve.ts",
     "build:watch": "rollup -w --config build/rollup.config.js  --format es",
     "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:types": "tsc --emitDeclarationOnly --project ./tsconfig.json",
     "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
     "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"

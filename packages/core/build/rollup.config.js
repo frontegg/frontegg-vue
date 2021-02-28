@@ -23,8 +23,12 @@ const argv = minimist(process.argv.slice(2));
 
 const projectRoot = path.resolve(__dirname, '..');
 
+const entryPoints = [
+  'auth/index',
+  'index',
+];
 const baseConfig = {
-  input: 'src/index.ts',
+  input: entryPoints.reduce((p, n) => ({ ...p, [n]: `./src/${n}.ts` }), {}),
   plugins: {
     preVue: [
       alias({
@@ -65,6 +69,8 @@ const external = [
   // eg. 'jquery'
   'vue',
   '@frontegg/redux-store',
+  '@frontegg/redux-store/auth',
+  '@frontegg/redux-store/toolkit',
   '@frontegg/rest-api',
   'redux-saga',
   'redux-saga/effects',
@@ -89,10 +95,12 @@ const buildFormats = [];
 if (!argv.format || argv.format === 'es') {
   const esConfig = {
     ...baseConfig,
-    input: 'src/index.ts',
+    // input: 'src/index.ts',
     external,
     output: {
-      file: 'dist/frontegg-core.esm.js',
+      // file: 'dist/frontegg-core.esm.js',
+      dir: distFolder,
+      entryFileNames: '[name].js',
       format: 'esm',
       exports: 'named',
     },

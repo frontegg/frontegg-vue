@@ -1,3 +1,18 @@
+import { FronteggAuthService } from './service';
+import {
+  AcceptInvitationState,
+  ActivateAccountState,
+  ApiTokensState,
+  AuthState, ForgotPasswordState, LoginActions, LoginState,
+  MFAState,
+  ProfileState,
+  SecurityPolicyState,
+  SignUpState,
+  SocialLoginState,
+  SSOState,
+  TeamState,
+} from '@frontegg/redux-store/auth';
+
 export type AuthPageRoutes = {
   /**
    * the page whither need to redirect in the case when a user is authenticated
@@ -44,3 +59,25 @@ export type AuthPageRoutes = {
 
 
 export type AuthPluginOptions = { routes?: Partial<AuthPageRoutes> };
+
+declare module 'vue/types/vue' {
+  interface VueConstructor {
+    fronteggAuth: FronteggAuthService
+  }
+
+  interface Vue {
+    mapAuthState: () => { authState: AuthState };
+    mapLoginState: () => { loginState: LoginState };
+    mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };
+    mapActivateAccountState: () => { activateAccountState: ActivateAccountState };
+    mapApiTokensState: () => { apiTokensState: ApiTokensState };
+    mapForgotPasswordState: () => { forgotPasswordState: ForgotPasswordState };
+    mapMfaState: () => { mfaState: MFAState };
+    mapProfileState: () => { profileState: ProfileState };
+    mapSecurityPolicyState: () => { securityPolicyState: SecurityPolicyState };
+    mapSignupState: () => { signupState: SignUpState };
+    mapSocialLoginState: () => { socialLoginState: SocialLoginState };
+    mapSsoState: () => { ssoState: SSOState };
+    mapTeamState: () => { teamState: TeamState };
+  }
+}

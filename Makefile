@@ -66,7 +66,10 @@ install: ##@1 Global yarn install all packages
   		| sed 's|^./packages/||' \
   		| xargs -I '{}' sh -c '$(MAKE) add-dist-folders-{}'
 	@echo "${YELLOW}Running lerna bootstrap${RESET}"
-	@./node_modules/.bin/lerna bootstrap
+	@echo "${YELLOW}Running lerna bootstrap${RESET}"
+	@./node_modules/.bin/lerna bootstrap --ignore redux-store
+	@rm "${DIR}/node_modules/@frontegg/vue-core"
+	@ln -s "${DIR}/packages/core/dist" "${DIR}/node_modules/@frontegg/vue-core"
 
 add-dist-folders-%:
 	@mkdir -p ./packages/${*}/dist

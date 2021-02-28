@@ -2,8 +2,25 @@ import { PluginObject, VueConstructor } from 'vue';
 import { AuthPluginOptions } from './interfaces';
 import { FronteggAuthService } from './service';
 import { registerFronteggPlugin } from '../utils';
+import { connectMapState } from './mapAuthState';
 
 
+export {
+  mapAuthActions,
+  mapLoginActions,
+  mapAcceptInvitationActions,
+  mapActivateAccountActions,
+  mapApiTokensActions,
+  mapForgotPasswordActions,
+  mapMfaActions,
+  mapProfileActions,
+  mapSecurityPolicyActions,
+  mapSignupActions,
+  mapSocialLoginActions,
+  mapSsoActions,
+  mapTeamActions,
+} from './mapAuthState';
+export * from './interfaces';
 export const FronteggAuth: PluginObject<AuthPluginOptions> = {
   install(Vue: VueConstructor, options?: AuthPluginOptions) {
     if (Vue.fronteggAuth) {
@@ -11,13 +28,13 @@ export const FronteggAuth: PluginObject<AuthPluginOptions> = {
       return;
     }
 
-    // if (!Vue.registerFronteggPlugin) {
-    //   throw Error('FronteggCore plugin must registered before, move Vue.use(FronteggCore) to the top');
-    // }
-
     Vue.fronteggAuth = new FronteggAuthService(options ?? {});
     registerFronteggPlugin(Vue, Vue.fronteggAuth);
 
-
+    Vue.mixin({
+      beforeCreate() {
+        connectMapState(this);
+      },
+    });
   },
 };

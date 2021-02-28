@@ -35,22 +35,22 @@ const objectMappers = (obj: any, fallbackGetter: any) => function () {
   }), {});
 };
 
-export const mapState = (component: any, ...props: any[]) => {
-  const fallbackGetter = (prop: any) => (state: FronteggStore) => get(state, prop);
-  const [obj] = props;
-  const vueInstance: any = component;
-
-  const slices = Object.keys(obj);
-  const state = vueInstance[FRONTEGG_STORE_KEY].getState();
-
-  vueInstance.FRONTEGG_REDUX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
-    [prop]: typeof obj[prop] === 'function' ? obj[prop].bind(vueInstance) : fallbackGetter(obj[prop]),
-  }), vueInstance.FRONTEGG_REDUX_BINDINGS || {});
-
-  return slices.reduce((result, prop) => Object.assign({}, result, {
-    [prop]: typeof obj[prop] === 'function' ? obj[prop].call(vueInstance, state) : fallbackGetter(obj[prop])(state),
-  }), {});
-};
+// export const mapState = (component: any, ...props: any[]) => {
+//   const fallbackGetter = (prop: any) => (state: FronteggStore) => get(state, prop);
+//   const [obj] = props;
+//   const vueInstance: any = component;
+//
+//   const slices = Object.keys(obj);
+//   const state = vueInstance[FRONTEGG_STORE_KEY].getState();
+//
+//   vueInstance.FRONTEGG_REDUX_BINDINGS = slices.reduce((result, prop) => Object.assign({}, result, {
+//     [prop]: typeof obj[prop] === 'function' ? obj[prop].bind(vueInstance) : fallbackGetter(obj[prop]),
+//   }), vueInstance.FRONTEGG_REDUX_BINDINGS || {});
+//
+//   return slices.reduce((result, prop) => Object.assign({}, result, {
+//     [prop]: typeof obj[prop] === 'function' ? obj[prop].call(vueInstance, state) : fallbackGetter(obj[prop])(state),
+//   }), {});
+// };
 
 /**
  * maps redux state to data attributes

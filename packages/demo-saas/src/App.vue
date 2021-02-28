@@ -1,10 +1,12 @@
 <template>
-  <div v-if="!fronteggLoaded">Loading... {{fronteggLoaded}}</div>
+  <div v-if="!fronteggLoaded">Loading...</div>
   <div id="app" v-else>
     <div id="nav">
       <router-link to="/">Home</router-link>
       |
       <router-link to="/about">About</router-link>
+      |
+      <router-link to="/test">Test</router-link>
     </div>
     <router-view/>
   </div>
@@ -32,3 +34,18 @@
   }
 }
 </style>
+
+
+<script lang="ts">
+import Vue from "vue";
+
+export default Vue.extend({
+  name: "App",
+  mounted() {
+    console.log('mounted', this.fronteggLoaded)
+  },
+  updated() {
+    console.log('updated', this.fronteggLoaded)
+  }
+});
+</script>

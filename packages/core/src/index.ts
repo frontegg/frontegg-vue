@@ -4,8 +4,9 @@ import { EnhancedStore } from '@reduxjs/toolkit';
 import VueMoment from 'vue-moment';
 import { PluginOptions } from './interfaces';
 import { combinedPluginsStore, syncStateWithComponent } from './helpers';
-import { getStoreBinding, loadingUnsubscribe, setLoadingUnsubscribe, setMapState, setStoreKey, setStoreUnsubscribe, storeUnsubscribe } from './utils';
-import { FronteggAuth } from './auth';
+import { getStoreBinding, loadingUnsubscribe, setLoadingUnsubscribe, setStoreKey, setStoreUnsubscribe, storeUnsubscribe } from './utils';
+
+export * from './types';
 
 _Vue.use(VueMoment as unknown as PluginObject<undefined>);
 
@@ -34,12 +35,10 @@ const FronteggCore: PluginObject<PluginOptions> = {
       const func: any = () => {
         // @ts-ignore
         instance.fronteggLoaded = fronteggLoaded;
-        // instance.fronteggLoaded = fronteggLoaded;
       };
       fronteggLoadedSubscribes.add(func);
       return () => fronteggLoadedSubscribes.delete(func);
     };
-
 
     const registerPlugins = (instance: any) => {
       console.log('Registering plugins', Vue.fronteggPlugins);
@@ -84,9 +83,16 @@ const FronteggCore: PluginObject<PluginOptions> = {
       };
     });
 
+    const waitFor = setInterval(() => {
+      checkIfPluginsLoaded();
+      if (fronteggLoaded) {
+        clearInterval(waitFor);
+      }
+    }, 10);
+
     Vue.mixin({
       data: () => ({
-        fronteggLoaded: false,
+        fronteggLoaded,
       }),
       beforeCreate() {
         if (!pluginRegistered) {
@@ -94,7 +100,7 @@ const FronteggCore: PluginObject<PluginOptions> = {
         }
 
         setStoreKey(this, store);
-        setMapState(this);
+        // setMapState(this);
       },
       created() {
         if (getStoreBinding(this)) {
@@ -112,5 +118,4 @@ const FronteggCore: PluginObject<PluginOptions> = {
 
 export {
   FronteggCore,
-  FronteggAuth,
 };

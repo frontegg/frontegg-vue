@@ -1,0 +1,192 @@
+<template>
+  <div class="fe-login-page">
+    <v-container class="fe-login-container">
+      <div class="fe-login-header">
+        asdasd
+      </div>
+      <div class="fe-login-component">
+        <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
+          <LoginWithPassword/>
+          <!--          <SocialLogins/>-->
+        </div>
+        <!--        <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">-->
+        <!--          <LoginWithTwoFactor/>-->
+        <!--        </div>-->
+        <!--        <div v-else-if="currentStep === LoginStep.recoverTwoFactor">-->
+        <!--          <RecoverTwoFactor/>-->
+        <!--        </div>-->
+        <!--        <div v-else-if="currentStep === LoginStep.redirectToSSO">-->
+        <!--          <RedirectToSSO/>-->
+        <!--        </div>-->
+        <!--        <div v-else-if="currentStep === LoginStep.loginWithSSOFailed">-->
+        <!--          <LoginWithSSOFailed/>-->
+        <!--        </div>-->
+        <!--        <div v-else-if="currentStep === LoginStep.forceTwoFactor">-->
+        <!--          <ForceEnrollMfa/>-->
+        <!--        </div>-->
+        <!--        <div v-else-if="currentStep === LoginStep.success">-->
+        <!--          <LoginSuccess/>-->
+        <!--        </div>-->
+      </div>
+
+      <button
+        v-if="showBackBtn"
+        class="fe-login-component__back-to-login"
+        @click=""
+      >
+        Back to Login
+      </button>
+    </v-container>
+  </div>
+</template>
+
+<script lang="ts">
+import Vue from 'vue';
+import {LoginStep} from "@frontegg/redux-store/auth";
+import LoginWithPassword from "@/auth/Login/LoginWithPassword.vue";
+// import {mapLoginActions} from "@frontegg/vue-core/auth";
+// import LoginWithPassword from './LoginWithPassword.vue';
+// import SocialLogins from './SocialLogins.vue';
+// import RedirectToSSO from './RedirectToSSO.vue';
+// import LoginWithSSOFailed from './LoginWithSSOFailed.vue';
+// import ForceEnrollMfa from './ForceEnrollMfa.vue';
+// import LoginSuccess from './LoginSuccess.vue';
+// import LoginWithTwoFactor from './LoginWithTwoFactor.vue';
+// import RecoverTwoFactor from './RecoverTwoFactor.vue'
+// import {AuthState, LoginState, LoginStep} from '@frontegg/redux-store/auth';
+// import Spinner from '@/components/Common/Spinner.vue'
+import i18n from '@/i18n';
+
+export default Vue.extend({
+  name: 'Login',
+  i18n,
+  components: {
+    // Spinner,
+    LoginWithPassword,
+    // RedirectToSSO,
+    // LoginWithSSOFailed,
+    // ForceEnrollMfa,
+    // SocialLogins,
+    // LoginSuccess,
+    // LoginWithTwoFactor,
+    // RecoverTwoFactor,
+  },
+  data() {
+    return {
+      LoginStep,
+      routes: {loginUrl: '/login'},
+      ...this.mapLoginState()
+      // ...this.mapAuthState({
+      //   loginState: state => state.loginState,
+      //   routes: state => state.routes
+      // }),
+    }
+  },
+  computed: {
+    showBackBtn() {
+      return false;
+      // return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginState.step);
+    },
+
+    currentStep() {
+      return this.$data.loginState.step || LoginStep.preLogin;
+    },
+  },
+  mounted() {
+    // this[FRONTEGG_STORE_KEY].dispatch({
+    //   type: 'auth/setState',
+    //   payload: {
+    //     isLoading: false,
+    //   }
+    // });
+  },
+  methods: {
+    // login: mapLoginActions("login"),
+    backToLogin() {
+      // this.$router.push(this.routes.loginUrl);
+
+      // this[FRONTEGG_STORE_KEY].dispatch({
+      //   type: "auth/resetLoginState",
+      // });
+    },
+  },
+});
+</script>
+
+<style lang="scss">
+.fe-login-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--fe-auth-background, var(--color-white));
+  z-index: 1000;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  overflow: auto;
+}
+
+.fe-login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-width: 90%;
+  min-height: 300px;
+  box-shadow: 0 1.4px 4.5px rgba(0, 0, 0, 0.016),
+  0 4.3px 12.5px rgba(0, 0, 0, 0.032), 0 10.3px 30.1px rgba(0, 0, 0, 0.055),
+  0 29px 100px rgba(0, 0, 0, 0.14);
+  background: var(--fe-auth-container-background, var(--color-white));
+  border-radius: var(--fe-auth-container-border-radius, 0.5rem);
+  padding: var(--fe-auth-container-paddig, 2rem);
+  width: var(--fe-auth-container-width, 400px);
+}
+
+.fe-login-header {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 3rem;
+  align-items: center;
+  overflow-x: hidden;
+
+  > * {
+    max-width: 100%;
+    max-height: 50px;
+  }
+}
+
+.fe-login-header {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0 3rem;
+  align-items: center;
+  overflow-x: hidden;
+
+  > * {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .fe-login-page {
+    padding-top: 10vh;
+    justify-content: flex-start;
+
+    .fe-login-container {
+      box-shadow: none;
+    }
+  }
+}
+</style>
+
+<style scoped>
+.v-stepper {
+  box-shadow: none;
+}
+
+.v-stepper__content {
+  padding: 0;
+}
+</style>
