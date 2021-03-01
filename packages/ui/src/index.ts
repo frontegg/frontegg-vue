@@ -2,6 +2,7 @@
 import plugin, * as components from './index.esm';
 import { FronteggAuth } from '@frontegg/vue-core/auth';
 import Vue from 'vue';
+
 Vue.use(FronteggAuth);
 
 // Attach named exports directly to plugin. IIFE/CJS will
@@ -11,7 +12,7 @@ type NamedExports = Exclude<typeof components, 'default'>;
 type ExtendedPlugin = typeof plugin & NamedExports;
 Object.entries(components).forEach(([componentName, component]) => {
   if (componentName !== 'default') {
-    const key = componentName as Exclude<keyof NamedExports, 'default'>;
+    const key = componentName as Exclude<keyof NamedExports, 'default' | 'vuetify'>;
     const val = component as Exclude<ExtendedPlugin, typeof plugin>;
     (plugin as ExtendedPlugin)[key] = val;
   }

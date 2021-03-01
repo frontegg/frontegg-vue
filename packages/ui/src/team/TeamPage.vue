@@ -4,7 +4,7 @@
       :page-title="$t('auth.team.title')"
       :sub-title="$t('auth.team.subtitle', {totalItems: 100})"
     />
-    <TeamLayout /> 
+    <TeamLayout />
   </div>
 </template>
 
