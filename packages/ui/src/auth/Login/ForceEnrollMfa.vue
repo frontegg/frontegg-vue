@@ -50,13 +50,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
-import { AuthState, MFAStep } from "@/plugins/fronteggAuth/Api";
-import { mapState } from "@/plugins/fronteggCore/map-state";
-import MFAVerifyStepForm from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepForm.vue";
-import MFAVerifyStepErrorMessage from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepErrorMessage.vue";
-import MFAVerifyStepMessage from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepMessage.vue";
-import MFARecoveryCodeStep from "@/components/auth/MFA/MFARecoveryCodeStep/MFARecoveryCodeStep.vue";
+import {MFAStep} from "@frontegg/redux-store/auth";
+import {mapMfaActions, mapLoginActions} from "@frontegg/vue-core/auth";
+import MFAVerifyStepForm from "../MFA/MFAVerifyStep/MFAVerifyStepForm.vue";
+import MFAVerifyStepErrorMessage from "../MFA/MFAVerifyStep/MFAVerifyStepErrorMessage.vue";
+import MFAVerifyStepMessage from "../MFA/MFAVerifyStep/MFAVerifyStepMessage.vue";
+import MFARecoveryCodeStep from "../MFA/MFARecoveryCodeStep/MFARecoveryCodeStep.vue";
 
 export default Vue.extend({
   name: "ForceEnrollMfa",
@@ -69,9 +68,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
       MFAStep,
       isFormValid: false,
       token: '',
@@ -80,63 +77,54 @@ export default Vue.extend({
   },
   computed: {
     step() {
-      return this.mfaState.step;
+      return this.$data.mfaState.step;
     },
     loading() {
-      return this.mfaState.loading;
+      return this.$data.mfaState.loading;
     },
     mfaToken() {
-      return this.mfaState.mfaToken;
+      return this.$data.mfaState.mfaToken;
     },
     recoveryCode() {
-      return this.mfaState.recoveryCode;
+      return this.$data.mfaState.recoveryCode;
     },
   },
   mounted() {
     const head = document.head || document.getElementsByTagName('head')[0];
-    this.style = document.createElement('style');
-    this.style.type = 'text/css';
-    this.style.appendChild(
+    this.$data.style = document.createElement('style');
+    this.$data.style.type = 'text/css';
+    this.$data.style.appendChild(
       document.createTextNode(`:root {
       --fe-auth-container-width: 500px;
     }`)
     );
-    head.appendChild(this.style);
+    head.appendChild(this.$data.style);
   },
   destroyed() {
-    this.style.remove();
+    this.$data.style.remove();
   },
   methods: {
+    _verifyMfaAfterForce: mapMfaActions('verifyMfaAfterForce'),
+    _setMfaState: mapMfaActions('setMfaState'),
+    _requestAuthorize: mapLoginActions('requestAuthorize'),
     async verifyMfaAfterForce() {
-      await this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/verifyMfaAfterForce",
-        payload: {
-          mfaToken: this.mfaToken || 'cef9809f-d722-483e-ac31-644989f9bb30', //cef9809f-d722-483e-ac31-644989f9bb30
-          value: this.token,
-          callback: (success) => {
-            if (success) {
-              this[FRONTEGG_STORE_KEY].dispatch({
-                type: "auth/setMfaState",
-                payload: {
-                  recoveryCode: this.recoveryCode,
-                },
-              });
-            }
-          },
+      await this._verifyMfaAfterForce({
+        mfaToken: this.mfaToken || '',
+        value: this.$data.token,
+        callback: (success) => {
+          if (success) {
+            this._setMfaState({
+              recoveryCode: this.recoveryCode,
+            })
+          }
         },
-      });
+      })
     },
     requestAuthorize(firstTime) {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/requestAuthorize",
-        payload: {
-          firstTime
-        },
-      });
+      this._requestAuthorize({
+        firstTime
+      })
     }
   },
 });
 </script>
-
-<style lang="scss">
-</style>
