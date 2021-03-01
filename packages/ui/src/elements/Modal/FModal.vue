@@ -24,7 +24,8 @@
 </template>
 
 <script lang="ts">
-export default {
+import Vue from "vue";
+export default Vue.extend({
   name: "FModal",
   props: {
     openModal: {
@@ -37,11 +38,12 @@ export default {
     },
   },
   methods: {
-    close() {
+    close(): void {
       this.$emit("onCloseModal", false);
     }
   }
-};
+})
+
 </script>
 
 <style lang="scss" >
