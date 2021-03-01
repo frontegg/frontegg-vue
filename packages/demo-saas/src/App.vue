@@ -6,7 +6,7 @@
       |
       <router-link to="/about">About</router-link>
       |
-      <router-link to="/test">Test</router-link>
+      <router-link to="/account/login">Login</router-link>
     </div>
     <router-view/>
   </div>
@@ -41,11 +41,5 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "App",
-  mounted() {
-    console.log('mounted', this.fronteggLoaded)
-  },
-  updated() {
-    console.log('updated', this.fronteggLoaded)
-  }
 });
 </script>

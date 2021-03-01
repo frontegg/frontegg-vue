@@ -30,9 +30,7 @@ export const combinedPluginsStore = (contextOptions: ContextOptions, plugins: Pl
     if (opts?.refresh) {
       window.location.href = path;
     } else {
-      if (path === router.currentRoute.path) {
-        return;
-      }
+
       if (opts?.replace) {
         router.replace(path);
       } else {
@@ -111,8 +109,6 @@ export const generateStoreBindingBySlices = (vueInstance: any, subState: string,
 export const objectMappers = (subState: string, obj: any, fallbackGetter: any) => function () {
   // @ts-ignore
   const vueInstance: any = this;
-  debugger;
-
   const slices = Object.keys(obj);
   const state = get(getStore(vueInstance).getState(), subState);
 
@@ -128,7 +124,6 @@ export const objectMappers = (subState: string, obj: any, fallbackGetter: any) =
 export const simpleMappers = (subState: string, props: any, getter: any) => function () {
   // @ts-ignore
   const vueInstance: any = this;
-  debugger;
   const slices = [].concat.apply([], props);
   const state = get(getStore(vueInstance).getState(), subState);
 

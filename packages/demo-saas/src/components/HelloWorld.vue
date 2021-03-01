@@ -1,6 +1,8 @@
 <template>
   <div class="hello">
-    <h1>{{ loginState.email }}</h1>
+
+    <p>{{ this.user ? this.user.email : "Not Logged in" }}</p>
+
     <p>
       For a guide and recipes on how to configure / customize this project,<br/>
       check out the
@@ -13,15 +15,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {mapLoginActions} from "@frontegg/vue-core/auth";
+// import {mapLoginActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "HelloWorld",
-  data: function () {
-    return this.mapLoginState()
-  },
-  methods: {
-    login: mapLoginActions('login')
+  computed: {
+    user() {
+      return this.fronteggAuth.user
+    }
   }
 });
 </script>

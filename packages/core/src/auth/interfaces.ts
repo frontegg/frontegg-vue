@@ -3,7 +3,7 @@ import {
   AcceptInvitationState,
   ActivateAccountState,
   ApiTokensState,
-  AuthState, ForgotPasswordState, LoginActions, LoginState,
+  AuthState, ForgotPasswordState, LoginState,
   MFAState,
   ProfileState,
   SecurityPolicyState,
@@ -66,6 +66,7 @@ declare module 'vue/types/vue' {
   }
 
   interface Vue {
+    fronteggAuth: FronteggAuthService
     mapAuthState: () => { authState: AuthState };
     mapLoginState: () => { loginState: LoginState };
     mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };

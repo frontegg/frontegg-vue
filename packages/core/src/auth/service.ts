@@ -31,6 +31,7 @@ import authPlugin, {
 } from '@frontegg/redux-store/auth';
 import { AuthActions } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
+import { AuthPageRoutes } from '@frontegg/redux-store/auth/interfaces';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
   const reducerKeys = Object.keys(reducer);
@@ -78,8 +79,11 @@ export class FronteggAuthService implements FronteggPluginService {
     return this.store?.getState().auth.isLoading ?? true;
   }
 
-  isAuthenticatedRef!: boolean;
+  get routes(): AuthPageRoutes {
+    return this.store?.getState().auth.routes ?? authInitialState.routes;
+  }
 
+  isAuthenticatedRef!: boolean;
   get isAuthenticated(): boolean {
     return this.store?.getState().auth.isAuthenticated ?? false;
   }

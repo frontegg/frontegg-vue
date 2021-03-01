@@ -2,7 +2,7 @@
   <v-row class="ma-0">
     <v-col cols="12" class="pa-0">
       {{ $t('auth.login.suggest-sign-up.message') }}
-      <span class="fe-login-component__back-to-sign-up-link">
+      <span class="fe-login-component__back-to-sign-up-link" @click.prevent="navigateToSignup">
         {{ $t('auth.login.suggest-sign-up.sign-up-link') }}
       </span>
     </v-col>
@@ -49,12 +49,9 @@
                 v-model="password"
                 tabindex="-1"
                 :outlined="true"
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="rules.password"
-                :type="showPassword ? 'text' : 'password'"
                 name="password"
                 placeholder="Enter Your Password"
-                @click:append="showPassword = !showPassword"
               />
             </div>
           </div>
@@ -89,7 +86,8 @@
 <script lang="ts">
 import Vue from "vue";
 import FButton from "@/elements/Button/FButton.vue";
-import {mapLoginActions} from "@frontegg/vue-core/auth";
+import {mapLoginActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
+import {validateEmail, validatePassword} from "@/auth/utils";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -98,15 +96,15 @@ export default Vue.extend({
   },
   data() {
     return {
+      ...this.mapAuthState(),
       ...this.mapLoginState(),
       isFormValid: false,
       email: "",
       password: "",
       rules: {
-        // email: validateEmail(),
-        // password: validatePassword(),
+        email: validateEmail(),
+        password: validatePassword(),
       },
-      showPassword: false,
     };
   },
   computed: {
@@ -136,6 +134,8 @@ export default Vue.extend({
   methods: {
     preLogin: mapLoginActions('preLogin'),
     login: mapLoginActions('login'),
+    resetLoginState: mapLoginActions('resetLoginState'),
+    setForgotPasswordState: mapForgotPasswordActions('setForgotPasswordState'),
     loginSubmit(e: any) {
       e.preventDefault();
       if (this.loginState.step === "preLogin") {
@@ -145,15 +145,13 @@ export default Vue.extend({
       }
     },
     navigateForgetPass() {
-      // this[FRONTEGG_STORE_KEY].dispatch({
-      //   type: "auth/setForgotPasswordState",
-      //   payload: {email: this.email},
-      // });
-      // this[FRONTEGG_STORE_KEY].dispatch({
-      //   type: "auth/resetLoginState",
-      // });
-
-      this.$router.push('/account/forget-password');
+      this.setForgotPasswordState({email: this.email})
+      this.resetLoginState();
+      this.$router.push(this.fronteggAuth.routes.forgetPasswordUrl);
+    },
+    navigateToSignup() {
+      this.resetLoginState();
+      this.$router.push(this.fronteggAuth.routes.signUpUrl);
     },
   },
 });

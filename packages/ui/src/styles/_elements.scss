@@ -146,6 +146,7 @@
     white-space: pre-wrap;
     word-break: break-word;
   }
+
   &__date-ago {
     > div:first-child {
       font-size: 0.9rem;
@@ -176,6 +177,153 @@
 }
 
 .fe-input {
+  $class: &;
+
+  display: inline-flex;
+  position: relative;
+  flex-direction: column;
+  vertical-align: middle;
+
+  @include with-full-width;
+
+  &__header {
+    display: flex;
+    margin-bottom: var(--element-spacing);
+    font-size: var(--element-font-size);
+
+    & * > {
+      background-color: inherit;
+      color: inherit;
+      font-size: var(--element-font-size);
+      font-weight: 600;
+    }
+
+    #{$class}__label-button {
+      margin-left: auto;
+      border: none;
+      padding: 0;
+      height: auto;
+      filter: none;
+      text-decoration: underline;
+    }
+  }
+
+  &-in-form {
+    margin: 0.5rem 0 1rem;
+  }
+
+  &__inner {
+    overflow: hidden;
+    display: inline-flex;
+    position: relative;
+    vertical-align: middle;
+    align-items: center;
+    font-family: var(--element-font-family);
+    font-size: var(--element-font-size);
+    height: var(--element-height);
+    width: 100%;
+    border-radius: var(--element-border-radius-sm);
+    background-color: var(--color-white);
+    color: var(--color-gray-8);
+    border: 1px solid var(--element-border-color);
+
+    @include with-size {
+      border-radius: var(--element-border-radius-sm);
+      padding: 0;
+    }
+
+    @include with-theme {
+      background-color: var(--color-white);
+      color: var(--color-gray-8);
+      border: 1px solid var(--element-border-color);
+    }
+
+    @include with-theme(disabled) {
+      background-color: var(--color-gray-0);
+      color: var(--color-text-disabled);
+
+      border: 1px solid var(--background-disabled);
+      opacity: 0.85;
+    }
+
+    &:hover {
+      border-color: var(--color-gray-5);
+    }
+
+    &:focus-within {
+      border-color: var(--theme-color);
+    }
+
+    #{$class}__input {
+      padding: 0 var(--element-padding);
+      width: 100%;
+      height: 100%;
+      border: none;
+      outline: none;
+      background-color: inherit;
+      font-family: inherit;
+      font-size: inherit;
+      color: inherit;
+    }
+
+    &-error {
+      border-color: var(--color-danger);
+      color: var(--color-danger);
+    }
+
+    &-multi {
+      vertical-align: middle;
+      min-height: var(--element-height);
+      height: auto;
+      padding: 0;
+      overflow: hidden;
+
+      #{$class}__input {
+        padding: var(--element-padding);
+      }
+    }
+
+    .fe-icon {
+      cursor: pointer;
+      user-select: none;
+      @include with-clickable {
+        border-radius: 50%;
+        width: var(--size-icon);
+        height: var(--size-icon);
+      }
+    }
+  }
+
+  &-with-prefix-icon {
+    #{$class}__input {
+      padding-left: 2rem;
+    }
+
+    .fe-icon {
+      margin-right: -1.5rem;
+      z-index: 1;
+      margin-left: 0.5rem;
+    }
+  }
+
+  &-with-suffix-icon {
+    #{$class}__input {
+      padding-right: 2rem;
+    }
+
+    .fe-icon {
+      margin-left: -2rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &__error {
+    color: var(--color-danger);
+    font-size: var(--element-font-size-sm);
+  }
+}
+
+.fe-input {
   .fe-input__inner-large,
   .fe-input__inner-small {
     height: auto;
@@ -186,7 +334,7 @@
       min-height: 40px;
 
       .v-text-field__slot,
-      input { 
+      input {
         min-height: 40px;
       }
     }
@@ -197,7 +345,7 @@
       min-height: 32px;
 
       .v-text-field__slot,
-      input { 
+      input {
         min-height: 32px;
       }
     }
@@ -213,6 +361,7 @@
   .v-input.v-text-field--outlined {
     .v-input__append-inner {
       margin: auto 8px auto auto;
+
       .v-icon {
         font-size: 22px;
       }
@@ -236,9 +385,7 @@
     .v-input__slot {
       --size-font-size: var(--element-font-size-lg);
       --size-border-radius: var(--element-border-radius-sm);
-      height: var(--size-height);
       font-size: var(--size-font-size);
-      border-radius: var(--size-border-radius);
       padding: 0;
       overflow: hidden;
       display: inline-flex;
@@ -258,7 +405,7 @@
           border-color: var(--color-gray-5);
         }
       }
-  
+
       &:focus-within {
         fieldset {
           border-color: var(--theme-color);
@@ -283,12 +430,18 @@
     }
   }
 
+  &__label {
+    text-align: left;
+  }
+
   .v-input.error--text {
-    input,
-    .v-messages__message {
+    input, .v-messages__message {
       color: var(--color-danger);
-      margin-top: 6px;
       font-size: var(--element-font-size-sm);
+    }
+
+    .v-messages__message {
+      margin-top: 6px;
     }
 
     .v-input__slot {
@@ -297,7 +450,7 @@
           border-color: var(--color-danger);
         }
       }
-  
+
       &:focus-within {
         fieldset {
           border-color: var(--color-danger);
@@ -311,3 +464,57 @@
     }
   }
 }
+
+.fe-loader {
+  position: relative;
+  width: var(--element-height);
+  height: var(--element-height);
+  display: inline-flex;
+
+  &-center {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
+
+  &__inner {
+    @include with-theme() {
+      background-color: transparent;
+      border: 2px solid var(--color-black-20);
+      border-bottom: 2px solid;
+    }
+    @include with-theme(primary) {
+      --theme-color: var(--color-primary);
+      --theme-background: var(--color-primary-lighter);
+    }
+
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    animation: spin 0.8s infinite linear;
+    animation-direction: reverse;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    margin: auto;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+

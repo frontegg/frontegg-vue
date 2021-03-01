@@ -13,10 +13,12 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from "@/components/Common/Spinner.vue";
+import i18n from "@/i18n";
+import Spinner from "@/elements/Spinner.vue";
 
 export default Vue.extend({
   name: "LoginSuccess",
+  i18n,
   components: {
     Spinner,
   },

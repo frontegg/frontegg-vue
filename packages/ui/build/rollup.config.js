@@ -41,11 +41,7 @@ const baseConfig = {
         }),
       }),
       json(),
-      postcss({
-        extensions: ['.css', '.scss', '.sass'],
-        minimize: true,
-        inject: true,
-      }),
+
     ],
     replace: {
       preventAssignment: true,
@@ -57,7 +53,13 @@ const baseConfig = {
         isProduction: true,
       },
     },
-    postVue: [],
+    postVue: [
+      postcss({
+        extensions: ['.css', '.scss', '.sass'],
+        minimize: true,
+        inject: true,
+      }),
+    ],
     babel: {
       exclude: 'node_modules/**',
       extensions: ['.js', '.jsx', '.ts', '.tsx', '.vue'],

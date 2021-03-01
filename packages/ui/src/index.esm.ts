@@ -1,13 +1,10 @@
 import _Vue, { PluginFunction } from 'vue';
 
+import './styles/app.scss';
 // Import vue components
 import * as authComponents from './auth/index';
-import { FronteggAuth } from '@frontegg/vue-core/auth';
 import Vuetify from 'vuetify';
-import './styles/app.scss';
-
 _Vue.use(Vuetify);
-_Vue.use(FronteggAuth);
 
 // install function executed by Vue.use()
 const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {

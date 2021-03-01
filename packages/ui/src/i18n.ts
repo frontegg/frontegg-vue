@@ -7,7 +7,6 @@ Vue.use(VueI18n);
 function loadLocaleMessages(): LocaleMessages {
   // @ts-ignore
   const messages: LocaleMessages = {};
-  debugger;
   Object.keys(locales).forEach((locale: any) => {
     messages[locale] = (locales as any)[locale];
   });

@@ -43,13 +43,13 @@ const FronteggCore: PluginObject<PluginOptions> = {
     const registerPlugins = (instance: any) => {
       console.log('Registering plugins', Vue.fronteggPlugins);
       pluginRegistered = true;
-      const pluginConfigs = Vue.fronteggPlugins.map(plugin => plugin.pluginConfig);
+      const pluginConfigs = (Vue.fronteggPlugins ||[]).map(plugin => plugin.pluginConfig);
       store = combinedPluginsStore(contextOptions!, pluginConfigs, instance.$router);
-      Vue.fronteggPlugins.forEach(plugin => plugin.init(store));
+      (Vue.fronteggPlugins ||[]).forEach(plugin => plugin.init(store));
     };
 
     const checkIfPluginsLoaded = () => {
-      const _fronteggLoaded = Vue.fronteggPlugins.reduce((loaded: boolean, plugin) => loaded && !plugin.loading, true);
+      const _fronteggLoaded = (Vue.fronteggPlugins || []).reduce((loaded: boolean, plugin) => loaded && !plugin.loading, true);
       if (_fronteggLoaded != fronteggLoaded) {
         fronteggLoaded = _fronteggLoaded;
         for (const subscriber of fronteggLoadedSubscribes) {

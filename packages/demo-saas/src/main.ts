@@ -12,7 +12,9 @@ Vue.use(FronteggCore, {
   },
   router,
 });
-Vue.use(FronteggAuth);
+Vue.use(FronteggAuth, {
+  header: 'https://live.frontegg.com/static/media/main-logo.d547563b.svg'
+});
 
 
 new Vue({

@@ -69,4 +69,8 @@ export default Vue.extend({
 .fe-button-loader > :not(.fe-loader) {
   visibility: visible;
 }
+.fe-loader__inner-primary {
+  --theme-color: var(--color-white);
+  --theme-background: var(--color-gray-1);
+}
 </style>

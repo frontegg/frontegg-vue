@@ -4,7 +4,6 @@ import { FronteggAuthService } from './service';
 import { registerFronteggPlugin } from '../utils';
 import { connectMapState } from './mapAuthState';
 
-
 export {
   mapAuthActions,
   mapLoginActions,
@@ -33,6 +32,7 @@ export const FronteggAuth: PluginObject<AuthPluginOptions> = {
 
     Vue.mixin({
       beforeCreate() {
+        this.fronteggAuth = Vue.fronteggAuth;
         connectMapState(this);
       },
     });

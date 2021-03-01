@@ -2,16 +2,16 @@
   <div class="fe-login-page">
     <v-container class="fe-login-container">
       <div class="fe-login-header">
-        asdasd
+        <img v-bind:src="headerImage">
       </div>
       <div class="fe-login-component">
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
           <LoginWithPassword/>
-          <!--          <SocialLogins/>-->
+          <SocialLogins/>
         </div>
-        <!--        <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">-->
-        <!--          <LoginWithTwoFactor/>-->
-        <!--        </div>-->
+        <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
+          <LoginWithTwoFactor/>
+        </div>
         <!--        <div v-else-if="currentStep === LoginStep.recoverTwoFactor">-->
         <!--          <RecoverTwoFactor/>-->
         <!--        </div>-->
@@ -43,77 +43,55 @@
 <script lang="ts">
 import Vue from 'vue';
 import {LoginStep} from "@frontegg/redux-store/auth";
-import LoginWithPassword from "@/auth/Login/LoginWithPassword.vue";
-// import {mapLoginActions} from "@frontegg/vue-core/auth";
-// import LoginWithPassword from './LoginWithPassword.vue';
-// import SocialLogins from './SocialLogins.vue';
-// import RedirectToSSO from './RedirectToSSO.vue';
-// import LoginWithSSOFailed from './LoginWithSSOFailed.vue';
-// import ForceEnrollMfa from './ForceEnrollMfa.vue';
-// import LoginSuccess from './LoginSuccess.vue';
-// import LoginWithTwoFactor from './LoginWithTwoFactor.vue';
-// import RecoverTwoFactor from './RecoverTwoFactor.vue'
-// import {AuthState, LoginState, LoginStep} from '@frontegg/redux-store/auth';
-// import Spinner from '@/components/Common/Spinner.vue'
 import i18n from '@/i18n';
+import Spinner from "@/elements/Spinner.vue";
+import LoginWithPassword from "@/auth/Login/LoginWithPassword.vue";
+import SocialLogins from "@/auth/SocialLogins/SocialLogins.vue";
+import LoginWithTwoFactor from "@/auth/Login/LoginWithTwoFactor.vue";
 
 export default Vue.extend({
   name: 'Login',
   i18n,
   components: {
-    // Spinner,
+    Spinner,
     LoginWithPassword,
     // RedirectToSSO,
     // LoginWithSSOFailed,
     // ForceEnrollMfa,
-    // SocialLogins,
+    SocialLogins,
     // LoginSuccess,
-    // LoginWithTwoFactor,
+    LoginWithTwoFactor,
     // RecoverTwoFactor,
   },
   data() {
     return {
       LoginStep,
-      routes: {loginUrl: '/login'},
+      ...this.mapAuthState(),
       ...this.mapLoginState()
-      // ...this.mapAuthState({
-      //   loginState: state => state.loginState,
-      //   routes: state => state.routes
-      // }),
     }
   },
   computed: {
     showBackBtn() {
-      return false;
-      // return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginState.step);
+      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.$data.loginState.step);
     },
 
     currentStep() {
       return this.$data.loginState.step || LoginStep.preLogin;
     },
-  },
-  mounted() {
-    // this[FRONTEGG_STORE_KEY].dispatch({
-    //   type: 'auth/setState',
-    //   payload: {
-    //     isLoading: false,
-    //   }
-    // });
+    headerImage() {
+      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
+    },
   },
   methods: {
-    // login: mapLoginActions("login"),
     backToLogin() {
-      // this.$router.push(this.routes.loginUrl);
-
-      // this[FRONTEGG_STORE_KEY].dispatch({
-      //   type: "auth/resetLoginState",
-      // });
+      this.$router.push(this.fronteggAuth.routes.loginUrl);
     },
   },
 });
 </script>
 
 <style lang="scss">
+
 .fe-login-page {
   position: absolute;
   top: 0;

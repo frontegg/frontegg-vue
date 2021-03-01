@@ -27,28 +27,26 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import Spinner from "@/components/Common/Spinner.vue";
-import FButton from "@/components/core/elements/Button/FButton.vue";
-import { mapState } from '@/plugins/fronteggCore/map-state';
-import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
 import { ISocialLoginCallbackState, SocialLoginsActions } from './types';
+import FButton from "@/elements/Button/FButton.vue";
+import Spinner from "@/elements/Spinner.vue";
+import i18n from "@/i18n";
 
 export default Vue.extend({
   name: 'SocailLoginsSuccess',
+  i18n,
   components: {
     Spinner,
     FButton,
   },
   data() {
     return {
-      ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
-      }),
+      ...this.mapSocialLoginState(),
     }
   },
   computed: {
     isLoading() {
-      return this.authState.socialLoginsState.firstLoad || this.authState.socialLoginsState.loading;
+      return this.$data.socialLoginsState.firstLoad || this.authState.socialLoginsState.loading;
     },
     errorMsg() {
       return this.$t('auth.social-logins.error.invalid-callback-url');
@@ -94,16 +92,16 @@ export default Vue.extend({
       this.$router.push(this.authState.routes.loginUrl);
     },
     setSocialLoginError(payload) {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/setSocialLoginError",
-        payload
-      });
+      // this[FRONTEGG_STORE_KEY].dispatch({
+      //   type: "auth/setSocialLoginError",
+      //   payload
+      // });
     },
     loginViaSocialLogin(payload) {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/loginViaSocialLogin",
-        payload
-      });
+      // this[FRONTEGG_STORE_KEY].dispatch({
+      //   type: "auth/loginViaSocialLogin",
+      //   payload
+      // });
     },
   },
 });

@@ -15,10 +15,12 @@
 
 <script lang="ts">
 import Vue from 'vue'
-import FButton from "@/components/core/elements/Button/FButton.vue";
+import FButton from "@/elements/Button/FButton.vue";
+import i18n from "@/i18n";
 
 export default Vue.extend({
   name: 'SocialLoginButton',
+  i18n,
   components: {
     FButton,
   },
