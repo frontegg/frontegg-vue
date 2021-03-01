@@ -94,10 +94,6 @@ export default Vue.extend({
       this.$router.push(this.fronteggAuth.routes.loginUrl);
     },
   },
-  mounted() {
-    debugger;
-    alert("mounted")
-  },
   // beforeRouteEnter(to, from, next) {
   //   to
   //   from
