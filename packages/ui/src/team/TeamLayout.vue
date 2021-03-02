@@ -83,45 +83,50 @@ export default Vue.extend({
   },
   watch: {
     options: {
-      // immediate: true,
       deep: true,
       handler(): any {
         this.fetchTableData();
       }
     },
+    "options.page"(val) {
+      this.$data.currentPage = val;
+    },
     searchValue(): any {
       this.fetchTableData();
     }
   },
+  mounted() {
+    console.log('this:', this)
+  },
   methods: {
-    onOpenModal() {
-      mapTeamActions('openAddUserDialog')();
-    },
-    onCloseModal() {
-      mapTeamActions('closeAddUserDialog')();
-    },
+    onOpenModal: mapTeamActions('openAddUserDialog'),
+    onCloseModal: mapTeamActions('closeAddUserDialog'),
     changeOptions(options: TableOptions) {
-      this.options = { ...options };
+      this.$data.options = { ...options };
     },
-    async fetchTableData() {
+    fetchTableData() {
       const payload: ILoadUsers = {
-        pageOffset: this.options.page - 1
+        pageOffset: this.$data.options.page - 1,
+        sort: [],
+        filter: []
       };
-      if (this.options.sortBy.length > 0) {
+      if (this.$data.options.sortBy.length > 0) {
         payload.sort = [
           {
-            id: this.options.sortBy[0],
-            desc: this.options.sortDesc[0]
+            id: this.$data.options.sortBy[0],
+            desc: this.$data.options.sortDesc[0]
           }
         ];
       }
 
-      (payload.filter = [
-        {
-          id: "searchFilter",
-          value: this.searchValue
-        }
-      ]);
+      if(this.$data.searchValue) {
+        payload.filter = [
+          {
+            id: "searchFilter",
+            value: this.$data.searchValue
+          }
+        ];
+      }
 
       mapTeamActions('loadUsers')(payload);
     }
