@@ -73,7 +73,7 @@ export default Vue.extend({
   },
   methods: {
     _enrollMfa: mapMfaActions('enrollMfa'),
-    updateValue(value) {
+    updateValue(value: any) {
       this.$emit('input', value)
     },
     enrollMfa() {

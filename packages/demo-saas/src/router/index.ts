@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import { LoginPage } from '@frontegg/vue-ui';
+import { ActivateAccount } from '@frontegg/vue-ui';
 
 Vue.use(VueRouter);
 
@@ -22,6 +23,11 @@ const routes: Array<RouteConfig> = [
     path: '/account/login',
     name: 'Login',
     component: LoginPage,
+  },
+  {
+    path: '/account/activate',
+    name: 'ActivateAccount',
+    component: ActivateAccount,
   },
 ];
 

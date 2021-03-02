@@ -8,8 +8,8 @@ export const validatePassword = () => {
   const requiredMsg = i18n.t('validation.required-field', { name: i18n.t('common.password') });
   const minMsg = i18n.t('validation.min-length', { name: i18n.t('common.password'), limit: 6 });
   return [
-    v => requiredSchema.isValidSync(v) || requiredMsg,
-    v => minSchema.isValidSync(v) || minMsg
+    (v: string) => requiredSchema.isValidSync(v) || requiredMsg,
+    (v: string) => minSchema.isValidSync(v) || minMsg
   ]
 }
 
@@ -19,8 +19,8 @@ export const validateEmail = () => {
   const requiredMsg = i18n.t('validation.required-field', { name: i18n.t('common.email') });
   const emailMsg = i18n.t('validation.must-be-a-valid-email', 'Must be a valid email');
   return [
-    v => requiredSchema.isValidSync(v) || requiredMsg,
-    v => emailSchema.isValidSync(v) || emailMsg
+    (v: string) => requiredSchema.isValidSync(v) || requiredMsg,
+    (v: string) => emailSchema.isValidSync(v) || emailMsg
   ]
 }
 
@@ -30,8 +30,8 @@ export const validateTwoFactorCode = () => {
   const requiredMsg = i18n.t('validation.required-field', { name: 'code' });
   const lengthMsg = i18n.t('validation.min-length', { name: 'Code', limit: 6 });
   return [
-    v => requiredSchema.isValidSync(v) || requiredMsg,
-    v => lengthSchema.isValidSync(v) || lengthMsg
+    (v: string) => requiredSchema.isValidSync(v) || requiredMsg,
+    (v: string) => lengthSchema.isValidSync(v) || lengthMsg
   ]
 }
 
@@ -41,12 +41,12 @@ export const validateTwoFactorRecoveryCode = () => {
   const requiredMsg = i18n.t('validation.required-field', { name: 'code' });
   const minMsg = i18n.t('validation.max-length', { name: 'code', limit: 8 });
   return [
-    v => requiredSchema.isValidSync(v) || requiredMsg,
-    v => minSchema.isValidSync(v) || minMsg
+    (v: string) => requiredSchema.isValidSync(v) || requiredMsg,
+    (v: string) => minSchema.isValidSync(v) || minMsg
   ]
 }
 
-export const validatePasswordConfirmation = (ref) => {
+export const validatePasswordConfirmation = (ref: any) => {
   const confirmPass = (v: string) => {
     const confirmPassSchema = Yup.object().shape({
       confirmPassword: Yup.string()
@@ -64,9 +64,9 @@ export const validatePasswordConfirmation = (ref) => {
 }
 
 export const validatePasswordUsingOWASP = async (testConfig: Partial<TestConfig> | null, val: string) =>
-  new Promise((resolve, reject) => {
+  new Promise((resolve) => {
     // owasp validation
-    const validatePass =  async function (value) {
+    const validatePass =  async function (value: string) {
       if (!value?.length) {
         resolve(i18n.t('validation.required-field', { name: i18n.t('common.password') }));
       }
@@ -104,23 +104,6 @@ export const validateRequired = (name: string) => {
   const requiredSchema = Yup.string().required();
   const requiredMsg = i18n.t('validation.required-field', { name });
   return [
-    v => {
-      const test = requiredSchema.isValidSync(v);
-      return requiredSchema.isValidSync(v) || requiredMsg
-    },
+    (v: string) => requiredSchema.isValidSync(v) || requiredMsg,
   ]
 }
-  
-
-export const validateArrayLength = (name: string) =>
-  Yup.array().required(i18n.t('validation.required-field', { name }));
-
-export const validateSchema = (props: any) => Yup.objeci18n.t(props);
-
-export const validationPhone = () =>
-  Yup.string()
-    .matches(
-      /^(?!\b(0)\1+\b)(\+?\d{1,3}[. -]?)?\(?\d{3}\)?([. -]?)\d{3}\3\d{4}$/,
-      i18n.t('validation.invalid-phone', 'Invalid phone number')
-    )
-    .required(i18n.t('validation.required-field', { name: 'phone' }));

@@ -45,14 +45,12 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
     }
   },
   computed: {
     isLoading() {
-      return this.mfaState.loading;
+      return this.$data.mfaState.loading;
     }
   },
   methods: {
