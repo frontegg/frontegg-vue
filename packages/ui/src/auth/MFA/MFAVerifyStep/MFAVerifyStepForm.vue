@@ -17,10 +17,11 @@
             >
           </div>
         </li>
-        <li>
+        <li class="fe-input fe-input-full-width fe-input-in-form">
           {{ $t('auth.mfa.verify.enter-generated-code') }}
           <v-text-field
             :rules="rules.code"
+            :outlined="true"
             aria-autocomplete="false"
             auto-complete="off"
             name="token"

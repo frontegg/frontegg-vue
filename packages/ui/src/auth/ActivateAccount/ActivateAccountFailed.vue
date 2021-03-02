@@ -18,10 +18,12 @@
 
 <script lang="ts">
 import Vue from "vue";
+import i18n from '@/i18n';
 import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "ActivateAccountFailed",
+  i18n,
   data() {
     return {
       ...this.mapAuthState(),
@@ -36,7 +38,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="scss">
-
-</style>

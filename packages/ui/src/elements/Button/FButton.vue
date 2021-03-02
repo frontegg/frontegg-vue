@@ -14,10 +14,9 @@
 <script lang="ts">
 import Vue, {PropType} from 'vue'
 import {ButtonProps} from './interfaces'
-import {ClassNameGenerator} from '@/styles/';
+import {ClassNameGenerator} from '../../styles';
 import Spinner from "../Spinner.vue";
 import classNames from "classnames";
-
 const prefixCls = 'fe-button';
 
 export default Vue.extend({
@@ -33,6 +32,11 @@ export default Vue.extend({
   data() {
     return {
       classes: '',
+    }
+  },
+  computed: {
+    disabled(): boolean | undefined {
+      return this.params.disabled || this.params.loading;
     }
   },
   watch: {
@@ -53,7 +57,7 @@ export default Vue.extend({
         className: this.params.class,
         prefixCls: prefixCls,
         size: this.params.size,
-        theme: this.params.disabled ? 'disabled' : this.params.variant,
+        theme: this.disabled ? 'disabled' : this.params.variant,
         isClickable: true,
         isFullWidth: this.params.fullWidth,
         isLoading: this.params.loading,
