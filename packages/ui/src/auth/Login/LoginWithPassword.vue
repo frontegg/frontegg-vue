@@ -49,6 +49,7 @@
                 v-model="password"
                 tabindex="-1"
                 :outlined="true"
+                type="password"
                 :rules="rules.password"
                 name="password"
                 placeholder="Enter Your Password"
@@ -87,7 +88,8 @@
 import Vue from "vue";
 import FButton from "@/elements/Button/FButton.vue";
 import {mapLoginActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
-import {validateEmail, validatePassword} from "@/auth/utils";
+import {validateEmail, validatePassword} from "../../auth/utils";
+import {LoginStep} from "@frontegg/redux-store/auth";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -108,27 +110,23 @@ export default Vue.extend({
     };
   },
   computed: {
-    step() {
-      return this.$data.loginState.step;
+    step(): LoginStep {
+      return this.loginState.step;
     },
-    submitText() {
-      if (this.$data.loginState.loading) {
+    submitText(): string {
+      if (this.loginState.loading) {
         return "";
-      } else if (this.$data.loginState.step === "preLogin") {
+      } else if (this.step === "preLogin") {
         return "Continue";
       } else {
         return "Login";
       }
     },
-    isLoading() {
-      return this.$data.loginState.loading;
+    isLoading(): boolean {
+      return this.loginState.loading;
     },
-    loginError() {
-      if (this.$data.loginState.error) {
-        return this.$data.loginState.error;
-      } else {
-        return null;
-      }
+    loginError(): string | null {
+      return this.loginState.error ?? null
     },
   },
   methods: {

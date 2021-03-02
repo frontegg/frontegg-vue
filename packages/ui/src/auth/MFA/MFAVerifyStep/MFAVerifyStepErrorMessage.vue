@@ -6,26 +6,18 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import { AuthState } from '@/plugins/fronteggAuth/Api';
 
 export default Vue.extend({
   name: "MFAVerifyStepErrorMessage",
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
     }
   },
   computed: {
     error() {
-      return this.mfaState.error;
+      return this.$data.mfaState.error;
     },
   },
 });
 </script>
-
-<style lang="scss">
-
-</style>

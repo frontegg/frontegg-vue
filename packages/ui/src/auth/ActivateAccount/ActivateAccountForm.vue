@@ -3,6 +3,7 @@
     <v-col cols="12">
       <v-form
         v-model="isFormValid"
+        ref="form"
         class="fe-form"
       >
         <div
@@ -17,9 +18,12 @@
             <v-text-field
               v-model="password"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
+              :error-messages="passError"
               :type="showPassword ? 'text' : 'password'"
+              ref="password"
               name="password"
               :placeholder="$t('auth.activate-account.enter-your-password')"
               @click:append="showPassword = !showPassword"
@@ -38,6 +42,7 @@
             <v-text-field
               v-model="confirmPassword"
               tabindex="-1"
+              :outlined="true"
               :append-icon="showConfirmPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.confirmPassword"
               :type="showConfirmPassword ? 'text' : 'password'"
@@ -54,7 +59,7 @@
             :disabled="!isFormValid"
             @click.prevent="activateAccount()"
           >
-            <spinner v-if="isLoading" />
+            <spinner v-if="isLoading"/>
             <span v-else>
               {{ $t('auth.activate-account.activate-account-button') }}
             </span>
@@ -73,12 +78,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import Spinner from '@/components/Common/Spinner.vue'
+import Spinner from "@/elements/Spinner.vue";
+import {mapActivateAccountActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
+import {validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation} from "../../auth/utils";
+import {TestConfig} from "owasp-password-strength-test";
 
 export default Vue.extend({
-  name: 'ResetPassword',
+  name: 'ActivateAccountForm',
   components: {
     Spinner,
   },
@@ -94,49 +100,54 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        activateState: (state: { auth: AuthState }) => state.auth.activateState,
-      }),
+      ...this.mapActivateAccountState(),
+      ...this.mapForgotPasswordState(),
       isFormValid: false,
       password: '',
       confirmPassword: '',
       showPassword: false,
       showConfirmPassword: false,
+      passError: [],
       rules: {
-        password: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
-        ],
-        confirmPassword: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) => this.password === this.confirmPassword || 'Password must match',
-        ]
+        password: validateRequired('Password'),
+        confirmPassword: validatePasswordConfirmation(this.$refs),
       },
     }
   },
   computed: {
-    isLoading() {
-      return this.activateState.loading;
+    isLoading(): boolean {
+      return this.activateAccountState.loading;
     },
-    resetError() {
-      return this.activateState.error;
+    resetError(): string | undefined {
+      return this.activateAccountState.error;
+    },
+    passwordConfig(): Partial<TestConfig> | null {
+      return this.forgotPasswordState.passwordConfig;
+    },
+  },
+  mounted() {
+    this.loadPasswordConfig();
+  },
+  watch: {
+    password(value): void {
+      validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
+        this.$data.passError = error;
+        if (this.confirmPassword.length) {
+          (this.$refs.form as any).validate();
+        }
+      })
     }
   },
   methods: {
+    loadPasswordConfig: mapForgotPasswordActions('loadPasswordConfig'),
+    _activateAccount: mapActivateAccountActions('activateAccount'),
     activateAccount() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/activateAccount",
-        payload: {
-          password: this.password,
-          userId: this.userId,
-          token: this.token,
-        }
-      });
+      this._activateAccount({
+        password: this.password,
+        userId: this.userId,
+        token: this.token,
+      })
     },
   },
 });
 </script>
-
-<style lang="scss">
-</style>

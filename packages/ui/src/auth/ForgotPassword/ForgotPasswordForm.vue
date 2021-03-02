@@ -37,10 +37,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { AuthState, ForgotPasswordState } from '@/plugins/fronteggAuth/Api';
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import Spinner from '@/components/Common/Spinner.vue'
+import Spinner from "@/elements/Spinner.vue";
+import {mapForgotPasswordActions} from "@frontegg/vue-core/auth";
+import { validateEmail } from "../../auth/utils";
 
 export default Vue.extend({
   name: "ForgotPasswordForm",
@@ -49,44 +48,30 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        forgotPasswordState: (state: { auth: AuthState }) => state.auth.forgotPasswordState,
-      }),
+      ...this.mapForgotPasswordState(),
       email: '',
-      emailRules: [
-        (v: string) => !!v || "The Email is required",
-        (v: string) =>
-          !v ||
-          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "Must be a valid email",
-      ],
+      emailRules: validateEmail(),
       isFormValid: false,
     };
   },
   computed: {
     isLoading() {
-      return this.forgotPasswordState.loading;
+      return this.$data.forgotPasswordState.loading;
     },
     backendError() {
-      return this.forgotPasswordState.error;
+      return this.$data.forgotPasswordState.error;
     },
   },
   mounted() {
-    this.email = this.forgotPasswordState.email;
+    this.$data.email = this.$data.forgotPasswordState.email;
   },
   methods: {
+    _forgotPassword: mapForgotPasswordActions('forgotPassword'),
     remindMe() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/forgotPassword",
-        payload: {
-          email: this.email
-        }
+      this._forgotPassword({
+        email: this.$data.email
       });
     },
   }
 });
 </script>
-
-<style lang="scss">
-
-</style>

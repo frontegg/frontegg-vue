@@ -208,7 +208,6 @@ export default Vue.extend({
       }
     },
     setDeleteModal(id: string, email: string) {
-      console.log('setDeleteModal:', 'if:', id, 'email:', email);
       this.onOpenModal();
       this.idUserDeleteModal = id;
       this.$data.textUserDeleteModal = email;
