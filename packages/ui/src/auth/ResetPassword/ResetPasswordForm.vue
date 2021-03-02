@@ -128,7 +128,7 @@ export default Vue.extend({
       validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
         this.$data.passError = error;
         if(this.confirmPassword.length) {
-          this.$refs.form.validate();
+          (this.$refs.form as Vue & { validate: () => boolean }).validate()
         }
       })
     }

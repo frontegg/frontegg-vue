@@ -40,10 +40,15 @@ const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {
     component: authComponents.ForgotPassword,
   });
 
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.resetPasswordUrl,
+    name: 'ResetPassword',
+    component: authComponents.ResetPassword,
+  });
+
   // to be added to the router
   // logoutUrl
   // acceptInvitationUrl
-  // resetPasswordUrl
   // socialLoginCallbackUrl
   // signUpUrl
 

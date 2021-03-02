@@ -40,14 +40,12 @@ import {ForgotPasswordStep} from "@frontegg/redux-store/auth";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import ForgotPasswordForm from "./ForgotPasswordForm.vue";
 import ForgotPasswordSuccess from "./ForgotPasswordSuccess.vue";
-import Spinner from "@/elements/Spinner.vue";
 import i18n from '@/i18n';
 
 export default Vue.extend({
   name: "ForgetPassword",
   i18n,
   components: {
-    Spinner,
     ForgotPasswordForm,
     ForgotPasswordSuccess,
   },
@@ -93,11 +91,4 @@ export default Vue.extend({
 
 <style lang="scss">
 @import '../../styles/auth/auth.scss';
-
-.v-stepper {
-  box-shadow: none;
-}
-.v-stepper__content {
-  padding: 0;
-}
 </style>
