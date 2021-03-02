@@ -21,8 +21,7 @@ import Vue from "vue";
 import MFARecoveryCodeStepMessage from './MFARecoveryCodeStepMessage.vue';
 import MFARecoveryCodeStepForm  from './MFARecoveryCodeStepForm.vue';
 import MFARecoveryCodeStepFooter from './MFARecoveryCodeStepFooter.vue';
-import { MFAStep, AuthState } from '@/plugins/fronteggAuth/Api';
-import { mapState } from '@/plugins/fronteggCore/map-state'
+import {MFAStep} from "@frontegg/redux-store/auth";
 
 export default Vue.extend({
   name: "MFARecoveryCodeStep",
@@ -33,15 +32,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
       MFAStep,
     }
   },
   computed: {
     step() {
-      return this.mfaState.step;
+      return this.$data.mfaState.step;
     },
     hasSlot() {
       return !!this.$slots.default;
@@ -49,8 +46,4 @@ export default Vue.extend({
   }
 });
 </script>
-
-<style lang="scss">
-
-</style>
 

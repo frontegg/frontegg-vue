@@ -3,7 +3,8 @@
     <v-col cols="12">
       <v-form
         v-model="isFormValid"
-        class="fe-form">
+        class="fe-form"
+      >
         <div class="fe-input fe-input-full-width fe-input-in-form">
           <div class="fe-input__header">
             <div class="fe-input__label">
@@ -12,6 +13,7 @@
           </div>
           <div>
             <v-text-field
+              :outlined="true"
               v-model="code"
               name="code"
               :rules="rules.code"
@@ -34,14 +36,23 @@
             {{ $t("auth.login.disable-two-factor-title") }}
           </div>
           <div class="fe-note-description fe-recover-two-factor">
-            <a test-id="recover-two-factor-button" @click.prevent="recoverTwoFactor()">
+            <a 
+              test-id="recover-two-factor-button"
+              @click.prevent="recoverTwoFactor()"
+            >
               {{ $t("common.click-here") }}
             </a>
             &nbsp;
             {{ $t("auth.login.disable-two-factor-description") }}
           </div>
         </div>
-        <div v-if="error" class="fe-error-message">{{ error }}</div>
+
+        <div
+          v-if="error"
+          class="fe-error-message"
+        >
+          {{ error }}
+        </div>
       </v-form>
     </v-col>
   </v-row>
@@ -51,6 +62,7 @@
 import Vue from "vue";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import {LoginStep} from "@frontegg/redux-store/auth";
+import {validateTwoFactorCode} from "../../auth/utils";
 
 export default Vue.extend({
   name: "LoginWithTwoFactor",
@@ -60,10 +72,7 @@ export default Vue.extend({
       isFormValid: false,
       code: '',
       rules: {
-        code: [
-          (v: string) => !!v || "The code is required",
-          (v: string) => !v || v.length === 6 || "Code must be at least 6 characters",
-        ],
+        code: validateTwoFactorCode(),
       },
     }
   },
@@ -93,6 +102,3 @@ export default Vue.extend({
   },
 });
 </script>
-
-<style lang="scss">
-</style>

@@ -12,9 +12,9 @@
               <v-list-item-title>Team management</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="'/account/login'">
+          <v-list-item :to="this.authState.isAuthenticated ? this.fronteggAuth.routes.logoutUrl :this.fronteggAuth.routes.loginUrl">
             <v-list-item-content>
-              <v-list-item-title>Login</v-list-item-title>
+              <v-list-item-title>{{this.authState.isAuthenticated ? 'Logout' : 'Login' }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <v-list-item :to="'/account/forget-password'">

@@ -75,7 +75,7 @@ declare module 'vue/types/vue' {
     mapAuthState: () => { authState: AuthState };
     mapLoginState: () => { loginState: LoginState };
     mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };
-    mapActivateAccountState: () => { activateAccountState: ActivateAccountState };
+    mapActivateAccountState: () => { activateState: ActivateAccountState };
     mapApiTokensState: () => { apiTokensState: ApiTokensState };
     mapForgotPasswordState: () => { forgotPasswordState: ForgotPasswordState };
     mapMfaState: () => { mfaState: MFAState };

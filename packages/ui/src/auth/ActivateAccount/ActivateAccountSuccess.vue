@@ -5,7 +5,7 @@
         {{ $t('auth.activate-account.activation-succeeded') }}
       </div>
       <div class="fe-relative fe-mt-4">
-        <spinner />
+        <spinner/>
       </div>
     </v-col>
   </v-row>
@@ -13,33 +13,29 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from "@/components/Common/Spinner.vue";
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
+import Spinner from "@/elements/Spinner.vue";
+import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
+import i18n from '@/i18n';
 
 export default Vue.extend({
-  name: "ResetPasswordSuccess",
+  name: "ActivateAccountSuccess",
+  i18n,
   components: {
     Spinner,
   },
   data() {
     return {
-      ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
-      }),
+      ...this.mapAuthState(),
     }
   },
   mounted() {
     setTimeout(() => {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetActivateState",
-      });
-      this.$router.push(this.authState.routes.logoutUrl);
+      this.resetActivateState();
+      this.$router.push(this.$data.authState.routes.logoutUrl);
     }, 1000);
   },
+  methods: {
+    resetActivateState: mapActivateAccountActions('resetActivateState'),
+  }
 });
 </script>
-
-<style lang="scss">
-
-</style>

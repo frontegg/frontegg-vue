@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import { TeamPage } from '@frontegg/vue-ui';
 
-const ifAuthenticated = (to:any, from:any , next: any) => {
+const ifAuthenticated = (to: any, from: any, next: any) => {
   if (Vue.fronteggAuth.isAuthenticated) {
     next();
     return;
@@ -32,7 +32,7 @@ const routes: Array<RouteConfig> = [
     path: '/team_management',
     name: 'Team',
     component: TeamPage,
-    beforeEnter: ifAuthenticated
+    beforeEnter: ifAuthenticated,
   },
 ];
 

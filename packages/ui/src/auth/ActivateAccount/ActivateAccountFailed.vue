@@ -18,30 +18,23 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
-import { mapState } from '@/plugins/fronteggCore/map-state'
+import i18n from '@/i18n';
+import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
-  name: "ResetPasswordFailed",
+  name: "ActivateAccountFailed",
+  i18n,
   data() {
     return {
-      ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
-      }),
+      ...this.mapAuthState(),
     }
   },
   methods: {
+    _resetActivateState: mapActivateAccountActions('resetActivateState'),
     backToLogin() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetActivateState",
-      });
-
-      this.$router.push(this.authState.routes.loginUrl);
+      this._resetActivateState();
+      this.$router.push(this.$data.authState.routes.loginUrl);
     }
   },
 });
 </script>
-
-<style lang="scss">
-
-</style>

@@ -17,11 +17,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import MFAVerifyStepForm from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepForm.vue";
-import MFAVerifyStepErrorMessage from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepErrorMessage.vue";
-import MFAVerifyStepMessage from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepMessage.vue";
-import MFAVerifyStepFooter from "@/components/auth/MFA/MFAVerifyStep/MFAVerifyStepFooter.vue";
+import MFAVerifyStepForm from "./MFAVerifyStepForm.vue";
+import MFAVerifyStepErrorMessage from "./MFAVerifyStepErrorMessage.vue";
+import MFAVerifyStepMessage from "./MFAVerifyStepMessage.vue";
+import MFAVerifyStepFooter from "./MFAVerifyStepFooter.vue";
+import {mapMfaActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "MFAVerifyStep",
@@ -38,17 +38,12 @@ export default Vue.extend({
     }
   },
   methods: {
+    _verifyMfa: mapMfaActions('verifyMfa'),
     verifyMfa() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/verifyMfa",
-        payload: {
-          token: this.token,
-        }
-      });
+      this._verifyMfa({
+        token: this.$data.token,
+      })
     }
   },
 });
 </script>
-
-<style lang="scss">
-</style>

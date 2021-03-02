@@ -15,7 +15,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from "@/components/Common/Spinner.vue";
+import Spinner from "@/elements/Spinner.vue";
 
 export default Vue.extend({
   name: "RedirectToSSO",

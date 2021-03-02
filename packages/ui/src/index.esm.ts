@@ -28,6 +28,20 @@ const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {
     name: 'Login',
     component: authComponents.LoginPage,
   });
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.activateUrl,
+    name: 'ActivateAccount',
+    component: authComponents.ActivateAccount,
+  });
+
+  // to be added to the router
+  // logoutUrl
+  // acceptInvitationUrl
+  // forgetPasswordUrl
+  // resetPasswordUrl
+  // socialLoginCallbackUrl
+  // signUpUrl
+
 };
 
 // Create module definition for Vue.use()

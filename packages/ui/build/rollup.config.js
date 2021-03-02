@@ -76,6 +76,7 @@ const external = [
   'vue',
   'vue-i18n',
   '@frontegg/vue-core',
+  '@frontegg/vue-core/auth',
 ];
 
 // UMD/IIFE shared settings: output.globals

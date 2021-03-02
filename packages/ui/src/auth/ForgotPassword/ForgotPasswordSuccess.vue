@@ -15,7 +15,3 @@ export default Vue.extend({
   name: "ForgotPasswordSuccess",
 });
 </script>
-
-<style lang="scss">
-
-</style>

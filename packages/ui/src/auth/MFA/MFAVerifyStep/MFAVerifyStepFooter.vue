@@ -31,8 +31,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapState } from "@/plugins/fronteggCore/map-state";
-import { AuthState } from "@/plugins/fronteggAuth/Api";
 
 export default Vue.extend({
   name: "MFAVerifyStepFooter",
@@ -43,14 +41,12 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
     };
   },
   computed: {
     loading() {
-      return this.mfaState.loading;
+      return this.$data.mfaState.loading;
     },
   },
   methods: {
