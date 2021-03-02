@@ -1,7 +1,7 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
-import { LoginPage, TeamPage } from '@frontegg/vue-ui';
+import { TeamPage } from '@frontegg/vue-ui';
 
 const ifAuthenticated = (to: any, from: any, next: any) => {
   if (Vue.fronteggAuth.isAuthenticated) {

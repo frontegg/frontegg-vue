@@ -329,6 +329,20 @@
     height: auto;
   }
 
+  .v-input__control > .v-input__slot {
+    min-height: var(--element-height);
+    height: var(--element-height);
+
+    .v-text-field__slot{ 
+      height: var(--element-height);
+      min-height: var(--element-height);
+    }
+
+    input {
+      min-height: 100%;
+    }
+  }
+
   .fe-input__inner-large {
     .v-input__control > .v-input__slot {
       min-height: 40px;

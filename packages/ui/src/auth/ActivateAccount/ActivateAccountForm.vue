@@ -78,6 +78,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import i18n from '@/i18n';
 import Spinner from "@/elements/Spinner.vue";
 import {mapActivateAccountActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
 import {validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation} from "../../auth/utils";
@@ -85,6 +86,7 @@ import {TestConfig} from "owasp-password-strength-test";
 
 export default Vue.extend({
   name: 'ActivateAccountForm',
+  i18n,
   components: {
     Spinner,
   },

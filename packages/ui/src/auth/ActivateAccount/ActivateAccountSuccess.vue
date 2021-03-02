@@ -15,9 +15,11 @@
 import Vue from "vue";
 import Spinner from "@/elements/Spinner.vue";
 import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
+import i18n from '@/i18n';
 
 export default Vue.extend({
   name: "ActivateAccountSuccess",
+  i18n,
   components: {
     Spinner,
   },

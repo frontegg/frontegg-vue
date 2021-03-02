@@ -24,11 +24,12 @@
               :outlined="true"
               :rules="rules.email"
               placeholder="name@example.com"
+              @change="shouldBackToLoginIfEmailChanged ? backToPreLogin() : undefined"
             />
           </div>
         </div>
         <div
-          v-if="step === 'loginWithPassword'"
+          v-if="shouldDisplayPassword"
           class="fe-input fe-input-full-width fe-input-in-form fe-input-with-suffix-icon mb-0"
         >
           <div class="fe-input fe-input-full-width fe-input-in-form">
@@ -49,10 +50,12 @@
                 v-model="password"
                 tabindex="-1"
                 :outlined="true"
-                type="password"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 :rules="rules.password"
+                :type="showPassword ? 'text' : 'password'"
                 name="password"
                 placeholder="Enter Your Password"
+                @click:append="showPassword = !showPassword"
               />
             </div>
           </div>
@@ -68,7 +71,7 @@
               disabled: !isFormValid,
               'data-test-id': 'sumbit-btn'
             }"
-            @click="loginSubmit($event)"
+            @click.prevent="loginSubmit"
           >
             {{ submitText }}
           </FButton>
@@ -90,9 +93,11 @@ import FButton from "@/elements/Button/FButton.vue";
 import {mapLoginActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
 import {validateEmail, validatePassword} from "../../auth/utils";
 import {LoginStep} from "@frontegg/redux-store/auth";
+import i18n from "@/i18n";
 
 export default Vue.extend({
   name: "LoginWithPassword",
+  i18n,
   components: {
     FButton,
   },
@@ -103,6 +108,7 @@ export default Vue.extend({
       isFormValid: false,
       email: "",
       password: "",
+      showPassword: false,
       rules: {
         email: validateEmail(),
         password: validatePassword(),
@@ -113,14 +119,11 @@ export default Vue.extend({
     step(): LoginStep {
       return this.loginState.step;
     },
-    submitText(): string {
-      if (this.loginState.loading) {
-        return "";
-      } else if (this.step === "preLogin") {
-        return "Continue";
-      } else {
-        return "Login";
+    submitText(): any {
+      if (!this.$data.shouldDisplayPassword) {
+        return this.$t('auth.login.continue');
       }
+      return this.$t('auth.login.login');
     },
     isLoading(): boolean {
       return this.loginState.loading;
@@ -128,14 +131,23 @@ export default Vue.extend({
     loginError(): string | null {
       return this.loginState.error ?? null
     },
+    isSSOAuth(): boolean | undefined {
+      return this.authState.isSSOAuth ?? undefined
+    },
+    shouldDisplayPassword(): boolean | undefined {
+      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword;
+    },
+    shouldBackToLoginIfEmailChanged(): boolean | undefined {
+      return this.isSSOAuth && this.shouldDisplayPassword;
+    }
   },
   methods: {
     preLogin: mapLoginActions('preLogin'),
     login: mapLoginActions('login'),
     resetLoginState: mapLoginActions('resetLoginState'),
+    setLoginState: mapLoginActions('setLoginState'),
     setForgotPasswordState: mapForgotPasswordActions('setForgotPasswordState'),
-    loginSubmit(e: any) {
-      e.preventDefault();
+    loginSubmit() {
       if (this.loginState.step === "preLogin") {
         this.preLogin({email: this.email})
       } else {
@@ -151,6 +163,11 @@ export default Vue.extend({
       this.resetLoginState();
       this.$router.push(this.fronteggAuth.routes.signUpUrl);
     },
+    backToPreLogin() {
+      this.setLoginState({
+        step: LoginStep.preLogin
+      });
+    }
   },
 });
 </script>
