@@ -43,6 +43,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import {LoginStep} from "@frontegg/redux-store/auth";
+import {mapAuthState, mapLoginState} from '@frontegg/vue-core/auth/mapAuthState'
 import i18n from '@/i18n';
 import Spinner from "@/elements/Spinner.vue";
 import LoginWithPassword from "@/auth/Login/LoginWithPassword.vue";

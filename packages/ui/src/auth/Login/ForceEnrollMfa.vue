@@ -120,10 +120,8 @@ export default Vue.extend({
         },
       })
     },
-    requestAuthorize(firstTime) {
-      this._requestAuthorize({
-        firstTime
-      })
+    requestAuthorize(firstTime: boolean | undefined) {
+      this._requestAuthorize(firstTime)
     }
   },
 });

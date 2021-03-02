@@ -97,7 +97,7 @@ export default Vue.extend({
 });
 </script>
 
-<style scopped lang="scss">
+<style scoped lang="scss">
 .v-dialog > .v-card > .v-card__text {
   padding: 2rem;
 }
