@@ -1,6 +1,6 @@
 // iife/cjs usage extends esm default export - so import it all
 import plugin, * as components from './index.esm';
-import { FronteggAuth } from '@frontegg/vue-core/auth';
+import { FronteggAuth } from '@frontegg/vue-core/auth/index';
 import Vue from 'vue';
 Vue.use(FronteggAuth);
 

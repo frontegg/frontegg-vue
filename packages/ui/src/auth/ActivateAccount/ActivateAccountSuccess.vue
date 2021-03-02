@@ -18,7 +18,7 @@ import { mapState } from '@/plugins/fronteggCore/map-state'
 import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 
 export default Vue.extend({
-  name: "ResetPasswordSuccess",
+  name: "ActivateAccountSuccess",
   components: {
     Spinner,
   },

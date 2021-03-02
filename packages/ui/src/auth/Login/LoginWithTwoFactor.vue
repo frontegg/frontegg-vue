@@ -51,6 +51,7 @@
 import Vue from "vue";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import {LoginStep} from "@frontegg/redux-store/auth";
+import {validateTwoFactorCode} from "../../auth/utils";
 
 export default Vue.extend({
   name: "LoginWithTwoFactor",
@@ -60,10 +61,7 @@ export default Vue.extend({
       isFormValid: false,
       code: '',
       rules: {
-        code: [
-          (v: string) => !!v || "The code is required",
-          (v: string) => !v || v.length === 6 || "Code must be at least 6 characters",
-        ],
+        code: validateTwoFactorCode(),
       },
     }
   },

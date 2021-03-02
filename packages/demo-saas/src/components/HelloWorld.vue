@@ -21,7 +21,7 @@ export default Vue.extend({
   name: "HelloWorld",
   computed: {
     user() {
-      return this.fronteggAuth.user
+      return this.$data.fronteggAuth.user
     }
   }
 });
