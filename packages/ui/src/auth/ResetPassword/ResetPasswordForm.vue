@@ -3,6 +3,7 @@
     <v-col cols="12">
       <v-form
         v-model="isFormValid"
+        ref="form"
         class="fe-form"
       >
         <div
@@ -20,7 +21,9 @@
               :outlined="true"
               :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
               :rules="rules.password"
+              :error-messages="passError"
               :type="showPassword ? 'text' : 'password'"
+              ref="password"
               name="password"
               placeholder="Enter Your Password"
               @click:append="showPassword = !showPassword"
@@ -75,9 +78,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import Spinner from '@/components/Common/Spinner.vue'
+import Spinner from "@/elements/Spinner.vue";
+import {mapForgotPasswordActions} from "@frontegg/vue-core/auth";
+import { validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation } from "../../auth/utils";
 
 export default Vue.extend({
   name: 'ResetPasswordForm',
@@ -96,50 +99,49 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        forgotPasswordState: (state: { auth: AuthState }) => state.auth.forgotPasswordState,
-      }),
+      ...this.mapForgotPasswordState(),
       isFormValid: false,
       password: '',
       confirmPassword: '',
       showPassword: false,
       showConfirmPassword: false,
+      passError: [],
       rules: {
-        password: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) =>
-            !v || v.length >= 6 || "Password must be at least 6 characters",
-        ],
-        confirmPassword: [
-          (v: string) => !!v || "The Password is required",
-          (v: string) => this.password === this.confirmPassword || 'Password must match',
-        ]
+        password: validateRequired('Password'),
+        confirmPassword: validatePasswordConfirmation(this.$refs),
       },
     }
   },
   computed: {
     isLoading() {
-      return this.forgotPasswordState.loading;
+      return this.$data.forgotPasswordState.loading;
     },
     resetError() {
-      return this.forgotPasswordState.error;
+      return this.$data.forgotPasswordState.error;
+    },
+    passwordConfig() {
+      return this.$data.forgotPasswordState.passwordConfig;
+    },
+  },
+  watch: {
+    password(value) {
+      validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
+        this.$data.passError = error;
+        if(this.confirmPassword.length) {
+          this.$refs.form.validate();
+        }
+      })
     }
   },
   methods: {
+    _resetPassword: mapForgotPasswordActions('resetPassword'),
     resetPassword() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetPassword",
-        payload: {
-          password: this.password,
-          userId: this.userId,
-          token: this.token,
-        }
+      this._resetPassword({
+        password: this.$data.password,
+        userId: this.userId,
+        token: this.token,
       });
     },
   },
-
 });
 </script>
-
-<style lang="scss">
-</style>

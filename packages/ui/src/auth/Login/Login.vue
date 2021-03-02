@@ -1,40 +1,45 @@
 <template>
-  <div class="fe-login-page">
-    <v-container class="fe-login-container">
+  <div
+    class="fe-login-page"
+  >
+    <spinner v-if="isLoading" />
+    <v-container
+      v-else
+      class="fe-login-container"
+    >
       <div class="fe-login-header">
-        <img v-bind:src="headerImage">
+        <img src="@/assets/main-logo.svg">
       </div>
       <div class="fe-login-component">
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
-          <LoginWithPassword/>
-          <SocialLogins/>
+          <LoginWithPassword />
+          <SocialLogins />
         </div>
         <div v-else-if="currentStep === LoginStep.loginWithTwoFactor">
-          <LoginWithTwoFactor/>
+          <LoginWithTwoFactor />
         </div>
-        <div v-else-if="currentStep === LoginStep.recoverTwoFactor">-->
-          <RecoverTwoFactor/>
+        <div v-else-if="currentStep === LoginStep.recoverTwoFactor">
+          <RecoverTwoFactor />
         </div>
         <div v-else-if="currentStep === LoginStep.redirectToSSO">
-          <RedirectToSSO/>
+          <RedirectToSSO />
         </div>
         <div v-else-if="currentStep === LoginStep.loginWithSSOFailed">
-          <LoginWithSSOFailed/>
+          <LoginWithSSOFailed />
         </div>
         <div v-else-if="currentStep === LoginStep.forceTwoFactor">
-          <ForceEnrollMfa/>
+          <ForceEnrollMfa />
         </div>
         <div v-else-if="currentStep === LoginStep.success">
-          <LoginSuccess/>
+          <LoginSuccess />
         </div>
       </div>
-
       <button
         v-if="showBackBtn"
         class="fe-login-component__back-to-login"
-        @click=""
+        @click="backToLogin()"
       >
-        Back to Login
+        {{ $t('auth.login.back-to-login') }}
       </button>
     </v-container>
   </div>

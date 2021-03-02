@@ -13,9 +13,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from "@/components/Common/Spinner.vue";
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
+import Spinner from "@/elements/Spinner.vue";
+import {mapForgotPasswordActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "ResetPasswordSuccess",
@@ -24,23 +23,17 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
-      }),
+      ...this.mapAuthState(),
     }
   },
   mounted() {
     setTimeout(() => {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetForgotPasswordState",
-      });
-
-      this.$router.push(this.authState.routes.loginUrl);
+      this._resetForgotPasswordState();
+      this.$router.push(this.$data.authState.routes.loginUrl);
     }, 1000);
   },
+  methods: {
+    _resetForgotPasswordState: mapForgotPasswordActions('resetForgotPasswordState'),
+  }
 });
 </script>
-
-<style lang="scss">
-
-</style>

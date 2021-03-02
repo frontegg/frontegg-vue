@@ -36,7 +36,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from '@/components/Common/Spinner.vue';
+import Spinner from "@/elements/Spinner.vue";
 import {validateTwoFactorCode} from "../../../auth/utils";
 import {mapMfaActions} from "@frontegg/vue-core/auth";
 
