@@ -6,7 +6,7 @@
       class="fe-form"
       @keyup.native.enter="submitForm"
     >
-      <div class="fe-input fe-input-full-width fe-input-in-form">
+      <label class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
             {{ $t("common.name") }}
@@ -20,8 +20,8 @@
             :placeholder="$t('common.enter-name')"
           />
         </div>
-      </div>
-      <div class="fe-input fe-input-full-width fe-input-in-form">
+      </label>
+      <label class="fe-input fe-input-full-width fe-input-in-form">
         <div class="fe-input__header">
           <div class="fe-input__label">
             {{ $t("common.email") }}
@@ -35,7 +35,7 @@
             :placeholder="$t('common.enter-email')"
           />
         </div>
-      </div>
+      </label>
       <v-autocomplete
         v-if="isAuthenticated"
         v-model="form.roleIds"
@@ -69,6 +69,7 @@
         {{ inviteError }}
       </div>
     </v-form>
+    
     <v-card-actions>
       <v-btn
         :class="{ 'fe-button-disabled': loading }"
@@ -83,9 +84,11 @@
         class="fe-button fe-button-large"
         :class="{
           'fe-button-disabled': !isFormValid,
-          'fe-button-primary': isFormValid
+          'fe-button-primary': isFormValid,
+          'fe-button-loader': loading
         }"
         :loading="loading"
+        :disabled="loading"
         @click.prevent="submitForm"
       >
         {{ $t("common.invite") }}
@@ -97,6 +100,7 @@
 <script lang="ts">
 import Vue from 'vue';
 import { checkRoleAccess } from "./helpers";
+import {validateEmail } from "./utils";
 
 import { mapTeamActions } from "@frontegg/vue-core/auth";
 
@@ -125,15 +129,7 @@ export default Vue.extend({
               name: this.$t("common.name")
             })
         ],
-        emailRules: [
-          (v: string) =>
-            !!v ||
-            this.$t("validation.required-field", {
-              name: this.$t("common.email")
-            }),
-          (v: string) =>
-            !v || /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) || this.$t("validation.must-be-a-valid-email")
-        ]
+        emailRules: validateEmail(),
       },
       roleValues: "",
       searchInput: ""
@@ -144,7 +140,7 @@ export default Vue.extend({
       return this.fronteggAuth.user
     },
     loading() {
-      return this.$data.teamState.loading
+      return this.$data.teamState.addUserDialogState.loading
     },
     addUserDialogError() {
       return this.$data.teamState.addUserDialogState.error

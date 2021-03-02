@@ -55,7 +55,7 @@
 }
 
 @mixin with-clickable {
-  &-clickable, &:not(&--disabled) {
+  &-clickable, &-clickable:not(&--disabled) {
     cursor: pointer;
     transition: all 0.1s ease-out;
     user-select: none;

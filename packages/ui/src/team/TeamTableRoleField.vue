@@ -14,38 +14,40 @@
       </div>
       <span v-if="showTooltip">{{ textTooltip }}</span>
     </div>
-    <v-menu
-      :close-on-click="true"
-      :close-on-content-click="false"
-      bottom
-      right
-      content-class="roles-menu"
-    >
-      <template v-slot:activator="{ on, attrs }">
-        <div
-          class="open-fe-menu open-roles-menu"
-          v-bind="attrs"
-          v-on="on"
-        >
-          <FeIcon :params="{ iconName: 'arrow-down', width: '14', height: '14' }" />
-        </div>
-      </template>
-      <v-card>
-        <v-list>
-          <v-list-item
-            v-for="role in avaliableRoles"
-            :key="role.id"
+    <div :class="`rolex-modal-holder-${id}`" class="rolex-modal-holder">
+      <v-menu
+        :attach="`.rolex-modal-holder-${id}`"
+        :close-on-click="true"
+        :close-on-content-click="false"
+        offset-y
+        content-class="roles-menu"
+      >
+        <template v-slot:activator="{ on, attrs }">
+          <div
+            class="open-fe-menu open-roles-menu"
+            v-bind="attrs"
+            v-on="on"
           >
-            <v-checkbox
-              v-model="myCheckedRoles"
-              :label="role.label"
-              :value="role.value"
-              @change="onRolesChange"
-            />
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-menu>
+            <FeIcon :params="{ iconName: 'arrow-down', width: '14', height: '14' }" />
+          </div>
+        </template>
+        <v-card>
+          <v-list>
+            <v-list-item
+              v-for="role in avaliableRoles"
+              :key="role.id"
+            >
+              <v-checkbox
+                v-model="myCheckedRoles"
+                :label="role.label"
+                :value="role.value"
+                @change="onRolesChange"
+              />
+            </v-list-item>
+          </v-list>
+        </v-card>
+      </v-menu>
+    </div>
   </div>
 </template>
 
@@ -61,6 +63,9 @@ export default Vue.extend({
   name: "TeamTableRoleField",
   components: { FeIcon },
   props: {
+    id: {
+      type: String
+    },
     item: {
       type: Object
     },
@@ -122,13 +127,23 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+.rolex-modal-holder {
+  position: relative;
+  .v-menu__content {
+    max-width: none;
+    left: 50% !important;
+    label {
+      white-space: nowrap;
+    }
+  }
+}
 .roles-row {
   min-width: 194px;
   display: flex;
   flex-wrap: nowrap;
 
   .roles-checked {
-    flex-grow: 1;
+    flex-grow: 0 1 auto;
     display: flex; 
     flex-wrap: wrap;
     align-items: center;
@@ -140,7 +155,8 @@ export default Vue.extend({
 .roles-menu {
   box-shadow: none;
   border-radius: 0;
-  transform: translateX(30px);
+  transform: translateX(-50%);
+  margin-top: 5px;
   .v-card {
     border-radius: 0;
   }
