@@ -50,7 +50,7 @@ export default Vue.extend({
       type: String
     }
   },
-  data() {
+  data(): any {
     return {
       ...this.mapMfaState(),
       rules: {
@@ -59,10 +59,10 @@ export default Vue.extend({
     }
   },
   computed: {
-    qrCode() {
+    qrCode(): string | undefined {
       return this.$data.mfaState.qrCode;
     },
-    loading() {
+    loading(): boolean {
       return this.$data.mfaState.loading;
     },
   },
@@ -73,11 +73,11 @@ export default Vue.extend({
   },
   methods: {
     _enrollMfa: mapMfaActions('enrollMfa'),
-    updateValue(value: any) {
-      this.$emit('input', value)
-    },
     enrollMfa() {
       this._enrollMfa();
+    },
+    updateValue(value: any) {
+      this.$emit('input', value)
     },
   }
 });

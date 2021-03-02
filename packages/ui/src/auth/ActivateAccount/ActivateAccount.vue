@@ -6,7 +6,7 @@
       class="fe-login-container"
     >
       <div class="fe-login-header">
-        <img src="@/assets/main-logo.svg">
+        <img v-bind:src="headerImage">
       </div>
 
       <div class="fe-activate-account-component">
@@ -66,6 +66,9 @@ export default Vue.extend({
     },
     isAuthenticated() {
       return this.$data.authState.isAuthenticated;
+    },
+    headerImage() {
+      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
   },
   mounted() {

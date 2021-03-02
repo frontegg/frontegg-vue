@@ -8,7 +8,7 @@
       class="fe-login-container"
     >
       <div class="fe-login-header">
-        <img src="@/assets/main-logo.svg">
+        <img v-bind:src="headerImage">
       </div>
       <div class="fe-login-component">
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">

@@ -14,6 +14,7 @@
     "packages/*"
   ],
   "dependencies": {
+    "clipboard-copy": "^4.0.1",
     "owasp-password-strength-test": "^1.3.0"
   }
 }

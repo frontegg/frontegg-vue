@@ -2,7 +2,7 @@
   <div class="fe-login-page">
     <v-container class="fe-login-container">
       <div class="fe-login-header">
-        <img src="@/assets/main-logo.svg">
+        <img v-bind:src="headerImage">
       </div>
       <Spinner v-if="isLoading" />
       <div
@@ -42,6 +42,7 @@ export default Vue.extend({
   data() {
     return {
       ...this.mapSocialLoginState(),
+      ...this.mapAuthState(),
     }
   },
   computed: {
@@ -53,6 +54,9 @@ export default Vue.extend({
     },
     error() {
       return this.authState.socialLoginsState.error;
+    },
+    headerImage() {
+      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
   },
   mounted() {
