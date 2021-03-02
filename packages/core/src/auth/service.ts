@@ -32,6 +32,7 @@ import authPlugin, {
 import { AuthActions } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
 import { AuthPageRoutes } from '@frontegg/redux-store/auth/interfaces';
+import VueRouter from 'vue-router';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
   const reducerKeys = Object.keys(reducer);
@@ -39,7 +40,7 @@ export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer:
   return reducerActions.reduce((p, n) => ({ ...p, ...n }), {}) as CaseReducerActions<T>;
 };
 
-const AuthPlugin = (options?: AuthPluginOptions): PluginConfig => ({
+const AuthPlugin = (options?: Omit<AuthPluginOptions, 'router'>): PluginConfig => ({
   storeName: authPlugin.storeName,
   preloadedState: {
     ...authPlugin.initialState,
@@ -56,6 +57,8 @@ const AuthPlugin = (options?: AuthPluginOptions): PluginConfig => ({
 
 export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
+  router!: VueRouter;
+  private _routes!: AuthPageRoutes;
   private store?: EnhancedStore<FronteggStore>;
   private state: AuthState = authInitialState;
   loginActions!: LoginActions;
@@ -71,8 +74,13 @@ export class FronteggAuthService implements FronteggPluginService {
   apiTokensActions!: ApiTokensActions;
   securityPolicyActions!: SecurityPolicyActions;
 
-  constructor(options: AuthPluginOptions) {
+  constructor({router, ...options}: AuthPluginOptions) {
     this.pluginConfig = AuthPlugin(options);
+    this._routes = {
+      ...authInitialState.routes,
+      ...options.routes
+    }
+    this.router = router;
   }
 
   get loading(): boolean {
@@ -80,10 +88,11 @@ export class FronteggAuthService implements FronteggPluginService {
   }
 
   get routes(): AuthPageRoutes {
-    return this.store?.getState().auth.routes ?? authInitialState.routes;
+    return this.store?.getState().auth.routes ?? this._routes;
   }
 
   isAuthenticatedRef!: boolean;
+
   get isAuthenticated(): boolean {
     return this.store?.getState().auth.isAuthenticated ?? false;
   }

@@ -1,8 +1,13 @@
 <template>
   <div class="hello">
 
-    <p>{{ this.user ? this.user.email : "Not Logged in" }}</p>
+    <p>{{ this.userEmail }}</p>
 
+    <div>Login Loading: {{ this.loginState.loading }}</div>
+
+    <button v-on:click="login({email: 'david+1@frontegg.com', password: 'david93'})">
+      login
+    </button>
     <p>
       For a guide and recipes on how to configure / customize this project,<br/>
       check out the
@@ -15,13 +20,24 @@
 
 <script lang="ts">
 import Vue from "vue";
+import {mapLoginActions} from "@frontegg/vue-core/auth";
+import {AuthState, LoginState} from "@frontegg/redux-store/auth";
 // import {mapLoginActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "HelloWorld",
+  data(): { authState: AuthState, loginState: LoginState } {
+    return {
+      ...this.mapAuthState(),
+      ...this.mapLoginState(),
+    }
+  },
+  methods: {
+    login: mapLoginActions('login')
+  },
   computed: {
-    user() {
-      return this.fronteggAuth.user
+    userEmail(): string {
+      return this.authState.user?.email ?? 'Not Logged In'
     }
   }
 });
