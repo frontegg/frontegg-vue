@@ -71,19 +71,19 @@ export default Vue.extend({
     }
   },
   computed: {
-    showBackBtn() {
-      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.$data.loginState.step);
+    showBackBtn(): boolean {
+      return [LoginStep.loginWithSSOFailed, LoginStep.forceTwoFactor, LoginStep.recoverTwoFactor].includes(this.loginState.step);
     },
 
-    currentStep() {
-      return this.$data.loginState.step || LoginStep.preLogin;
+    currentStep(): string {
+      return this.loginState.step || LoginStep.preLogin;
     },
-    headerImage() {
-      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
+    headerImage(): string {
+      return this.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
   },
   methods: {
-    backToLogin() {
+    backToLogin(): void {
       this.$router.push(this.fronteggAuth.routes.loginUrl);
     },
   },
