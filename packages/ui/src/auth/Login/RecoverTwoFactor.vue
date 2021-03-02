@@ -43,54 +43,44 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { mapState } from "@/plugins/fronteggCore/map-state";
-import { FRONTEGG_STORE_KEY } from "@/plugins/fronteggCore/constants";
-import Spinner from "@/components/Common/Spinner.vue";
-import { LoginStep } from "@/plugins/fronteggAuth/Api";
+import {mapLoginActions} from "@frontegg/vue-core/auth";
+import {validateTwoFactorRecoveryCode} from "../../auth/utils";
 
 export default Vue.extend({
   name: "RecoverTwoFactor",
   components: {},
   data() {
     return {
-      ...mapState(this, {
-        loginState: (state: { auth: AuthState }) => state.auth.loginState,
-      }),
+      ...this.mapLoginState(),
       isFormValid: false,
       code: "",
       rules: {
-        code: [
-          (v: string) => !!v || "The code is required",
-          (v: string) =>
-            !v || v.length >= 8 || "Code must be at least 8 characters",
-        ],
+        code: validateTwoFactorRecoveryCode(),
       },
     };
   },
   computed: {
     email() {
-      return this.loginState.email;
+      return this.$data.loginState.email;
     },
     error() {
-      return this.loginState.error;
+      return this.$data.loginState.error;
     },
   },
   methods: {
+    _recoverMfa: mapLoginActions('recoverMfa'),
     recoverMfa() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/recoverMfa",
-        payload: {
-          email: this.email || '',
-          recoveryCode: this.code,
-        },
+      this._recoverMfa({
+        email: this.email || '',
+        recoveryCode: this.code,
       });
     },
   },
 });
 </script>
 
-<style scopped lang="scss">
+<style scoped lang="scss">
 .fe-button {
-      margin-bottom: 12px;
+  margin-bottom: 12px;
 }
 </style>

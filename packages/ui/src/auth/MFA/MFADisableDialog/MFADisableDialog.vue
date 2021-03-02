@@ -54,13 +54,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
 import MFADisableDialogMessage from "./MFADisableDialogMessage.vue";
 import MFADisableDialogFooter from "./MFADisableDialogFooter.vue";
 import MFADisableDialogForm from "./MFADisableDialogForm.vue";
 import MFADisableDialogErrorMessage from "./MFADisableDialogErrorMessage.vue";
-import { AuthState } from "@/plugins/fronteggAuth/Api";
-import { mapState } from "@/plugins/fronteggCore/map-state";
+import {mapMfaActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "MFADisableDialog",
@@ -72,9 +70,6 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
       isFormValid: false,
       dialog: false,
       token: ''
@@ -82,22 +77,20 @@ export default Vue.extend({
   },
   computed: {},
   methods: {
+    _disableMfa: mapMfaActions('disableMfa'),
     disableMfa() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/disableMfa",
-        payload: {
-          token: this.token,
-        }
+      this._disableMfa({
+        token: this.$data.token,
       });
     },
     closeDialog() {
-      this.dialog = false;
+      this.$data.dialog = false;
     }
   }
 });
 </script>
 
-<style scopped lang="scss">
+<style scoped lang="scss">
 .v-dialog > .v-card > .v-card__text {
   padding: 2rem;
 }

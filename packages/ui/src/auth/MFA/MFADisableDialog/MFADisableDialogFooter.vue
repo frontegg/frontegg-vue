@@ -45,14 +45,12 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
     }
   },
   computed: {
     isLoading() {
-      return this.mfaState.loading;
+      return this.$data.mfaState.loading;
     }
   },
   methods: {
@@ -63,7 +61,7 @@ export default Vue.extend({
 });
 </script>
 
-<style scopped lang="scss">
+<style scoped lang="scss">
  .fe-dialog__footer .fe-button-danger {
    min-width: 72px;
  }

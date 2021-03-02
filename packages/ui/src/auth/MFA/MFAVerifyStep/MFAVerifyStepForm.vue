@@ -36,10 +36,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import Spinner from '@/components/Common/Spinner.vue'
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
-import { mapState } from "@/plugins/fronteggCore/map-state";
-import { AuthState } from "@/plugins/fronteggAuth/Api";
+import Spinner from "@/elements/Spinner.vue";
+import {validateTwoFactorCode} from "../../../auth/utils";
+import {mapMfaActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "MFAVerifyStepForm",
@@ -51,25 +50,20 @@ export default Vue.extend({
       type: String
     }
   },
-  data() {
+  data(): any {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
       rules: {
-        code: [
-          (v: string) => !!v || this.$t('validation.required-field', { name: 'code' }),
-          (v: string) => !v || v.length === 6 || this.$t('validation.min-length', { name: 'code', limit: 6 }),
-        ],
+        code: validateTwoFactorCode(),
       },
     }
   },
   computed: {
-    qrCode() {
-      return this.mfaState.qrCode;
+    qrCode(): string | undefined {
+      return this.$data.mfaState.qrCode;
     },
-    loading() {
-      return this.mfaState.loading;
+    loading(): boolean {
+      return this.$data.mfaState.loading;
     },
   },
   mounted() {
@@ -78,13 +72,12 @@ export default Vue.extend({
     }
   },
   methods: {
-    updateValue(value) {
-      this.$emit('input', value)
-    },
+    _enrollMfa: mapMfaActions('enrollMfa'),
     enrollMfa() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: 'auth/enrollMfa'
-      });
+      this._enrollMfa();
+    },
+    updateValue(value: any) {
+      this.$emit('input', value)
     },
   }
 });

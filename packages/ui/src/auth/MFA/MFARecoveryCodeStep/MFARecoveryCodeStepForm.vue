@@ -24,8 +24,6 @@
 <script lang="ts">
 import Vue from "vue";
 import copy from 'clipboard-copy';
-import { AuthState } from '@/plugins/fronteggAuth/Api';
-import { mapState } from '@/plugins/fronteggCore/map-state';
 
 export default Vue.extend({
   name: "MFARecoveryCodeStepForm",
@@ -33,15 +31,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
       copiedMgsVisible: false,
     }
   },
   computed: {
     recoveryCode() {
-      return this.mfaState.recoveryCode;
+      return this.$data.mfaState.recoveryCode;
     },
   },
   methods: {

@@ -87,8 +87,7 @@
 import Vue from "vue";
 import FButton from "@/elements/Button/FButton.vue";
 import {mapLoginActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth";
-import {validateEmail, validatePassword} from "@/auth/utils";
-
+import {validateEmail, validatePassword} from "../../auth/utils";
 export default Vue.extend({
   name: "LoginWithPassword",
   components: {

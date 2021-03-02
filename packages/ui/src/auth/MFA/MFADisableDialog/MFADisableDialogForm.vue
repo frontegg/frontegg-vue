@@ -32,9 +32,7 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        mfaState: (state: { auth: AuthState }) => state.auth.mfaState,
-      }),
+      ...this.mapMfaState(),
       rules: {
         code: [
           (v: string) =>
@@ -49,16 +47,13 @@ export default Vue.extend({
   },
   computed: {
     loading() {
-      return this.mfaState.loading;
+      return this.$data.mfaState.loading;
     },
   },
   methods: {
-    updateValue(value) {
+    updateValue(value: any) {
       this.$emit("input", value);
     },
   },
 });
 </script>
-
-<style lang="scss">
-</style>
