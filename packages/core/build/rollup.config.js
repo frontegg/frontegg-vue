@@ -28,7 +28,7 @@ const entryPoints = [
   'index',
 ];
 const baseConfig = {
-  input: entryPoints.reduce((p, n) => ({ ...p, [n]: `./src/${n}.ts` }), {}),
+  input: 'src/index.ts',
   plugins: {
     preVue: [
       alias({
@@ -88,6 +88,12 @@ const globals = {
   vue: 'Vue',
   '@frontegg/redux-store': 'fronteggReduxStore',
   '@frontegg/rest-api': 'fronteggRestApi',
+  'vue-moment': 'vueMoment',
+  '@reduxjs/toolkit': 'ReduxjsToolkit',
+  'redux-saga': 'reduxSaga',
+  'redux-saga/effects': 'reduxSagaEffects',
+  'set-value': 'setValue',
+  'get-value': 'getValue',
 };
 
 // Customize configs for individual targets
@@ -95,7 +101,7 @@ const buildFormats = [];
 if (!argv.format || argv.format === 'es') {
   const esConfig = {
     ...baseConfig,
-    // input: 'src/index.ts',
+    input: entryPoints.reduce((p, n) => ({ ...p, [n]: `./src/${n}.ts` }), {}),
     external,
     output: {
       // file: 'dist/frontegg-core.esm.js',
@@ -157,6 +163,16 @@ if (!argv.format || argv.format === 'cjs') {
         },
       }),
       ...baseConfig.plugins.postVue,
+      ts({
+        tsconfig: `${process.cwd()}/tsconfig.json`,
+        tsconfigOverride: {
+          'compilerOptions': {
+            'declaration': false,
+            'target': 'ES6',
+            'module': 'ES6',
+          },
+        },
+      }),
       babel(baseConfig.plugins.babel),
       commonjs(),
     ],
@@ -181,6 +197,16 @@ if (!argv.format || argv.format === 'iife') {
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
       ...baseConfig.plugins.postVue,
+      ts({
+        tsconfig: `${process.cwd()}/tsconfig.json`,
+        tsconfigOverride: {
+          'compilerOptions': {
+            'declaration': false,
+            'target': 'ES6',
+            'module': 'ES6',
+          },
+        },
+      }),
       babel(baseConfig.plugins.babel),
       commonjs(),
       terser({

@@ -75,6 +75,9 @@ const external = [
   // eg. 'jquery'
   'vue',
   'vue-i18n',
+  '@frontegg/rest-api',
+  '@frontegg/redux-store',
+  '@frontegg/redux-store/auth',
   '@frontegg/vue-core',
   '@frontegg/vue-core/auth',
 ];
@@ -88,6 +91,9 @@ const globals = {
   'vue-i18n': 'VueI18n',
   '@frontegg/vue-core': 'FronteggVueCore',
   '@frontegg/vue-core/auth': 'FronteggVueCoreAuth',
+  '@frontegg/redux-store': 'fronteggReduxStore',
+  '@frontegg/redux-store/auth': 'fronteggReduxStoreAuth',
+  '@frontegg/rest-api': 'fronteggRestApi',
 };
 
 // Customize configs for individual targets

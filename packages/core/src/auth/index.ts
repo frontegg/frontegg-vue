@@ -20,6 +20,8 @@ export {
   mapTeamActions,
 } from './mapAuthState';
 export * from './interfaces';
+export * from './guards';
+
 export const FronteggAuth: PluginObject<AuthPluginOptions> = {
   install(Vue: VueConstructor, options?: AuthPluginOptions) {
     if (Vue.fronteggAuth) {

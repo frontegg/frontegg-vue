@@ -5,6 +5,7 @@ import VueMoment from 'vue-moment';
 import { PluginOptions } from './interfaces';
 import { combinedPluginsStore, syncStateWithComponent } from './helpers';
 import { getStoreBinding, loadingUnsubscribe, setLoadingUnsubscribe, setStoreKey, setStoreUnsubscribe, storeUnsubscribe } from './utils';
+import { StoreHolder } from './StoreHolder';
 
 export * from './types';
 
@@ -43,9 +44,10 @@ const FronteggCore: PluginObject<PluginOptions> = {
     const registerPlugins = (instance: any) => {
       console.log('Registering plugins', Vue.fronteggPlugins);
       pluginRegistered = true;
-      const pluginConfigs = (Vue.fronteggPlugins ||[]).map(plugin => plugin.pluginConfig);
+      const pluginConfigs = (Vue.fronteggPlugins || []).map(plugin => plugin.pluginConfig);
       store = combinedPluginsStore(contextOptions!, pluginConfigs, instance.$router);
-      (Vue.fronteggPlugins ||[]).forEach(plugin => plugin.init(store));
+      StoreHolder.setStore(store);
+      (Vue.fronteggPlugins || []).forEach(plugin => plugin.init(store));
     };
 
     const checkIfPluginsLoaded = () => {

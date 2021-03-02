@@ -58,7 +58,7 @@ const AuthPlugin = (options?: Omit<AuthPluginOptions, 'router'>): PluginConfig =
 export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
   router!: VueRouter;
-  private _routes!: AuthPageRoutes;
+  private readonly _routes!: AuthPageRoutes;
   private store?: EnhancedStore<FronteggStore>;
   private state: AuthState = authInitialState;
   loginActions!: LoginActions;
