@@ -1,20 +1,34 @@
 <template>
   <div class="hello">
+    <v-card
+      class="mx-auto"
+      max-width="300"
+      tile
+    >
+      <v-list>
+        <v-list-item-group>
+          <v-list-item :to="'/team_management'">
+            <v-list-item-content>
+              <v-list-item-title>Team management</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="'/account/login'">
+            <v-list-item-content>
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="'/account/forget-password'">
+            <v-list-item-content>
+              <v-list-item-title>Forget password</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
+    <p></p>
 
     <p>{{ this.userEmail }}</p>
 
-    <div>Login Loading: {{ this.loginState.loading }}</div>
-
-    <button v-on:click="login({email: 'david+1@frontegg.com', password: 'david93'})">
-      login
-    </button>
-    <p>
-      For a guide and recipes on how to configure / customize this project,<br/>
-      check out the
-      <a href="https://cli.vuejs.org" target="_blank" rel="noopener"
-      >vue-cli documentation</a
-      >.
-    </p>
   </div>
 </template>
 
@@ -22,7 +36,6 @@
 import Vue from "vue";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import {AuthState, LoginState} from "@frontegg/redux-store/auth";
-// import {mapLoginActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "HelloWorld",

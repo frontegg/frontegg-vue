@@ -9,7 +9,10 @@
 @import '_semantic-overrides';
 @import '_shadows';
 
+@import './components/FeTag.scss';
+@import './components/FeMenuItem.scss';
+@import './components/grid.scss';
+
 @import './auth/auth.scss';
-@import './FeButton.scss';
 @import './team.scss';
 @import './main.scss';
