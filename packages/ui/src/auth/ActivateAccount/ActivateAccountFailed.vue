@@ -21,7 +21,7 @@ import Vue from "vue";
 import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
-  name: "ResetPasswordFailed",
+  name: "ActivateAccountFailed",
   data() {
     return {
       ...this.mapAuthState(),

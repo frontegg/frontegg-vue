@@ -121,7 +121,7 @@ export default Vue.extend({
       return this.$data.activateAccountState.error;
     },
     passwordConfig() {
-      return this.$data.forgotPasswordState.passwordConfig
+      return this.$data.forgotPasswordState.passwordConfig;
     },
   },
   mounted() {
@@ -130,8 +130,8 @@ export default Vue.extend({
   watch: {
     password(value) {
       validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
-        this.passError = error;
-        if(this.confirmPassword.length) {
+        this.$data.passError = error;
+        if(this.$data.confirmPassword.length) {
           this.$refs.form.validate();
         }
       })

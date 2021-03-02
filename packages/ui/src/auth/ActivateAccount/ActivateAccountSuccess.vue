@@ -14,8 +14,7 @@
 <script lang="ts">
 import Vue from "vue";
 import Spinner from "@/components/Common/Spinner.vue";
-import { mapState } from '@/plugins/fronteggCore/map-state'
-import { FRONTEGG_STORE_KEY } from '@/plugins/fronteggCore/constants';
+import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: "ActivateAccountSuccess",
@@ -24,22 +23,17 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...mapState(this, {
-        authState: (state: { auth: AuthState }) => state.auth,
-      }),
+      ...this.mapAuthState(),
     }
   },
   mounted() {
     setTimeout(() => {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetActivateState",
-      });
-      this.$router.push(this.authState.routes.logoutUrl);
+      this._resetActivateState();
+      this.$router.push(this.$data.authState.routes.logoutUrl);
     }, 1000);
   },
+  methods: {
+    _resetActivateState: mapActivateAccountActions('resetActivateState'),
+  }
 });
 </script>
-
-<style lang="scss">
-
-</style>
