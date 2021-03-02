@@ -5,7 +5,7 @@
         {{ $t('auth.activate-account.activation-succeeded') }}
       </div>
       <div class="fe-relative fe-mt-4">
-        <spinner />
+        <spinner/>
       </div>
     </v-col>
   </v-row>
@@ -28,12 +28,12 @@ export default Vue.extend({
   },
   mounted() {
     setTimeout(() => {
-      this._resetActivateState();
+      this.resetActivateState();
       this.$router.push(this.$data.authState.routes.logoutUrl);
     }, 1000);
   },
   methods: {
-    _resetActivateState: mapActivateAccountActions('resetActivateState'),
+    resetActivateState: mapActivateAccountActions('resetActivateState'),
   }
 });
 </script>

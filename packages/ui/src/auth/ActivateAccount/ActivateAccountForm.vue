@@ -57,7 +57,7 @@
             class="fe-button fe-button-primary fe-button-large fe-button-clickable fe-button-full-width"
             :class="{ 'fe-button-disabled': !isFormValid }"
             :disabled="!isFormValid"
-            @click.prevent="activateAccount()"
+            @click.prevent="handleActivateAccount()"
           >
             <spinner v-if="isLoading"/>
             <span v-else>
@@ -116,10 +116,10 @@ export default Vue.extend({
   },
   computed: {
     isLoading(): boolean {
-      return this.activateAccountState.loading;
+      return this.activateState.loading;
     },
     resetError(): string | undefined {
-      return this.activateAccountState.error;
+      return this.activateState.error;
     },
     passwordConfig(): Partial<TestConfig> | null {
       return this.forgotPasswordState.passwordConfig;
@@ -140,9 +140,9 @@ export default Vue.extend({
   },
   methods: {
     loadPasswordConfig: mapForgotPasswordActions('loadPasswordConfig'),
-    _activateAccount: mapActivateAccountActions('activateAccount'),
-    activateAccount() {
-      this._activateAccount({
+    activateAccount: mapActivateAccountActions('activateAccount'),
+    handleActivateAccount() {
+      this.activateAccount({
         password: this.password,
         userId: this.userId,
         token: this.token,

@@ -1,20 +1,16 @@
 <template>
   <div class="fe-login-page">
-    <spinner v-if="isLoading" />
-    <v-container
-      v-else
-      class="fe-login-container"
-    >
+    <v-container class="fe-login-container">
       <div class="fe-login-header">
         <img v-bind:src="headerImage">
       </div>
 
       <div class="fe-activate-account-component">
         <div v-if="!userId || !token">
-          <ActivateAccountFailed />
+          <ActivateAccountFailed/>
         </div>
         <div v-else-if="step === activateStep.success">
-          <ActivateAccountSuccess />
+          <ActivateAccountSuccess/>
         </div>
         <div v-else>
           <ActivateAccountForm
@@ -34,9 +30,12 @@ import ActivateAccountForm from "./ActivateAccountForm.vue";
 import ActivateAccountSuccess from "./ActivateAccountSuccess.vue";
 import ActivateAccountFailed from "./ActivateAccountFailed.vue";
 import Spinner from "@/elements/Spinner.vue";
+import {ForgotPasswordStep} from "@frontegg/redux-store/auth/ForgotPasswordState/interfaces";
+import i18n from "@/i18n";
 
 export default Vue.extend({
   name: "ActivateAccount",
+  i18n,
   components: {
     Spinner,
     ActivateAccountForm,
@@ -52,32 +51,21 @@ export default Vue.extend({
     };
   },
   computed: {
-    isLoading() {
-      return this.$data.authState.isLoading || this.$data.loading;
+    step(): ForgotPasswordStep {
+      return this.authState.forgotPasswordState.step;
     },
-    step() {
-      return this.$data.authState.forgotPasswordState.step || this.$data.forgotPasswordStep.forgotPassword;
+    userId(): string {
+      return this.url.searchParams.get('userId') ?? '';
     },
-    userId() {
-      return this.$data.url.searchParams.get('userId') || '';
+    token(): string {
+      return this.url.searchParams.get('token') ?? '';
     },
-    token() {
-      return this.$data.url.searchParams.get('token') || '';
+    isAuthenticated(): boolean {
+      return this.authState.isAuthenticated;
     },
-    isAuthenticated() {
-      return this.$data.authState.isAuthenticated;
+    headerImage(): string {
+      return this.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
-    headerImage() {
-      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
-    },
-  },
-  mounted() {
-    // this[FRONTEGG_STORE_KEY].dispatch({
-    //   type: "auth/setState",
-    //   payload: {
-    //     isLoading: false,
-    //   },
-    // });
   },
 });
 </script>
@@ -88,6 +76,7 @@ export default Vue.extend({
 .v-stepper {
   box-shadow: none;
 }
+
 .v-stepper__content {
   padding: 0;
 }
