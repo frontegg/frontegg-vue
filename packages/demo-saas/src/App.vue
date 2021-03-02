@@ -1,7 +1,10 @@
 <template>
-  <div v-if="!fronteggLoaded">Loading...</div>
+  <div v-if="!fronteggLoaded">
+    Example of how to customize frontegg loading status
+    <div style="font-size: 30px; color: red"> Loading...</div>
+  </div>
   <v-app id="app" v-else>
-    <router-view />
+    <router-view/>
   </v-app>
 </template>
 

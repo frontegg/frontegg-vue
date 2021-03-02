@@ -26,6 +26,9 @@ export const FronteggAuth: PluginObject<AuthPluginOptions> = {
       console.warn('Frontegg Auth already installed');
       return;
     }
+    if (!options || !options.router) {
+      throw Error('router must be passed to Vue.use(FronteggAuth, { router, /* OPTIONS */ })');
+    }
 
     Vue.fronteggAuth = new FronteggAuthService(options ?? {});
     registerFronteggPlugin(Vue, Vue.fronteggAuth);

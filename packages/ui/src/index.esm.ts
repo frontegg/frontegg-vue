@@ -21,6 +21,13 @@ const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {
   Object.entries(teamComponents).forEach(([componentName, component]) => {
     Vue.component(componentName, component);
   });
+
+  const routes = Vue.fronteggAuth.routes;
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.loginUrl,
+    name: 'Login',
+    component: authComponents.LoginPage,
+  });
 };
 
 // Create module definition for Vue.use()

@@ -3,7 +3,7 @@ import App from './App.vue';
 import router from './router';
 import { FronteggCore } from '@frontegg/vue-core';
 import { FronteggAuth } from '@frontegg/vue-core/auth';
-import VueUi, { vuetify } from '@frontegg/vue-ui';
+import FronteggUi, { vuetify } from '@frontegg/vue-ui';
 
 Vue.config.productionTip = false;
 
@@ -15,8 +15,9 @@ Vue.use(FronteggCore, {
 });
 Vue.use(FronteggAuth, {
   header: 'https://live.frontegg.com/static/media/main-logo.d547563b.svg',
+  router,
 });
-Vue.use(VueUi);
+Vue.use(FronteggUi);
 
 new Vue({
   router,

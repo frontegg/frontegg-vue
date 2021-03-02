@@ -12,6 +12,7 @@ import {
   SSOState,
   TeamState,
 } from '@frontegg/redux-store/auth';
+import VueRouter from 'vue-router';
 
 export type AuthPageRoutes = {
   /**
@@ -58,7 +59,11 @@ export type AuthPageRoutes = {
 };
 
 
-export type AuthPluginOptions = { routes?: Partial<AuthPageRoutes> };
+export type AuthPluginOptions = {
+  header?: string; // authenticated header image url
+  routes?: Partial<AuthPageRoutes>;
+  router: VueRouter;
+};
 
 declare module 'vue/types/vue' {
   interface VueConstructor {
