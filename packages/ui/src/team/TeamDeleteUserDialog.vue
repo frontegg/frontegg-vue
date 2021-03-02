@@ -127,7 +127,6 @@ export default Vue.extend({
   .v-list-item {
     min-height: 1px;
     padding: 0;
-  }
-  
+  } 
 }
 </style>

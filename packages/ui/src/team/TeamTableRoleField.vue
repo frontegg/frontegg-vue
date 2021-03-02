@@ -65,7 +65,7 @@ export default Vue.extend({
       type: Object
     },
     roles: {
-      type: Object as () => ITeamUserRole[]
+      type: Array as () => ITeamUserRole[]
     },
     checkMe: {
       type: Boolean
@@ -122,7 +122,6 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
-// @import "@/styles/colors.scss";
 .roles-row {
   min-width: 194px;
   display: flex;

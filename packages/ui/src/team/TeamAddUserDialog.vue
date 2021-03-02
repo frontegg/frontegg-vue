@@ -58,7 +58,7 @@
             @click="select"
             @click:close="removeSelectedRole(item)"
           >
-            {{ item.name }}
+            {{ item.label }}
           </v-chip>
         </template>
       </v-autocomplete>

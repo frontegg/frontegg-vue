@@ -1,6 +1,32 @@
 <template>
   <div class="hello">
-
+    <v-card
+      class="mx-auto"
+      max-width="300"
+      tile
+    >
+      <v-list>
+        <v-list-item-group>
+          <v-list-item :to="'/team_management'">
+            <v-list-item-content>
+              <v-list-item-title>Team management</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="'/account/login'">
+            <v-list-item-content>
+              <v-list-item-title>Login</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="'/account/forget-password'">
+            <v-list-item-content>
+              <v-list-item-title>Forget password</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </v-list-item-group>
+      </v-list>
+    </v-card>
+    <p></p>
+    
     <p>{{ this.user ? this.user.email : "Not Logged in" }}</p>
 
     <p>

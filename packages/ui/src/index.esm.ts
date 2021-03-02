@@ -7,7 +7,7 @@ import * as teamComponents from './team/index';
 
 import Vuetify from 'vuetify';
 
-export const vuetify = new Vuetify({ icons: { iconfont: 'fa' } });
+export const vuetify = new Vuetify();
 
 _Vue.use(Vuetify);
 

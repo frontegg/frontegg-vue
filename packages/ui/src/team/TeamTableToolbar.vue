@@ -45,9 +45,8 @@ export default Vue.extend({
     };
   },
   watch: {
-    inputField: debounce(function(val: any) {
-      return val;
-      // this.$emit("input", val);
+    inputField: debounce(function(this: any, val: any) {
+      this.$emit("input", val);
     }, 400)
   },
   methods: {
