@@ -68,6 +68,7 @@ const FronteggCore: PluginObject<PluginOptions> = {
             next();
           }
         };
+
         if (fronteggLoaded) {
           callNext();
           return;
