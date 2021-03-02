@@ -381,6 +381,13 @@ $gray-5: #E0EBFD;
       height: var(--size-height);
       font-size: 14px;
 
+      &:hover {
+        border-color: var(--color-gray-5);
+      }
+  
+      &:focus-within {
+        border-color: var(--theme-color);
+      }
     }
 
     .input-error .v-text-field__slot,
@@ -388,6 +395,7 @@ $gray-5: #E0EBFD;
       border-color: var(--color-danger);
       color: var(--color-danger);
     }
+    
 
     .v-input.error--text {
       input {

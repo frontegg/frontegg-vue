@@ -24,7 +24,7 @@
           </span>
         </template>
         <template v-slot:[`item.roleIds`]="{ item }">
-          <TeamTableRoleField :item="item" :roles="roles" :check-me="item.email === user.email" />
+          <TeamTableRoleField :id="item.id" :item="item" :roles="roles" :check-me="item.email === user.email" />
         </template>
         <template v-slot:[`item.createdAt`]="{ item }">
           <div v-if="item.lastLogin && item.createdAt" class="datetime">
