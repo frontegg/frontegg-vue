@@ -36,7 +36,7 @@ export default Vue.extend({
   },
   computed: {
     disabled(): boolean | undefined {
-      return this.disabled || this.params.loading;
+      return this.params.disabled || this.params.loading;
     }
   },
   watch: {
