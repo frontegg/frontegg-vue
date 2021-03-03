@@ -22,28 +22,29 @@
             />
           </div>
         </div>
-        <button
-          class="fe-button fe-button-large fe-button-clickable fe-button-full-width"
-          :class="!isFormValid? 'fe-button-disabled': ''"
-          data-test-id="submit-btn"
-          :disabled="!isFormValid"
+        <FButton
+          :params="{
+              type: 'submit',
+              fullWidth: true,
+              variant:'primary',
+              size: 'large',
+              loading: isFormValid,
+              disabled: !isFormValid,
+              'data-test-id': 'submit-btn'
+            }"
           @click.prevent="loginWithMfa()"
         >
           {{ $t("auth.login.login") }}
-        </button>
+        </FButton>
+
         <div class="fe-note">
           <div class="fe-note-title">
             {{ $t("auth.login.disable-two-factor-title") }}
           </div>
           <div class="fe-note-description fe-recover-two-factor">
-            <a 
-              test-id="recover-two-factor-button"
-              @click.prevent="recoverTwoFactor()"
-            >
-              {{ $t("common.click-here") }}
-            </a>
-            &nbsp;
-            {{ $t("auth.login.disable-two-factor-description") }}
+            <a data-test-id="recover-two-factor-button" @click.prevent="recoverTwoFactor()">{{
+                $t("common.click-here")
+              }}</a> {{ $t("auth.login.disable-two-factor-description") }}
           </div>
         </div>
 
@@ -62,10 +63,14 @@
 import Vue from "vue";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import {LoginStep} from "@frontegg/redux-store/auth";
-import {validateTwoFactorCode} from "../../auth/utils";
+import {validateTwoFactorCode} from "@/auth/utils";
+import FButton from "@/elements/Button/FButton.vue";
 
 export default Vue.extend({
   name: "LoginWithTwoFactor",
+  components: {
+    FButton
+  },
   data() {
     return {
       ...this.mapLoginState(),

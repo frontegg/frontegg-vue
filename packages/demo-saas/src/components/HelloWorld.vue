@@ -12,14 +12,15 @@
               <v-list-item-title>Team management</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="this.authState.isAuthenticated ? this.fronteggAuth.routes.logoutUrl :this.fronteggAuth.routes.loginUrl">
+          <v-list-item
+            :to="this.authState.isAuthenticated ? this.fronteggAuth.routes.logoutUrl :this.fronteggAuth.routes.loginUrl">
             <v-list-item-content>
-              <v-list-item-title>{{this.authState.isAuthenticated ? 'Logout' : 'Login' }}</v-list-item-title>
+              <v-list-item-title>{{ this.authState.isAuthenticated ? 'Logout' : 'Login' }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="'/account/forget-password'">
+          <v-list-item v-on:click="openAdminBox">
             <v-list-item-content>
-              <v-list-item-title>Forget password</v-list-item-title>
+              <v-list-item-title>Admin Box</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </v-list-item-group>
@@ -34,6 +35,7 @@
 
 <script lang="ts">
 import Vue from "vue";
+import {openAdminBox} from "@frontegg/vue-core";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import {AuthState, LoginState} from "@frontegg/redux-store/auth";
 
@@ -46,7 +48,10 @@ export default Vue.extend({
     }
   },
   methods: {
-    login: mapLoginActions('login')
+    login: mapLoginActions('login'),
+    openAdminBox() {
+      openAdminBox()
+    }
   },
   computed: {
     userEmail(): string {

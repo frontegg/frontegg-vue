@@ -24,6 +24,7 @@
   "dependencies": {
     "@frontegg/redux-store": "^1.23.3",
     "@frontegg/rest-api": "^1.23.2",
+    "@frontegg/admin-box": "^0.2.1",
     "vue-moment": "^4.1.0",
     "get-value": "^3.0.1",
     "set-value": "^3.0.2"

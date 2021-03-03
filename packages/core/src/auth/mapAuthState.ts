@@ -30,7 +30,7 @@ export const mapForgotPasswordState = (_this: any) => mapSubState('auth.forgotPa
 export const mapMfaState = (_this: any) => mapSubState('auth.mfaState').bind(_this);
 export const mapProfileState = (_this: any) => mapSubState('auth.profileState').bind(_this);
 export const mapSecurityPolicyState = (_this: any) => mapSubState('auth.securityPolicyState').bind(_this);
-export const mapSignupState = (_this: any) => mapSubState('auth.signUpState').bind(_this);
+export const mapSignUpState = (_this: any) => mapSubState('auth.signUpState').bind(_this);
 export const mapSocialLoginState = (_this: any) => mapSubState('auth.socialLoginState').bind(_this);
 export const mapSsoState = (_this: any) => mapSubState('auth.ssoState').bind(_this);
 export const mapTeamState = (_this: any) => mapSubState('auth.teamState').bind(_this);
@@ -46,7 +46,7 @@ export const connectMapState = (_this: any) => {
     mapMfaState: mapMfaState(_this),
     mapProfileState: mapProfileState(_this),
     mapSecurityPolicyState: mapSecurityPolicyState(_this),
-    mapSignupState: mapSignupState(_this),
+    mapSignUpState: mapSignUpState(_this),
     mapSocialLoginState: mapSocialLoginState(_this),
     mapSsoState: mapSsoState(_this),
     mapTeamState: mapTeamState(_this),

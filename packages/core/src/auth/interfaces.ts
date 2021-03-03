@@ -81,7 +81,7 @@ declare module 'vue/types/vue' {
     mapMfaState: () => { mfaState: MFAState };
     mapProfileState: () => { profileState: ProfileState };
     mapSecurityPolicyState: () => { securityPolicyState: SecurityPolicyState };
-    mapSignupState: () => { signupState: SignUpState };
+    mapSignUpState: () => { signUpState: SignUpState };
     mapSocialLoginState: () => { socialLoginState: SocialLoginState };
     mapSsoState: () => { ssoState: SSOState };
     mapTeamState: () => { teamState: TeamState };

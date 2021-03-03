@@ -1,8 +1,7 @@
 <template>
   <div
     v-if="active"
-    @click="redirect"
-  >
+    @click="redirect">
     <slot/>
     <SocialLoginButton
       v-if="!hasSlot"
@@ -68,15 +67,17 @@ export default Vue.extend({
   },
   methods: {
     generatedRedirectUrl(): string {
+      debugger;
+      const {config, active} = this as any;
       const redirectUrl = createGoogleUrl({
-        ...this.$data.config,
+        ...config,
         state: JSON.stringify({
           provider: SocialLoginsProviders.Google,
           action: SocialLoginsActions.Login
         }),
       } as UrlCreatorConfigType);
 
-      if (!this.$data.active || !redirectUrl) {
+      if (!active || !redirectUrl) {
         return '';
       }
 

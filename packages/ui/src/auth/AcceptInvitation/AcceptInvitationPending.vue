@@ -1,11 +1,11 @@
 <template>
   <v-row>
     <v-col cols="12">
-      <div class="fe-center">
-        {{ $t('auth.login.authentication-succeeded') }}
+      <div class="fe-center fe-success-message">
+        {{ $t('auth.account.pending-title') }}
       </div>
-      <div class="fe-relative fe-mt-3">
-        <spinner />
+      <div class="fe-relative fe-mt-4">
+        <spinner/>
       </div>
     </v-col>
   </v-row>
@@ -13,18 +13,14 @@
 
 <script lang="ts">
 import Vue from "vue";
-import i18n from "@/i18n";
 import Spinner from "@/elements/Spinner.vue";
+import i18n from '@/i18n';
 
 export default Vue.extend({
-  name: "LoginSuccess",
+  name: "AcceptInvitationPending",
   i18n,
   components: {
     Spinner,
   },
 });
 </script>
-
-<style lang="scss">
-
-</style>

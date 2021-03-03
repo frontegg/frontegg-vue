@@ -4,7 +4,9 @@
       <div class="fe-login-header">
         <img v-bind:src="headerImage">
       </div>
-      <Spinner v-if="isLoading" />
+      <div v-if="isLoading" class="fe-relative fe-mt-3">
+        <spinner/>
+      </div>
       <div
         v-if="!isLoading"
         class="fe-error-message"
@@ -27,13 +29,14 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import { ISocialLoginCallbackState, SocialLoginsActions } from './types';
+import {ISocialLoginCallbackState, SocialLoginsActions} from './types';
 import FButton from "@/elements/Button/FButton.vue";
 import Spinner from "@/elements/Spinner.vue";
 import i18n from "@/i18n";
+import {mapSocialLoginActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
-  name: 'SocailLoginsSuccess',
+  name: 'SocialLoginsSuccess',
   i18n,
   components: {
     Spinner,
@@ -41,22 +44,22 @@ export default Vue.extend({
   },
   data() {
     return {
-      ...this.mapSocialLoginState(),
       ...this.mapAuthState(),
+      ...this.mapSocialLoginState(),
     }
   },
   computed: {
-    isLoading() {
-      return this.$data.socialLoginsState.firstLoad || this.authState.socialLoginsState.loading;
+    isLoading(): boolean {
+      return Boolean(this.socialLoginState.firstLoad || this.socialLoginState.loading);
     },
-    errorMsg() {
-      return this.$t('auth.social-logins.error.invalid-callback-url');
+    errorMsg(): string {
+      return this.$t('auth.social-logins.error.invalid-callback-url') as string;
     },
-    error() {
-      return this.authState.socialLoginsState.error;
+    error(): any {
+      return this.socialLoginState.error;
     },
-    headerImage() {
-      return this.$data.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
+    headerImage(): string {
+      return this.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
   },
   mounted() {
@@ -66,50 +69,38 @@ export default Vue.extend({
     let parsedState: ISocialLoginCallbackState;
 
     if (!state || !code) {
-      this.setSocialLoginError({ error: this.errorMsg });
+      this.setSocialLoginError({error: this.errorMsg});
     }
 
     try {
-      parsedState = JSON.parse(state);
+      parsedState = JSON.parse(state ?? '');
     } catch (e) {
-      this.setSocialLoginError({ error: this.errorMsg });
+      this.setSocialLoginError({error: this.errorMsg});
+      return
     }
 
     if (!parsedState.action || !parsedState.provider) {
-      this.setSocialLoginError({ error: this.errorMsg });
+      this.setSocialLoginError({error: this.errorMsg});
     }
 
     switch (parsedState.action) {
       case SocialLoginsActions.Login:
       case SocialLoginsActions.SignUp:
-        this.loginViaSocialLogin({ code, ...parsedState });
+        this.loginViaSocialLogin({code: code!, ...parsedState});
         break;
       default:
-        this.setSocialLoginError({ error: this.errorMsg });
+        this.setSocialLoginError({error: this.errorMsg});
     }
   },
   methods: {
+    setSocialLoginError: mapSocialLoginActions('setSocialLoginError'),
+    loginViaSocialLogin: mapSocialLoginActions('loginViaSocialLogin'),
     backToLogin() {
-      this[FRONTEGG_STORE_KEY].dispatch({
-        type: "auth/resetActivateState",
-      });
       this.$router.push(this.authState.routes.loginUrl);
-    },
-    setSocialLoginError(payload) {
-      // this[FRONTEGG_STORE_KEY].dispatch({
-      //   type: "auth/setSocialLoginError",
-      //   payload
-      // });
-    },
-    loginViaSocialLogin(payload) {
-      // this[FRONTEGG_STORE_KEY].dispatch({
-      //   type: "auth/loginViaSocialLogin",
-      //   payload
-      // });
     },
   },
 });
 </script>
 <style lang="scss">
-@import '@/styles/auth/auth.scss';
+@import '../../styles/auth/auth.scss';
 </style>

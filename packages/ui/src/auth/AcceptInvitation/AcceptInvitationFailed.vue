@@ -2,9 +2,9 @@
   <v-row>
     <v-col cols="12">
       <div class="fe-error-message">
-        {{ $t('auth.activate-account.failed-title') }}
+        {{ $t('auth.account.failed-title') }}
         <br>
-        {{ $t('auth.activate-account.failed-description') }}
+        {{ $t('auth.account.failed-description') }}
       </div>
       <button
         class="fe-forgot-password-component__back-to-login"
@@ -19,16 +19,16 @@
 <script lang="ts">
 import Vue from "vue";
 import i18n from '@/i18n';
-import {mapActivateAccountActions} from "@frontegg/vue-core/auth";
+import {mapAcceptInvitationActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
-  name: "ActivateAccountFailed",
+  name: "AcceptInvitationFailed",
   i18n,
   destroyed() {
-    this.resetActivateState();
+    this.resetAcceptInvitationState();
   },
   methods: {
-    resetActivateState: mapActivateAccountActions('resetActivateState'),
+    resetAcceptInvitationState: mapAcceptInvitationActions('resetAcceptInvitationState'),
     backToLogin() {
       this.$router.push(Vue.fronteggAuth.routes.loginUrl);
     }

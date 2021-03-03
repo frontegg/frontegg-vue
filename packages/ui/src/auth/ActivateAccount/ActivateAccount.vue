@@ -30,7 +30,6 @@ import ActivateAccountForm from "./ActivateAccountForm.vue";
 import ActivateAccountSuccess from "./ActivateAccountSuccess.vue";
 import ActivateAccountFailed from "./ActivateAccountFailed.vue";
 import Spinner from "@/elements/Spinner.vue";
-import {ForgotPasswordStep} from "@frontegg/redux-store/auth/ForgotPasswordState/interfaces";
 import i18n from "@/i18n";
 
 export default Vue.extend({
@@ -45,23 +44,21 @@ export default Vue.extend({
   data() {
     return {
       ...this.mapAuthState(),
+      ...this.mapActivateAccountState(),
       activateStep: ActivateAccountStep,
       url: new URL(window?.location.href),
       loading: false,
     };
   },
   computed: {
-    step(): ForgotPasswordStep {
-      return this.authState.forgotPasswordState.step;
+    step(): ActivateAccountStep {
+      return this.activateState.step;
     },
     userId(): string {
       return this.url.searchParams.get('userId') ?? '';
     },
     token(): string {
       return this.url.searchParams.get('token') ?? '';
-    },
-    isAuthenticated(): boolean {
-      return this.authState.isAuthenticated;
     },
     headerImage(): string {
       return this.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';

@@ -24,7 +24,6 @@
               :outlined="true"
               :rules="rules.email"
               placeholder="name@example.com"
-              @change="shouldBackToLoginIfEmailChanged ? backToPreLogin() : undefined"
             />
           </div>
         </div>
@@ -94,6 +93,7 @@ import {mapLoginActions, mapForgotPasswordActions} from "@frontegg/vue-core/auth
 import {validateEmail, validatePassword} from "../../auth/utils";
 import {LoginStep} from "@frontegg/redux-store/auth";
 import i18n from "@/i18n";
+import {TranslateResult} from "vue-i18n";
 
 export default Vue.extend({
   name: "LoginWithPassword",
@@ -119,8 +119,8 @@ export default Vue.extend({
     step(): LoginStep {
       return this.loginState.step;
     },
-    submitText(): any {
-      if (!this.$data.shouldDisplayPassword) {
+    submitText(): TranslateResult {
+      if (!this.shouldDisplayPassword) {
         return this.$t('auth.login.continue');
       }
       return this.$t('auth.login.login');
@@ -131,15 +131,13 @@ export default Vue.extend({
     loginError(): string | null {
       return this.loginState.error ?? null
     },
-    isSSOAuth(): boolean | undefined {
-      return this.authState.isSSOAuth ?? undefined
+    isSSOAuth(): boolean {
+      return this.authState.isSSOAuth ?? false
     },
-    shouldDisplayPassword(): boolean | undefined {
-      return !this.isSSOAuth || this.step === LoginStep.loginWithPassword;
+    shouldDisplayPassword(): boolean {
+      return Boolean(!this.isSSOAuth || this.step === LoginStep.loginWithPassword);
     },
-    shouldBackToLoginIfEmailChanged(): boolean | undefined {
-      return this.isSSOAuth && this.shouldDisplayPassword;
-    }
+
   },
   methods: {
     preLogin: mapLoginActions('preLogin'),
@@ -163,11 +161,6 @@ export default Vue.extend({
       this.resetLoginState();
       this.$router.push(this.fronteggAuth.routes.signUpUrl);
     },
-    backToPreLogin() {
-      this.setLoginState({
-        step: LoginStep.preLogin
-      });
-    }
   },
 });
 </script>

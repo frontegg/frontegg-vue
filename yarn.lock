@@ -963,6 +963,30 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
+"@frontegg/admin-box@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-box/-/admin-box-0.0.4.tgz#7e725b1c9f7156f141a56fe45708524d0be1598b"
+  integrity sha512-fpZOl0xyZ5g0DLk7sGsoyur+R46WKZrRStyeg04lUt0zjlWCxZFimRElnR0XKbezDhRtnpPozpt+v4pXIVti+g==
+  dependencies:
+    "@frontegg/injector" "^0.0.20"
+
+"@frontegg/admin-box@^0.2.1":
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-box/-/admin-box-0.2.1.tgz#e3123e2580d35bca9a2bc3f964e03718cbe294bc"
+  integrity sha512-Ewyi9TD4fE+rixXaYZ03bLwhNDTpL1Ykkudijlvaf5i3QQOTruk9GM6XVaRWhFohAF7QLvhJRscJY7NvqrTakQ==
+  dependencies:
+    "@frontegg/injector" "^0.0.21"
+
+"@frontegg/injector@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.20.tgz#62de31023e9f62c7c7323afe4e90725d70b6f66b"
+  integrity sha512-oR7mKDuBfD7K0FD34msG+Fq+ITIfIt1iM2UbBKn2Hc1UZjy3FupMTQHHFz1jUaCQ3v4Ryo6J3jwEcSB5dGq3+Q==
+
+"@frontegg/injector@^0.0.21":
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.21.tgz#2d9a17186c30c030473f4c3bc8764075f5a97f44"
+  integrity sha512-pFL/jxY9+s4me2nrw+EsSclnKKR9v08xIF/T8cpKEkvm8fYlLxzo9Cm1TU8dxxEztZc/v9qrH6E4i/9cD7absQ==
+
 "@frontegg/redux-store@^1.23.3":
   version "1.23.3"
   resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-1.23.3.tgz#ed237beeb9339e3e15f6ecbec4aadde986a1f814"

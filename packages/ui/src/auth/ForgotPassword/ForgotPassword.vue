@@ -35,7 +35,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {NavigationGuardNext, Route} from "vue-router/types/router";
 import {ForgotPasswordStep} from "@frontegg/redux-store/auth";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
 import ForgotPasswordForm from "./ForgotPasswordForm.vue";
@@ -76,15 +75,6 @@ export default Vue.extend({
       this.resetLoginState();
       this.$router.push(this.authState.routes.loginUrl);
     },
-  },
-  beforeRouteEnter(_to: Route, _from: Route, next: NavigationGuardNext) {
-    next((vm: Vue) => {
-      if (vm.fronteggAuth.isAuthenticated) {
-        vm.$nextTick(() => {
-          vm.fronteggAuth.router.push(Vue.fronteggAuth.routes.authenticatedUrl);
-        })
-      }
-    })
   },
 });
 </script>

@@ -47,15 +47,15 @@ export default Vue.extend({
     }
   },
   computed: {
-    hasSlot() {
+    hasSlot(): any {
       return !!this.$slots.default;
     },
-    config() {
+    config(): ISocialLoginProviderConfiguration {
       return this.$data.socialLoginState.socialLoginsConfig?.find(
         ({type}: ISocialLoginProviderConfiguration) => type.toLowerCase() === SocialLoginsProviders.Github.valueOf().toLowerCase()
       );
     },
-    active() {
+    active(): boolean {
       return this.$data.socialLoginState.socialLoginsConfig?.find(
         ({type}: ISocialLoginProviderConfiguration) => type.toLowerCase() === SocialLoginsProviders.Github.valueOf().toLowerCase()
       )?.active;
@@ -77,8 +77,8 @@ export default Vue.extend({
 
       return redirectUrl;
     },
-    redirect() {
-      const redirectUrl = (this as any).generateRedirectUrl();
+    redirect(): void {
+      const redirectUrl = this.generateRedirectUrl();
       if (redirectUrl.length) {
         ContextHolder.onRedirectTo(redirectUrl, {replace: true, refresh: true})
       }

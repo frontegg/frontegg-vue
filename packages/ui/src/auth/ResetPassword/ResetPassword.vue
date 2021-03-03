@@ -9,10 +9,10 @@
 
       <div class="fe-forgot-password-component">
         <div v-if="!userId || !token">
-          <ResetPasswordFailed />
+          <ResetPasswordFailed/>
         </div>
         <div v-else-if="step === forgotPasswordStep.success">
-          <ResetPasswordSuccess />
+          <ResetPasswordSuccess/>
         </div>
         <div v-else>
           <ResetPasswordForm
@@ -27,7 +27,6 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {NavigationGuardNext, Route} from "vue-router/types/router";
 import {ForgotPasswordStep} from "@frontegg/redux-store/auth";
 import ResetPasswordForm from "./ResetPasswordForm.vue";
 import ResetPasswordSuccess from "./ResetPasswordSuccess.vue";
@@ -68,15 +67,7 @@ export default Vue.extend({
       return this.authState.header || 'https://assets.frontegg.com/public-frontegg-assets/logo-transparent.png';
     },
   },
-  beforeRouteEnter(_to: Route, _from: Route, next: NavigationGuardNext) {
-    next((vm: Vue) => {
-      if (vm.fronteggAuth.isAuthenticated) {
-        vm.$nextTick(() => {
-          vm.fronteggAuth.router.push(Vue.fronteggAuth.routes.authenticatedUrl);
-        })
-      }
-    })
-  },
+
 });
 </script>
 

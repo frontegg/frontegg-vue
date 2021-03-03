@@ -4,7 +4,10 @@
       <div class="fe-login-header">
         <img v-bind:src="headerImage">
       </div>
-      <div class="fe-login-component">
+      <div class="fe-relative fe-mt-3" v-if="isLoading">
+        <spinner/>
+      </div>
+      <div class="fe-login-component" v-else>
         <div v-if="currentStep === LoginStep.preLogin || currentStep === LoginStep.loginWithPassword">
           <LoginWithPassword/>
           <SocialLogins/>
@@ -53,6 +56,7 @@ import LoginSuccess from '@/auth/Login/LoginSuccess.vue';
 import LoginWithTwoFactor from '@/auth/Login/LoginWithTwoFactor.vue';
 import RecoverTwoFactor from '@/auth/Login/RecoverTwoFactor.vue'
 import {NavigationGuardNext, Route} from "vue-router/types/router";
+import {mapAuthActions} from "@frontegg/vue-core/auth";
 
 export default Vue.extend({
   name: 'Login',
@@ -72,8 +76,12 @@ export default Vue.extend({
     return {
       LoginStep,
       ...this.mapAuthState(),
-      ...this.mapLoginState()
+      ...this.mapLoginState(),
+      ...this.mapSocialLoginState()
     }
+  },
+  destroyed() {
+    this.resetLoginState();
   },
   computed: {
     showBackBtn(): boolean {
@@ -88,8 +96,12 @@ export default Vue.extend({
     isAuthenticated(): boolean {
       return this.authState.isAuthenticated;
     },
+    isLoading(): boolean {
+      return this.authState.isLoading ||  this.socialLoginState.loading;
+    },
   },
   methods: {
+    resetLoginState: mapAuthActions('resetLoginState'),
     backToLogin(): void {
       this.$router.push(this.fronteggAuth.routes.loginUrl);
     },

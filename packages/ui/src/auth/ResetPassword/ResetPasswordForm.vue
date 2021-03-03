@@ -59,7 +59,7 @@
             :disabled="!isFormValid"
             @click.prevent="resetPassword"
           >
-            <spinner v-if="isLoading" />
+            <spinner v-if="isLoading"/>
             <span v-else>
               {{ $t('auth.forgot-password.reset-password-button') }}
             </span>
@@ -80,7 +80,7 @@
 import Vue from "vue";
 import Spinner from "@/elements/Spinner.vue";
 import {mapForgotPasswordActions} from "@frontegg/vue-core/auth";
-import { validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation } from "../../auth/utils";
+import {validateRequired, validatePasswordUsingOWASP, validatePasswordConfirmation} from "../../auth/utils";
 
 export default Vue.extend({
   name: 'ResetPasswordForm',
@@ -123,17 +123,21 @@ export default Vue.extend({
       return this.$data.forgotPasswordState.passwordConfig;
     },
   },
+  mounted() {
+    this.loadPasswordConfig();
+  },
   watch: {
     password(value) {
       validatePasswordUsingOWASP(this.passwordConfig, value).then(error => {
         this.$data.passError = error;
-        if(this.confirmPassword.length) {
+        if (this.confirmPassword.length) {
           (this.$refs.form as Vue & { validate: () => boolean }).validate()
         }
       })
     }
   },
   methods: {
+    loadPasswordConfig: mapForgotPasswordActions('loadPasswordConfig'),
     _resetPassword: mapForgotPasswordActions('resetPassword'),
     resetPassword() {
       this._resetPassword({

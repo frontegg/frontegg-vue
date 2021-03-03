@@ -6,6 +6,7 @@ import { PluginOptions } from './interfaces';
 import { combinedPluginsStore, syncStateWithComponent } from './helpers';
 import { getStoreBinding, loadingUnsubscribe, setLoadingUnsubscribe, setStoreKey, setStoreUnsubscribe, storeUnsubscribe } from './utils';
 import { StoreHolder } from './StoreHolder';
+import { AdminBoxInjector } from '@frontegg/admin-box';
 
 export * from './types';
 
@@ -23,6 +24,13 @@ const FronteggCore: PluginObject<PluginOptions> = {
     if (router == null) {
       throw Error('VueRouter instance must be passed to Vue.use(FronteggCore, { router })');
     }
+
+    AdminBoxInjector.init({
+      version: 'latest',
+      contextOptions: {
+        baseUrl: 'http://localhost:8080',
+      },
+    });
 
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
     ContextHolder.setContext(contextOptions);
@@ -119,6 +127,8 @@ const FronteggCore: PluginObject<PluginOptions> = {
   },
 };
 
+const openAdminBox = () => AdminBoxInjector.open();
 export {
   FronteggCore,
+  openAdminBox,
 };

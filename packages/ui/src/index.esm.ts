@@ -23,15 +23,23 @@ const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {
   });
 
   const routes = Vue.fronteggAuth.routes;
+
   Vue.fronteggAuth.router.addRoute({
     path: routes.loginUrl,
     name: 'Login',
     component: authComponents.LoginPage,
   });
+
   Vue.fronteggAuth.router.addRoute({
     path: routes.activateUrl,
     name: 'ActivateAccount',
     component: authComponents.ActivateAccount,
+  });
+
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.acceptInvitationUrl,
+    name: 'AcceptInvitation',
+    component: authComponents.AcceptInvitation,
   });
 
   Vue.fronteggAuth.router.addRoute({
@@ -46,12 +54,23 @@ const install: PluginFunction<any> = function installVueUi(Vue: typeof _Vue) {
     component: authComponents.ResetPassword,
   });
 
-  // to be added to the router
-  // logoutUrl
-  // acceptInvitationUrl
-  // socialLoginCallbackUrl
-  // signUpUrl
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.logoutUrl,
+    name: 'LogoutPage',
+    component: authComponents.LogoutPage,
+  });
 
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.socialLoginCallbackUrl ?? '/account/social/success',
+    name: 'SocialLoginsSuccess',
+    component: authComponents.SocialLoginsSuccess,
+  });
+
+  Vue.fronteggAuth.router.addRoute({
+    path: routes.signUpUrl,
+    name: 'SignUp',
+    component: authComponents.SignUp,
+  });
 };
 
 // Create module definition for Vue.use()

@@ -1,4 +1,3 @@
-
 <template>
   <v-row>
     <v-col cols="12">
@@ -21,15 +20,20 @@
             />
           </div>
         </div>
-        <button
-          class="fe-button  fe-button-large fe-button-clickable fe-button-full-width"
-          :class="!isFormValid? 'fe-button-disabled':''"
-          data-test-id="submit-btn"
-          :disabled="!isFormValid"
+        <FButton
+          :params="{
+              type: 'submit',
+              fullWidth: true,
+              variant:'primary',
+              size: 'large',
+              loading: isFormValid,
+              disabled: !isFormValid,
+              'data-test-id': 'submit-btn'
+            }"
           @click.prevent="recoverMfa()"
         >
           {{ $t('auth.login.disable-mfa') }}
-        </button>
+        </FButton>
 
         <div
           v-if="error"
@@ -45,11 +49,14 @@
 <script lang="ts">
 import Vue from "vue";
 import {mapLoginActions} from "@frontegg/vue-core/auth";
-import {validateTwoFactorRecoveryCode} from "../../auth/utils";
+import {validateTwoFactorRecoveryCode} from "@/auth/utils";
+import FButton from "@/elements/Button/FButton.vue";
 
 export default Vue.extend({
   name: "RecoverTwoFactor",
-  components: {},
+  components: {
+    FButton
+  },
   data() {
     return {
       ...this.mapLoginState(),
