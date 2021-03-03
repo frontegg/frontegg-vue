@@ -1,5 +1,6 @@
 MAKEFLAGS += --no-print-directory
 SOURCES = packages
+DIR = $(shell pwd)
 
 ########################################################################################################################
 #
@@ -61,8 +62,17 @@ clean-%:
 install: ##@1 Global yarn install all packages
 	@echo "${YELLOW}Running yarn install${RESET}"
 	@yarn install
+	@find ./packages -type d -maxdepth 1 ! -path ./packages \
+  		| sed 's|^./packages/||' \
+  		| xargs -I '{}' sh -c '$(MAKE) add-dist-folders-{}'
 	@echo "${YELLOW}Running lerna bootstrap${RESET}"
-	@./node_modules/.bin/lerna bootstrap --npm-client=yarn
+	@echo "${YELLOW}Running lerna bootstrap${RESET}"
+	@./node_modules/.bin/lerna bootstrap --ignore redux-store
+	@rm "${DIR}/node_modules/@frontegg/vue-core"
+	@ln -s "${DIR}/packages/core/dist" "${DIR}/node_modules/@frontegg/vue-core"
+
+add-dist-folders-%:
+	@mkdir -p ./packages/${*}/dist
 
 ########################################################################################################################
 #
@@ -114,15 +124,8 @@ test-unit: ##@3 Tests unit test with jest
 ########################################################################################################################
 
 build: ##@4 Build build all packages
-	${MAKE} build-cli
-	${MAKE} build-rest-api
 	${MAKE} build-core
-	${MAKE} build-elements-semantic
-	${MAKE} build-elements-material-ui
-	${MAKE} build-auth
-	${MAKE} build-connectivity
-	${MAKE} build-notifications
-	${MAKE} build-audits
+	${MAKE} build-ui
 
 build-%: ##@4 Build build a specific package
 	@echo "${YELLOW}Building package ${WHITE}${*}${RESET}"
@@ -162,8 +165,6 @@ prerelease-version-upgrade-%:
 # Helpers Operations
 #
 ########################################################################################################################
-
-
 
 commit:
 	@node ./scripts/commit.js

@@ -1,23 +1,45 @@
-.DS_Store
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
 node_modules
-/dist
+/.pnp
+.pnp.js
 
+# testing
+/coverage
 
-# local env files
+# misc
+.DS_Store
 .env.local
-.env.*.local
+.env.development.local
+.env.test.local
+.env.production.local
 
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+# Logs
+logs
+*.log
 
-# Editor directories and files
+# Build & env
+dist
+dist-umd
+.env
+
+*/dist/
+dist-umd/
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage
+*.lcov
+
+lerna-changed.json
+.npmrc
+cypress/videos
+.nyc_output
+cypress/screenshots
 .idea
-.vscode
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?
