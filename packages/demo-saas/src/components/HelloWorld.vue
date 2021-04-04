@@ -1,5 +1,6 @@
 <template>
   <div class="hello">
+    <button> open</button>
     <v-card
       class="mx-auto"
       max-width="300"
@@ -35,13 +36,11 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {openAdminBox} from "@frontegg/vue-core";
-import {mapLoginActions} from "@frontegg/vue-core/auth";
-import {AuthState, LoginState} from "@frontegg/redux-store/auth";
+import {openAdminPortal, mapLoginActions} from "@frontegg/vue";
 
 export default Vue.extend({
   name: "HelloWorld",
-  data(): { authState: AuthState, loginState: LoginState } {
+  data() {
     return {
       ...this.mapAuthState(),
       ...this.mapLoginState(),
@@ -50,7 +49,7 @@ export default Vue.extend({
   methods: {
     login: mapLoginActions('login'),
     openAdminBox() {
-      openAdminBox()
+      openAdminPortal()
     }
   },
   computed: {

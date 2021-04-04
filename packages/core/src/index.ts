@@ -28,9 +28,14 @@ const FronteggCore: PluginObject<PluginOptions> = {
     AdminBoxInjector.init({
       version: 'latest',
       contextOptions: {
-        baseUrl: 'http://localhost:8080',
+        requestCredentials: 'include',
+        ...contextOptions,
       },
-    });
+      context: {
+        requestCredentials: 'include',
+        ...contextOptions,
+      },
+    } as any);
 
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
     ContextHolder.setContext(contextOptions);
