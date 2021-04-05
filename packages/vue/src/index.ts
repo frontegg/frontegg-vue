@@ -19,6 +19,7 @@ import { ContextHolder } from '@frontegg/rest-api';
 
 export * from './types';
 
+
 export {
   mapAuthActions,
   mapLoginActions,
@@ -69,22 +70,22 @@ const Frontegg: PluginObject<PluginOptions> = {
       return () => fronteggLoadedSubscribes.delete(func);
     };
 
-    if (!Vue.fronteggAuth) {
-      Vue.fronteggAuth = new FronteggAuthService({ router });
-      registerFronteggPlugin(Vue, Vue.fronteggAuth);
-    }
+    const onRedirectTo = router && setupOnRedirectTo(router);
 
     fronteggApp = initialize({
       version: 'latest',
       ...rest,
+      onRedirectTo,
     } as any);
     // @ts-ignore
     Vue.$fronteggApp = fronteggApp;
 
+    if (!Vue.fronteggAuth) {
+      Vue.fronteggAuth = new FronteggAuthService({ router });
+      registerFronteggPlugin(Vue, Vue.fronteggAuth);
+    }
     const registerPlugins = (instance: any) => {
-
       pluginRegistered = true;
-      router && setupOnRedirectTo(router);
 
       fronteggApp.onLoad(() => {
         const waitForStore = setInterval(() => {
@@ -92,7 +93,7 @@ const Frontegg: PluginObject<PluginOptions> = {
             store = fronteggApp.store as EnhancedStore;
             clearInterval(waitForStore);
             StoreHolder.setStore(store);
-            (Vue.fronteggPlugins || []).forEach(plugin => plugin.init(store));
+            (Vue.fronteggPlugins || []).forEach((plugin: any) => plugin.init(store));
             setStoreKey(instance, store);
             instance.fronteggAuth = Vue.fronteggAuth;
             connectMapState(instance);
@@ -115,11 +116,6 @@ const Frontegg: PluginObject<PluginOptions> = {
       }
     };
 
-
-    router?.addRoutes([{
-      path:'/account/login',
-
-    }])
     router?.getRoutes().map(route => {
       const beforeEnterFn = route.beforeEnter;
       route.beforeEnter = (route, redirect, next) => {
@@ -153,18 +149,17 @@ const Frontegg: PluginObject<PluginOptions> = {
       }
     }, 10);
 
+    if (!pluginRegistered) {
+      registerPlugins(Vue);
+    }
     Vue.mixin({
       data: () => ({
         fronteggLoaded,
       }),
       beforeCreate() {
-        if (!pluginRegistered) {
-          registerPlugins(this);
-        } else {
-          setStoreKey(this, store);
-          this.fronteggAuth = Vue.fronteggAuth;
-          connectMapState(this);
-        }
+        setStoreKey(this, store);
+        this.fronteggAuth = Vue.fronteggAuth;
+        connectMapState(this);
       },
       created() {
         if (getStoreBinding(this)) {

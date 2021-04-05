@@ -47,7 +47,7 @@ const AuthPlugin = (options?: Omit<AuthPluginOptions, 'router'>): PluginConfig =
     ...options,
     routes: {
       ...authPlugin.initialState.routes,
-      ...options?.routes,
+      ...(options as any)?.routes,
     },
   },
   reducer: authPlugin.reducer,
@@ -78,7 +78,7 @@ export class FronteggAuthService implements FronteggPluginService {
     this.pluginConfig = AuthPlugin(options);
     this._routes = {
       ...authInitialState.routes,
-      ...options.routes
+      ...(options as any).routes
     }
     this.router = router;
   }

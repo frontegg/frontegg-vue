@@ -9,7 +9,7 @@ import {
   ProfileActions,
   SecurityPolicyActions, SignUpActions,
   SocialLoginActions, SSOActions,
-  TeamActions,
+  TeamActions, TenantsActions,
 } from '@frontegg/redux-store/auth';
 import { ActionsHolder } from './ActionsHolder';
 import { AuthActions } from '@frontegg/redux-store';
@@ -34,6 +34,7 @@ export const mapSignUpState = (_this: any) => mapSubState('auth.signUpState').bi
 export const mapSocialLoginState = (_this: any) => mapSubState('auth.socialLoginState').bind(_this);
 export const mapSsoState = (_this: any) => mapSubState('auth.ssoState').bind(_this);
 export const mapTeamState = (_this: any) => mapSubState('auth.teamState').bind(_this);
+export const mapTenantsState = (_this: any) => mapSubState('auth.tenantsState').bind(_this);
 
 export const connectMapState = (_this: any) => {
   Object.assign(_this, {
@@ -50,6 +51,7 @@ export const connectMapState = (_this: any) => {
     mapSocialLoginState: mapSocialLoginState(_this),
     mapSsoState: mapSsoState(_this),
     mapTeamState: mapTeamState(_this),
+    mapTenantsState: mapTenantsState(_this),
   });
 
 };
@@ -83,5 +85,7 @@ export const mapSsoActions =
   <K extends keyof SSOActions>(action: K): SSOActions[K] => actionGetter(action);
 export const mapTeamActions =
   <K extends keyof TeamActions>(action: K): TeamActions[K] => actionGetter(action);
+export const mapTenantsActions =
+  <K extends keyof TenantsActions>(action: K): TenantsActions[K] => actionGetter(action);
 
 

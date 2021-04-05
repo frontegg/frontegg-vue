@@ -25,6 +25,7 @@ export const setupOnRedirectTo = (router: VueRouter) => {
   };
 
   ContextHolder.setOnRedirectTo(onRedirectTo);
+  return onRedirectTo;
 };
 
 export const syncStateWithComponent = (component: any, bindings: any) => () => {

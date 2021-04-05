@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import { Frontegg } from '@frontegg/vue';
 
+const FRONTEGG_OPTIONS = JSON.parse(`<%= options %>`);
+
 export default function(context, inject) {
   const { app, store } = context;
 
@@ -8,9 +10,7 @@ export default function(context, inject) {
 
   Vue.use(Frontegg, {
     version: 'next',
-    contextOptions: {
-      baseUrl: 'https://david.frontegg.com',
-    },
+    ...FRONTEGG_OPTIONS,
     router,
   });
 

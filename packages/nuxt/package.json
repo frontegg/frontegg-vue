@@ -1,12 +1,13 @@
 {
   "name": "@frontegg/nuxt",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "lib/module.js",
+  "types": "types/index.d.ts",
   "files": [
     "lib"
   ],
   "dependencies": {
-    "@frontegg/vue": "/Users/davidfrontegg/git/frontegg-vue-new/packages/vue/dist"
+    "@frontegg/vue": "^0.1.6"
   }
 }
