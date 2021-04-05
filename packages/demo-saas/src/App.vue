@@ -1,15 +1,7 @@
 <template>
-  <div v-if="!fronteggLoaded" style="min-height: 100vh; justify-content: center; display: flex; align-items: center; text-align: center;">
-    <div>
-      Example of how to customize frontegg loading status
-      <br/>
-      <br/>
-      <div style="font-size: 30px; color: red"> Loading...</div>
-    </div>
-  </div>
-  <v-app id="app" v-else>
+  <div id="app" v-if="fronteggLoaded">
     <router-view/>
-  </v-app>
+  </div>
 </template>
 
 <style lang="scss"></style>

@@ -4,11 +4,8 @@
     <img style="margin-top:40px" height="50" src="https://frontegg.com/wp-content/uploads/2020/04/logo_frrontegg.svg" alt="Frontegg logo">
   </a>
 </p>
-<h1 align="center">Frontegg-React</h1>
-<div align="center">
+<h1 align="center">Frontegg-Vue</h1>
 
-[React](https://reactjs.org/) pre-built Component for faster and simpler integration with Frontegg services.
-</div>
 
 ## Installation
 Frontegg-React is available as an [npm package](https://www.npmjs.com/package/@frontegg/react-core).

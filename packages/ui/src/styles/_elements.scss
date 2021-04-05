@@ -31,6 +31,7 @@
 }
 
 .fe-note {
+  text-align: start;
   margin: 1rem 0;
   font-size: 0.8rem;
 
@@ -190,6 +191,7 @@
     display: flex;
     margin-bottom: var(--element-spacing);
     font-size: var(--element-font-size);
+    text-align: start;
 
     & * > {
       background-color: inherit;
@@ -333,7 +335,7 @@
     min-height: var(--element-height);
     height: var(--element-height);
 
-    .v-text-field__slot{ 
+    .v-text-field__slot {
       height: var(--element-height);
       min-height: var(--element-height);
     }
@@ -348,7 +350,7 @@
       height: 40px;
       min-height: 40px;
 
-      .v-text-field__slot { 
+      .v-text-field__slot {
         height: 40px;
         min-height: 40px;
       }
@@ -428,13 +430,14 @@
       &:hover .v-text-field__slot {
         border-color: var(--color-gray-5);
       }
-  
+
       &:focus-within .v-text-field__slot {
         border-color: var(--theme-color);
       }
 
       input {
         padding: 0 var(--element-padding);
+
         &[name="password"] {
           padding-right: 32px;
         }
@@ -461,7 +464,7 @@
       font-size: var(--element-font-size-sm);
     }
 
-    .v-messages__message  {
+    .v-messages__message {
       margin-top: 6px;
     }
 
@@ -471,7 +474,7 @@
           border-color: var(--color-danger);
         }
       }
-  
+
       &:focus-within {
         .v-text-field__slot {
           border-color: var(--color-danger);

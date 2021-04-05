@@ -2,7 +2,7 @@ import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
 import { TeamPage } from '@frontegg/vue-ui';
-import { isAuthenticatedGuard } from '@frontegg/vue-core/auth';
+import { isAuthenticatedGuard } from '@frontegg/vue';
 
 Vue.use(VueRouter);
 

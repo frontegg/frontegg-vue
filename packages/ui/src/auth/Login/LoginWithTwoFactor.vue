@@ -28,7 +28,7 @@
               fullWidth: true,
               variant:'primary',
               size: 'large',
-              loading: isFormValid,
+              loading: isLoading,
               disabled: !isFormValid,
               'data-test-id': 'submit-btn'
             }"
@@ -82,23 +82,26 @@ export default Vue.extend({
     }
   },
   computed: {
-    mfaToken() {
-      return this.$data.loginState.mfaToken
+    mfaToken(): string {
+      return this.loginState.mfaToken ?? ''
     },
-    error() {
-      return this.$data.loginState.error
+    error(): any {
+      return this.loginState.error
+    },
+    isLoading(): boolean {
+      return this.loginState.loading
     },
   },
   methods: {
     _loginWithMfa: mapLoginActions('loginWithMfa'),
     _setLoginState: mapLoginActions('setLoginState'),
-    loginWithMfa() {
+    loginWithMfa(): void {
       this._loginWithMfa({
         mfaToken: this.mfaToken,
         value: this.code,
       })
     },
-    recoverTwoFactor() {
+    recoverTwoFactor(): void {
       this._setLoginState({
         step: LoginStep.recoverTwoFactor,
         error: '',

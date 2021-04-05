@@ -105,7 +105,7 @@ test-integration: ##@3 Tests integration test with cypress
 test-component: ##@3 Tests component test with cypress
 	@echo "${YELLOW}Component Test Cypress${RESET}"
 	${MAKE} test-component-auth
-	${MAKE} test-component-audits
+	#${MAKE} test-component-audits
 	#${MAKE} test-component-core
 
 test-component-%:
@@ -126,6 +126,7 @@ test-unit: ##@3 Tests unit test with jest
 build: ##@4 Build build all packages
 	${MAKE} build-core
 	${MAKE} build-ui
+	${MAKE} build-vue
 
 build-%: ##@4 Build build a specific package
 	@echo "${YELLOW}Building package ${WHITE}${*}${RESET}"
