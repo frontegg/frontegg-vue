@@ -76,6 +76,7 @@ const Frontegg: PluginObject<PluginOptions> = {
       version: 'latest',
       ...rest,
       onRedirectTo,
+      basename: router?.options.base,
     } as any);
     // @ts-ignore
     Vue.$fronteggApp = fronteggApp;

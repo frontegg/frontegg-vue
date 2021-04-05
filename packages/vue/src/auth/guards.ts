@@ -8,9 +8,9 @@ export const isAuthenticatedGuard: NavigationGuard = function (_to: Route, _from
     if (state.isAuthenticated) {
       next();
     } else {
-      localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', _to.path);
-      window.location.href = state.routes.loginUrl;
-      document.body.style.display = 'none';
+      const basename = StoreHolder.getBasename() ?? '';
+      const calculatedBasename = basename.endsWith('/') ? basename.substring(0, basename.length - 1) : '';
+      localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', `${calculatedBasename}${_to.path}`);
       next({ path: state.routes.loginUrl, replace: true });
     }
   };

@@ -13,6 +13,7 @@ import {
   TeamState,
 } from '@frontegg/redux-store/auth';
 import VueRouter from 'vue-router';
+import { TenantsState } from '@frontegg/redux-store';
 
 // export type AuthPageRoutes = {
 //   /**
@@ -84,5 +85,6 @@ declare module 'vue/types/vue' {
     mapSocialLoginState: () => { socialLoginState: SocialLoginState };
     mapSsoState: () => { ssoState: SSOState };
     mapTeamState: () => { teamState: TeamState };
+    mapTenantsState: () => { tenantsState: TenantsState };
   }
 }

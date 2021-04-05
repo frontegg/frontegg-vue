@@ -4,13 +4,16 @@ import { getStore, getStoreBinding, setStoreBinding } from './utils';
 import { AuthState } from '@frontegg/redux-store/auth';
 import get from 'get-value';
 import VueRouter from 'vue-router';
+import { StoreHolder } from './StoreHolder';
 
 export const setupOnRedirectTo = (router: VueRouter) => {
-  const baseName = window.location.pathname.substring(0, window.location.pathname.lastIndexOf(location.pathname));
+  const baseName = router.options.base || '';
+  StoreHolder.setBasename(baseName);
   const onRedirectTo = (_path: string, opts?: RedirectOptions) => {
     let path = _path;
-    if (path.startsWith(baseName)) {
-      path = path.substring(baseName.length);
+
+    if (path.startsWith(baseName) && baseName !== '/') {
+      path = path.substring(baseName.length - 1);
     }
     if (opts?.refresh) {
       window.location.href = path;
