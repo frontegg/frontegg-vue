@@ -977,13 +977,6 @@
   dependencies:
     "@frontegg/injector" "^0.0.23"
 
-"@frontegg/admin-portal@^0.5.2":
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-0.5.2.tgz#a53a231e000855e9a58dbd44113154a383ad7eda"
-  integrity sha512-NhsLTd3O+BUlPbJXDLfpIKFKRzrOWccB5c+9Wg5MjOkrkyXroX0DtB7S1EvySMpb2/DOu/HU5gKJR6DNYJszLw==
-  dependencies:
-    "@frontegg/injector" "^0.0.23"
-
 "@frontegg/injector@^0.0.21":
   version "0.0.21"
   resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.21.tgz#2d9a17186c30c030473f4c3bc8764075f5a97f44"
@@ -1007,14 +1000,6 @@
   version "1.23.40"
   resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-1.23.40.tgz#ffbeb6097ac7b053073abcf84fc144cd5efadccc"
   integrity sha512-T08RWX2bv7fN6ax3xEguz6rrnbsnrVUhDcZhE2ij11rzo/VVw9QJ/A4l0RbyBuKDGJte6XjFbOip6w9R++reww==
-
-"@frontegg/vue@file:packages/vue/dist":
-  version "0.1.5"
-  dependencies:
-    "@frontegg/admin-portal" "^0.5.2"
-    "@frontegg/redux-store" "1.23.40"
-    get-value "^3.0.1"
-    set-value "^3.0.2"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -5009,9 +4994,9 @@ dns-equal@^1.0.0:
   integrity sha1-s55/HabrCnW6nBcySzR1PEfgZU0=
 
 dns-packet@^1.3.1:
-  version "1.3.1"
-  resolved "https://registry.yarnpkg.com/dns-packet/-/dns-packet-1.3.1.tgz#12aa426981075be500b910eedcd0b47dd7deda5a"
-  integrity sha512-0UxfQkMhYAUaZI+xrNZOz/as5KgDU0M/fQ9b6SpkyLbk3GEswDi6PADJVaYJradtRVsRIlF1zLyOodbcTCDzUg==
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/dns-packet/-/dns-packet-1.3.4.tgz#e3455065824a2507ba886c55a89963bb107dec6f"
+  integrity sha512-BQ6F4vycLXBvdrJZ6S3gZewt6rcrks9KBgM9vrhW+knGRqc8uEdT7fuCwloc7nny5xNoMJ17HGH0R/6fpo8ECA==
   dependencies:
     ip "^1.1.0"
     safe-buffer "^5.0.1"
