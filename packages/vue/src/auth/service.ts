@@ -2,7 +2,7 @@ import { AuthPluginOptions } from './interfaces';
 import { FronteggPluginService, FronteggStore, PluginConfig } from '../interfaces';
 import { EnhancedStore } from '@reduxjs/toolkit';
 import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store/toolkit';
-import authPlugin, {
+import {
   authActions,
   LoginActions,
   SocialLoginActions,
@@ -16,6 +16,7 @@ import authPlugin, {
   TeamActions,
   ApiTokensActions,
   SecurityPolicyActions,
+  tenantsActions,
   loginActions,
   socialLoginsActions,
   activateAccountActions,
@@ -27,7 +28,7 @@ import authPlugin, {
   mfaActions,
   teamActions,
   apiTokensActions,
-  securityPolicyActions, User, AuthState, authInitialState,
+  securityPolicyActions, User, AuthState, authInitialState, TenantsActions,
 } from '@frontegg/redux-store/auth';
 import { AuthActions } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
@@ -39,21 +40,6 @@ export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer:
   const reducerActions = reducerKeys.map((key) => ({ [key]: authActions[key as keyof AuthActions] }));
   return reducerActions.reduce((p, n) => ({ ...p, ...n }), {}) as CaseReducerActions<T>;
 };
-
-const AuthPlugin = (options?: Omit<AuthPluginOptions, 'router'>): PluginConfig => ({
-  storeName: authPlugin.storeName,
-  preloadedState: {
-    ...authPlugin.initialState,
-    ...options,
-    routes: {
-      ...authPlugin.initialState.routes,
-      ...(options as any)?.routes,
-    },
-  },
-  reducer: authPlugin.reducer,
-  sagas: authPlugin.sagas,
-});
-
 
 export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
@@ -73,13 +59,13 @@ export class FronteggAuthService implements FronteggPluginService {
   teamActions!: TeamActions;
   apiTokensActions!: ApiTokensActions;
   securityPolicyActions!: SecurityPolicyActions;
+  tenantsActions!: TenantsActions;
 
-  constructor({router, ...options}: AuthPluginOptions) {
-    this.pluginConfig = AuthPlugin(options);
+  constructor({ router, ...options }: AuthPluginOptions) {
     this._routes = {
       ...authInitialState.routes,
-      ...(options as any).routes
-    }
+      ...(options as any).routes,
+    };
     this.router = router;
   }
 
@@ -117,6 +103,7 @@ export class FronteggAuthService implements FronteggPluginService {
       teamActions,
       apiTokensActions,
       securityPolicyActions,
+      tenantsActions,
     }).forEach(([key, actions]) => {
       Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
     });

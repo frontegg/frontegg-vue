@@ -145,7 +145,7 @@ if (!argv.format || argv.format === 'cjs') {
     external,
     output: {
       compact: true,
-      file: 'dist/frontegg-core.ssr.js',
+      file: 'dist/index.ssr.js',
       format: 'cjs',
       name: 'FronteggCore',
       exports: 'auto',
@@ -185,7 +185,7 @@ if (!argv.format || argv.format === 'iife') {
     external,
     output: {
       compact: true,
-      file: 'dist/frontegg-core.min.js',
+      file: 'dist/index.min.js',
       format: 'iife',
       name: 'FronteggCore',
       exports: 'auto',
