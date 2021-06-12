@@ -10,7 +10,7 @@ export const isAuthenticatedGuard: NavigationGuard = function (_to: Route, _from
     } else {
       const basename = StoreHolder.getBasename() ?? '';
       const calculatedBasename = basename.endsWith('/') ? basename.substring(0, basename.length - 1) : '';
-      localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', `${calculatedBasename}${_to.path}`);
+      localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', `${calculatedBasename}${_to.fullPath}`);
       next({ path: state.routes.loginUrl, replace: true });
     }
   };
