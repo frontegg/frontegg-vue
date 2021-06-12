@@ -69,7 +69,7 @@
         {{ inviteError }}
       </div>
     </v-form>
-    
+
     <v-card-actions>
       <v-btn
         :class="{ 'fe-button-disabled': loading }"
@@ -114,7 +114,7 @@ export default Vue.extend({
   data(): any {
     return {
       ...this.mapTeamState(),
-      
+
       isFormValid: false,
       form: {
         name: "",
@@ -190,7 +190,6 @@ export default Vue.extend({
       this.form.roleIds = [...this.form.roleIds];
     },
     clear() {
-      console.log(1);
     }
   }
 })

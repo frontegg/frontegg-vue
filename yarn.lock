@@ -856,6 +856,13 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
+"@babel/runtime@^7.9.2":
+  version "7.14.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.14.5.tgz#665450911c6031af38f81db530f387ec04cd9a98"
+  integrity sha512-121rumjddw9c3NCQ55KGkyE1h/nzWhU/owjhw0l4mQrkzz4x9SGS1X8gFLraHwX7td3Yo4QTL+qj0NcIzN87BA==
+  dependencies:
+    regenerator-runtime "^0.13.4"
+
 "@babel/template@^7.0.0", "@babel/template@^7.12.13":
   version "7.12.13"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.12.13.tgz#530265be8a2589dbb37523844c5bcb55947fb327"
@@ -970,12 +977,25 @@
   dependencies:
     "@frontegg/injector" "^0.0.21"
 
-"@frontegg/admin-portal@^0.4.1":
-  version "0.4.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-0.4.1.tgz#e2d813d0c34c269e39aa15aa2e3c40a16b535c13"
-  integrity sha512-Wsenwkv4F0WzUvsUMvaoU511cwyXiiZX0+c/m2f2dWwJ6rewq/pZtASHOMikgfisx3jNR1UzMWWneMhxOUMN3g==
+"@frontegg/admin-portal@^0.5.2":
+  version "0.5.2"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-0.5.2.tgz#a53a231e000855e9a58dbd44113154a383ad7eda"
+  integrity sha512-NhsLTd3O+BUlPbJXDLfpIKFKRzrOWccB5c+9Wg5MjOkrkyXroX0DtB7S1EvySMpb2/DOu/HU5gKJR6DNYJszLw==
   dependencies:
     "@frontegg/injector" "^0.0.23"
+
+"@frontegg/admin-portal@^1.3.0":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-1.3.1.tgz#437ec29339652217603a9801cb424c872417a66e"
+  integrity sha512-DWsHDTURCTAnWte5kfc3VWE8ZxG8kqUhMInvuAQCeJkGjFU3EHpBfrRMXme+dngo0yPWeUF+WjNxrV8M1czZMQ==
+  dependencies:
+    "@frontegg/injector" "0.0.25"
+    uuid "^8.3.0"
+
+"@frontegg/injector@0.0.25":
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.25.tgz#05009e41f8f1790941fa907c97c67b0496ddbf00"
+  integrity sha512-NXbn9gCD6hopsPGQzBnfxI2qEFqiqTSuqop6tm/1fu6jgWWxhRu9+rX3VRoGDYqWgeuypgLN67EtWcG0LLDnKQ==
 
 "@frontegg/injector@^0.0.21":
   version "0.0.21"
@@ -987,7 +1007,7 @@
   resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.23.tgz#d4fca57659c6b5fec913b801f0196a8c8e77512f"
   integrity sha512-aZNZCIHuZwPpkPkXTmBpJS3Ot8ID00vMuN8z1YGCvBKHzA6PhaitJV6ZxAUQweUG7suv872iNdNJFr85ObPOLg==
 
-"@frontegg/redux-store@1.23.40", "@frontegg/redux-store@^1.23.40":
+"@frontegg/redux-store@1.23.40":
   version "1.23.40"
   resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-1.23.40.tgz#d50684ed38c3016a70ed41057a483e9a3ee96539"
   integrity sha512-5G1GyOH7ygf+Q/gfulGpDSLpbxhrcbatq67J5nLsq3GriU3TbEPMZneEeujy+rFt3WSUnjTpXTZnhbQocCilLg==
@@ -996,10 +1016,34 @@
     "@reduxjs/toolkit" "1.x"
     redux-saga "1.x"
 
+"@frontegg/redux-store@^2.2.0-alpha.789152436", "@frontegg/redux-store@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-2.7.0.tgz#acf4750844ab5734aaa2423eeff3e16ca686bc20"
+  integrity sha512-I+J9SGr/lTGrH2m6fhI7JUzH5eocEZTUTL4S2DUk1HTV0MMXaLGrnRSe/le7zeJmV1+GjtokRQMkeoIk44Y53w==
+  dependencies:
+    "@frontegg/rest-api" "^2.7.0"
+    "@reduxjs/toolkit" "^1.5.0"
+    redux-saga "^1.1.0"
+
 "@frontegg/rest-api@1.23.40":
   version "1.23.40"
   resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-1.23.40.tgz#ffbeb6097ac7b053073abcf84fc144cd5efadccc"
   integrity sha512-T08RWX2bv7fN6ax3xEguz6rrnbsnrVUhDcZhE2ij11rzo/VVw9QJ/A4l0RbyBuKDGJte6XjFbOip6w9R++reww==
+
+"@frontegg/rest-api@^2.7.0":
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-2.7.0.tgz#715fa3bf20cd43489554773d990247a338712f44"
+  integrity sha512-BV6mAyfuBSaUTSlQoIQn8MD7/8sZ6sVtRiFU4yM/SPuZ0NoSxYhWyvsarAkvKvqE6ABSIuQkmATYgvfKyE/TOg==
+
+"@frontegg/vue@^0.1.1":
+  version "0.1.9"
+  resolved "https://registry.yarnpkg.com/@frontegg/vue/-/vue-0.1.9.tgz#5905d3b9739b7607386f547f81d711c31e27b89f"
+  integrity sha512-mxg8bRxobKlTQ2jJJELVjYf9M4cmDu3e/iqw6I7CtOwSdrQVovWNAb0ZCOUo2CNBtSOsWsr3Dq7p+3GSEWh3pA==
+  dependencies:
+    "@frontegg/admin-portal" "^0.5.2"
+    "@frontegg/redux-store" "1.23.40"
+    get-value "^3.0.1"
+    set-value "^3.0.2"
 
 "@hapi/address@2.x.x":
   version "2.1.4"
@@ -1905,6 +1949,16 @@
   dependencies:
     immer "^8.0.1"
     redux "^4.0.0"
+    redux-thunk "^2.3.0"
+    reselect "^4.0.0"
+
+"@reduxjs/toolkit@^1.5.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.6.0.tgz#0a17c6941c57341f8b31e982352b495ab69d5add"
+  integrity sha512-eGL50G+Vj5AG5uD0lineb6rRtbs96M8+hxbcwkHpZ8LQcmt0Bm33WyBSnj5AweLkjQ7ZP+KFRDHiLMznljRQ3A==
+  dependencies:
+    immer "^9.0.1"
+    redux "^4.1.0"
     redux-thunk "^2.3.0"
     reselect "^4.0.0"
 
@@ -6771,6 +6825,11 @@ immer@^8.0.1:
   resolved "https://registry.yarnpkg.com/immer/-/immer-8.0.4.tgz#3a21605a4e2dded852fb2afd208ad50969737b7a"
   integrity sha512-jMfL18P+/6P6epANRvRk6q8t+3gGhqsJ9EuJ25AXE+9bNTYtssvzeYbEd0mXRYWCmmXSIbnlpz6vd6iJlmGGGQ==
 
+immer@^9.0.1:
+  version "9.0.3"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-9.0.3.tgz#146e2ba8b84d4b1b15378143c2345559915097f4"
+  integrity sha512-mONgeNSMuyjIe0lkQPa9YhdmTv8P19IeHV0biYhcXhbd5dhdB9HSK93zBpyKjp6wersSUgT5QyU0skmejUVP2A==
+
 import-cwd@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/import-cwd/-/import-cwd-2.1.0.tgz#aa6cf36e722761285cb371ec6519f53e2435b0a9"
@@ -10344,7 +10403,7 @@ redent@^3.0.0:
     indent-string "^4.0.0"
     strip-indent "^3.0.0"
 
-redux-saga@1.x:
+redux-saga@1.x, redux-saga@^1.1.0:
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-1.1.3.tgz#9f3e6aebd3c994bbc0f6901a625f9a42b51d1112"
   integrity sha512-RkSn/z0mwaSa5/xH/hQLo8gNf4tlvT18qXDNvedihLcfzh+jMchDgaariQoehCpgRltEm4zHKJyINEz6aqswTw==
@@ -10363,6 +10422,13 @@ redux@^4.0.0, redux@^4.0.4:
   dependencies:
     loose-envify "^1.4.0"
     symbol-observable "^1.2.0"
+
+redux@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/redux/-/redux-4.1.0.tgz#eb049679f2f523c379f1aff345c8612f294c88d4"
+  integrity sha512-uI2dQN43zqLWCt6B/BMGRMY6db7TTY4qeHHfGeKb3EOhmOKjU3KdWvNLJyqaHRksv/ErdNH7cFZWg9jXtewy4g==
+  dependencies:
+    "@babel/runtime" "^7.9.2"
 
 regenerate-unicode-properties@^8.2.0:
   version "8.2.0"
@@ -12326,6 +12392,11 @@ uuid@^3.0.1, uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
+
+uuid@^8.3.0:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"

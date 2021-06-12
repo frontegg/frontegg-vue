@@ -55,7 +55,6 @@ const FronteggCore: PluginObject<PluginOptions> = {
     };
 
     const registerPlugins = (instance: any) => {
-      console.log('Registering plugins', Vue.fronteggPlugins);
       pluginRegistered = true;
       const pluginConfigs = (Vue.fronteggPlugins || []).map(plugin => plugin.pluginConfig);
       store = combinedPluginsStore(contextOptions!, pluginConfigs, instance.$router);

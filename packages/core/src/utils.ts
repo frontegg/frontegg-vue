@@ -16,7 +16,6 @@ export const setLoadingUnsubscribe = (instance: any, unsubscribe: () => void) =>
 export const loadingUnsubscribe = (instance: any) => instance[FRONTEGG_LOADER_UNSUBSCRIBE]?.();
 
 export const registerFronteggPlugin = (Vue: typeof _Vue, plugin: FronteggPluginService) => {
-  console.log('New register plugin request', plugin);
   Vue.fronteggPlugins = Vue.fronteggPlugins ?? [];
   Vue.fronteggPlugins.push(plugin);
 };

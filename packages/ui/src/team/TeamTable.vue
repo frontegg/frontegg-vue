@@ -197,9 +197,7 @@ export default Vue.extend({
     onOpenModal: mapTeamActions('openDeleteUserDialog'),
     onCloseModal: mapTeamActions('closeDeleteUserDialog'),
     deleteUser() {
-      console.log('deleteUser:', this.$data)
       if (this.$data.idUserDeleteModal) {
-        console.log('this.$data.idUserDeleteModal:', this.$data.idUserDeleteModal);
         const data = {
           callback: () => this.$emit('itemDeleted'),
           userId: this.$data.idUserDeleteModal,

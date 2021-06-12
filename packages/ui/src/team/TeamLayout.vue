@@ -73,7 +73,7 @@ export default Vue.extend({
     pageOffset() {
       return this.$data.teamState.pageOffse
     },
-    
+
     totalPages() {
       return this.$data.teamState.totalPages;
     },
@@ -96,7 +96,6 @@ export default Vue.extend({
     }
   },
   mounted() {
-    console.log('this:', this)
   },
   methods: {
     onOpenModal: mapTeamActions('openAddUserDialog'),
