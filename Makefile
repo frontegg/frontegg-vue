@@ -127,4 +127,23 @@ pretty:
 	@yarn prettier-hook
 
 demo:
-	cd ./packages/demo-saas && yarn start
+	cd ./packages/demo-saas && yarn serve
+
+
+publish-packages-next:
+	@make publish-package-next-vue
+	@make publish-package-next-nuxt
+
+publish-package-next-%:
+	@cp ./.npmrc "./packages/${*}/.npmrc"
+	@cp ./.npmignore "./packages/${*}/.npmignore"
+	@cd "./packages/${*}/dist" && npm publish --tag next
+
+publish-packages:
+	@make publish-package-latest-vue
+	@make publish-package-latest-nuxt
+
+publish-package-latest-%:
+	@cp ./.npmrc "./packages/${*}/.npmrc"
+	@cp ./.npmignore "./packages/${*}/.npmignore"
+	@cd "./packages/${*}/dist" && npm publish --tag latest
