@@ -1,13 +1,13 @@
 {
   "name": "@frontegg/nuxt",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "",
   "main": "lib/module.js",
   "types": "types/index.d.ts",
   "files": [
     "lib"
   ],
-  "peerDependencies": {
-    "@frontegg/vue": "0.2.7"
+  "dependencies": {
+    "@frontegg/vue": "^0.2.9"
   }
 }
