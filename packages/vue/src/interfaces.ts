@@ -1,4 +1,4 @@
-import { AuthState } from '@frontegg/redux-store/auth';
+import { AuthState } from '@frontegg/redux-store';
 import { ContextOptions } from '@frontegg/rest-api';
 import VueRouter from 'vue-router';
 import { EnhancedStore } from '@reduxjs/toolkit';

@@ -11,7 +11,7 @@ import {
   SocialLoginState,
   SSOState,
   TeamState,
-} from '@frontegg/redux-store/auth';
+} from '@frontegg/redux-store';
 import VueRouter from 'vue-router';
 import { TenantsState } from '@frontegg/redux-store';
 

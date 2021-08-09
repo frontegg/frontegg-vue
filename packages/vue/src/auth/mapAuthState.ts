@@ -10,9 +10,9 @@ import {
   SecurityPolicyActions, SignUpActions,
   SocialLoginActions, SSOActions,
   TeamActions, TenantsActions,
-} from '@frontegg/redux-store/auth';
+  AuthActions,
+} from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthActions } from '@frontegg/redux-store';
 
 const mapSubState = (statePrefix: string, propertyName?: string) => function () {
   const obj = { [propertyName ?? statePrefix.substring('auth.'.length)]: (state: any) => state };

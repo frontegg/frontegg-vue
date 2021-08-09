@@ -12,13 +12,13 @@ import {
   storeUnsubscribe,
 } from './utils';
 import { StoreHolder } from './StoreHolder';
-import { initialize } from '@frontegg/admin-portal';
+import { AdminPortal, initialize } from '@frontegg/admin-portal';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';
+import { createFronteggStore } from '@frontegg/redux-store';
 
 export * from './types';
-
 
 export {
   mapAuthActions,
@@ -50,10 +50,6 @@ const Frontegg: PluginObject<PluginOptions> = {
       throw Error('contextOptions must be passed to Vue.use(Frontegg, { /* OPTIONS */ })');
     }
 
-    // if (router == null) {
-    //   throw Error('VueRouter instance must be passed to Vue.use(Frontegg, { router })');
-    // }
-
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
     ContextHolder.setContext(contextOptions);
     let pluginRegistered = false;
@@ -71,13 +67,16 @@ const Frontegg: PluginObject<PluginOptions> = {
     };
 
     const onRedirectTo = router && setupOnRedirectTo(router);
-
     fronteggApp = initialize({
       version: 'latest',
       ...rest,
       onRedirectTo,
       basename: router?.options.base,
     } as any);
+
+    store = createFronteggStore({ context: contextOptions }, fronteggApp);
+    fronteggApp.store = store;
+    StoreHolder.setStore(store);
     // @ts-ignore
     Vue.$fronteggApp = fronteggApp;
 
@@ -88,23 +87,10 @@ const Frontegg: PluginObject<PluginOptions> = {
     const registerPlugins = (instance: any) => {
       pluginRegistered = true;
 
-      fronteggApp.onLoad(() => {
-        const waitForStore = setInterval(() => {
-          if (fronteggApp.store) {
-            store = fronteggApp.store as EnhancedStore;
-            clearInterval(waitForStore);
-            StoreHolder.setStore(store);
-            (Vue.fronteggPlugins || []).forEach((plugin: any) => plugin.init(store));
-            setStoreKey(instance, store);
-            instance.fronteggAuth = Vue.fronteggAuth;
-            connectMapState(instance);
-          }
-        }, 50);
-      });
-      fronteggApp.onStoreChanged((state: any) => {
-        ContextHolder.setUser(state.auth.user);
-        ContextHolder.setAccessToken(state.auth.user?.accessToken);
-      });
+      (Vue.fronteggPlugins || []).forEach((plugin: any) => plugin.init(store));
+      setStoreKey(instance, store);
+      instance.fronteggAuth = Vue.fronteggAuth;
+      connectMapState(instance);
     };
 
     const checkIfPluginsLoaded = () => {
@@ -176,8 +162,24 @@ const Frontegg: PluginObject<PluginOptions> = {
   },
 };
 
-const openAdminPortal = () => fronteggApp.mountAdminPortal();
+/**
+ * @deprecated since version 2.0
+ * use instead:
+ * import {AdminPortal} from '@frontegg/vue'
+ * AdminPortal.show()
+ */
+const openAdminPortal = () => AdminPortal.show();
+/**
+ * @deprecated since version 2.0
+ * use instead:
+ * import {AdminPortal} from '@frontegg/vue'
+ * AdminPortal.hide()
+ */
+const closeAdminPortal = () => AdminPortal.hide();
+
 export {
   Frontegg,
+  AdminPortal,
   openAdminPortal,
+  closeAdminPortal
 };

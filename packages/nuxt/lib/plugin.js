@@ -9,10 +9,11 @@ export default function(context, inject) {
   const router = app.router;
 
   Vue.use(Frontegg, {
-    version: 'next',
+    version: 'latest',
     ...FRONTEGG_OPTIONS,
     router,
   });
+
 
   if (store) {
     store.$fronteggApp = Vue.$fronteggApp;
