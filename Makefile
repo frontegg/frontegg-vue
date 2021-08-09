@@ -66,55 +66,10 @@ install: ##@1 Global yarn install all packages
   		| sed 's|^./packages/||' \
   		| xargs -I '{}' sh -c '$(MAKE) add-dist-folders-{}'
 	@echo "${YELLOW}Running lerna bootstrap${RESET}"
-	@echo "${YELLOW}Running lerna bootstrap${RESET}"
-	@./node_modules/.bin/lerna bootstrap --ignore redux-store
-	@rm "${DIR}/node_modules/@frontegg/vue-core"
-	@ln -s "${DIR}/packages/core/dist" "${DIR}/node_modules/@frontegg/vue-core"
+	@./node_modules/.bin/lerna bootstrap
 
 add-dist-folders-%:
 	@mkdir -p ./packages/${*}/dist
-
-########################################################################################################################
-#
-# PACKAGES
-#
-########################################################################################################################
-
-lint: ##@2 Linting run lint on all packages
-	@echo "${YELLOW}Running tslint on all packages${RESET}"
-	@./node_modules/.bin/tslint "./packages/*/{src,tests}/**/*.{ts,tsx}"
-
-lint-%: ##@2 Linting run lint on specific packages
-	@echo "${YELLOW}Running tslint on package ${WHITE}${SERVICE_NAME}-${*}${RESET}"
-	@./node_modules/.bin/tslint ./packages/${*}/{src}/**/*.ts
-
-########################################################################################################################
-#
-# TEST Operations
-#
-########################################################################################################################
-#
-
-test-integration: ##@3 Tests integration test with cypress
-	@echo "${YELLOW}Integration Test Cypress${RESET}"
-	@echo "Building DemoSaaS project"
-	@cd ./packages/demo-saas && yarn build
-	@echo "Start Cypress tests on port 3000"
-	@start-server-and-test 'cd ./packages/demo-saas && serve -l 3000 -s build' 3000 'cypress run --headless --config baseUrl=http://localhost:3000'
-
-test-component: ##@3 Tests component test with cypress
-	@echo "${YELLOW}Component Test Cypress${RESET}"
-	${MAKE} test-component-auth
-	#${MAKE} test-component-audits
-	#${MAKE} test-component-core
-
-test-component-%:
-	@echo "${YELLOW}Component Test Cypress [${*}]${RESET}"
-	@./node_modules/.bin/cypress run --headless --spec "packages/${*}/**/*"
-
-test-unit: ##@3 Tests unit test with jest
-	@echo "${YELLOW}Unit Test Jest${RESET}"
-	@./node_modules/.bin/lerna run test --parallel
 
 
 ########################################################################################################################
@@ -124,8 +79,6 @@ test-unit: ##@3 Tests unit test with jest
 ########################################################################################################################
 
 build: ##@4 Build build all packages
-	${MAKE} build-core
-	${MAKE} build-ui
 	${MAKE} build-vue
 
 build-%: ##@4 Build build a specific package

@@ -1,12 +1,10 @@
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 import Home from '../views/Home.vue';
-import { TeamPage } from '@frontegg/vue-ui';
-import { isAuthenticatedGuard } from '@frontegg/vue';
 
 Vue.use(VueRouter);
 
-const routes: Array<RouteConfig> = [
+const routes: RouteConfig[] = [
   {
     path: '/',
     name: 'Home',
@@ -19,11 +17,6 @@ const routes: Array<RouteConfig> = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue'),
-  }, {
-    path: '/team_management',
-    name: 'Team',
-    component: TeamPage,
-    beforeEnter: isAuthenticatedGuard,
   },
 ];
 
