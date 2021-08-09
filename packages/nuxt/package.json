@@ -1,6 +1,6 @@
 {
   "name": "@frontegg/nuxt",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "",
   "main": "lib/module.js",
   "types": "types/index.d.ts",
