@@ -1,7 +1,7 @@
 import { ContextHolder, RedirectOptions } from '@frontegg/rest-api';
 import set from 'set-value';
 import { getStore, getStoreBinding, setStoreBinding } from './utils';
-import { AuthState } from '@frontegg/redux-store/auth';
+import { AuthState } from '@frontegg/redux-store';
 import get from 'get-value';
 import VueRouter from 'vue-router';
 import { StoreHolder } from './StoreHolder';

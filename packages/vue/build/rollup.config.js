@@ -68,7 +68,7 @@ const external = [
   // eg. 'jquery'
   'vue',
   '@frontegg/redux-store',
-  '@frontegg/redux-store/auth',
+  '@frontegg/redux-store',
   '@frontegg/redux-store/toolkit',
   '@frontegg/rest-api',
   '@frontegg/admin-portal',

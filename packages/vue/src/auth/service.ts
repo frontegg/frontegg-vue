@@ -29,10 +29,9 @@ import {
   teamActions,
   apiTokensActions,
   securityPolicyActions, User, AuthState, authInitialState, TenantsActions,
-} from '@frontegg/redux-store/auth';
-import { AuthActions } from '@frontegg/redux-store';
+  AuthPageRoutes, AuthActions,
+} from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthPageRoutes } from '@frontegg/redux-store/auth/interfaces';
 import VueRouter from 'vue-router';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {

@@ -1,4 +1,4 @@
-import { AuthState } from '@frontegg/redux-store/auth';
+import { AuthState } from '@frontegg/redux-store';
 import { NavigationGuard, NavigationGuardNext, Route } from 'vue-router';
 import { StoreHolder } from '../StoreHolder';
 

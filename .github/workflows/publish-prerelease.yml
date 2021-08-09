@@ -21,9 +21,7 @@ jobs:
           node-version: 12
           registry-url: 'https://npm.pkg.github.com'
       - name: Install Dependencies and Build Packages
-        run: |
-          yarn install
-          yarn build
+        run: make init
       - name: Git Identity
         run: |
           git config --global user.name 'frontegg'
@@ -47,14 +45,20 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Commit Version UP
         run: |
-          yarn increment-version
-          git add . && git commit -m "chore(release): publish `node -p 'require("./projects/frontegg-app/package.json").version'`"
+          yarn lerna version patch --no-git-tag-version --yes --no-push --force-publish
+          git add . && git commit -m "chore(release): publish `node -p 'require("./lerna.json").version'`"
       - name: Set current CHANGELOG to output
         id: changelog
         shell: bash -ex {0}
         run: |
-          version=$(node -p 'require("./projects/frontegg-app/package.json").version')
+          version=$(node -p 'require("./lerna.json").version')
+          changelog=$(node -p "(function(){var changelog = require('fs').readFileSync('./CHANGELOG.md', {encoding: 'utf8'}); changelog = changelog.substring(changelog.indexOf('# [')); changelog = changelog.substring(changelog.indexOf('\n')).trim();  return changelog.substring(0, changelog.indexOf('# [') - 2)})()")
+          changelog="${changelog//'%'/'%25'}"
+          changelog="${changelog//$'\n'/'%0A'}"
+          changelog="${changelog//$'\r'/'%0D'}"
+          echo $changelog
           echo "::set-output name=version::${version}"
+          echo "::set-output name=changelog::${changelog}"
       - name: Create Release Pull Request
         id: cpr
         uses: peter-evans/create-pull-request@v3.5.1
@@ -68,16 +72,20 @@ jobs:
           body: |
             # v${{ steps.changelog.outputs.version }}
 
+            ${{steps.changelog.outputs.changelog}}
+
           labels: "Type: Release"
           branch: "release/next"
 
       - name: Publish Pre-Release version to NPM
         run: |
-          version=$(node -p 'require("./projects/frontegg-app/package.json").version')
-          echo "Publishing Pre-Release version - v${version}-alpha.${{ github.run_id }}"
-          node -p "(function(){var fs = require('fs'); var pkg = JSON.parse(fs.readFileSync('./dist/@frontegg/angular/package.json', {encoding: 'utf8'})); pkg.version = '${version}-alpha.${{ github.run_id }}'; fs.writeFileSync('./dist/@frontegg/angular/package.json', JSON.stringify(pkg, null, 2),  {encoding: 'utf8'})})()"
-          cp .npmrc ./dist/@frontegg/angular/
-          cp .npmignore ./dist/@frontegg/angular/
-          cd ./dist/@frontegg/angular && npm publish --tag next
+          version=$(node -p 'require("./lerna.json").version')
+          echo "Publishing DEV version - v${version}-alpha.${{ github.run_id }}"
+          make move-package-json-to-dist
+          make prerelease-version-upgrade-${version}-alpha.${{ github.run_id }}
+          make pretty
+          git add .
+          git commit -m "chore: prelrease version"
+          yarn lerna publish from-package --ignore-prepublish --no-git-reset --dist-tag next --force-publish --contents dist --yes --no-git-tag-version --no-push
         env:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}

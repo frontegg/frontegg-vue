@@ -32,15 +32,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Install Dependencies and Build Packages
-        run: |
-          yarn install
-          yarn build
+        run: make init
       - name: Set Current Version
         id: set_current_version
         if: startsWith(github.event.pull_request.title, 'v')
         shell: bash -ex {0}
         run: |
-          CURRENT_VERSION=$(node -p 'require("./projects/frontegg-app/package.json").version')
+          CURRENT_VERSION=$(node -p 'require("./lerna.json").version')
           echo "::set-output name=CURRENT_VERSION::${CURRENT_VERSION}"
       - name: Tag Check
         id: tag_check
@@ -95,9 +93,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
       - name: Publish
         run: |
-          cp .npmrc ./dist/@frontegg/angular/
-          cp .npmignore ./dist/@frontegg/angular/
-          cd ./dist/@frontegg/angular && npm publish --tag latest
+          yarn lerna publish from-package --force-publish --dist-tag latest --yes --no-push
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NODE_AUTH_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
