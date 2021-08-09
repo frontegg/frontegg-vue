@@ -83,9 +83,7 @@ jobs:
         run: |
           version=$(node -p 'require("./lerna.json").version')
           echo "Publishing DEV version - v${version}-alpha.${{ github.run_id }}"
-          make move-package-json-to-dist
           make prerelease-version-upgrade-${version}-alpha.${{ github.run_id }}
-          make pretty
           git add .
           git commit -m "chore: prelrease version"
           yarn lerna publish from-package --ignore-prepublish --no-git-reset --dist-tag next --force-publish --contents dist --yes --no-git-tag-version --no-push
