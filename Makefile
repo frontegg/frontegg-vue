@@ -137,7 +137,7 @@ publish-packages-next:
 publish-package-next-%:
 	@cp ./.npmrc "./packages/${*}/.npmrc"
 	@cp ./.npmignore "./packages/${*}/.npmignore"
-	@cd "./packages/${*}/dist" && npm publish --tag next
+	@cd "./packages/${*}" && npm publish --tag next
 
 publish-packages:
 	@make publish-package-latest-vue
@@ -146,4 +146,4 @@ publish-packages:
 publish-package-latest-%:
 	@cp ./.npmrc "./packages/${*}/.npmrc"
 	@cp ./.npmignore "./packages/${*}/.npmignore"
-	@cd "./packages/${*}/dist" && npm publish --tag latest
+	@cd "./packages/${*}" && npm publish --tag latest
