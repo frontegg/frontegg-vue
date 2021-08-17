@@ -970,10 +970,10 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@3.14.1":
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-3.14.1.tgz#01c7a579bca0eee9d8cae4ed0903c73bb2499f94"
-  integrity sha512-atz7kvFovhgKSXatGfvNXUFe4i0+/hTwNNe5l2mWtz1OX/NQJDZRg32oseGnZMVzYeNcpmGQnUoLI7Dz/xZzqQ==
+"@frontegg/admin-portal@3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-3.15.0.tgz#a8a133a7132853cfda4b32c85ce3a00120fb217b"
+  integrity sha512-jd32RFn+KmcCVXalAZSkEULAvM4cUlUsAX4Iv7rgtv5bcm/EbXa5BK+kSwM7MM3ZMWTKtVTFNkrNzPB6+kf1dQ==
   dependencies:
     "@frontegg/injector" "0.0.26"
     uuid "^8.3.0"
@@ -1004,10 +1004,10 @@
     "@reduxjs/toolkit" "1.x"
     redux-saga "1.x"
 
-"@frontegg/redux-store@3.14.1":
-  version "3.14.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-3.14.1.tgz#ed7698c6b708ead78295eff0ec33f8a9f6b2fa0c"
-  integrity sha512-eYT9NK8ehxEDfHnzbunUUj4xROTu4Yxcx3d7Sg+Y1z7mBwxiTRTzjb9WCe1ZQTZMEuVGQiOKg9ACcwh5mpSk/g==
+"@frontegg/redux-store@3.15.0":
+  version "3.15.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-3.15.0.tgz#7a3d0c0cf65ca267204f1f5a77aaf3a01f754bb7"
+  integrity sha512-c4t3lHJGDqUe6a4jZlcjFROdkSXpw2OkPdL2iCfZajKW2wt3qVInSYNRp/3OXBL9FmNgdjAVzGhivlDP9DADCw==
   dependencies:
     "@frontegg/rest-api" "^2.10.15"
     "@reduxjs/toolkit" "^1.5.0"
