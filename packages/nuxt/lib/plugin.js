@@ -9,7 +9,6 @@ export default function(context, inject) {
   const router = app.router;
 
   Vue.use(Frontegg, {
-    version: 'latest',
     ...FRONTEGG_OPTIONS,
     router,
   });

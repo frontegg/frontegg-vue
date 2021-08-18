@@ -68,7 +68,6 @@ const Frontegg: PluginObject<PluginOptions> = {
 
     const onRedirectTo = router && setupOnRedirectTo(router);
     fronteggApp = initialize({
-      version: 'latest',
       ...rest,
       onRedirectTo,
       basename: router?.options.base,
