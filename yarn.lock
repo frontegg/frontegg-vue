@@ -970,13 +970,13 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.1.0.tgz#25d6f3ffca3289aeff583d1cf975759970a21aa0"
-  integrity sha512-pcwlXivQ68HWEPrFETj8YUTB5rt2Ru1MEQ88P7bb5jvh93Yu06YhEOdgtpfWQoJipYzYIQjIFKmigU8Q4YTq9g==
+"@frontegg/admin-portal@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.2.0.tgz#3c23ab0849d40264300ab9479407a1a847e2735e"
+  integrity sha512-ERu0KXeRl9l3jPv85uwF9T1Ka/hF5xcHx5rh2L0geXHj1BrCcVvHinwS9RQ1P9frSeT45dDZ5eqWbnzLD1RkBg==
   dependencies:
-    "@frontegg/redux-store" "4.1.0"
-    "@frontegg/types" "4.1.0"
+    "@frontegg/redux-store" "4.2.0"
+    "@frontegg/types" "4.2.0"
 
 "@frontegg/admin-portal@^0.5.2":
   version "0.5.2"
@@ -999,10 +999,10 @@
     "@reduxjs/toolkit" "1.x"
     redux-saga "1.x"
 
-"@frontegg/redux-store@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.1.0.tgz#404518d4f6fdb77a7649be9781d937f9bbe219e7"
-  integrity sha512-hfdwQFlJxvHZJPePKlj0mctbpLNB8GrC/oY6lQm6eVh69KEcTiMgLRWdRJ7oVNf1sw/aX9HziheefsD6zjisbQ==
+"@frontegg/redux-store@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.2.0.tgz#fadf6a64b11fe80606f14e765cbaf077f8917fc6"
+  integrity sha512-5Bp8D/2FP32YeJfDMzBl2+HCd7BbaVGFl7AbP/Xsn8QZk5eTvS4D9NcYh2kh/qFDql9fA3wWfV3Ipxf7Prn3TA==
   dependencies:
     "@frontegg/rest-api" "^2.10.19"
     "@reduxjs/toolkit" "^1.5.0"
@@ -1022,10 +1022,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@frontegg/types@4.1.0":
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.1.0.tgz#ff930c46d9607779da3956c945892425a31c0cbf"
-  integrity sha512-+cBG86o5UiOgTwJVBCo8ymwAY6Banww58FTmmnfeM7J+OlHvedPQfgr+tLxmytaeg1wuozSOstTPn6CmF7LCgg==
+"@frontegg/types@4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.2.0.tgz#3b0a8911b59f2e173cbe532467c4d72670f8d548"
+  integrity sha512-FopoEz4BeFc62tkT0Evf5Pwsar+NeYEkb05epOgfXx+NWQHBVDT3az3XC+cIfpdWPYRtgpDc+Y8rxQo78BRNqg==
 
 "@frontegg/vue-ui@^0.1.0":
   version "0.1.3"
