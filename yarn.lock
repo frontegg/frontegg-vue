@@ -970,13 +970,13 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.8.0.tgz#280788fd1a7886cbcf5af838c86406f76a62f926"
-  integrity sha512-uZNxupuLrxl4OAA91TyVkdNmbkT2Oie80BMQoADBEAHYlyHdI7e0s0Vl2qMVS65rrN9zflGq8p7/jd0yNyob5g==
+"@frontegg/admin-portal@4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.8.1.tgz#9f88091de8e874c90ed6dd08674299f06238ea7c"
+  integrity sha512-UnAxO7al47z24H6+4NCwG1uj11bT31jq5dYRPX0cj3LsAwXjLuzHHOAI26O/gBK+h51KNS7J4nEPLe3Iv9lm7g==
   dependencies:
-    "@frontegg/redux-store" "4.8.0"
-    "@frontegg/types" "4.8.0"
+    "@frontegg/redux-store" "4.8.1"
+    "@frontegg/types" "4.8.1"
 
 "@frontegg/admin-portal@^0.5.2":
   version "0.5.2"
@@ -999,10 +999,10 @@
     "@reduxjs/toolkit" "1.x"
     redux-saga "1.x"
 
-"@frontegg/redux-store@4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.8.0.tgz#75e73fbaa24265bcc9d262b8a9efca3ec2e07e43"
-  integrity sha512-Juh01ZrDDjfGvjImE4jGwJzyfoXRHljxMVWSeXa7j6DuL9mpiX3askas1g4bDJNIToWlrxn41QR98Sb5mJW2iA==
+"@frontegg/redux-store@4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.8.1.tgz#985c7d6fcecf27ed38d2983d74c358c655ce9533"
+  integrity sha512-yl6oXGVLmA5ToqWWhFuvVFWNRS6+N7PRkk9KakPge6XHI4fnrg+xhnJepqa/ezGfeq0tEbS9NZvUYB1Qu7KInA==
   dependencies:
     "@frontegg/rest-api" "^2.10.19"
     "@reduxjs/toolkit" "^1.5.0"
@@ -1022,10 +1022,10 @@
   dependencies:
     tslib "^2.3.0"
 
-"@frontegg/types@4.8.0":
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.8.0.tgz#4361324cc38d6128022065c8ecb92b42e3c912f7"
-  integrity sha512-5CfZqcx1fespNY1FzXSe91oBiTe/Sqda6msWMhy/9ZGLbcPegr98rgrMBLBMkbZVCA9YIDrwibGwOK5cNCYSTA==
+"@frontegg/types@4.8.1":
+  version "4.8.1"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.8.1.tgz#c126ed92bca3af66dbccb4ab3a66dbfd18776148"
+  integrity sha512-PK7Fb9AYdBopGqJz2wWIc33ZC/swRlAThb8Q839N4TKvtZ7WZP9AK2NJ36Ouantkf/hbuaFqwLgs4W/CVtVfLg==
   dependencies:
     csstype "^3.0.8"
 
