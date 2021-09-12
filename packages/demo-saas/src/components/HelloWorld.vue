@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <button> open</button>
+    <button v-on:click="openAdminBox()"> open</button>
     <v-card
       class="mx-auto"
       max-width="300"

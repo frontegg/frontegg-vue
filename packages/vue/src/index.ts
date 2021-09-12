@@ -1,5 +1,4 @@
 import _Vue, { PluginObject } from 'vue';
-import { EnhancedStore } from '@reduxjs/toolkit';
 import { PluginOptions } from './interfaces';
 import { setupOnRedirectTo, syncStateWithComponent } from './helpers';
 import {
@@ -16,7 +15,6 @@ import { AdminPortal, initialize } from '@frontegg/admin-portal';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';
-import { createFronteggStore } from '@frontegg/redux-store';
 
 export * from './types';
 
@@ -38,14 +36,11 @@ export {
 export * from './auth/interfaces';
 export * from './auth/guards';
 
-
-let store: EnhancedStore;
 let fronteggApp: any = null;
 const Frontegg: PluginObject<PluginOptions> = {
   install(Vue: typeof _Vue, options?: PluginOptions) {
-
-    let { router, ...rest } = options ?? {};
-    let { contextOptions } = options ?? {};
+    const { router, ...rest } = options ?? {};
+    const { contextOptions } = options ?? {};
     if (contextOptions == null) {
       throw Error('contextOptions must be passed to Vue.use(Frontegg, { /* OPTIONS */ })');
     }
@@ -73,8 +68,7 @@ const Frontegg: PluginObject<PluginOptions> = {
       basename: router?.options.base,
     } as any);
 
-    store = createFronteggStore({ context: contextOptions }, fronteggApp);
-    fronteggApp.store = store;
+    const store = fronteggApp.store;
     StoreHolder.setStore(store);
     // @ts-ignore
     Vue.$fronteggApp = fronteggApp;
@@ -94,7 +88,7 @@ const Frontegg: PluginObject<PluginOptions> = {
 
     const checkIfPluginsLoaded = () => {
       const _fronteggLoaded = (Vue.fronteggPlugins || []).reduce((loaded: boolean, plugin) => loaded && !plugin.loading, true);
-      if (_fronteggLoaded != fronteggLoaded) {
+      if (_fronteggLoaded !== fronteggLoaded) {
         fronteggLoaded = _fronteggLoaded;
         for (const subscriber of fronteggLoadedSubscribes) {
           subscriber();
@@ -180,5 +174,5 @@ export {
   Frontegg,
   AdminPortal,
   openAdminPortal,
-  closeAdminPortal
+  closeAdminPortal,
 };
