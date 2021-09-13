@@ -4,7 +4,7 @@
 
 ### 1. Install Frontegg Libraries    
   
-  Run the following command to Install Frontegg Vue library.
+  Run the following command to Install Frontegg Vue library
 
 ```
 npm install @frontegg/vue
