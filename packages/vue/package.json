@@ -25,7 +25,7 @@
     "@frontegg/admin-portal": "4.21.1",
     "@frontegg/redux-store": "4.21.1",
     "get-value": "^3.0.1",
-    "set-value": "^3.0.2"
+    "set-value": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
