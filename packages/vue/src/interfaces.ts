@@ -1,8 +1,6 @@
-import { AuthState } from '@frontegg/redux-store';
-import { ContextOptions } from '@frontegg/rest-api';
 import VueRouter from 'vue-router';
-import { EnhancedStore } from '@reduxjs/toolkit';
-import { AuthPluginOptions } from './auth/interfaces';
+import { AuthState, EnhancedStore } from '@frontegg/redux-store';
+import { FronteggAppOptions } from '@frontegg/types';
 
 export interface PluginConfig {
   storeName: string;
@@ -11,20 +9,17 @@ export interface PluginConfig {
   preloadedState: any;
 }
 
-
 export interface FronteggStore {
   auth: AuthState;
 }
 
-export interface PluginOptions extends AuthPluginOptions {
-  contextOptions: ContextOptions;
-  router: VueRouter
+export interface PluginOptions extends FronteggAppOptions {
+  router: VueRouter;
 }
-
 
 export abstract class FronteggPluginService {
   public loading!: boolean;
   public pluginConfig!: PluginConfig;
 
-  public abstract init(store: EnhancedStore<FronteggStore>): void;
+  public abstract init(options: PluginOptions, store: EnhancedStore<FronteggStore>): void;
 }
