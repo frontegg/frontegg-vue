@@ -52,9 +52,8 @@ const Frontegg: PluginObject<PluginOptions> = {
     // frontegg loader subscription
     let fronteggLoaded: boolean = false;
     const fronteggLoadedSubscribes: Set<any> = new Set();
-    const fronteggLoadedSubscribe = function (instance: any) {
+    const fronteggLoadedSubscribe = (instance: any) => {
       const func: any = () => {
-        // @ts-ignore
         instance.fronteggLoaded = fronteggLoaded;
       };
       fronteggLoadedSubscribes.add(func);
@@ -80,7 +79,7 @@ const Frontegg: PluginObject<PluginOptions> = {
     const registerPlugins = (instance: any) => {
       pluginRegistered = true;
 
-      (Vue.fronteggPlugins || []).forEach((plugin: any) => plugin.init(store));
+      (Vue.fronteggPlugins || []).forEach((plugin: any) => plugin.init(rest, store));
       setStoreKey(instance, store);
       instance.fronteggAuth = Vue.fronteggAuth;
       connectMapState(instance);

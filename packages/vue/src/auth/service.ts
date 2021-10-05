@@ -1,5 +1,5 @@
 import { AuthPluginOptions } from './interfaces';
-import { FronteggPluginService, FronteggStore, PluginConfig } from '../interfaces';
+import { FronteggPluginService, FronteggStore, PluginConfig, PluginOptions } from '../interfaces';
 import { EnhancedStore } from '@reduxjs/toolkit';
 import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store/toolkit';
 import {
@@ -77,6 +77,7 @@ export class FronteggAuthService implements FronteggPluginService {
   }
 
   isAuthenticatedRef!: boolean;
+  userRef: User | null | undefined = undefined;
 
   get isAuthenticated(): boolean {
     return this.store?.getState().auth.isAuthenticated ?? false;
@@ -86,7 +87,7 @@ export class FronteggAuthService implements FronteggPluginService {
     return this.store?.getState().auth.user;
   }
 
-  init = (store: EnhancedStore<FronteggStore>) => {
+  init = (options: PluginOptions, store: EnhancedStore<FronteggStore>) => {
     this.store = store;
 
     Object.entries({
@@ -107,24 +108,32 @@ export class FronteggAuthService implements FronteggPluginService {
       Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
     });
 
-
     const detachableActions = bindActionCreators(authActions, this.store!.dispatch);
     ActionsHolder.setActions(detachableActions);
 
-
-    // this.accessTokenUpdater(true);
-    this.store.subscribe(this.storeSubscriber);
-  };
+    if (!options.hostedLoginBox) {
+      this.store.subscribe(this.storeSubscriber);
+    }
+  }
 
   storeSubscriber = () => {
     this.state = this.store!.getState().auth;
 
-    if (this.state.isAuthenticated != this.isAuthenticatedRef) {
+    let notifyChange = false;
+    if (this.state.user !== this.userRef) {
+      this.userRef = this.state.user;
+      notifyChange = true;
+    }
+    if (this.state.isAuthenticated !== this.isAuthenticatedRef) {
       this.isAuthenticatedRef = this.state.isAuthenticated;
+      notifyChange = true;
+    }
+    if (!this.userRef || !this.state.isAuthenticated) {
+      clearInterval(this.accessTokenUpdaterRef);
+    } else if (notifyChange) {
       this.accessTokenUpdater();
     }
-  };
-
+  }
 
   accessTokenUpdaterRef!: any;
   accessTokenUpdater = (firstTime: boolean = false) => {
@@ -137,5 +146,5 @@ export class FronteggAuthService implements FronteggPluginService {
         this.accessTokenUpdaterRef = setInterval(this.loginActions.requestAuthorize, ttl);
       }
     }
-  };
+  }
 }
