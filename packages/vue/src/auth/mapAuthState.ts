@@ -59,10 +59,17 @@ export const connectMapState = (_this: any) => {
 
 const actionGetter = (action: any) => (...args: any) => (ActionsHolder.getAction(action) as any)(...args);
 
+
+type MapLoginActions = LoginActions & {'loginWithRedirect': LoginActions['requestHostedLoginAuthorize']};
 export const mapAuthActions =
   <K extends keyof AuthActions>(action: K): AuthActions[K] => actionGetter(action);
 export const mapLoginActions =
-  <K extends keyof LoginActions>(action: K): LoginActions[K] => actionGetter(action);
+  <K extends keyof MapLoginActions>(action: K): MapLoginActions[K] => {
+    if (action === 'loginWithRedirect') {
+      return actionGetter('requestHostedLoginAuthorize');
+    }
+    return actionGetter(action);
+  };
 export const mapAcceptInvitationActions =
   <K extends keyof AcceptInvitationActions>(action: K): AcceptInvitationActions[K] => actionGetter(action);
 export const mapActivateAccountActions =
@@ -87,5 +94,3 @@ export const mapTeamActions =
   <K extends keyof TeamActions>(action: K): TeamActions[K] => actionGetter(action);
 export const mapTenantsActions =
   <K extends keyof TenantsActions>(action: K): TenantsActions[K] => actionGetter(action);
-
-
