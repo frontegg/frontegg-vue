@@ -1,6 +1,7 @@
 <template>
   <div class="hello">
     <button v-on:click="openAdminBox()"> open</button>
+    <button v-on:click="loginWithRedirect()">Open hosted login</button>
     <v-card
       class="mx-auto"
       max-width="300"
@@ -36,7 +37,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import {openAdminPortal, mapLoginActions} from "@frontegg/vue";
+import {openAdminPortal,  mapLoginActions} from "@frontegg/vue";
+
 
 export default Vue.extend({
   name: "HelloWorld",
@@ -48,8 +50,9 @@ export default Vue.extend({
   },
   methods: {
     login: mapLoginActions('login'),
+    loginWithRedirect: mapLoginActions('loginWithRedirect'),
     openAdminBox() {
-      openAdminPortal()
+      openAdminPortal();
     }
   },
   computed: {
