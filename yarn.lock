@@ -977,13 +977,13 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@4.40.1":
-  version "4.40.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.40.1.tgz#c78a6567212092d7e8679cf5822d0eb814a08ef1"
-  integrity sha512-IsftDxx2feeamGwGTEIHtBHpKXXzrdaNUZgjJAVgqbg5tXSi1jmVmjGvv/zywDhMD9wKb9+5bdEBBx12HvYWaQ==
+"@frontegg/admin-portal@4.42.2":
+  version "4.42.2"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-4.42.2.tgz#1a5e5a6ba94cbaafac0f651ffa9f9ae3373eb888"
+  integrity sha512-Nx88ids8mRbXXlWFZvkcAa2stjsdXvb0kvYO55BcVbvqd7kbxbP5QMb6XlwFUrFvfCMBYmrDoaz4vdsZdJMwNg==
   dependencies:
-    "@frontegg/react-hooks" "4.40.1"
-    "@frontegg/types" "4.40.1"
+    "@frontegg/react-hooks" "4.42.2"
+    "@frontegg/types" "4.42.2"
 
 "@frontegg/admin-portal@^0.5.2":
   version "0.5.2"
@@ -997,12 +997,12 @@
   resolved "https://registry.yarnpkg.com/@frontegg/injector/-/injector-0.0.23.tgz#d4fca57659c6b5fec913b801f0196a8c8e77512f"
   integrity sha512-aZNZCIHuZwPpkPkXTmBpJS3Ot8ID00vMuN8z1YGCvBKHzA6PhaitJV6ZxAUQweUG7suv872iNdNJFr85ObPOLg==
 
-"@frontegg/react-hooks@4.40.1":
-  version "4.40.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/react-hooks/-/react-hooks-4.40.1.tgz#30071aba8ee2e45d0ddab177736d6b93e5142ec4"
-  integrity sha512-GoX844Z4D7b6R9OQ4fx9aqHhFICjiOBkKpj4m/xW2Vk6bHme4iQUMxZrkzjGqStnDsJyVmvQj6pcpYaYKB4yYA==
+"@frontegg/react-hooks@4.42.2":
+  version "4.42.2"
+  resolved "https://registry.yarnpkg.com/@frontegg/react-hooks/-/react-hooks-4.42.2.tgz#1c15324413be408c0db11fe02fb2848f4d9bf970"
+  integrity sha512-UtEwGRHxOf4Id2OhYYyWxdjo1LeZpvUnaOBK+bbfwVxNriv6+uFYeNDJumagAsmQy4Q2uh1Xrcn3WICl5KwwCg==
   dependencies:
-    "@frontegg/redux-store" "4.40.1"
+    "@frontegg/redux-store" "4.42.2"
     react-redux "^7.x"
 
 "@frontegg/redux-store@1.23.40":
@@ -1014,12 +1014,12 @@
     "@reduxjs/toolkit" "1.x"
     redux-saga "1.x"
 
-"@frontegg/redux-store@4.40.1":
-  version "4.40.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.40.1.tgz#4967dbf908265fe3fe6781585b5fd3f72b99f317"
-  integrity sha512-LORW4YScgOUPoZ7HJvJIUi6TZwv1D1n2QznFX4C2ZG666N23NI8ACEfiTW2s+oyd5q30vyk2MFt8Mb/LS/VNoA==
+"@frontegg/redux-store@4.42.2":
+  version "4.42.2"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-4.42.2.tgz#9c8bb764cee689576877ff9dbab220647870761c"
+  integrity sha512-aS5nROL/aRf9Qdnw8zvjuoB1ajZ7/RoyukSZ+460RSQuKo2yxVbjImqN+4fZYX0HawHBBeJ6+xDSDnLyvBUILA==
   dependencies:
-    "@frontegg/rest-api" "2.10.46"
+    "@frontegg/rest-api" "2.10.47"
     "@reduxjs/toolkit" "^1.5.0"
     redux-saga "^1.1.0"
     tslib "^2.3.1"
@@ -1030,15 +1030,15 @@
   resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-1.23.40.tgz#ffbeb6097ac7b053073abcf84fc144cd5efadccc"
   integrity sha512-T08RWX2bv7fN6ax3xEguz6rrnbsnrVUhDcZhE2ij11rzo/VVw9QJ/A4l0RbyBuKDGJte6XjFbOip6w9R++reww==
 
-"@frontegg/rest-api@2.10.46":
-  version "2.10.46"
-  resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-2.10.46.tgz#47d59c385ff96927c5a6c0ae1baec8a01d479c83"
-  integrity sha512-YjQLnPZdH//Gb+b6FgLTDWSoBYFGZe9NqoTS3nuBNsQ+64LNtGH4OKUWU82/iByupPG3Uz7zOZAmxhYlKuEhaQ==
+"@frontegg/rest-api@2.10.47":
+  version "2.10.47"
+  resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-2.10.47.tgz#70f096ecfab8c53b909f424a54e5db5fa64e0be3"
+  integrity sha512-r42xDO7kvWMBo9s9r/kpvZQjFTUF+qNkK3QkY4vMfyzyW6SdbY9jvitxIfkr3ZgeGwOeqL9MFd/z4T2CkzGJDQ==
 
-"@frontegg/types@4.40.1":
-  version "4.40.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.40.1.tgz#11d494e07eb75816620283a903b4ab17990a3663"
-  integrity sha512-HqwCIAMLMrjjoiA4r/mh79YM3EP/cPI6reFrcdTIuoqs3eQsGJiht9Lq1XTa+ZdXJQd2ekgs3yDnlbKnlBx2/A==
+"@frontegg/types@4.42.2":
+  version "4.42.2"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-4.42.2.tgz#713e869f38697bffb5e2901082702fb332493583"
+  integrity sha512-7MvgPJdAt9wxhYlJAA69aILY9mNM/rtwrc7bydIPbWqddLxYadp6TXb938xUMhU7FtZCey2uRe1zsGtCNhWw+A==
   dependencies:
     csstype "^3.0.9"
 
