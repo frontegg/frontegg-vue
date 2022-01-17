@@ -1,16 +1,13 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
+import fronteggOptions from './fronteggOptions';
 Vue.config.productionTip = false;
 
 import { Frontegg } from '@frontegg/vue';
 
 Vue.use(Frontegg, {
-  contextOptions: {
-    baseUrl: 'https://loudapi.frontegg.com',
-    clientId: '93447df4-edcc-45e5-8664-9fb8c196cf44',
-  },
-  hostedLoginBox: true,
+  ...fronteggOptions,
   router,
 });
 

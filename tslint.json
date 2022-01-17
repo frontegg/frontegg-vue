@@ -59,7 +59,8 @@
         "allow-leading-underscore",
         "allow-pascal-case"
       ]
-    }
+    },
+    "@typescript-eslint/ban-ts-ignore": false
   },
   "linterOptions": {
     "exclude": [
