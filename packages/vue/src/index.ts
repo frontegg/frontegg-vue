@@ -37,7 +37,7 @@ export * from './auth/interfaces';
 export * from './auth/guards';
 
 let fronteggApp: any = null;
-const Frontegg: PluginObject<PluginOptions> = {
+const Frontegg: PluginObject<PluginOptions> | any = {
   install(Vue: typeof _Vue, options?: PluginOptions) {
     const { router, ...rest } = options ?? {};
     const { contextOptions } = options ?? {};

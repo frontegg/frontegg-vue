@@ -5,6 +5,7 @@ import { AuthState } from '@frontegg/redux-store';
 import get from 'get-value';
 import VueRouter from 'vue-router';
 import { StoreHolder } from './StoreHolder';
+import * as Vue from 'vue';
 
 export const setupOnRedirectTo = (router: VueRouter) => {
   const baseName = router.options.base || '';
@@ -40,7 +41,21 @@ export const syncStateWithComponent = (component: any, bindings: any) => () => {
       if (!getter) {
         return;
       }
-      set(component._data, prop, getter(get(state, subState)));
+      
+      const newData = getter(get(state, subState));
+      const vueObject: any = { ...Vue };
+      let version;
+
+      if (vueObject.default) version = 2;
+      if (vueObject.version && vueObject.version[0] === '3') {
+          version = 3;
+      }
+      if(version === 3) {
+        set(component.$data, prop, newData);
+      }
+      if(version === 2) {
+        set(component._data, prop, newData);
+      } 
     });
   });
 };
