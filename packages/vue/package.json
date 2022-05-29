@@ -22,8 +22,8 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
   },
   "dependencies": {
-    "@frontegg/admin-portal": "5.51.1",
-    "@frontegg/redux-store": "5.51.1",
+    "@frontegg/admin-portal": "5.51.2",
+    "@frontegg/redux-store": "5.51.2",
     "get-value": "^3.0.1",
     "set-value": "^4.0.1"
   },
