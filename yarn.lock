@@ -963,18 +963,18 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@5.68.2":
-  version "5.68.2"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-5.68.2.tgz#c394091bbb6b6c765a7888179e0209020ad2c3ef"
-  integrity sha512-6886CiL+8CHCDgGSQyVIghtULp+DGaRTebC+7XjZtAUKHOjd749wxRO6pff58BVvTBgcD0X2P5bGR4Kx01RFZw==
+"@frontegg/admin-portal@5.68.3":
+  version "5.68.3"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-5.68.3.tgz#74e4c9d85b0b499c731464791a8579b2acda2aa6"
+  integrity sha512-+iupSVn/oQnyX92+zSf4OfZoHOhbmhzPnyiXrjaysn1T4aoFiStXcXGemLBcWvqHd3UV0ybMZ2xERe37Dw7SRg==
   dependencies:
-    "@frontegg/types" "5.68.2"
+    "@frontegg/types" "5.68.3"
     uuid "^8.3.2"
 
-"@frontegg/redux-store@5.68.2":
-  version "5.68.2"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-5.68.2.tgz#3fc0f44e2b13e5e832262dcdd2531609d0c3c09b"
-  integrity sha512-HAv6xnCzRLbQN3JHJG70fibIiKpv+6G9gjJ+UVzDqmZOm6oNokqsXq58jTMmqzXOUaZXt3d5IMUY+ktL7xYDkA==
+"@frontegg/redux-store@5.68.3":
+  version "5.68.3"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-5.68.3.tgz#91613be94506795573bad4b5b36d6ea4caeb3f6c"
+  integrity sha512-BHtrumMcdvrX5KU2malAPPe8R5P7coYmkmlk4ZoMYFvE+gwb21RHXV0ViczAIBVjR2ckJWu0wr8qBrsYqonsQA==
   dependencies:
     "@frontegg/rest-api" "^2.10.87"
     "@reduxjs/toolkit" "^1.5.0"
@@ -987,10 +987,10 @@
   resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-2.10.89.tgz#fecbd09364b4d35950f527b20721f44b0f7f0dc9"
   integrity sha512-/hrRRhWyNDpzbQ64XPha7jLWWtgYeiBPpE/3w+Cmc81GPPN1nrswCctYv6DNVMs3vD9abp53h9y1ZtFTH3MyBA==
 
-"@frontegg/types@5.68.2":
-  version "5.68.2"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-5.68.2.tgz#39bece7e267d38015079764566f1bc8cbde44d0c"
-  integrity sha512-uhR9mWCPMfLY7XD2vlZF4bYYGuDnZk5nn7vrSi+gnHjiMvRWp6Ul6tPOqYXucszh4S3QW3Ksu6mFaxJmlH8TJg==
+"@frontegg/types@5.68.3":
+  version "5.68.3"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-5.68.3.tgz#8a344f76601a5519cc35199ae1f6068a22566f02"
+  integrity sha512-Y70CQezVF1mAzqbNwuH3bahblzZBfAa+VqS56Wwksv6SqBEfk6qbTUc0YxciiyJ1tHn1h1Wem1bkcWVwrleH+Q==
   dependencies:
     csstype "^3.0.9"
 
