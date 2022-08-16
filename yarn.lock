@@ -970,18 +970,18 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/admin-portal@5.74.1":
-  version "5.74.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-5.74.1.tgz#cf8fb7ca5695b16b322749904670abce8bfee63a"
-  integrity sha512-pK8hfuf9jSmDZa3u4JvGxhrAf2rKRdJB4lBOgDebKEk4o8maIQ99zEEU30GD0OLE+hWfr+Uit9vdut5NKVBTAQ==
+"@frontegg/admin-portal@5.76.0":
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/admin-portal/-/admin-portal-5.76.0.tgz#4a42aac1f62848e761ffbbda5f4e760c66a3f60f"
+  integrity sha512-YH0ckkkvTvvLONqqMsRIs9hIOQBfqwU9/faIrcAzCwVdMDajHTcVqOXO7BxE3rEjdaOPXM7c32Y/TFGtHE7gDg==
   dependencies:
-    "@frontegg/types" "5.74.1"
+    "@frontegg/types" "5.76.0"
     uuid "^8.3.2"
 
-"@frontegg/redux-store@5.74.1":
-  version "5.74.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-5.74.1.tgz#053e9acd366af95bb418cc34e7337c705ba8cc68"
-  integrity sha512-Cvfd5jq81Kgr8JuU4MJv7cfA1rL5HNPm+3uX8V5zdsb2w0eppKEyv6UaZ2HrMZ3oMQj3B7BoFjG/pqqR5BqK7A==
+"@frontegg/redux-store@5.76.0":
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-5.76.0.tgz#9de6d4b832e90c69ab1d424044c896ae70762836"
+  integrity sha512-eUR+jmJyuZdI9VKalpIvHVAf+GuM3sKlvPR9GHJKDTVxr2ibO9oY1n94IIjy3k/ULziHSPGB/KecX7L6lPNJsg==
   dependencies:
     "@frontegg/rest-api" "^3.0.10"
     "@reduxjs/toolkit" "^1.5.0"
@@ -996,10 +996,10 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@frontegg/types@5.74.1":
-  version "5.74.1"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-5.74.1.tgz#5782bf851aae250797130bd6bea15ef020183a1a"
-  integrity sha512-e0THoWjjnyzP+8KU8VDzBlet5tZk8Sn0ZDTwjzNerjzWMA1YNoubgtmRxE74LrGCRKus1BjBNb/EWxeyCajzSA==
+"@frontegg/types@5.76.0":
+  version "5.76.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-5.76.0.tgz#e9820fe8944ef78592eea5d0f573ebfb814a63e6"
+  integrity sha512-3KyfKJl/uEaU0Z3IpaHH3Kufw3bflj8dzRM6VO8S8m8LKV9fDbzv9JtxnWZx1IsGmGS/qPZfVJSRnzeS+uSu6A==
   dependencies:
     csstype "^3.0.9"
 
