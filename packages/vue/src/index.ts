@@ -11,7 +11,7 @@ import {
   storeUnsubscribe,
 } from './utils';
 import { StoreHolder } from './StoreHolder';
-import { AdminPortal, initialize } from '@frontegg/admin-portal';
+import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';

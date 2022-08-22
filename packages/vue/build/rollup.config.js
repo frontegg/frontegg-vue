@@ -71,7 +71,7 @@ const external = [
   '@frontegg/redux-store',
   '@frontegg/redux-store/toolkit',
   '@frontegg/rest-api',
-  '@frontegg/admin-portal',
+  '@frontegg/js',
   'redux-saga',
   'redux-saga/effects',
   'set-value',

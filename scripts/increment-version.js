@@ -3,7 +3,7 @@ const { writeFileSync, readFileSync } = require('fs');
 const path = require('path');
 
 function getCurrentVersion() {
-  const pkg = require('../projects/frontegg-app/package.json');
+  const pkg = require('../packages/vue/package.json');
   const [major = 0, minor = 0, patch = 0] = pkg.version.split('.').map(Number);
   return { major, minor, patch };
 }
@@ -12,7 +12,7 @@ function isAdminPortalPackageUpdated() {
   const yarnLockChanges = execSync('git diff HEAD $(git describe --tags --match "v*" --abbrev=0) -- \'yarn.lock\'');
   return yarnLockChanges.toString().indexOf('@frontegg/rest-api@') !== -1 ||
     yarnLockChanges.toString().indexOf('@frontegg/redux-store@') !== -1 ||
-    yarnLockChanges.toString().indexOf('@frontegg/admin-portal@') !== -1;
+    yarnLockChanges.toString().indexOf('@frontegg/js@') !== -1;
 }
 
 function modifyVersion(newVersion) {
