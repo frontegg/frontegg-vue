@@ -61,17 +61,19 @@ import { TenantsState } from '@frontegg/redux-store';
 
 
 export type AuthPluginOptions = {
-  headerImage?:string;
+  headerImage?: string;
   router?: VueRouter | null;
 };
 
 declare module 'vue/types/vue' {
   interface VueConstructor {
-    fronteggAuth: FronteggAuthService
+    fronteggAuth: FronteggAuthService;
+    loginWithRedirect: () => void;
   }
 
   interface Vue {
-    fronteggAuth: FronteggAuthService
+    fronteggAuth: FronteggAuthService;
+    loginWithRedirect: () => void;
     mapAuthState: () => { authState: AuthState };
     mapLoginState: () => { loginState: LoginState };
     mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };
