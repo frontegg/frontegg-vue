@@ -131,6 +131,16 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     if (!pluginRegistered) {
       registerPlugins(Vue);
     }
+
+    // should be function not arrow to maintain this
+    function loginWithRedirect() {
+      // @ts-ignore
+      if (!this.$route.path.startsWith(Vue.fronteggAuth.routes.hostedLoginRedirectUrl)) {
+        store.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
+        Vue.fronteggAuth.loginActions.requestHostedLoginAuthorize();
+      }
+    }
+
     Vue.mixin({
       data: () => ({
         fronteggLoaded,
@@ -138,6 +148,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       beforeCreate() {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
+        this.loginWithRedirect = loginWithRedirect.bind(this);
         connectMapState(this);
       },
       created() {
