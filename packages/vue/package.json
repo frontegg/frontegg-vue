@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@frontegg/admin-portal": "5.80.2",
-    "@frontegg/redux-store": "5.80.2",
+    "@frontegg/redux-store": "6.1.0",
     "get-value": "^3.0.1",
     "set-value": "^4.0.1"
   },
