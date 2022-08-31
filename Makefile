@@ -139,6 +139,15 @@ publish-package-next-%:
 	@cp ./.npmignore "./packages/${*}/.npmignore"
 	@cd "./packages/${*}" && npm publish --tag next
 
+publish-packages-alpha:
+	@make publish-package-alpha-vue
+	@make publish-package-alpha-nuxt
+
+publish-package-alpha-%:
+	@cp ./.npmrc "./packages/${*}/.npmrc"
+	@cp ./.npmignore "./packages/${*}/.npmignore"
+	@cd "./packages/${*}" && npm publish --tag alpha
+
 publish-packages:
 	@make publish-package-latest-vue
 	@make publish-package-latest-nuxt

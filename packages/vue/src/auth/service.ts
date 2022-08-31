@@ -1,7 +1,7 @@
 import { AuthPluginOptions } from './interfaces';
 import { FronteggPluginService, FronteggStore, PluginConfig, PluginOptions } from '../interfaces';
 import { EnhancedStore } from '@reduxjs/toolkit';
-import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store/toolkit';
+import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store';
 import {
   authActions,
   LoginActions,
