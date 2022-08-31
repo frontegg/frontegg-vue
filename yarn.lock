@@ -978,10 +978,10 @@
     "@frontegg/types" "5.80.2"
     uuid "^8.3.2"
 
-"@frontegg/redux-store@6.1.0":
-  version "6.1.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.1.0.tgz#e64af4783e5146e1cf499b41c7fcad4d0e5beaf9"
-  integrity sha512-4JBiV5NghLapdiJdhv8k0Lx3Cq7bVZOiypoqx607GIsDScaQ963dMS3gLtPbNPxCVgAdLp2cmkMUcRH3G8/ctA==
+"@frontegg/redux-store@6.2.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.2.0.tgz#d030ec32ada7bb331926bc2c4b382cf9a35450d2"
+  integrity sha512-mHiHnfVcdxvsYXqu1gkjMka2jsBPWw9jX3tonba+znU82N29P+JDHB8necOEiaVSBjilAEPwQZ9VTFkiQpqVRg==
   dependencies:
     "@babel/runtime" "^7.17.2"
     "@frontegg/rest-api" "3.0.11"
