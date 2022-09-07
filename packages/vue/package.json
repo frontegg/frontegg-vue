@@ -15,11 +15,11 @@
   "sideEffects": false,
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.ts",
-    "build:watch": "rollup -w --config build/rollup.config.js  --format es",
-    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build:watch": "rollup -w --config rollup.config.js  --format es",
+    "build": "cross-env NODE_ENV=production rollup --config rollup.config.js",
+    "build:ssr": "cross-env NODE_ENV=production rollup --config rollup.config.js --format cjs",
+    "build:es": "cross-env NODE_ENV=production rollup --config rollup.config.js --format es",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config rollup.config.js --format iife"
   },
   "dependencies": {
     "@frontegg/js": "6.2.3",
