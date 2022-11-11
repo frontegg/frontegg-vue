@@ -135,8 +135,11 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         .includes(path);
     }
 
-    const authorizedContentGuard = (_this: any)=>{
-      if (_this.authorizedContent && !isAuthRoutes(_this.$route.path)) {
+    const authorizedContentGuard = (_this: any) => {
+      if (!_this.authorizedContent && isAuthRoutes(_this.$route.path)) {
+        return;
+      }
+      if (!Vue.fronteggAuth.loading && !Vue.fronteggAuth.isAuthenticated) {
         if (options?.hostedLoginBox) {
           Vue.fronteggAuth.loginActions.requestHostedLoginAuthorize();
         } else {
