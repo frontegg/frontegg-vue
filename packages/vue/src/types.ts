@@ -15,6 +15,5 @@ declare module 'vue/types/vue' {
     FRONTEGG_REDUX_BINDINGS?: any;
     _data?: any;
     fronteggLoaded: boolean;
-    authorizedContent?: boolean;
   }
 }
