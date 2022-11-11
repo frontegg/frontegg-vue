@@ -128,6 +128,27 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       }
     }, 10);
 
+
+    const isAuthRoutes = (path: string) => {
+      return Object.values(Vue.fronteggAuth.routes)
+        .filter(path => path != Vue.fronteggAuth.routes.authenticatedUrl)
+        .includes(path);
+    }
+
+    const authorizedContentGuard = (_this: any) => {
+      if (!_this.authorizedContent || isAuthRoutes(_this.$route.path)) {
+        return;
+      }
+      if (!Vue.fronteggAuth.loading && !Vue.fronteggAuth.isAuthenticated) {
+        if (options?.hostedLoginBox) {
+          Vue.fronteggAuth.loginActions.requestHostedLoginAuthorize();
+        } else {
+          const { loginUrl } = Vue.fronteggAuth.routes
+          _this.$router.push(loginUrl);
+        }
+      }
+    }
+
     if (!pluginRegistered) {
       registerPlugins(Vue);
     }
@@ -150,6 +171,12 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
         connectMapState(this);
+      },
+      updated() {
+        authorizedContentGuard(this)
+      },
+      mounted() {
+        authorizedContentGuard(this)
       },
       created() {
         if (getStoreBinding(this)) {
