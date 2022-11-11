@@ -136,7 +136,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     }
 
     const authorizedContentGuard = (_this: any) => {
-      if (!_this.authorizedContent && isAuthRoutes(_this.$route.path)) {
+      if (!_this.authorizedContent || isAuthRoutes(_this.$route.path)) {
         return;
       }
       if (!Vue.fronteggAuth.loading && !Vue.fronteggAuth.isAuthenticated) {
