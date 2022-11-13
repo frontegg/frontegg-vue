@@ -7,6 +7,8 @@
 <script lang="ts">
 import Vue from 'vue';
 
+/*
+Add this in order to have authorizeContentGuard
 export default Vue.extend({
   name: 'App',
   data() {
@@ -14,5 +16,10 @@ export default Vue.extend({
       authorizedContent: true
     };
   },
+});
+ */
+
+export default Vue.extend({
+  name: 'App',
 });
 </script>
