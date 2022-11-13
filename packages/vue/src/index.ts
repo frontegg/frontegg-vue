@@ -130,8 +130,9 @@ const Frontegg: PluginObject<PluginOptions> | any = {
 
 
     const isAuthRoutes = (path: string) => {
-      return Object.values(Vue.fronteggAuth.routes)
-        .filter(path => path != Vue.fronteggAuth.routes.authenticatedUrl)
+      const { routes } = Vue.fronteggAuth;
+      return Object.values(routes)
+        .filter(path => path != routes.authenticatedUrl)
         .includes(path);
     }
 
