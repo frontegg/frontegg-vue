@@ -1,7 +1,7 @@
 import { AuthPluginOptions } from './interfaces';
 import { FronteggPluginService, FronteggStore, PluginConfig, PluginOptions } from '../interfaces';
 import { EnhancedStore } from '@reduxjs/toolkit';
-import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store/toolkit';
+import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store';
 import {
   authActions,
   LoginActions,
@@ -36,7 +36,7 @@ import VueRouter from 'vue-router';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
   const reducerKeys = Object.keys(reducer);
-  const reducerActions = reducerKeys.map((key) => ({ [key]: authActions[key as keyof AuthActions] }));
+  const reducerActions = reducerKeys.map((key) => ({ [key]: (authActions as any)[key as keyof AuthActions] }));
   return reducerActions.reduce((p, n) => ({ ...p, ...n }), {}) as CaseReducerActions<T>;
 };
 
@@ -104,11 +104,11 @@ export class FronteggAuthService implements FronteggPluginService {
       apiTokensActions,
       securityPolicyActions,
       tenantsActions,
-    }).forEach(([key, actions]) => {
+    }).forEach(([key, actions]: any) => {
       Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
     });
 
-    const detachableActions = bindActionCreators(authActions, this.store!.dispatch);
+    const detachableActions: any = bindActionCreators(authActions, this.store!.dispatch);
     ActionsHolder.setActions(detachableActions);
 
     if (!options.hostedLoginBox) {

@@ -1,6 +1,6 @@
 {
   "name": "@frontegg/vue",
-  "version": "1.0.20",
+  "version": "2.0.9",
   "description": "",
   "main": "dist/index.ssr.js",
   "browser": "dist/index.js",
@@ -15,15 +15,14 @@
   "sideEffects": false,
   "scripts": {
     "serve": "vue-cli-service serve dev/serve.ts",
-    "build:watch": "rollup -w --config build/rollup.config.js  --format es",
-    "build": "cross-env NODE_ENV=production rollup --config build/rollup.config.js",
-    "build:ssr": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format cjs",
-    "build:es": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format es",
-    "build:unpkg": "cross-env NODE_ENV=production rollup --config build/rollup.config.js --format iife"
+    "build:watch": "rollup -w --config rollup.config.js  --format es",
+    "build": "cross-env NODE_ENV=production rollup --config rollup.config.js",
+    "build:ssr": "cross-env NODE_ENV=production rollup --config rollup.config.js --format cjs",
+    "build:es": "cross-env NODE_ENV=production rollup --config rollup.config.js --format es",
+    "build:unpkg": "cross-env NODE_ENV=production rollup --config rollup.config.js --format iife"
   },
   "dependencies": {
-    "@frontegg/admin-portal": "5.78.0",
-    "@frontegg/redux-store": "5.78.0",
+    "@frontegg/js": "6.42.0",
     "get-value": "^3.0.1",
     "set-value": "^4.0.1"
   },
