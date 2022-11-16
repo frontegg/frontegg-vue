@@ -4,7 +4,7 @@ import router from './router';
 import fronteggOptions from './fronteggOptions';
 Vue.config.productionTip = false;
 import { Frontegg } from '@frontegg/vue';
-export * from '@frontegg/rest-api';
+export { ContextHolder } from '@frontegg/rest-api';
 
 Vue.use(Frontegg, {
   ...fronteggOptions,
