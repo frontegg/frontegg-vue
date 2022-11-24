@@ -1,5 +1,19 @@
 # Change Log
 
+## [2.0.10](https://github.com/frontegg/frontegg-vue/compare/v2.0.9...v2.0.10) (2022-11-23)
+
+- Added support for admin portal pre-defined theme options (dark, vivid, modern, and classic themes)
+- Added support for customizing admin portal navigation hover color
+- Fixed typo of Andorra country in countries dropdown
+- Fixed select popup alignment issue
+- Changed no local authentication feature to also hide the sign-up form when there is no local authentication option (use only social logins and SSO for signing up)
+- Added mock for feature flags API for admin portal preview mode
+- Fixed resend invitation and activate your account API calls
+- Fixed creating custom webhook on the Admin Portal is sent with the event ID and not with the event Key
+- Added support for customizing fields and tabs in the admin portal
+### VueJS Wrapper 2.0.10:
+- Updated README.md with the current integration guide
+
 ## [2.0.9](https://github.com/frontegg/frontegg-vue/compare/v2.0.8...v2.0.9) (2022-11-11)
 
 ### VueJS Wrapper 2.0.9:
