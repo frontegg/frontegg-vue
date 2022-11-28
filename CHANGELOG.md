@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.11](https://github.com/frontegg/frontegg-vue/compare/v2.0.10...v2.0.11) (2022-11-28)
+
+- Update hide fields API according to new security tabs naming
+- Changed max length for secret fields to 100 characters
+- Added support for customizing invite user dialog fields
+
 ## [2.0.10](https://github.com/frontegg/frontegg-vue/compare/v2.0.9...v2.0.10) (2022-11-23)
 
 - Added support for admin portal pre-defined theme options (dark, vivid, modern, and classic themes)
