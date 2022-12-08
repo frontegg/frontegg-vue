@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.0.12](https://github.com/frontegg/frontegg-vue/compare/v2.0.11...v2.0.12) (2022-12-8)
+
+- Fixed ignoring `urlPrefix` issue
+- Added the ability to Invite a user by bulk API in the admin portal
+- Fixed OTC digits are not visible on mobile devices
+- Added MFA devices management section in the admin portal under FF
+- Fixed the ability to copy invite link for dynamic base URL as well
+- Added new abilities to MFA flows under FF
+- Added support for providing an external CDN to load fonts in Frontegg components
+
+
 ## [2.0.11](https://github.com/frontegg/frontegg-vue/compare/v2.0.10...v2.0.11) (2022-11-28)
 
 - Update hide fields API according to new security tabs naming
