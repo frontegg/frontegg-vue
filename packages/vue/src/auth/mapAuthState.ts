@@ -1,3 +1,5 @@
+// @ts-ignore
+import { inject, onUpdated, onMounted, reactive, onBeforeUnmount } from 'vue';
 import { defaultGetterGenerator, objectMappers } from '../helpers';
 import {
   AcceptInvitationActions,
@@ -7,19 +9,25 @@ import {
   LoginActions,
   MfaActions,
   ProfileActions,
-  SecurityPolicyActions, SignUpActions,
-  SocialLoginActions, SSOActions,
-  TeamActions, TenantsActions,
+  SecurityPolicyActions,
+  SignUpActions,
+  SocialLoginActions,
+  SSOActions,
+  TeamActions,
+  TenantsActions,
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
+import { AuthState, EnhancedStore } from '@frontegg/redux-store';
+import { FronteggAuthService } from './service';
+import VueRouter from 'vue-router';
 
-const mapSubState = (statePrefix: string, propertyName?: string) => function () {
-  const obj = { [propertyName ?? statePrefix.substring('auth.'.length)]: (state: any) => state };
-  // @ts-ignore
-  return objectMappers(statePrefix, obj, defaultGetterGenerator).bind(this)();
-};
-
+const mapSubState = (statePrefix: string, propertyName?: string) =>
+  function() {
+    const obj = { [propertyName ?? statePrefix.substring('auth.'.length)]: (state: any) => state };
+    // @ts-ignore
+    return objectMappers(statePrefix, obj, defaultGetterGenerator).bind(this)();
+  };
 
 export const mapAuthState = (_this: any) => mapSubState('auth', 'authState').bind(_this);
 export const mapLoginState = (_this: any) => mapSubState('auth.loginState').bind(_this);
@@ -53,44 +61,132 @@ export const connectMapState = (_this: any) => {
     mapTeamState: mapTeamState(_this),
     mapTenantsState: mapTenantsState(_this),
   });
-
 };
-
 
 const actionGetter = (action: any) => (...args: any) => (ActionsHolder.getAction(action) as any)(...args);
 
+type MapLoginActions = LoginActions & { loginWithRedirect: LoginActions['requestHostedLoginAuthorize'] };
+export const mapAuthActions = <K extends keyof AuthActions>(action: K): AuthActions[K] => actionGetter(action);
+export const mapLoginActions = <K extends keyof MapLoginActions>(action: K): MapLoginActions[K] => {
+  if (action === 'loginWithRedirect') {
+    return actionGetter('requestHostedLoginAuthorize');
+  }
+  return actionGetter(action);
+};
+export const mapAcceptInvitationActions = <K extends keyof AcceptInvitationActions>(
+  action: K
+): AcceptInvitationActions[K] => actionGetter(action);
+export const mapActivateAccountActions = <K extends keyof ActivateAccountActions>(
+  action: K
+): ActivateAccountActions[K] => actionGetter(action);
+export const mapApiTokensActions = <K extends keyof ApiTokensActions>(action: K): ApiTokensActions[K] =>
+  actionGetter(action);
+export const mapForgotPasswordActions = <K extends keyof ForgotPasswordActions>(action: K): ForgotPasswordActions[K] =>
+  actionGetter(action);
+export const mapMfaActions = <K extends keyof MfaActions>(action: K): MfaActions[K] => actionGetter(action);
+export const mapProfileActions = <K extends keyof ProfileActions>(action: K): ProfileActions[K] => actionGetter(action);
+export const mapSecurityPolicyActions = <K extends keyof SecurityPolicyActions>(action: K): SecurityPolicyActions[K] =>
+  actionGetter(action);
+export const mapSignupActions = <K extends keyof SignUpActions>(action: K): SignUpActions[K] => actionGetter(action);
+export const mapSocialLoginActions = <K extends keyof SocialLoginActions>(action: K): SocialLoginActions[K] =>
+  actionGetter(action);
+export const mapSsoActions = <K extends keyof SSOActions>(action: K): SSOActions[K] => actionGetter(action);
+export const mapTeamActions = <K extends keyof TeamActions>(action: K): TeamActions[K] => actionGetter(action);
+export const mapTenantsActions = <K extends keyof TenantsActions>(action: K): TenantsActions[K] => actionGetter(action);
 
-type MapLoginActions = LoginActions & {'loginWithRedirect': LoginActions['requestHostedLoginAuthorize']};
-export const mapAuthActions =
-  <K extends keyof AuthActions>(action: K): AuthActions[K] => actionGetter(action);
-export const mapLoginActions =
-  <K extends keyof MapLoginActions>(action: K): MapLoginActions[K] => {
-    if (action === 'loginWithRedirect') {
-      return actionGetter('requestHostedLoginAuthorize');
+export const connectFronteggStoreV3 = (store: EnhancedStore) => {
+  const initialState = store.getState();
+
+  const authState = reactive({ ...initialState.auth });
+
+  const unsubscribe = store.subscribe(() => {
+    const state = store.getState().auth;
+
+    Object.entries(state).forEach(([key, value]) => {
+      authState[key as keyof AuthState] = value;
+    });
+  });
+
+  return { authState, unsubscribe };
+};
+
+export const useFronteggLoaded = () => {
+  const fronteggLoaded = inject('fronteggLoaded') as boolean;
+
+  return fronteggLoaded;
+};
+
+export const useUnsubscribeFronteggStore = () => {
+  const unsubscribeFronteggStore = inject('unsubscribeFronteggStore') as () => void;
+
+  return unsubscribeFronteggStore;
+};
+
+export const useAuthState = () => {
+  const authState = inject('authState') as AuthState;
+
+  return authState;
+};
+
+export const useFronteggStore = () => {
+  const fronteggStore = inject('fronteggStore');
+  return fronteggStore;
+};
+
+export const useFrontegg = () => {
+  const fronteggLoaded = useFronteggLoaded();
+  const unsubscribeFronteggStore = useUnsubscribeFronteggStore();
+  const authState = useAuthState();
+  const fronteggAuth = inject('fronteggAuth') as FronteggAuthService;
+
+  const fronteggStore = useFronteggStore() as EnhancedStore;
+
+  const loginWithRedirect = () => {
+    // @ts-ignore
+    if (!fronteggAuth.router?.currentRoute.path.startsWith(authState.routes.hostedLoginRedirectUrl)) {
+      fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
+      fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
-    return actionGetter(action);
   };
-export const mapAcceptInvitationActions =
-  <K extends keyof AcceptInvitationActions>(action: K): AcceptInvitationActions[K] => actionGetter(action);
-export const mapActivateAccountActions =
-  <K extends keyof ActivateAccountActions>(action: K): ActivateAccountActions[K] => actionGetter(action);
-export const mapApiTokensActions =
-  <K extends keyof ApiTokensActions>(action: K): ApiTokensActions[K] => actionGetter(action);
-export const mapForgotPasswordActions =
-  <K extends keyof ForgotPasswordActions>(action: K): ForgotPasswordActions[K] => actionGetter(action);
-export const mapMfaActions =
-  <K extends keyof MfaActions>(action: K): MfaActions[K] => actionGetter(action);
-export const mapProfileActions =
-  <K extends keyof ProfileActions>(action: K): ProfileActions[K] => actionGetter(action);
-export const mapSecurityPolicyActions =
-  <K extends keyof SecurityPolicyActions>(action: K): SecurityPolicyActions[K] => actionGetter(action);
-export const mapSignupActions =
-  <K extends keyof SignUpActions>(action: K): SignUpActions[K] => actionGetter(action);
-export const mapSocialLoginActions =
-  <K extends keyof SocialLoginActions>(action: K): SocialLoginActions[K] => actionGetter(action);
-export const mapSsoActions =
-  <K extends keyof SSOActions>(action: K): SSOActions[K] => actionGetter(action);
-export const mapTeamActions =
-  <K extends keyof TeamActions>(action: K): TeamActions[K] => actionGetter(action);
-export const mapTenantsActions =
-  <K extends keyof TenantsActions>(action: K): TenantsActions[K] => actionGetter(action);
+
+  onBeforeUnmount(() => {
+    unsubscribeFronteggStore();
+  });
+
+  return {
+    fronteggLoaded,
+    authState,
+    fronteggAuth,
+    loginWithRedirect,
+  };
+};
+
+export const useFronteggAuthGuard = () => {
+  const fronteggAuth = inject('fronteggAuth') as FronteggAuthService;
+  const fronteggOptions = inject('fronteggOptions') as any;
+  const authState = useAuthState();
+  const router = inject('router') as VueRouter;
+  const fronteggStore = useFronteggStore() as EnhancedStore;
+
+  const isAuthRoutes = (path: string) => {
+    const { routes } = authState;
+    return Object.values(routes)
+      .filter(path => path !== routes.authenticatedUrl)
+      .includes(path);
+  };
+
+  const checkGuard = () => {
+    if (!isAuthRoutes(fronteggAuth.router?.currentRoute.path!) && !authState.isAuthenticated && !authState.isLoading) {
+      if (fronteggOptions.hostedLoginBox) {
+        fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
+        fronteggAuth.loginActions.requestHostedLoginAuthorize();
+      } else {
+        router.push(authState.routes.loginUrl);
+      }
+    }
+  };
+
+  onMounted(checkGuard);
+
+  onUpdated(checkGuard);
+};

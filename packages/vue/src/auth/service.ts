@@ -28,15 +28,20 @@ import {
   mfaActions,
   teamActions,
   apiTokensActions,
-  securityPolicyActions, User, AuthState, authInitialState, TenantsActions,
-  AuthPageRoutes, AuthActions,
+  securityPolicyActions,
+  User,
+  AuthState,
+  authInitialState,
+  TenantsActions,
+  AuthPageRoutes,
+  AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
 import VueRouter from 'vue-router';
 
 export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
   const reducerKeys = Object.keys(reducer);
-  const reducerActions = reducerKeys.map((key) => ({ [key]: (authActions as any)[key as keyof AuthActions] }));
+  const reducerActions = reducerKeys.map(key => ({ [key]: (authActions as any)[key as keyof AuthActions] }));
   return reducerActions.reduce((p, n) => ({ ...p, ...n }), {}) as CaseReducerActions<T>;
 };
 
@@ -114,7 +119,7 @@ export class FronteggAuthService implements FronteggPluginService {
     if (!options.hostedLoginBox) {
       this.store.subscribe(this.storeSubscriber);
     }
-  }
+  };
 
   storeSubscriber = () => {
     this.state = this.store!.getState().auth;
@@ -133,7 +138,7 @@ export class FronteggAuthService implements FronteggPluginService {
     } else if (notifyChange) {
       this.accessTokenUpdater();
     }
-  }
+  };
 
   accessTokenUpdaterRef!: any;
   accessTokenUpdater = (firstTime: boolean = false) => {
@@ -146,5 +151,5 @@ export class FronteggAuthService implements FronteggPluginService {
         this.accessTokenUpdaterRef = setInterval(this.loginActions.requestAuthorize, ttl);
       }
     }
-  }
+  };
 }
