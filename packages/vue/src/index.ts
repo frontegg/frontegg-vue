@@ -213,4 +213,5 @@ export {
   AdminPortal,
   openAdminPortal,
   closeAdminPortal,
+  ContextHolder
 };
