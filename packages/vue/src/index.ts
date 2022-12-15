@@ -260,4 +260,10 @@ const openAdminPortal = () => AdminPortal.show();
  */
 const closeAdminPortal = () => AdminPortal.hide();
 
-export { Frontegg, AdminPortal, openAdminPortal, closeAdminPortal };
+export {
+  Frontegg,
+  AdminPortal,
+  openAdminPortal,
+  closeAdminPortal,
+  ContextHolder
+};
