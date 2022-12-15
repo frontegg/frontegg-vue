@@ -1,4 +1,5 @@
-import _Vue, { PluginObject } from 'vue';
+// @ts-ignore
+import _Vue, { PluginObject, reactive, ref } from 'vue';
 import { PluginOptions } from './interfaces';
 import { setupOnRedirectTo, syncStateWithComponent } from './helpers';
 import {
@@ -13,8 +14,17 @@ import {
 import { StoreHolder } from './StoreHolder';
 import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
-import { connectMapState } from './auth/mapAuthState';
+import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';
+import {
+  authStateKey,
+  fronteggAuthKey,
+  fronteggLoadedKey,
+  fronteggOptionsKey,
+  fronteggStoreKey,
+  routerKey,
+  unsubscribeFronteggStoreKey,
+} from './constants';
 
 export * from './types';
 
@@ -32,6 +42,11 @@ export {
   mapSocialLoginActions,
   mapSsoActions,
   mapTeamActions,
+  useAuthState,
+  useUnsubscribeFronteggStore,
+  useFronteggLoaded,
+  useFrontegg,
+  useFronteggAuthGuard,
 } from './auth/mapAuthState';
 export * from './auth/interfaces';
 export * from './auth/guards';
@@ -51,6 +66,15 @@ const Frontegg: PluginObject<PluginOptions> | any = {
 
     // frontegg loader subscription
     let fronteggLoaded: boolean = false;
+
+    const isVue3 = Vue.version.charAt(0) === '3';
+
+    let fronteggLoadedV3: any;
+
+    if (isVue3) {
+      fronteggLoadedV3 = ref(false);
+    }
+
     const fronteggLoadedSubscribes: Set<any> = new Set();
     const fronteggLoadedSubscribe = (instance: any) => {
       const func: any = () => {
@@ -86,9 +110,16 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     };
 
     const checkIfPluginsLoaded = () => {
-      const _fronteggLoaded = (Vue.fronteggPlugins || []).reduce((loaded: boolean, plugin) => loaded && !plugin.loading, true);
+      const _fronteggLoaded = (Vue.fronteggPlugins || []).reduce(
+        (loaded: boolean, plugin) => loaded && !plugin.loading,
+        true
+      );
+
       if (_fronteggLoaded !== fronteggLoaded) {
         fronteggLoaded = _fronteggLoaded;
+        if (isVue3) {
+          fronteggLoadedV3.value = _fronteggLoaded;
+        }
         for (const subscriber of fronteggLoadedSubscribes) {
           subscriber();
         }
@@ -128,13 +159,12 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       }
     }, 10);
 
-
     const isAuthRoutes = (path: string) => {
       const { routes } = Vue.fronteggAuth;
       return Object.values(routes)
         .filter(path => path != routes.authenticatedUrl)
         .includes(path);
-    }
+    };
 
     const authorizedContentGuard = (_this: any) => {
       if (!_this.authorizedContent || isAuthRoutes(_this.$route.path)) {
@@ -144,11 +174,11 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         if (options?.hostedLoginBox) {
           Vue.fronteggAuth.loginActions.requestHostedLoginAuthorize();
         } else {
-          const { loginUrl } = Vue.fronteggAuth.routes
+          const { loginUrl } = Vue.fronteggAuth.routes;
           _this.$router.push(loginUrl);
         }
       }
-    }
+    };
 
     if (!pluginRegistered) {
       registerPlugins(Vue);
@@ -163,6 +193,28 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       }
     }
 
+    if (isVue3) {
+      // @ts-ignore - provide will exist only in vue 3 app
+      Vue.provide(fronteggLoadedKey, fronteggLoadedV3);
+
+      const { authState, unsubscribe } = connectFronteggStoreV3(store);
+
+      const fronteggAuthReactive = reactive({ ...Vue.fronteggAuth });
+
+      // @ts-ignore
+      Vue.provide(authStateKey, authState);
+      // @ts-ignore
+      Vue.provide(unsubscribeFronteggStoreKey, unsubscribe);
+      // @ts-ignore
+      Vue.provide(fronteggAuthKey, fronteggAuthReactive);
+      // @ts-ignore
+      Vue.provide(routerKey, router);
+      // @ts-ignore
+      Vue.provide(fronteggOptionsKey, options);
+      // @ts-ignore
+      Vue.provide(fronteggStoreKey, store);
+    }
+
     Vue.mixin({
       data: () => ({
         fronteggLoaded,
@@ -174,10 +226,10 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         connectMapState(this);
       },
       updated() {
-        authorizedContentGuard(this)
+        authorizedContentGuard(this);
       },
       mounted() {
-        authorizedContentGuard(this)
+        authorizedContentGuard(this);
       },
       created() {
         if (getStoreBinding(this)) {
