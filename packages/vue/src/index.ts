@@ -16,6 +16,15 @@ import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';
+import {
+  authStatedKey,
+  fronteggAuthKey,
+  fronteggLoadedKey,
+  fronteggOptionsKey,
+  fronteggStoreKey,
+  routerKey,
+  unsubscribeFronteggStoreKey,
+} from './constants';
 
 export * from './types';
 
@@ -186,24 +195,24 @@ const Frontegg: PluginObject<PluginOptions> | any = {
 
     if (isVue3) {
       // @ts-ignore - provide will exist only in vue 3 app
-      Vue.provide('fronteggLoaded', fronteggLoadedV3);
+      Vue.provide(fronteggLoadedKey, fronteggLoadedV3);
 
       const { authState, unsubscribe } = connectFronteggStoreV3(store);
 
       const fronteggAuthReactive = reactive({ ...Vue.fronteggAuth });
 
       // @ts-ignore
-      Vue.provide('authState', authState);
+      Vue.provide(authStatedKey, authState);
       // @ts-ignore
-      Vue.provide('unsubscribeFronteggStore', unsubscribe);
+      Vue.provide(unsubscribeFronteggStoreKey, unsubscribe);
       // @ts-ignore
-      Vue.provide('fronteggAuth', fronteggAuthReactive);
+      Vue.provide(fronteggAuthKey, fronteggAuthReactive);
       // @ts-ignore
-      Vue.provide('router', router);
+      Vue.provide(routerKey, router);
       // @ts-ignore
-      Vue.provide('fronteggOptions', options);
+      Vue.provide(fronteggOptionsKey, options);
       // @ts-ignore
-      Vue.provide('fronteggStore', store);
+      Vue.provide(fronteggStoreKey, store);
     }
 
     Vue.mixin({

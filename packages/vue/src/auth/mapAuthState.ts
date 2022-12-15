@@ -21,6 +21,15 @@ import { ActionsHolder } from './ActionsHolder';
 import { AuthState, EnhancedStore } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
+import {
+  authStatedKey,
+  fronteggAuthKey,
+  fronteggLoadedKey,
+  fronteggOptionsKey,
+  fronteggStoreKey,
+  routerKey,
+  unsubscribeFronteggStoreKey,
+} from '../constants';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
   function() {
@@ -111,33 +120,38 @@ export const connectFronteggStoreV3 = (store: EnhancedStore) => {
 };
 
 export const useFronteggLoaded = () => {
-  const fronteggLoaded = inject('fronteggLoaded') as boolean;
+  const fronteggLoaded = inject(fronteggLoadedKey) as boolean;
 
   return fronteggLoaded;
 };
 
 export const useUnsubscribeFronteggStore = () => {
-  const unsubscribeFronteggStore = inject('unsubscribeFronteggStore') as () => void;
+  const unsubscribeFronteggStore = inject(unsubscribeFronteggStoreKey) as () => void;
 
   return unsubscribeFronteggStore;
 };
 
 export const useAuthState = () => {
-  const authState = inject('authState') as AuthState;
+  const authState = inject(authStatedKey) as AuthState;
 
   return authState;
 };
 
 export const useFronteggStore = () => {
-  const fronteggStore = inject('fronteggStore');
+  const fronteggStore = inject(fronteggStoreKey);
   return fronteggStore;
+};
+
+export const useFronteggAuth = () => {
+  const fronteggAuth = inject(fronteggAuthKey) as FronteggAuthService;
+  return fronteggAuth;
 };
 
 export const useFrontegg = () => {
   const fronteggLoaded = useFronteggLoaded();
   const unsubscribeFronteggStore = useUnsubscribeFronteggStore();
   const authState = useAuthState();
-  const fronteggAuth = inject('fronteggAuth') as FronteggAuthService;
+  const fronteggAuth = useFronteggAuth();
 
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
@@ -162,10 +176,10 @@ export const useFrontegg = () => {
 };
 
 export const useFronteggAuthGuard = () => {
-  const fronteggAuth = inject('fronteggAuth') as FronteggAuthService;
-  const fronteggOptions = inject('fronteggOptions') as any;
+  const fronteggAuth = useFronteggAuth();
+  const fronteggOptions = inject(fronteggOptionsKey) as any;
   const authState = useAuthState();
-  const router = inject('router') as VueRouter;
+  const router = inject(routerKey) as VueRouter;
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
   const isAuthRoutes = (path: string) => {
