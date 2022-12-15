@@ -17,7 +17,7 @@ import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder } from '@frontegg/rest-api';
 import {
-  authStatedKey,
+  authStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -202,7 +202,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       const fronteggAuthReactive = reactive({ ...Vue.fronteggAuth });
 
       // @ts-ignore
-      Vue.provide(authStatedKey, authState);
+      Vue.provide(authStateKey, authState);
       // @ts-ignore
       Vue.provide(unsubscribeFronteggStoreKey, unsubscribe);
       // @ts-ignore

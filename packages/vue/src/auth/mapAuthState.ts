@@ -22,7 +22,7 @@ import { AuthState, EnhancedStore } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
-  authStatedKey,
+  authStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -112,7 +112,9 @@ export const connectFronteggStoreV3 = (store: EnhancedStore) => {
     const state = store.getState().auth;
 
     Object.entries(state).forEach(([key, value]) => {
-      authState[key as keyof AuthState] = value;
+      if (authState[key] !== state[key as keyof AuthState]) {
+        authState[key as keyof AuthState] = value;
+      }
     });
   });
 
@@ -132,7 +134,7 @@ export const useUnsubscribeFronteggStore = () => {
 };
 
 export const useAuthState = () => {
-  const authState = inject(authStatedKey) as AuthState;
+  const authState = inject(authStateKey) as AuthState;
 
   return authState;
 };
