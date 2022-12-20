@@ -1,5 +1,17 @@
 # Change Log
 
+## [2.0.13](https://github.com/frontegg/frontegg-vue/compare/v2.0.12...v2.0.13) (2022-12-20)
+
+- Added support for Composition API
+- Enabled scim without roles
+- Fixed menu component for dark theme
+- Added api navigation icon
+- Added tests for mfa
+- Added apple social login types
+- Added support for Hiding Invoices
+- Expose contextHolder
+
+
 ## [2.0.12](https://github.com/frontegg/frontegg-vue/compare/v2.0.11...v2.0.12) (2022-12-8)
 
 - Fixed ignoring `urlPrefix` issue
