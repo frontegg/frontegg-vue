@@ -2,32 +2,15 @@
 
 ## [2.0.13](https://github.com/frontegg/frontegg-vue/compare/v2.0.12...v2.0.13) (2022-12-20)
 
-- FR-10024 - fix bulk
-- FR-10072 - mobile fixes for mfa
-- FR-9821 - enable scim without roles
-- FR-10010 - mfa fixes
-- FR-10028 - fix menu for dark
-- FR-10010 - card list item on click fix
-- FR-10020 - add api navigation icon
-- FR-10016 - mfa tests
-- FR-9731 - add apple social login types
-- FR-9936 - Hide Invoices on FronteggAppOptions
-- FR-10010 - mfa fixes
-- FR-9932 - Subscriptions billing collection
-- FR-9526 - remove adding class to body when frontegg loading on nextjs
-- FR-9977 - change validations + color in autofill mode
-- FR-9971 - otc mobile fix
-- FR-9821 - SCIM
-- FR-9969 - fix getBaseUrl never returns context prefix
-- FR-9927 - fix validation invite with bulk
-- FR-9914 - Move initial api calls to NextJS server-side before the first render
-- FR-9887 - OTC digits are not visible on mobile devices
-- FR-9860 - mfa devices management
-- FR-9418 - invite email bulk
+- Added support for Composition API
+- Enabled scim without roles
+- Fixed menu component for dark theme
+- Added api navigation icon
+- Added tests for mfa
+- Added apple social login types
+- Added support for Hiding Invoices
+- Expose contextHolder
 
-### VueJS Wrapper 2.0.13:
-- FR-10050 - export contextHolder from the right location
-- FR-7317 - Composition API
 
 ## [2.0.12](https://github.com/frontegg/frontegg-vue/compare/v2.0.11...v2.0.12) (2022-12-8)
 
