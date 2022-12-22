@@ -1,5 +1,22 @@
 # Change Log
 
+## [2.0.14](https://github.com/frontegg/frontegg-vue/compare/v2.0.13...v2.0.14) (2022-12-22)
+
+- Few bug fixes
+- FR-10024 - fix bulk
+- FR-10072 - mobile fixes for mfa
+- FR-9821 - enable scim without roles
+- FR-10010 - mfa fixes
+- FR-10028 - fix menu for dark
+- FR-10010 - card list item on click fix
+- FR-10020 - add api navigation icon
+- FR-10016 - mfa tests
+- FR-9731 - add apple social login types
+- FR-9936 - Hide Invoices on FronteggAppOptions
+
+### VueJS Wrapper 2.0.14:
+- FR-10050 - export contextHolder from the right location
+
 ## [2.0.13](https://github.com/frontegg/frontegg-vue/compare/v2.0.12...v2.0.13) (2022-12-20)
 
 - Added support for Composition API
