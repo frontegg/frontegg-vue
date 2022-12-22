@@ -1,12 +1,16 @@
-# Frontegg Vue
-
-## How to use
+<div align="center">
+<img src="https://fronteggstuff.blob.core.windows.net/frongegg-logos/logo-transparent.png" alt="Frontegg Logo" width="400" height="90">
+<h3 align="center">Frontegg Vue</h3>
+  <p align="center">
+    Frontegg is a web platform where SaaS companies can set up their fully managed, scalable and brand aware - SaaS features and integrate them into their SaaS portals in up to 5 lines of code.
+    <br />
+</div>
 
 ### 1. Install Frontegg Libraries    
   
   Run the following command to Install Frontegg Vue library
 
-```
+```bash
 npm install @frontegg/vue
 ```
 
@@ -14,7 +18,7 @@ npm install @frontegg/vue
    
   Add Frontegg use to the main application
 
-```
+```js
 import Vue from 'vue'
 import App from './App.vue'
 import VueRouter from 'vue-router'
@@ -28,10 +32,9 @@ const router = new VueRouter({
 
 Vue.use(Frontegg, {
   contextOptions: {
-    baseUrl: 'https://app-na8f2nf315s2.stg.frontegg.com',
+    baseUrl: 'https://[YOUR_FRONTEGG_DOMAIN].frontegg.com',
+    clientId: '[YOUR_FRONTEGG_CLIENT_ID]'
   },
-  // Replace this with your app logo 👇
-  headerImage: 'https://assets.frontegg.com/public-frontegg-assets/acme-logo.svg',
   router,
 });
 
@@ -43,7 +46,7 @@ new Vue({
 
   Wrap your application on the `fronteggLoaded` attribute to make sure you have the right context
 
-```
+```js
 <template>
   <div id="app" v-if="fronteggLoaded">
     <img alt="Vue logo" src="./assets/logo.png" />
@@ -55,7 +58,7 @@ new Vue({
 ### 3. Getting the user context  
 Frontegg exposes the user context and the authentication state via a global set of mixins and state mappers. You can access the authentication state via the `mapAuthState` as in the following sample:
 
-```
+```js
 <template>
   <div id="app" v-if="fronteggLoaded">
     <img alt="Vue logo" src="./assets/logo.png" />
@@ -82,7 +85,7 @@ export default {
 
 We are all set. Let's run the application and see Frontegg in action.
 
-```
+```bash
 npm run serve
 ```
 
@@ -107,7 +110,7 @@ In order to allow your end users to control the Security Settings, Profile, Team
 
 For admin portal integration we will import the `AdminPortal` from the `@frontegg/vue` package and use it when clicking on the relevant button
 
-```
+```js
 <template>
   <div id="app" v-if="fronteggLoaded">
     <img alt="Vue logo" src="./assets/logo.png" />
