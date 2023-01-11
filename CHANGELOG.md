@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.14](https://github.com/frontegg/frontegg-vue/compare/v2.0.13...v2.0.14) (2022-12-22)
+
+- Few bug fixes
+
+
 ## [2.0.13](https://github.com/frontegg/frontegg-vue/compare/v2.0.12...v2.0.13) (2022-12-20)
 
 - Added support for Composition API
