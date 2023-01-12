@@ -2,36 +2,14 @@
 
 ## [2.0.15](https://github.com/frontegg/frontegg-vue/compare/v2.0.14...v2.0.15) (2023-1-12)
 
-- FR-10112 -  update admin box pipeline for next js and angular
-- FR-10248 - mfa spacing
-- FR-10256 - replace apple button redirect url
-- FR-10248 - add tooltip for card list item
-- FR-10248 - mfa fixes
-- FR-10246 - Add impersonation indication in login session table
-
-- FR-10275 - Avoid calling conditioned hook in Google onetap code
-
-- FR-9413 - fix main login validation for on boarding
-- FR-10241 - added support for redirectUrl on prelogin
-- FR-10240 - remove linkedin from inactive providers
-
-- FR-9983 - make sure that OTC fields are in one column with submit button
-- FR-9642 - Logout on OAuth service on Hosted Login
-- FR-8022 - support linkedin
-- FR-10212 - hide disabled cards from mfa list
-
-- FR-10162 - added support for google one tap
-- FR-9983 - Improve digits component
-- FR-9987 - fix social btns UI
-- FR-9413 - Login, unified behaviour 
-
-- FR-10047 - fix bad UI webhook
-- FR-9993 - Add custom event to add user by bulk
-- FR-10118 - fix apple logo color change when font color changes
-- FR-9976 - refactor otc
-
-### VueJS Wrapper 2.0.15:
-- FR-10342 - Update readme to include vue 3 composition api
+- Fixed login with apple redirect URL
+- Added impersonation indication in login session table
+- Added support for session expired logout on Hosted Login
+- Added support for login with Linkedin
+- Added support for Google one tap
+- Improve insert OTC screen UI
+- Improve UX of authentication forms
+- Fix apple logo color and match to font color
 
 ## [2.0.14](https://github.com/frontegg/frontegg-vue/compare/v2.0.13...v2.0.14) (2022-12-22)
 
