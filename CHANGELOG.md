@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.0.15](https://github.com/frontegg/frontegg-vue/compare/v2.0.14...v2.0.15) (2023-1-12)
+
+- Fixed login with apple redirect URL
+- Added impersonation indication in login session table
+- Added support for session expired logout on Hosted Login
+- Added support for login with Linkedin
+- Added support for Google one tap
+- Improve insert OTC screen UI
+- Improve UX of authentication forms
+- Fix apple logo color and match to font color
+
 ## [2.0.14](https://github.com/frontegg/frontegg-vue/compare/v2.0.13...v2.0.14) (2022-12-22)
 
 - Few bug fixes
