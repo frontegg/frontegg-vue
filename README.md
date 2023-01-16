@@ -16,32 +16,36 @@ npm install @frontegg/vue
 
 ### 2. Configuration 
    
-  Add Frontegg use to the main application
+  Add Frontegg to the main application.
 
 ```js
-import Vue from 'vue'
-import App from './App.vue'
-import VueRouter from 'vue-router'
-import { Frontegg } from '@frontegg/vue';
+import { createApp } from "vue";
+import App from "./App.vue";
+import { Frontegg } from "@frontegg/vue";
+import { createRouter, createWebHistory } from "vue-router";
 
-Vue.use(VueRouter)
-const router = new VueRouter({
-  mode: 'history',
+const router = createRouter({
+  history: createWebHistory("/"),
+  routes: [
+    { name: "HomePage", path: "/", component: App },
+  ],
 });
 
+const app = createApp(App).use(router);
 
-Vue.use(Frontegg, {
+app.use(Frontegg, {
   contextOptions: {
-    baseUrl: 'https://[YOUR_FRONTEGG_DOMAIN].frontegg.com',
-    clientId: '[YOUR_FRONTEGG_CLIENT_ID]'
+    baseUrl: "https://[YOUR_SUBDOMAIN].frontegg.com",
+    clientId: '[YOUR_CLIENT_ID]'
   },
+   authOptions: {
+    // keepSessionAlive: true // Uncomment this in order to maintain the session alive
+  },
+  hostedLoginBox: true,
   router,
 });
 
-new Vue({
-  router,
-  render: h => h(App),
-}).$mount('#app')
+app.mount("#app");
 ```
 
   Wrap your application on the `fronteggLoaded` attribute to make sure you have the right context
@@ -55,26 +59,57 @@ new Vue({
 
 ```
 
-### 3. Getting the user context  
-Frontegg exposes the user context and the authentication state via a global set of mixins and state mappers. You can access the authentication state via the `mapAuthState` as in the following sample:
+### 3. Redirect to login  
+Sending your non-authenticated users to the login page is available by calling the loginWithRedirect method.
+Authenticated users context will have their state mapped as displayed below.
 
 ```js
 <template>
   <div id="app" v-if="fronteggLoaded">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <p>
-      Logged in as
-      {{ this.authState.user ? this.authState.user.email : "Not logged in" }}
-    </p>
+    <div v-if="authState.user">
+      <span>Logged in as: {{ authState.user.name }}</span>
+    </div>
+    <div>
+      <button v-if="authState.user" v-on:click="logout">Logout</button>
+      <button v-if="authState.user" v-on:click="showAccessToken">
+        What is my access token?
+      </button>
+      <button v-if="!authState.user" v-on:click="goToLogin">Login</button>
+    </div>
   </div>
 </template>
 
 <script>
+import {
+  useFrontegg,
+  ContextHolder,
+} from "@frontegg/vue";
+
 export default {
-  name: "App",
-  data() {
+  setup() {
+    const { fronteggLoaded, authState, loginWithRedirect, useFronteggAuthGuard } = useFrontegg();
+   
+    useFronteggAuthGuard(); // auto redirects the user to the login page / application
+    
+    const goToLogin = () => {
+      loginWithRedirect();
+    };
+    
+    const logout = () => {
+      const baseUrl = ContextHolder.getContext().baseUrl;
+      window.location.href = `${baseUrl}/oauth/logout?post_logout_redirect_uri=${window.location}`;
+    };
+    
+    const showAccessToken = () => {
+      alert(authState.user.accessToken);
+    };
+    
     return {
-      ...this.mapAuthState(),
+      fronteggLoaded,
+      authState,
+      goToLogin,
+      logout,
+      showAccessToken,
     };
   },
 };
@@ -113,11 +148,6 @@ For admin portal integration we will import the `AdminPortal` from the `@fronteg
 ```js
 <template>
   <div id="app" v-if="fronteggLoaded">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <p>
-      Logged in as
-      {{ this.authState.user ? this.authState.user.email : "Not logged in" }}
-    </p>
     <button v-on:click="showAdminPortal">Open admin portal</button>
   </div>
 </template>
@@ -126,16 +156,14 @@ For admin portal integration we will import the `AdminPortal` from the `@fronteg
 import { AdminPortal } from "@frontegg/vue";
 
 export default {
-  name: "App",
-  data() {
-    return {
-      ...this.mapAuthState(),
-    };
-  },
-  methods: {
-    showAdminPortal() {
+  setup() {
+    const showAdminPortal = () => {
       AdminPortal.show();
     },
+    
+    return {
+      showAdminPortal
+    };
   },
 };
 </script>
