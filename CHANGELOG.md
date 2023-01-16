@@ -1,5 +1,28 @@
 # Change Log
 
+## [2.0.16](https://github.com/frontegg/frontegg-vue/compare/v2.0.15...v2.0.16) (2023-1-16)
+
+- FR-10261 - fix sign up position in dark theme
+- FR-10369 - change mfa ff name
+
+- FR-8329 - roles mock
+- FR-10141 - Added support for logout on hosted login in nextjs
+- FR-9816 - Add Snyk to PR check whitelist
+- FR-10345 - add margin login error
+
+- FR-10330 - fixes for bulk
+- FR-9816 - Fix branch selection
+
+- 
+
+- FR-10112 - update admin box pipeline angular
+- FR-10141 - update rest-api
+
+- FR-9816 - fix version
+
+### VueJS Wrapper 2.0.16:
+- FR-10342 - Update readme to include vue 3 composition api
+
 ## [2.0.15](https://github.com/frontegg/frontegg-vue/compare/v2.0.14...v2.0.15) (2023-1-12)
 
 - Fixed login with apple redirect URL
