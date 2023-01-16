@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.16](https://github.com/frontegg/frontegg-vue/compare/v2.0.15...v2.0.16) (2023-1-16)
+
+- Fixed sign up position in dark theme
+- Added margin to login error
+
 ## [2.0.15](https://github.com/frontegg/frontegg-vue/compare/v2.0.14...v2.0.15) (2023-1-12)
 
 - Fixed login with apple redirect URL
