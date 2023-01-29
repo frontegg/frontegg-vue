@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.18](https://github.com/frontegg/frontegg-vue/compare/v2.0.17...v2.0.18) (2023-1-29)
+
+- Fixed error message position in login with SMS screen
+- Fixed missing client ID after creating API token
+
 ## [2.0.17](https://github.com/frontegg/frontegg-vue/compare/v2.0.16...v2.0.17) (2023-1-25)
 
 - Added email type to all email inputs in the login box and admin portal
