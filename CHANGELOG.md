@@ -2,24 +2,18 @@
 
 ## [2.0.17](https://github.com/frontegg/frontegg-vue/compare/v2.0.16...v2.0.17) (2023-1-25)
 
-- 
-
-- FR-10485 - Update restapi version
-- FR-10017 - add email type to all email inputs
-- FR-10501 - Fix mobile width of login box
-- FR-10196 - Fix scroll in privacy page
-- FR-10489 - update scim ui
-- FR-10483 - Added the option to customize forget password button
-- FR-10374 - improve values ui in split mode
-- FR-10184 - add access tokens
-- FR-9995 - Accept Invitation text and icon change
-- FR-10448 - add prettier pre-commit check 
-- FR-10443 - Fix impersonation
-- FR-10282 - fix otc login for mobile
-- FR-10410 - fix policies mock
-- FR-10371 - sync vendor security policies
-- FR-10302 - Add impersonation indication for audit logs
-- FR-10281 - Impersonation
+- Added email type to all email inputs in the login box and admin portal
+- Fixed mobile width of the login box in modern and classic theme
+- Fixed the scrolling issue in the privacy page in the admin portal
+- Updated SCIM UI
+- Added API to customize forget password button in the login with password page
+- Improve split mode values layout
+- Added support to access API tokens
+- Updated Accept Invitation text, icon, and debounce
+- Fixed OTC login for mobile
+- Added support to sync vendor security policies
+- Added impersonation indication for audit logs
+- Added support for Impersonation
 
 
 ## [2.0.16](https://github.com/frontegg/frontegg-vue/compare/v2.0.15...v2.0.16) (2023-1-16)
