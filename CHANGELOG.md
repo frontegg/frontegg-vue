@@ -1,5 +1,21 @@
 # Change Log
 
+## [2.0.17](https://github.com/frontegg/frontegg-vue/compare/v2.0.16...v2.0.17) (2023-1-25)
+
+- Added email type to all email inputs in the login box and admin portal
+- Fixed mobile width of the login box in modern and classic theme
+- Fixed the scrolling issue in the privacy page in the admin portal
+- Updated SCIM UI
+- Added API to customize forget password button in the login with password page
+- Improve split mode values layout
+- Added support to access API tokens
+- Updated Accept Invitation text, icon, and debounce
+- Fixed OTC login for mobile
+- Added support to sync vendor security policies
+- Added impersonation indication for audit logs
+- Added support for Impersonation
+
+
 ## [2.0.16](https://github.com/frontegg/frontegg-vue/compare/v2.0.15...v2.0.16) (2023-1-16)
 
 - Fixed sign up position in dark theme
