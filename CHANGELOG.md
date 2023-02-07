@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0.19](https://github.com/frontegg/frontegg-vue/compare/v2.0.18...v2.0.19) (2023-2-7)
+
+- FR-10662 - fix sign up message
+- FR-10431 - input component for adding members
+- FR-10414 - fix filter SSO providers according to the vendor choice
+- FR-10430 - user groups card header
+- FR-9271 - hosted login improvements
+
+
 ## [2.0.18](https://github.com/frontegg/frontegg-vue/compare/v2.0.17...v2.0.18) (2023-1-29)
 
 - Fixed error message position in login with SMS screen
