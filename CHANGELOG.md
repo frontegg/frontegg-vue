@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0.19](https://github.com/frontegg/frontegg-vue/compare/v2.0.18...v2.0.19) (2023-2-7)
+
+- Fixed go-to-sign-up message position in speedy login layout
+- Added an input component to the library for adding members to a tenant
+- Fix filtering SSO providers according to the vendor selection
+- Added user groups card header component to the library
+- Improved the admin portal and login box performance and bundle size
+
+
 ## [2.0.18](https://github.com/frontegg/frontegg-vue/compare/v2.0.17...v2.0.18) (2023-1-29)
 
 - Fixed error message position in login with SMS screen
