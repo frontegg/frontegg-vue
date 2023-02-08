@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.20](https://github.com/frontegg/frontegg-vue/compare/v2.0.19...v2.0.20) (2023-2-8)
+
+- FR-10682 - change m2m strategy to be from identity
+- FR-10660 - ui for prompt passkeys
+- FR-10662 - fix sign up message
+
+
 ## [2.0.19](https://github.com/frontegg/frontegg-vue/compare/v2.0.18...v2.0.19) (2023-2-7)
 
 - Fixed go-to-sign-up message position in speedy login layout
