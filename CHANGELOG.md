@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.20](https://github.com/frontegg/frontegg-vue/compare/v2.0.19...v2.0.20) (2023-2-8)
+
+- Updated M2M tokens to reflect the vendor choice
+
+
 ## [2.0.19](https://github.com/frontegg/frontegg-vue/compare/v2.0.18...v2.0.19) (2023-2-7)
 
 - Fixed go-to-sign-up message position in speedy login layout
