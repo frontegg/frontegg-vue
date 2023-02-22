@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.21](https://github.com/frontegg/frontegg-vue/compare/v2.0.20...v2.0.21) (2023-2-21)
+
+- Fixed Admin portal SSO provider's options to be correlated with the vendor choice
+- Fixed background for table pivot column
+- Fixed impersonation by removing unnecessary redirects and adding a refresh call
+- Fixed style reorder bug when using @emotion/react and Frontegg Next.JS
+
 ## [2.0.20](https://github.com/frontegg/frontegg-vue/compare/v2.0.19...v2.0.20) (2023-2-8)
 
 - Updated M2M tokens to reflect the vendor choice
