@@ -2,18 +2,15 @@
 
 ## [2.0.22](https://github.com/frontegg/frontegg-vue/compare/v2.0.21...v2.0.22) (2023-3-10)
 
-- FR-9524 - Add missing RecaptchaTokens, Fix first load recaptcha
-- FR-9524 - Update packages folder path in nextjs project
-- FR-11009 - fix auth url default value for preview mode
-- FR-11009 - add check for social config authorization url validity
-- FR-10428 - fix rest-api imports
-- FR-11022 - groups feature bugfix
-- FR-9524 - Fix Recaptcha
-- FR-10945 - add passkeys privacy page
-
-- FR-11025 - fix invite users bug
-- FR-11009 - add support for new social login flow
-
+- Refactored reCaptcha mechanism to load tokens correctly
+- Added  support to let tenants create a manage user groups in the admin portal under a FF
+- Added support to login with passkeys and manage passkeys in the admin portal under a FF
+- Fixed invite users issue when the vendor is not forcing roles and permissions
+- Support auth strategy and social logins for login per tenants
+- Refactored feature flag mechanism to be based on rest-api package
+- Fixed validation for postcode in admin portal forms
+- Fixed SMS code input to have input type number
+- Improved auth screens form UX 
 
 ## [2.0.21](https://github.com/frontegg/frontegg-vue/compare/v2.0.20...v2.0.21) (2023-2-21)
 
