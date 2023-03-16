@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.0.23](https://github.com/frontegg/frontegg-vue/compare/v2.0.22...v2.0.23) (2023-3-16)
+
+- Fixed use permission regex issue to accept a wild card
+- User groups design fixes
+- Fixed passkeys loading mode and login flow with MFA
+- Update dependencies between passkeys and MFA on the privacy page
+- Added support to reset Idle session timeout by post messages from the client iFrame
+- Added an option to enforce redirect URLs to the same site only to avoid security issues
+- Added support for customized social login providers
+
+
 ## [2.0.22](https://github.com/frontegg/frontegg-vue/compare/v2.0.21...v2.0.22) (2023-3-10)
 
 - Fixed resend OTC with reCaptcha
