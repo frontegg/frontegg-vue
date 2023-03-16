@@ -2,17 +2,13 @@
 
 ## [2.0.23](https://github.com/frontegg/frontegg-vue/compare/v2.0.22...v2.0.23) (2023-3-16)
 
-- FR-10976 - Remove idle session export from default items
-- FR-11120 - fix use permission
-- FR-10976 - idle session missing script for local exmaple
-- FR-11109 - fix groups design
-- FR-10530 - fix passkeys loading mode in login flow
-- FR-11065 - fix login flow with prompt for mfa
-- FR-10530 - update dependencies between passkeys and mfa
-- FR-10976 - Idle session timeout will be reset on a post message from the client iFrame
-- FR-10150 - add option to enforce redirect to same site only to avoid security issues
-
-- FR-9469 - Added support for customized social login providers
+- Fixed use permission regex issue to accept a wild card
+- User groups design fixes
+- Fixed passkeys loading mode and login flow with MFA
+- Update dependencies between passkeys and MFA on the privacy page
+- Added support to reset Idle session timeout by post messages from the client iFrame
+- Added an option to enforce redirect URLs to the same site only to avoid security issues
+- Added support for customized social login providers
 
 
 ## [2.0.22](https://github.com/frontegg/frontegg-vue/compare/v2.0.21...v2.0.22) (2023-3-10)
