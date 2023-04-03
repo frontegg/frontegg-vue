@@ -1844,18 +1844,18 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/js@6.83.0":
-  version "6.83.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/js/-/js-6.83.0.tgz#1ff8a4a4430924f811d5bf7436e2665673632174"
-  integrity sha512-Mb8W70bN8KVO75TQk/J64Zm5XDN5wuHIVZZHyogwMBPEfQ3PdOcPAMCsuH7BZ4+/rN6MI05qtkJIr49F+vsjeQ==
+"@frontegg/js@6.84.0":
+  version "6.84.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/js/-/js-6.84.0.tgz#55598ed6501b40a888cc80a273dc6324c6ec5e2b"
+  integrity sha512-2TwpBSMHai/WAY5uf9YrLUGHVIlGLQDQVxNqEN2NcElY2zweK/sGnRCu/l6UuvOkF9jMvlBgnzJAzrlRvqMb3g==
   dependencies:
     "@babel/runtime" "^7.18.6"
-    "@frontegg/types" "6.83.0"
+    "@frontegg/types" "6.84.0"
 
-"@frontegg/redux-store@6.83.0":
-  version "6.83.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.83.0.tgz#0c1056038aaf35521856f087c24c3c71454f15bc"
-  integrity sha512-iGEFkkgv8qqmgWsaKYCVRxwAp7xY46AONrryqoK1mMVJZPW+NfcqzoxcxCb86PqmU0FSEdmoKwEW1uAfcF9lIw==
+"@frontegg/redux-store@6.84.0":
+  version "6.84.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.84.0.tgz#665289960467f9fa686c5229f25fd10e90291d8f"
+  integrity sha512-bTNrketlpmha/OYNEgXMl3rgMyRHJ0UZzO79mDgoPFre0nJP6lCXPHiPqnVizTpoknL4XGiS8qJWCDTPEuUHwQ==
   dependencies:
     "@babel/runtime" "^7.18.6"
     "@frontegg/rest-api" "^3.0.95"
@@ -1870,13 +1870,13 @@
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@frontegg/types@6.83.0":
-  version "6.83.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-6.83.0.tgz#19260d5e56036e1d91275b5bcd0f9368ede0067c"
-  integrity sha512-ws7xee4DRsF0+7bNlw8Minj/rSG9mH33y2yKb4K0Tq6cNKXDruz7qgcFEXS2zMrGNIWiepipUMBXFYG8w1aBcw==
+"@frontegg/types@6.84.0":
+  version "6.84.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-6.84.0.tgz#e45ea562f1ee35b361d398dab61459f59968a14b"
+  integrity sha512-z1e4x7Is8aNSCfX6bG/YmcxTLIULnnUJf5sn3whgJaPtx2bHS1hKet+bwV/c1JTsMRvRvbkhmSawbMmvV1weYw==
   dependencies:
     "@babel/runtime" "^7.18.6"
-    "@frontegg/redux-store" "6.83.0"
+    "@frontegg/redux-store" "6.84.0"
     csstype "^3.0.9"
     deepmerge "^4.2.2"
 
