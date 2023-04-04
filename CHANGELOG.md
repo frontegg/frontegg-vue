@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.25](https://github.com/frontegg/frontegg-vue/compare/v2.0.24...v2.0.25) (2023-4-3)
+
+- Added support for SCIM groups
+- Updated texts across login box - grammar and terminology
+- Added impersonation indicator to show impersonator that they're in an impersonation session
+- Added passkeys feature
+
 ## [2.0.24](https://github.com/frontegg/frontegg-vue/compare/v2.0.23...v2.0.24) (2023-3-27)
 
 - FR-11247 - fix version branch 6.82
