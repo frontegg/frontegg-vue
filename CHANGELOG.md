@@ -1,5 +1,23 @@
 # Change Log
 
+## [2.0.26](https://github.com/frontegg/frontegg-vue/compare/v2.0.25...v2.0.26) (2023-4-17)
+
+- FR-11393 - Extract customization options from App.tsx for better usage
+- FR-11063 - add tests for passkeys
+- FR-11351 - preserve query params for login per tenant
+
+- FR-11389 - Fix activate account button disable/loading state
+- FR-11389 - Add js-sha256 library to test suites
+- FR-11389 - Add support for generate code challenge in non-secure domains [HostedLogin Mode]
+- FR-9359 - cannot update sso group name
+- FR-11076 - Add live SSO integration guide
+
+- FR-11248 - add the option to separate first and last name in sign up form
+- FR-11354 - allaccounts components
+
+### VueJS Wrapper 2.0.26:
+- FR-11351 - preserve-query-params-for-login-per-tenant
+
 ## [2.0.25](https://github.com/frontegg/frontegg-vue/compare/v2.0.24...v2.0.25) (2023-4-3)
 
 - Added support for SCIM groups
