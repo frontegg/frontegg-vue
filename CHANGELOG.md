@@ -1,5 +1,18 @@
 # Change Log
 
+## [2.0.26](https://github.com/frontegg/frontegg-vue/compare/v2.0.25...v2.0.26) (2023-4-17)
+- Added support to preserve query params between all auth routes
+- Added support for generating a code challenge in non-secure domains [HostedLogin Mode]
+- Fixed issue with updating SSO group name in the admin portal
+- Added live SSO integration guide
+- Added support to seperate first and last name in sign up form
+
+### VueJS Wrapper 2.0.26:
+- Added support to preserve query params between all auth routes
+
+### VueJS Wrapper 2.0.26:
+- FR-11351 - preserve-query-params-for-login-per-tenant
+
 ## [2.0.25](https://github.com/frontegg/frontegg-vue/compare/v2.0.24...v2.0.25) (2023-4-3)
 
 - Added support for SCIM groups
