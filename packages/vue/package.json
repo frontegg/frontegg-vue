@@ -1,6 +1,6 @@
 {
   "name": "@frontegg/vue",
-  "version": "2.0.26",
+  "version": "2.0.27",
   "description": "",
   "main": "dist/index.ssr.js",
   "browser": "dist/index.js",
