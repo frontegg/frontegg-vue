@@ -2,8 +2,8 @@
 
 ## [2.0.28](https://github.com/frontegg/frontegg-vue/compare/v2.0.27...v2.0.28) (2023-4-25)
 
-- FR-11479 - Passkeys button style should be the same configuration as "social login button" style
-- FR-11375 - fix a11y login-box second part
+- Fix Passkeys button style 
+- Support login per tenant with search param
 
 
 ## [2.0.27](https://github.com/frontegg/frontegg-vue/compare/v2.0.26...v2.0.27) (2023-4-23)
