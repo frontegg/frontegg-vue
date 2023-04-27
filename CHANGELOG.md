@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.28](https://github.com/frontegg/frontegg-vue/compare/v2.0.27...v2.0.28) (2023-4-25)
+
+- Fix Passkeys button style 
+- Support login per tenant with search param
+
+
 ## [2.0.27](https://github.com/frontegg/frontegg-vue/compare/v2.0.26...v2.0.27) (2023-4-23)
 - Lock reduxjs/toolkit version to be compatible in Vite types plugin
 - Fixed password input placeholder text in the login box
