@@ -2,8 +2,8 @@
 
 ## [2.0.29](https://github.com/frontegg/frontegg-vue/compare/v2.0.28...v2.0.29) (2023-4-27)
 
-- FR-11551 - fix hover input eye icon button
-- FR-11547 - fix a11y second part
+- Fixed input hover issue on suffix icon
+- A11y improvements 
 
 
 ## [2.0.28](https://github.com/frontegg/frontegg-vue/compare/v2.0.27...v2.0.28) (2023-4-25)
