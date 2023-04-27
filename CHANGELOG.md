@@ -2,11 +2,10 @@
 
 ## [2.0.30](https://github.com/frontegg/frontegg-vue/compare/v2.0.29...v2.0.30) (2023-4-27)
 
-- FR-11561 - move passkeys button out of form
-- FR-11538 - support-next-js-serach-param-for-login-per-tenant 
-- FR-11337 - Passkeys is missing in the full Preview mode in the Builder
-- FR-10976 - allow to load frontegg helper by a query param to the URL
-- [Snyk] Security upgrade webpack from 5.74.0 to 5.76.0
+- Fixed passkeys issue with reCaptcha
+- Removed feature flag from passkeys button
+- Enable loading Frontegg helper scripts by providing query params to Frontegg external source
+- Security upgrade webpack from 5.74.0 to 5.76.0
 
 
 ## [2.0.29](https://github.com/frontegg/frontegg-vue/compare/v2.0.28...v2.0.29) (2023-4-27)
