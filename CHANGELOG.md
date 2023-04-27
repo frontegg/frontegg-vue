@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.29](https://github.com/frontegg/frontegg-vue/compare/v2.0.28...v2.0.29) (2023-4-27)
+
+- Fixed input hover issue on suffix icon
+- A11y improvements 
+
+
 ## [2.0.28](https://github.com/frontegg/frontegg-vue/compare/v2.0.27...v2.0.28) (2023-4-25)
 
 - Fix Passkeys button style 
