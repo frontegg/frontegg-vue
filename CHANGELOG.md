@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.31](https://github.com/frontegg/frontegg-vue/compare/v2.0.30...v2.0.31) (2023-4-28)
+
+- FR-11564 - Social login button shouldn't inherit from secondary color
+
+
 ## [2.0.30](https://github.com/frontegg/frontegg-vue/compare/v2.0.29...v2.0.30) (2023-4-27)
 
 - Fixed passkeys issue with reCaptcha
