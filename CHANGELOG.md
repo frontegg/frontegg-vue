@@ -1,5 +1,14 @@
 # Change Log
 
+## [2.0.32](https://github.com/frontegg/frontegg-vue/compare/v2.0.31...v2.0.32) (2023-5-4)
+
+- FR-11632 - update code owners
+- FR-11581 - a11y login box onenter event
+- FR-11353 - all accounts tree graph component
+
+### VueJS Wrapper 2.0.32:
+- FR-11632 - update CODEOWNERS
+
 ## [2.0.31](https://github.com/frontegg/frontegg-vue/compare/v2.0.30...v2.0.31) (2023-4-28)
 
 - FR-11564 - Social login button shouldn't inherit from secondary color
