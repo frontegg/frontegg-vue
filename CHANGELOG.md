@@ -1,5 +1,22 @@
 # Change Log
 
+## [2.0.33](https://github.com/frontegg/frontegg-vue/compare/v2.0.32...v2.0.33) (2023-5-12)
+
+- FR-11735 - login per tenant self service dependence fix
+- FR-11442 - remove admin provisioning feature flag
+- FR-11723 - bump rest api version
+- FR-11735 - login per tenant self service input logo upload and fixes
+- FR-11442 - multiple sso cleanup
+- FR-11657 - login per tenant api new
+- FR-11718 - fix users table
+- FR-11113 - fix frontegg logo bug
+- FR-11442 - SSO and provisioning split
+- FR-11617 - a11y fix enter key issue
+- FR-11656 - login per tenant self service UI
+- FR-11352 - nested table
+- [Snyk] Security upgrade @azure/storage-blob from 12.11.0 to 12.13.0
+
+
 ## [2.0.32](https://github.com/frontegg/frontegg-vue/compare/v2.0.31...v2.0.32) (2023-5-4)
 
 - FR-11581 - fix a11y login-box onEnter event for links
