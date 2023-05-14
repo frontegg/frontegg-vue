@@ -1,5 +1,71 @@
 # Change Log
 
+## [2.0.33](https://github.com/frontegg/frontegg-vue/compare/v2.0.32...v2.0.33) (2023-5-12)
+
+- FR-11442 - Removed admin portal provisioning feature flag
+- FR-11723 - Fixed refresh token when computer clock is set to a future time
+- FR-11735 - Added support for customizing login per tenant in the admin portal
+- FR-11442 - Removed legacy SSO tab code
+- FR-11718 - Fix users' table UI issues
+- FR-11113 - Fixed Frontegg logo overlapping navigation
+- FR-11442 - Extract the provisioning tab to a separated page in the admin portal
+- FR-11617 - Fixed a11y enter key press issue
+- FR-11352 - Added support for nested table
+- [Snyk] Security upgrade @azure/storage-blob from 12.11.0 to 12.13.0
+
+
+## [2.0.32](https://github.com/frontegg/frontegg-vue/compare/v2.0.31...v2.0.32) (2023-5-4)
+
+- FR-11581 - fix a11y login-box onEnter event for links
+- FR-11353 - add new tree graph component
+
+## [2.0.31](https://github.com/frontegg/frontegg-vue/compare/v2.0.30...v2.0.31) (2023-4-28)
+
+- FR-11564 - Social login button shouldn't inherit from secondary color
+
+
+## [2.0.30](https://github.com/frontegg/frontegg-vue/compare/v2.0.29...v2.0.30) (2023-4-27)
+
+- Fixed passkeys issue with reCaptcha
+- Removed feature flag from passkeys button
+- Enable loading Frontegg helper scripts by providing query params to Frontegg external source
+- Security upgrade webpack from 5.74.0 to 5.76.0
+
+
+## [2.0.29](https://github.com/frontegg/frontegg-vue/compare/v2.0.28...v2.0.29) (2023-4-27)
+
+- Fixed input hover issue on suffix icon
+- A11y improvements 
+
+
+## [2.0.28](https://github.com/frontegg/frontegg-vue/compare/v2.0.27...v2.0.28) (2023-4-25)
+
+- Fix Passkeys button style 
+- Support login per tenant with search param
+
+
+## [2.0.27](https://github.com/frontegg/frontegg-vue/compare/v2.0.26...v2.0.27) (2023-4-23)
+- Lock reduxjs/toolkit version to be compatible in Vite types plugin
+- Fixed password input placeholder text in the login box
+- Fixed social login buttons order
+- Fix Vite js-sha256 warning
+- Fixed company name error in split mode sign up
+- Fixed phone number dropdown theming
+- Added aria labels to buttons
+
+## [2.0.26](https://github.com/frontegg/frontegg-vue/compare/v2.0.25...v2.0.26) (2023-4-17)
+- Added support to preserve query params between all auth routes
+- Added support for generating a code challenge in non-secure domains [HostedLogin Mode]
+- Fixed issue with updating SSO group name in the admin portal
+- Added live SSO integration guide
+- Added support to seperate first and last name in sign up form
+
+### VueJS Wrapper 2.0.26:
+- Added support to preserve query params between all auth routes
+
+### VueJS Wrapper 2.0.26:
+- FR-11351 - preserve-query-params-for-login-per-tenant
+
 ## [2.0.25](https://github.com/frontegg/frontegg-vue/compare/v2.0.24...v2.0.25) (2023-4-3)
 
 - Added support for SCIM groups
