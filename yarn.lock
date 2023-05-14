@@ -1844,39 +1844,39 @@
     unique-filename "^1.1.1"
     which "^1.3.1"
 
-"@frontegg/js@6.84.0":
-  version "6.84.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/js/-/js-6.84.0.tgz#55598ed6501b40a888cc80a273dc6324c6ec5e2b"
-  integrity sha512-2TwpBSMHai/WAY5uf9YrLUGHVIlGLQDQVxNqEN2NcElY2zweK/sGnRCu/l6UuvOkF9jMvlBgnzJAzrlRvqMb3g==
+"@frontegg/js@6.97.0":
+  version "6.97.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/js/-/js-6.97.0.tgz#17ba6626b16d3ecf7f3d7dc059134144b4dec941"
+  integrity sha512-yfNCoEnBT4u0Kp5YVllo7b/j5fxN6nugVsHbnoLUYrNm8Bh0pgGddLb+Mg9vFA8SIuN8oMVmIxIMVEYTas6gNQ==
   dependencies:
     "@babel/runtime" "^7.18.6"
-    "@frontegg/types" "6.84.0"
+    "@frontegg/types" "6.97.0"
 
-"@frontegg/redux-store@6.84.0":
-  version "6.84.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.84.0.tgz#665289960467f9fa686c5229f25fd10e90291d8f"
-  integrity sha512-bTNrketlpmha/OYNEgXMl3rgMyRHJ0UZzO79mDgoPFre0nJP6lCXPHiPqnVizTpoknL4XGiS8qJWCDTPEuUHwQ==
+"@frontegg/redux-store@6.97.0":
+  version "6.97.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/redux-store/-/redux-store-6.97.0.tgz#16ea026e2683f4d1b7d5d261d1d97ea259005054"
+  integrity sha512-XR7VcfOWki6sEW0r38wYV8UAAELBXtRCytAT8JYFMKuL83i9w7ywevrbV5zxRLx4RXnCsrLTOgsyqEP/Y0SpbQ==
   dependencies:
     "@babel/runtime" "^7.18.6"
-    "@frontegg/rest-api" "^3.0.95"
-    "@reduxjs/toolkit" "^1.8.5"
+    "@frontegg/rest-api" "^3.0.101"
+    "@reduxjs/toolkit" "1.8.5"
     redux-saga "^1.2.1"
     uuid "^8.3.2"
 
-"@frontegg/rest-api@^3.0.95":
-  version "3.0.95"
-  resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-3.0.95.tgz#975174b797c38c164661ecfa83565d99135e7aca"
-  integrity sha512-uAiWsEY+OzLoU60N7ASGhpNZnUONQ/joywPSIDvgTIRuo229a0H/z++N1wBqG4a+Dw8UEc5FkenPjllVCeME7A==
+"@frontegg/rest-api@^3.0.101":
+  version "3.0.101"
+  resolved "https://registry.yarnpkg.com/@frontegg/rest-api/-/rest-api-3.0.101.tgz#67141b77cd571ab47515d71fb84b46937026e2dd"
+  integrity sha512-/UnNXlPDpsDtOlOeJNlROYuJqLO0XTW19ku2Qyy96bJ0b6miuz17VRNsG+jUBuPc4TDkfrJxoVUMGHDIJgaXDQ==
   dependencies:
     "@babel/runtime" "^7.17.2"
 
-"@frontegg/types@6.84.0":
-  version "6.84.0"
-  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-6.84.0.tgz#e45ea562f1ee35b361d398dab61459f59968a14b"
-  integrity sha512-z1e4x7Is8aNSCfX6bG/YmcxTLIULnnUJf5sn3whgJaPtx2bHS1hKet+bwV/c1JTsMRvRvbkhmSawbMmvV1weYw==
+"@frontegg/types@6.97.0":
+  version "6.97.0"
+  resolved "https://registry.yarnpkg.com/@frontegg/types/-/types-6.97.0.tgz#b542fcdea4a2bbaf2c6067f6169f8c1dbb4666b0"
+  integrity sha512-l4WTK5mh1Cpjd+D3R5mPs7I10OF+91lVf2YWDeCkS7I/NsXYE9TN1w2YnkpODxtQ9cLdkOrhsckUQi/Twx+B8w==
   dependencies:
     "@babel/runtime" "^7.18.6"
-    "@frontegg/redux-store" "6.84.0"
+    "@frontegg/redux-store" "6.97.0"
     csstype "^3.0.9"
     deepmerge "^4.2.2"
 
@@ -2875,7 +2875,7 @@
   resolved "https://registry.yarnpkg.com/@redux-saga/types/-/types-1.2.1.tgz#9403f51c17cae37edf870c6bc0c81c1ece5ccef8"
   integrity sha512-1dgmkh+3so0+LlBWRhGA33ua4MYr7tUOj+a9Si28vUi0IUFNbff1T3sgpeDJI/LaC75bBYnQ0A3wXjn0OrRNBA==
 
-"@reduxjs/toolkit@^1.8.5":
+"@reduxjs/toolkit@1.8.5":
   version "1.8.5"
   resolved "https://registry.yarnpkg.com/@reduxjs/toolkit/-/toolkit-1.8.5.tgz#c14bece03ee08be88467f22dc0ecf9cf875527cd"
   integrity sha512-f4D5EXO7A7Xq35T0zRbWq5kJQyXzzscnHKmjnu2+37B3rwHU6mX9PYlbfXdnxcY6P/7zfmjhgan0Z+yuOfeBmA==
@@ -2958,9 +2958,9 @@
     "@hapi/hoek" "^9.0.0"
 
 "@sideway/formula@^3.0.0":
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.0.tgz#fe158aee32e6bd5de85044be615bc08478a0a13c"
-  integrity sha512-vHe7wZ4NOXVfkoRb8T5otiENVlT7a3IAiw7H5M2+GO+9CDgcVUUsX1zalAztCmwyOr2RUTGJdgB+ZvSVqmdHmg==
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@sideway/formula/-/formula-3.0.1.tgz#80fcbcbaf7ce031e0ef2dd29b1bfc7c3f583611f"
+  integrity sha512-/poHZJJVjx3L+zVD6g9KgHfYnb443oi7wLu/XKojDviHy6HOEOA6z1Trk5aR1dGcmPenJEgb2sK2I80LeS3MIg==
 
 "@sideway/pinpoint@^2.0.0":
   version "2.0.0"
@@ -6605,9 +6605,9 @@ decamelize@^1.0.0, decamelize@^1.1.0, decamelize@^1.1.2, decamelize@^1.2.0:
   integrity sha1-9lNNFRSCabIDUue+4m9QH5oZEpA=
 
 decode-uri-component@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
-  integrity sha1-6zkTMzRYd1y4TNGh+uBiEGu4dUU=
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.2.tgz#e69dbe25d37941171dd540e024c444cd5188e1e9"
+  integrity sha512-FqUYQ+8o158GyGTrMFJms9qh3CqTKvAqgqsTnkLI8sKu0028orqBhxNMFkFen0zGyg6epACD32pjVk58ngIErQ==
 
 dedent@^0.7.0:
   version "0.7.0"
@@ -10272,9 +10272,9 @@ minimalistic-crypto-utils@^1.0.1:
   integrity sha1-9sAMHAsIIkblxNmd+4x8CDsrWCo=
 
 minimatch@^3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.0.4.tgz#5166e286457f03306064be5497e8dbb0c3d32083"
-  integrity sha512-yJHVQEhyqPLUTgt9B83PXu6W3rx4MvvHvSUvToogpwoGDOUQ+yDrR0HRot+yOCdCO7u4hX3pWft6kWBBcqh0UA==
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-3.1.2.tgz#19cd194bfd3e428f049a70817c038d89ab4be35b"
+  integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
   dependencies:
     brace-expansion "^1.1.7"
 
@@ -12430,14 +12430,16 @@ qs@6.11.0:
     side-channel "^1.0.4"
 
 qs@^6.9.4:
-  version "6.9.6"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.6.tgz#26ed3c8243a431b2924aca84cc90471f35d5a0ee"
-  integrity sha512-TIRk4aqYLNoJUbd+g2lEdz5kLWIuTMRagAXxl78Q0RiVjAOugHmeKNGdd3cwo/ktpf9aL9epCfFqWDEKysUlLQ==
+  version "6.11.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.1.tgz#6c29dff97f0c0060765911ba65cbc9764186109f"
+  integrity sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==
+  dependencies:
+    side-channel "^1.0.4"
 
 qs@~6.5.2:
-  version "6.5.2"
-  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
-  integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.3.tgz#3aeeffc91967ef6e35c0e488ef46fb296ab76aad"
+  integrity sha512-qxXIEh4pCGfHICj1mAJQ2/2XVZkjCDTcEgfoSQxc/fYivUZxTkk7L3bDBJSoNrEzXI17oUO5Dp07ktqE5KzczA==
 
 query-string@^4.1.0:
   version "4.3.4"

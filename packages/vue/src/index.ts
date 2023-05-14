@@ -84,7 +84,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       return () => fronteggLoadedSubscribes.delete(func);
     };
 
-    const onRedirectTo = router && setupOnRedirectTo(router);
+    const onRedirectTo = router && setupOnRedirectTo(router, options?.authOptions?.routes);
     fronteggApp = initialize({
       ...rest,
       onRedirectTo,
