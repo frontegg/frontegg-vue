@@ -1,13 +1,13 @@
 import { ContextHolder, RedirectOptions } from '@frontegg/rest-api';
 import set from 'set-value';
 import { getStore, getStoreBinding, setStoreBinding } from './utils';
-import { AuthState } from '@frontegg/redux-store';
+import { AuthState, AuthPageRoutes, isAuthRoute } from '@frontegg/redux-store';
 import get from 'get-value';
 import VueRouter from 'vue-router';
 import { StoreHolder } from './StoreHolder';
 import * as Vue from 'vue';
 
-export const setupOnRedirectTo = (router: VueRouter) => {
+export const setupOnRedirectTo = (router: VueRouter, routes?: Partial<AuthPageRoutes>) => {
   const baseName = router.options.base || '';
   StoreHolder.setBasename(baseName);
   const onRedirectTo = (_path: string, opts?: RedirectOptions) => {
@@ -15,6 +15,9 @@ export const setupOnRedirectTo = (router: VueRouter) => {
 
     if (path.startsWith(baseName) && baseName !== '/') {
       path = path.substring(baseName.length - 1);
+    }
+    if (opts?.preserveQueryParams || isAuthRoute(path, routes)) {
+      path = `${path}${window.location.search}`;
     }
     if (opts?.refresh) {
       window.location.href = path;
