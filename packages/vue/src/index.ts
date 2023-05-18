@@ -93,7 +93,6 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       ...rest,
       onRedirectTo,
       basename: router?.options.base,
-      //
     } as any);
 
     const store = fronteggApp.store;
