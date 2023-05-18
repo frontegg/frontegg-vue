@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ContextOptions } from '@frontegg/rest-api';
-import sdkVersion from './sdkVersion';
+
 export interface RootState {
   context?: ContextOptions;
 }
@@ -17,13 +17,7 @@ const { reducer, actions } = createSlice({
       prepare: (context: ContextOptions) => ({ payload: context }),
       reducer: (state: RootState, { payload }: PayloadAction<ContextOptions>) => ({
         ...state,
-        context: {
-          metaDataHeaders: {
-            framework: 'vuejs',
-            version: `@frontegg/vuejs@${sdkVersion.version}`,
-          },
-          ...payload
-        },
+        context: payload
       }),
     },
   },

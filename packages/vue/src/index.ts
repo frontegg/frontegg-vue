@@ -25,6 +25,7 @@ import {
   routerKey,
   unsubscribeFronteggStoreKey,
 } from './constants';
+import sdkVersion from './sdkVersion';
 
 export * from './types';
 
@@ -59,11 +60,14 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     if (contextOptions == null) {
       throw Error('contextOptions must be passed to Vue.use(Frontegg, { /* OPTIONS */ })');
     }
-
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
+    contextOptions.metaDataHeaders = {
+      framework: 'vuejs',
+      fronteggSdkVersion: `@frontegg/vuejs@${sdkVersion.version}`,
+    }
     ContextHolder.setContext(contextOptions);
     let pluginRegistered = false;
-
+//
     // frontegg loader subscription
     let fronteggLoaded: boolean = false;
 
@@ -89,6 +93,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       ...rest,
       onRedirectTo,
       basename: router?.options.base,
+      //
     } as any);
 
     const store = fronteggApp.store;
