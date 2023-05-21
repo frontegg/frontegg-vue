@@ -17,7 +17,7 @@ const { reducer, actions } = createSlice({
       prepare: (context: ContextOptions) => ({ payload: context }),
       reducer: (state: RootState, { payload }: PayloadAction<ContextOptions>) => ({
         ...state,
-        context: payload
+        context: payload,
       }),
     },
   },
