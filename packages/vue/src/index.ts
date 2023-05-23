@@ -15,7 +15,7 @@ import { StoreHolder } from './StoreHolder';
 import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
-import { ContextHolder } from '@frontegg/rest-api';
+import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
 import {
   authStateKey,
   fronteggAuthKey,
@@ -25,6 +25,7 @@ import {
   routerKey,
   unsubscribeFronteggStoreKey,
 } from './constants';
+import sdkVersion from './sdkVersion';
 
 export * from './types';
 
@@ -59,8 +60,11 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     if (contextOptions == null) {
       throw Error('contextOptions must be passed to Vue.use(Frontegg, { /* OPTIONS */ })');
     }
-
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
+    contextOptions.metadataHeaders = {
+      framework: FronteggFrameworks.Vuejs,
+      fronteggSdkVersion: `@frontegg/vuejs@${sdkVersion.version}`,
+    }
     ContextHolder.setContext(contextOptions);
     let pluginRegistered = false;
 
