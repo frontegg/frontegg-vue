@@ -1,5 +1,16 @@
 # Change Log
 
+## [2.0.34](https://github.com/frontegg/frontegg-vue/compare/v2.0.33...v2.0.34) (2023-5-23)
+
+- Fix the issue with unnecessary white borders on the dark mode theme
+- Add metadataHeaders type to contextOptions
+- Add source header to all admin portal and login box requests
+- Add login per tenant self service
+- SSO Guides enhancements
+- [Snyk] Security upgrade babel-plugin-module-resolver from 4.1.0 to 5.0.0
+- Remove admin provisioning feature flag
+- Report version and framework as requests headers
+
 ## [2.0.33](https://github.com/frontegg/frontegg-vue/compare/v2.0.32...v2.0.33) (2023-5-12)
 
 - FR-11442 - Removed admin portal provisioning feature flag
