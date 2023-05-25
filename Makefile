@@ -114,6 +114,12 @@ prerelease-version-upgrade-%:
   		| sed 's|^./packages/||' \
   		| xargs -I '{}' sh -c 'node scripts/update-prerelease-version.js "./packages/{}" "${*}"'
 
+update-version:
+	@find ./packages -type d -maxdepth 1 ! -path ./packages \
+		| sed 's|^./packages/||' \
+		| xargs -I '{}' sh -c 'node scripts/update-entry.js ./packages/{}'
+
+
 ########################################################################################################################
 #
 # Helpers Operations
