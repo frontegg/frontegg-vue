@@ -1,5 +1,30 @@
 # Change Log
 
+## [2.0.35](https://github.com/frontegg/frontegg-vue/compare/v2.0.34...v2.0.35) (2023-5-28)
+
+- FR-11887 - Revert Entitlements SDK - Load entitlements list & make the data accessible for the wrappers"
+- FR-11722 - fix hosted login with hash [PLEASE DON'T MERGE YET]
+- FR-11611 - login per tenant self service small fixes
+
+- FR-11881 - restore search params after closing the admin portal
+- FR-11878 - QA fixes for login per tenant self service
+- FR-11887 - Entitlements SDK - Load entitlements list & make the data accessible for the wrappers
+- FR-11152 - cyprus phone area code 2 fa screen
+- FR-11658 - merge 6.99.x
+- FR-11652 - Add option to upload metadata file instead of metadata url
+- FR-11529 - fix bug white borders dark mode
+- FR-11769 - add meta data to context
+- FR-11769 - change source to enum
+- FR-11769 - add source header to request
+- FR-11658 - create mock login preview for login per tenant self service mock
+- FR-11652 - SSO Guides enhancements
+- [Snyk] Security upgrade babel-plugin-module-resolver from 4.1.0 to 5.0.0
+
+### VueJS Wrapper 2.0.35:
+- FR-11599 - change from yarn to make
+- FR-11599 - change to update version
+- FR-11599 - report version and framework
+
 ## [2.0.34](https://github.com/frontegg/frontegg-vue/compare/v2.0.33...v2.0.34) (2023-5-23)
 
 - Fix the issue with unnecessary white borders on the dark mode theme
