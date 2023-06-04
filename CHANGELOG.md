@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.35](https://github.com/frontegg/frontegg-vue/compare/v2.0.34...v2.0.35) (2023-5-28)
+
+- Fixed hosted login with hash router
+- Support login per tenant self service
+- Added Cyprus phone area code 2 fa screen
+- Added option to upload metadata file instead of metadata url
+
+
 ## [2.0.34](https://github.com/frontegg/frontegg-vue/compare/v2.0.33...v2.0.34) (2023-5-23)
 
 - Fix the issue with unnecessary white borders on the dark mode theme
