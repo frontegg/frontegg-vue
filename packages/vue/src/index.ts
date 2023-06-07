@@ -18,6 +18,7 @@ import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
 import {
   authStateKey,
+  entitlementsStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -45,6 +46,7 @@ export {
   mapTeamActions,
   useAuthState,
   useUnsubscribeFronteggStore,
+  useEntitlements,
   useFronteggLoaded,
   useFrontegg,
   useFronteggAuthGuard,
@@ -208,6 +210,8 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       // @ts-ignore
       Vue.provide(authStateKey, authState);
       // @ts-ignore
+      Vue.provide(entitlementsStateKey, authState.entitlementsState?.entitlements);
+      // @ts-ignore
       Vue.provide(unsubscribeFronteggStoreKey, unsubscribe);
       // @ts-ignore
       Vue.provide(fronteggAuthKey, fronteggAuthReactive);
@@ -227,6 +231,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
+        this.getEntitlements = fronteggApp.getEntitlements.bind(fronteggApp);
         connectMapState(this);
       },
       updated() {

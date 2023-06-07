@@ -16,6 +16,8 @@ import {
   TeamActions,
   TenantsActions,
   AuthActions,
+  getEntitlements,
+  Entitlements
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
 import { AuthState, EnhancedStore } from '@frontegg/redux-store';
@@ -23,6 +25,7 @@ import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
   authStateKey,
+  entitlementsStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -125,6 +128,16 @@ export const useFronteggLoaded = () => {
   const fronteggLoaded = inject(fronteggLoadedKey) as boolean;
 
   return fronteggLoaded;
+};
+
+/**
+  @param keys The requested entitlement keys
+  @returns Entitlements contain true/false for every key (state of is key entitled)
+*/
+export const useEntitlements = (keys: string[]): Entitlements => {
+  const entitlements = inject(entitlementsStateKey) || {};
+
+  return getEntitlements(entitlements, keys);
 };
 
 export const useUnsubscribeFronteggStore = () => {
