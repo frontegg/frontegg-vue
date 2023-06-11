@@ -1,5 +1,5 @@
 // @ts-ignore
-import { inject, onUpdated, onMounted, reactive, onBeforeUnmount } from 'vue';
+import { inject, onUpdated, onMounted, reactive, onBeforeUnmount, computed } from 'vue';
 import { defaultGetterGenerator, objectMappers } from '../helpers';
 import {
   AcceptInvitationActions,
@@ -25,7 +25,6 @@ import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
   authStateKey,
-  entitlementsStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -132,12 +131,18 @@ export const useFronteggLoaded = () => {
 
 /**
   @param keys The requested entitlement keys
-  @returns Entitlements contain true/false for every key (state of is key entitled)
+  @returns Entitlements contain state data for every key (inc if entitled)
 */
 export const useEntitlements = (keys: string[]): Entitlements => {
-  const entitlements = inject(entitlementsStateKey) || {};
+  const authState = inject(authStateKey);
 
-  return getEntitlements(entitlements, keys);
+  return computed(() =>
+    getEntitlements(authState.entitlementsState?.entitlements || {}, keys)
+      .reduce((entitlementsResult, { isEntitled }, i) => ({
+        ...entitlementsResult,
+        [keys[i]]: isEntitled
+      }), {})
+  );
 };
 
 export const useUnsubscribeFronteggStore = () => {

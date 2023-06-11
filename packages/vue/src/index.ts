@@ -18,7 +18,6 @@ import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
 import {
   authStateKey,
-  entitlementsStateKey,
   fronteggAuthKey,
   fronteggLoadedKey,
   fronteggOptionsKey,
@@ -209,8 +208,6 @@ const Frontegg: PluginObject<PluginOptions> | any = {
 
       // @ts-ignore
       Vue.provide(authStateKey, authState);
-      // @ts-ignore
-      Vue.provide(entitlementsStateKey, authState.entitlementsState?.entitlements);
       // @ts-ignore
       Vue.provide(unsubscribeFronteggStoreKey, unsubscribe);
       // @ts-ignore
