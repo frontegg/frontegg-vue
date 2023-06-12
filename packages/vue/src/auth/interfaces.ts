@@ -11,6 +11,7 @@ import {
   SocialLoginState,
   SSOState,
   TeamState,
+  EntitlementsState
 } from '@frontegg/redux-store';
 import VueRouter from 'vue-router';
 import { TenantsState } from '@frontegg/redux-store';
@@ -75,6 +76,7 @@ declare module 'vue/types/vue' {
     fronteggAuth: FronteggAuthService;
     loginWithRedirect: () => void;
     mapAuthState: () => { authState: AuthState };
+    mapEntitlementsState: () => { entitlements: EntitlementsState['entitlements'] };
     mapLoginState: () => { loginState: LoginState };
     mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };
     mapActivateAccountState: () => { activateState: ActivateAccountState };

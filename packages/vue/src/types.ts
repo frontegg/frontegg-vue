@@ -1,6 +1,6 @@
 import { EnhancedStore } from '@reduxjs/toolkit';
 import { Unsubscribe } from 'redux';
-import { FronteggApp } from '@frontegg/js';
+import { Entitlements } from '@frontegg/redux-store';
 import { FronteggPluginService } from './interfaces';
 
 declare module 'vue/types/vue' {
@@ -19,9 +19,10 @@ declare module 'vue/types/vue' {
     loginWithRedirect: () => void;
 
     /**
+      @param _entitlements
       @param keys The requested entitlement keys
       @returns Entitlements contain true/false for every key (state of is key entitled)
     */
-    getEntitlements: FronteggApp['getEntitlements'];
+    getEntitlements: (_entitlements: any, keys: string[]) => Entitlements;
   }
 }

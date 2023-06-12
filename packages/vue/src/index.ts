@@ -228,7 +228,8 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
-        this.getEntitlements = fronteggApp.getEntitlements.bind(fronteggApp);
+        // _entitlements was added for hack purposes - we want the user to pass it to have a reactive part in the computed property, then it will get updated
+        this.getEntitlements = (_entitlements: any, keys: string[]) => fronteggApp.getEntitlements(keys);
         connectMapState(this);
       },
       updated() {
