@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.36](https://github.com/frontegg/frontegg-vue/compare/v2.0.35...v2.0.36) (2023-6-6)
+
+- Improve login preview for login per tenant self service to rendered inside iframe
+- Added required to fields in invite user modal
+- Improve error handling for login 
+- Added MSP - all accounts main page and state
+
+
 ## [2.0.35](https://github.com/frontegg/frontegg-vue/compare/v2.0.34...v2.0.35) (2023-5-28)
 
 - Fixed hosted login with hash router

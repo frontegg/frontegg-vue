@@ -1,5 +1,5 @@
 // @ts-ignore
-import { inject, onUpdated, onMounted, reactive, onBeforeUnmount } from 'vue';
+import { inject, onUpdated, onMounted, reactive, onBeforeUnmount, computed } from 'vue';
 import { defaultGetterGenerator, objectMappers } from '../helpers';
 import {
   AcceptInvitationActions,
@@ -16,6 +16,8 @@ import {
   TeamActions,
   TenantsActions,
   AuthActions,
+  getEntitlements,
+  Entitlements
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
 import { AuthState, EnhancedStore } from '@frontegg/redux-store';
@@ -39,6 +41,7 @@ const mapSubState = (statePrefix: string, propertyName?: string) =>
   };
 
 export const mapAuthState = (_this: any) => mapSubState('auth', 'authState').bind(_this);
+export const mapEntitlementsState = (_this: any) => mapSubState('auth.entitlementsState.entitlements', 'entitlements').bind(_this);
 export const mapLoginState = (_this: any) => mapSubState('auth.loginState').bind(_this);
 export const mapAcceptInvitationState = (_this: any) => mapSubState('auth.acceptInvitationState').bind(_this);
 export const mapActivateAccountState = (_this: any) => mapSubState('auth.activateState').bind(_this);
@@ -56,6 +59,7 @@ export const mapTenantsState = (_this: any) => mapSubState('auth.tenantsState').
 export const connectMapState = (_this: any) => {
   Object.assign(_this, {
     mapAuthState: mapAuthState(_this),
+    mapEntitlementsState: mapEntitlementsState(_this),
     mapLoginState: mapLoginState(_this),
     mapAcceptInvitationState: mapAcceptInvitationState(_this),
     mapActivateAccountState: mapActivateAccountState(_this),
@@ -125,6 +129,24 @@ export const useFronteggLoaded = () => {
   const fronteggLoaded = inject(fronteggLoadedKey) as boolean;
 
   return fronteggLoaded;
+};
+
+/**
+  @param keys The requested entitlement keys
+  @returns Entitlements contain state data for every key (inc if entitled)
+*/
+export const useEntitlements = (keys: string[]): Entitlements => {
+  const authState = inject(authStateKey);
+
+  return computed(() =>
+    getEntitlements(authState.entitlementsState?.entitlements || {}, keys)
+      .reduce((entitlementsResult, { isEntitled }, i) => ({
+        ...entitlementsResult,
+        [keys[i]]: {
+          isEntitled
+        }
+      }), {})
+  );
 };
 
 export const useUnsubscribeFronteggStore = () => {
