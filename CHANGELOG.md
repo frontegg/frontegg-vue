@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.37](https://github.com/frontegg/frontegg-vue/compare/v2.0.36...v2.0.37) (2023-6-19)
+
+- Added support to load cdn component with the new vite version
+- Fix for new sso guide dark theme
+- Fix for login per tenant embedded with sub domain logout route
+- Create MSP all accounts main page
+
 ## [2.0.36](https://github.com/frontegg/frontegg-vue/compare/v2.0.35...v2.0.36) (2023-6-6)
 
 - Improve login preview for login per tenant self service to rendered inside iframe
