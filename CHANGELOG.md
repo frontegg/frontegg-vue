@@ -4,7 +4,6 @@
 
 - Update load tenants to new version
 - MSP bugfix, improvements
-- Add support to load cdn component with the new vite version
 - Fix new sso guide dark theme
 - Add support props and frontegg hooks in custom components
 
