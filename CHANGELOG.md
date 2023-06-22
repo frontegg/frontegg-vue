@@ -1,5 +1,13 @@
 # Change Log
 
+## [2.0.38](https://github.com/frontegg/frontegg-vue/compare/v2.0.37...v2.0.38) (2023-6-22)
+
+- Update load tenants to new version
+- MSP bugfix, improvements
+- Fix new sso guide dark theme
+- Add support props and frontegg hooks in custom components
+
+
 ## [2.0.37](https://github.com/frontegg/frontegg-vue/compare/v2.0.36...v2.0.37) (2023-6-19)
 
 - Added support to load cdn component with the new vite version
