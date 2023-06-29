@@ -1,5 +1,12 @@
 # Change Log
 
+## [2.0.39](https://github.com/frontegg/frontegg-vue/compare/v2.0.38...v2.0.39) (2023-6-28)
+
+- FR-12277 - Extended tenants state with the active tenant to support MSP sub-accounts
+- FR-12405 - MSP bug fixes
+- FR-12381 - Migrated users table to load users by users V2 API
+
+
 ## [2.0.38](https://github.com/frontegg/frontegg-vue/compare/v2.0.37...v2.0.38) (2023-6-22)
 
 - Update load tenants to new version
