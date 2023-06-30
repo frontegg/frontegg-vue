@@ -1,5 +1,10 @@
 # Change Log
 
+## [2.0.40](https://github.com/frontegg/frontegg-vue/compare/v2.0.39...v2.0.40) (2023-6-30)
+
+- MSP update visibility, bugfix
+- add security login flows
+
 ## [2.0.39](https://github.com/frontegg/frontegg-vue/compare/v2.0.38...v2.0.39) (2023-6-28)
 
 - FR-12277 - Extended tenants state with the active tenant to support MSP sub-accounts
