@@ -2,11 +2,8 @@
 
 ## [2.0.40](https://github.com/frontegg/frontegg-vue/compare/v2.0.39...v2.0.40) (2023-6-30)
 
-- FR-12426 - msp visibility bypermissions
-- FR-12413 - fix msp accounts update
-- FR-12213 - add security login flows - mfa and breached password
-- FR-12277 - active tenant gap fix
-
+- MSP update visibility, bugfix
+- add security login flows
 
 ## [2.0.39](https://github.com/frontegg/frontegg-vue/compare/v2.0.38...v2.0.39) (2023-6-28)
 
