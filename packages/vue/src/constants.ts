@@ -6,7 +6,6 @@ export const FRONTEGG_LOADER_UNSUBSCRIBE = 'FRONTEGG_LOADER_UNSUBSCRIBE';
 
 export const fronteggLoadedKey = Symbol('fronteggLoade');
 export const authStateKey = Symbol('authState');
-export const entitlementsStateKey = Symbol('entitlementsState');
 export const unsubscribeFronteggStoreKey = Symbol('unsubscribeFronteggStore');
 export const fronteggAuthKey = Symbol('fronteggAuth');
 export const routerKey = Symbol('router');
