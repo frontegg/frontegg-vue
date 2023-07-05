@@ -15,7 +15,7 @@ import { StoreHolder } from './StoreHolder';
 import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
-import { ContextHolder, FronteggFrameworks, EntitlementsResponse } from '@frontegg/rest-api';
+import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
 import {
   authStateKey,
   fronteggAuthKey,
@@ -45,7 +45,6 @@ export {
   mapTeamActions,
   useAuthState,
   useUnsubscribeFronteggStore,
-  useEntitlements,
   useFronteggLoaded,
   useFrontegg,
   useFronteggAuthGuard,
@@ -228,8 +227,6 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
-        // _entitlements was added for to make the computed property reactive, then it will get updated
-        this.getEntitlements = (_entitlements: EntitlementsResponse, keys: string[]) => fronteggApp.getEntitlements(keys);
         connectMapState(this);
       },
       updated() {
