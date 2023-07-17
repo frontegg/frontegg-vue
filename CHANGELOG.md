@@ -1,5 +1,24 @@
 # Change Log
 
+## [2.0.41](https://github.com/frontegg/frontegg-vue/compare/v2.0.40...v2.0.41) (2023-7-13)
+
+• FR-12550 - Align all auth methods to get the right login response type
+• FR-12664 - Rename redux-saga file to prevent loop imports by webpack
+• FR-12098 - Updated Admin portal user status to the correct one if email verification is off
+• FR-12020 - Fixed blinking workspace title in admin portal vivid theme
+• FR-12114 - Fixed custom social login provider shouldn't be shown if not active
+• FR-12628 - Fixed custom login with hosted Oauth in URL
+• FR-12575 - Changed remember my device value to be true by default
+• FR-12581 - Added support for custom inline html and script
+• FR-12343 - Added support for SSO per tenant
+• FR-12488 - Backward compatible support for loadUsersV1
+• FR-12164 - Added support for MSP bulk user invitation
+• FR-12479 - Fixed MSP warning dialog issue
+• FR-12408 - Redesigned Entitlements structure
+
+### VueJS Wrapper 2.0.41:
+- FR-12528 - remove entitlements
+
 ## [2.0.40](https://github.com/frontegg/frontegg-vue/compare/v2.0.39...v2.0.40) (2023-6-30)
 
 - MSP update visibility, bugfix
