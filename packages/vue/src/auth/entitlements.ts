@@ -35,7 +35,7 @@ export const usePermissionEntitlements = (key: string): Entitlement => {
 };
 
 /**
-  @param options - including permission or feature key
+  @param entitledToOptions - including permission or feature key
   @returns if the user is entitled to the given permission or feature. Attaching the justification if not
   @throws when entitlement is not enabled via frontegg options
 */

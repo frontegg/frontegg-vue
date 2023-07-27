@@ -153,8 +153,7 @@ export const useFronteggAuth = () => {
 };
 
 export const useLoadEntitlements = () => {
-  const loadEntitlements = inject(loadEntitlementsKey);
-  return loadEntitlements;
+  return inject(loadEntitlementsKey);
 };
 
 export const useFrontegg = () => {
