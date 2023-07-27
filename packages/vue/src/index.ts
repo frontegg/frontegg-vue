@@ -1,6 +1,7 @@
 // @ts-ignore
 import _Vue, { PluginObject, reactive, ref } from 'vue';
 import { PluginOptions } from './interfaces';
+import { User } from '@frontegg/redux-store';
 import { setupOnRedirectTo, syncStateWithComponent } from './helpers';
 import {
   getStoreBinding,
@@ -16,6 +17,7 @@ import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
+import { EntitledToOptions } from '@frontegg/types';
 import {
   authStateKey,
   fronteggAuthKey,
@@ -24,6 +26,7 @@ import {
   fronteggStoreKey,
   routerKey,
   unsubscribeFronteggStoreKey,
+  loadEntitlementsKey,
 } from './constants';
 import sdkVersion from './sdkVersion';
 
@@ -49,6 +52,11 @@ export {
   useFrontegg,
   useFronteggAuthGuard,
 } from './auth/mapAuthState';
+export {
+  useFeatureEntitlements,
+  usePermissionEntitlements,
+  useEntitlements,
+} from './auth/entitlements';
 export * from './auth/interfaces';
 export * from './auth/guards';
 
@@ -197,6 +205,8 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       }
     }
 
+    const loadEntitlements = fronteggApp.loadEntitlements.bind(fronteggApp);
+
     if (isVue3) {
       // @ts-ignore - provide will exist only in vue 3 app
       Vue.provide(fronteggLoadedKey, fronteggLoadedV3);
@@ -217,6 +227,8 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       Vue.provide(fronteggOptionsKey, options);
       // @ts-ignore
       Vue.provide(fronteggStoreKey, store);
+      // @ts-ignore
+      Vue.provide(loadEntitlementsKey, loadEntitlements);
     }
 
     Vue.mixin({
@@ -227,6 +239,13 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
+        
+        // _entitlements was added for to make the computed property reactive, then it will get updated
+        this.getFeatureEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getFeatureEntitlements(key);
+        this.getPermissionEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getPermissionEntitlements(key);
+        this.getEntitlements = (_entitlements: User['entitlements'], entitledToOptions: EntitledToOptions) => fronteggApp.getEntitlements(entitledToOptions);
+        this.loadEntitlements = loadEntitlements;
+
         connectMapState(this);
       },
       updated() {
