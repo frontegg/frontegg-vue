@@ -40,7 +40,6 @@ const mapSubState = (statePrefix: string, propertyName?: string) =>
   };
 
 export const mapAuthState = (_this: any) => mapSubState('auth', 'authState').bind(_this);
-export const mapEntitlementsState = (_this: any) => mapSubState('auth.user.entitlements', 'entitlements').bind(_this);
 export const mapLoginState = (_this: any) => mapSubState('auth.loginState').bind(_this);
 export const mapAcceptInvitationState = (_this: any) => mapSubState('auth.acceptInvitationState').bind(_this);
 export const mapActivateAccountState = (_this: any) => mapSubState('auth.activateState').bind(_this);
@@ -58,7 +57,6 @@ export const mapTenantsState = (_this: any) => mapSubState('auth.tenantsState').
 export const connectMapState = (_this: any) => {
   Object.assign(_this, {
     mapAuthState: mapAuthState(_this),
-    mapEntitlementsState: mapEntitlementsState(_this),
     mapLoginState: mapLoginState(_this),
     mapAcceptInvitationState: mapAcceptInvitationState(_this),
     mapActivateAccountState: mapActivateAccountState(_this),

@@ -76,7 +76,6 @@ declare module 'vue/types/vue' {
     fronteggAuth: FronteggAuthService;
     loginWithRedirect: () => void;
     mapAuthState: () => { authState: AuthState };
-    mapEntitlementsState: () => { entitlements: User['entitlements'] };
     mapLoginState: () => { loginState: LoginState };
     mapAcceptInvitationState: () => { acceptInvitationState: AcceptInvitationState };
     mapActivateAccountState: () => { activateState: ActivateAccountState };
