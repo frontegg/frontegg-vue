@@ -29,6 +29,7 @@ import {
   loadEntitlementsKey,
 } from './constants';
 import sdkVersion from './sdkVersion';
+import VuePkg from 'vue/package.json';
 
 export * from './types';
 
@@ -70,7 +71,9 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     }
     contextOptions.requestCredentials = contextOptions.requestCredentials ?? 'include';
     contextOptions.metadataHeaders = {
-      framework: FronteggFrameworks.Vuejs,
+      //TODO: remove this ts-ignore after updating rest-api context options type to accept string.
+      //@ts-ignore
+      framework: `${FronteggFrameworks.Vuejs}@${VuePkg.version}`,
       fronteggSdkVersion: `@frontegg/vuejs@${sdkVersion.version}`,
     }
     ContextHolder.setContext(contextOptions);
@@ -239,7 +242,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         setStoreKey(this, store);
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
-        
+
         // _entitlements was added for to make the computed property reactive, then it will get updated
         this.getFeatureEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getFeatureEntitlements(key);
         this.getPermissionEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getPermissionEntitlements(key);
