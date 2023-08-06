@@ -7,6 +7,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import resolve from '@rollup/plugin-node-resolve';
 import replace from '@rollup/plugin-replace';
 import babel from '@rollup/plugin-babel';
+import json from "@rollup/plugin-json";
 import { terser } from 'rollup-plugin-terser';
 import minimist from 'minimist';
 import ts from 'rollup-plugin-typescript2';
@@ -112,6 +113,7 @@ if (!argv.format || argv.format === 'es') {
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
       ...baseConfig.plugins.postVue,
+      json(),
       ts({
         tsconfig: `${process.cwd()}/tsconfig.json`,
         useTsconfigDeclarationDir: true,

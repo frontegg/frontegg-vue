@@ -37,6 +37,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
     "@rollup/plugin-replace": "^2.3.4",
+    "@rollup/plugin-json": "^6.0.0",
     "@types/get-value": "^3.0.1",
     "@types/set-value": "^2.0.0",
     "@types/vue-moment": "^4.0.2",
