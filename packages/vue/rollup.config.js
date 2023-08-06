@@ -162,6 +162,7 @@ if (!argv.format || argv.format === 'cjs') {
         },
       }),
       ...baseConfig.plugins.postVue,
+      json(),
       ts({
         tsconfig: `${process.cwd()}/tsconfig.json`,
         tsconfigOverride: {
@@ -196,6 +197,7 @@ if (!argv.format || argv.format === 'iife') {
       ...baseConfig.plugins.preVue,
       vue(baseConfig.plugins.vue),
       ...baseConfig.plugins.postVue,
+      json(),
       ts({
         tsconfig: `${process.cwd()}/tsconfig.json`,
         tsconfigOverride: {
