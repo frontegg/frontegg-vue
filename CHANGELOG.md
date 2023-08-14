@@ -1,5 +1,19 @@
 # Change Log
 
+## [2.0.42](https://github.com/frontegg/frontegg-vue/compare/v2.0.41...v2.0.42) (2023-7-31)
+
+# v2.0.42
+
+- FR-12828 - Added entitlements feature
+- FR-12224 - Added custom login support for authenticated users without a tenant alias
+- FR-12688 - Changed the Admin box to be compatible with the updated type of `IUserProfile`
+- FR-12114 - Removed inactive custom social login provider
+- FR-12098 - Fixed admin portal user status updates when email verification is off
+- FR-12098 - Fixed workspace title for the vivid theme
+
+### VueJS Wrapper 2.0.42:
+- FR-12190 - Added entitlements feature
+
 ## [2.0.41](https://github.com/frontegg/frontegg-vue/compare/v2.0.40...v2.0.41) (2023-7-13)
 
 • FR-12550 - Align all auth methods to get the right login response type

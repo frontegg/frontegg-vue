@@ -29,6 +29,7 @@ import {
   fronteggStoreKey,
   routerKey,
   unsubscribeFronteggStoreKey,
+  loadEntitlementsKey,
 } from '../constants';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
@@ -149,11 +150,16 @@ export const useFronteggAuth = () => {
   return fronteggAuth;
 };
 
+export const useLoadEntitlements = () => {
+  return inject(loadEntitlementsKey);
+};
+
 export const useFrontegg = () => {
   const fronteggLoaded = useFronteggLoaded();
   const unsubscribeFronteggStore = useUnsubscribeFronteggStore();
   const authState = useAuthState();
   const fronteggAuth = useFronteggAuth();
+  const loadEntitlements = useLoadEntitlements();
 
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
@@ -174,6 +180,7 @@ export const useFrontegg = () => {
     authState,
     fronteggAuth,
     loginWithRedirect,
+    loadEntitlements
   };
 };
 
