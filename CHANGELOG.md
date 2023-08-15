@@ -1,5 +1,19 @@
 # Change Log
 
+## [2.0.43](https://github.com/frontegg/frontegg-vue/compare/v2.0.42...v2.0.43) (2023-8-14)
+
+# v2.0.43
+- FR-11857 - Added new support for hosted login to load user on load
+- FR-12828 - Updated entitlements API response
+- FR-12224 - Supported custom login for authenticated users without a tenant alias
+- FR-12780 - Improved Entitlements Vanilla JS SDK
+
+### VueJS Wrapper 2.0.43:
+- FR-12986 - Added support of reporting Vue version header
+- FR-12190 - Supported entitlements SDK
+  
+# Change Log
+
 ## [2.0.42](https://github.com/frontegg/frontegg-vue/compare/v2.0.41...v2.0.42) (2023-7-31)
 
 # v2.0.42
