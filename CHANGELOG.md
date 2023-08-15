@@ -4,11 +4,9 @@
 
 # v2.0.43
 - FR-11857 - Added new support for hosted login to load user on load
-- FR-12818 - Added support to permissions in the security center inner pages and modified the security center main page
 - FR-12828 - Updated entitlements API response
 - FR-12224 - Supported custom login for authenticated users without a tenant alias
 - FR-12780 - Improved Entitlements Vanilla JS SDK
-- FR-12224 - Updated admin portal public endpoints
 
 ### VueJS Wrapper 2.0.43:
 - FR-12986 - Added support of reporting Vue version header
