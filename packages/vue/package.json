@@ -22,7 +22,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config rollup.config.js --format iife"
   },
   "dependencies": {
-    "@frontegg/js": "6.135.0",
+    "@frontegg/js": "6.136.0",
     "get-value": "^3.0.1",
     "set-value": "^4.0.1"
   },
