@@ -1,5 +1,17 @@
 # Change Log
 
+## [2.0.44](https://github.com/frontegg/frontegg-vue/compare/v2.0.43...v2.0.44) (2023-8-28)
+
+- FR-13142 - Support setRootAccountData action for all account feature 
+- FR-12321 - Added max validations to session management fields 
+
+
+- FR-12974 - Fixed the issue with permissions and roles granted from user groups on User context
+- FR-12322 - Change redirect to SSO text
+- FR-12979 - Fixed MFA options save button to be disabled if the user has no security write permission
+
+# Change Log
+
 ## [2.0.43](https://github.com/frontegg/frontegg-vue/compare/v2.0.42...v2.0.43) (2023-8-14)
 
 # v2.0.43
