@@ -1,5 +1,11 @@
 # Change Log
 
+## [2.0.45](https://github.com/frontegg/frontegg-vue/compare/v2.0.44...v2.0.45) (2023-9-5)
+
+- Releasing the new Security Center Page, which will replace the current Security Page. Currently exposed on Early Access with limited availability by a feature flag.
+
+
+
 ## [2.0.44](https://github.com/frontegg/frontegg-vue/compare/v2.0.43...v2.0.44) (2023-8-28)
 
 - FR-13142 - Support setRootAccountData action for all account feature 
