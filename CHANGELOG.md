@@ -2,11 +2,11 @@
 
 ## [3.0.1](https://github.com/frontegg/frontegg-vue/compare/v2.0.45...v3.0.1) (2023-9-27)
 
+- Introduction of our new security page in the admin portal replacing the current security page.
 - FR-13509 - Added GTM integration
 
+#### Note: no migration is needed to upgrade between versions 2 to 3.
 
-### VueJS Wrapper 3.0.1:
-- FR-13647 - release major
 
 ## [2.0.45](https://github.com/frontegg/frontegg-vue/compare/v2.0.44...v2.0.45) (2023-9-5)
 
