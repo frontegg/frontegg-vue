@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.0.1](https://github.com/frontegg/frontegg-vue/compare/v2.0.45...v3.0.1) (2023-9-27)
+
+- Introduction of our new security page in the admin portal replacing the current security page.
+- FR-13509 - Added GTM integration
+
+#### Note: No migration is needed to upgrade between versions 2 to 3.
+
+
 ## [2.0.45](https://github.com/frontegg/frontegg-vue/compare/v2.0.44...v2.0.45) (2023-9-5)
 
 - Releasing the new Security Center Page, which will replace the current Security Page. Currently exposed on Early Access with limited availability by a feature flag.
