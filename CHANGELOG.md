@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.0.2](https://github.com/frontegg/frontegg-vue/compare/v3.0.1...v3.0.2) (2023-9-28)
+
+null
+
+### VueJS Wrapper 3.0.2:
+- FR-13647 - release major
+# Change Log
+
 ## [3.0.1](https://github.com/frontegg/frontegg-vue/compare/v2.0.45...v3.0.1) (2023-9-27)
 
 - Introduction of our new security page in the admin portal replacing the current security page.
