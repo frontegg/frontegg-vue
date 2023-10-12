@@ -13,7 +13,7 @@ import { authStateKey } from '../constants';
 
 const getEntitlementsState = () => {
   const authState = inject(authStateKey) as AuthState;
-  return authState.user?.entitlements;
+  return authState.user?.entitlements as any;
 };
 
 /**
