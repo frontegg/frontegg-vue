@@ -1,7 +1,7 @@
 import { EnhancedStore } from '@reduxjs/toolkit';
 import { Unsubscribe } from 'redux';
 import { Entitlement, User } from '@frontegg/redux-store';
-import { EntitledToOptions, LoadEntitlementsCallback } from '@frontegg/types';
+import { EntitledToOptions, LoadEntitlementsCallback, CustomAttributes } from '@frontegg/types';
 import { FronteggPluginService } from './interfaces';
 
 declare module 'vue/types/vue' {
@@ -20,25 +20,28 @@ declare module 'vue/types/vue' {
     loginWithRedirect: () => void;
 
     /**
-      @param key feature
+      @param key feature key
+      @param customAttributes consumer attributes
       @returns if the user is entitled to the given feature. Attaching the justification if not
       @throws when entitlement is not enabled via frontegg options
     */
-    getFeatureEntitlements: (_entitlements: User['entitlements'], key: string) => Entitlement;
+    getFeatureEntitlements: (_user: User | undefined | null, key: string, customAttributes?: CustomAttributes) => Entitlement;
 
     /**
-      @param key permission
+      @param key permission key
+      @param customAttributes consumer attributes
       @returns if the user is entitled to the given permission. Attaching the justification if not
       @throws when entitlement is not enabled via frontegg options
     */    
-    getPermissionEntitlements: (_entitlements: User['entitlements'], key: string) => Entitlement;
+    getPermissionEntitlements: (_user: User | undefined | null, key: string, customAttributes?: CustomAttributes) => Entitlement;
 
     /**
       @param entitledToOptions - including permission or feature key
+      @param customAttributes consumer attributes
       @returns if the user is entitled to the given permission or feature. Attaching the justification if not
       @throws when entitlement is not enabled via frontegg options
     */
-    getEntitlements: (_entitlements: User['entitlements'], entitledToOptions: EntitledToOptions) => Entitlement;
+    getEntitlements: (_user: User | undefined | null, entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes) => Entitlement;
 
     /**
      * Load entitlements

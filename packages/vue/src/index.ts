@@ -17,7 +17,7 @@ import { AdminPortal, initialize } from '@frontegg/js';
 import { FronteggAuthService } from './auth/service';
 import { connectMapState, connectFronteggStoreV3 } from './auth/mapAuthState';
 import { ContextHolder, FronteggFrameworks } from '@frontegg/rest-api';
-import { EntitledToOptions } from '@frontegg/types';
+import { EntitledToOptions, CustomAttributes } from '@frontegg/types';
 import {
   authStateKey,
   fronteggAuthKey,
@@ -243,10 +243,10 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         this.fronteggAuth = Vue.fronteggAuth;
         this.loginWithRedirect = loginWithRedirect.bind(this);
 
-        // _entitlements was added for to make the computed property reactive, then it will get updated
-        this.getFeatureEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getFeatureEntitlements(key);
-        this.getPermissionEntitlements = (_entitlements: User['entitlements'], key: string) => fronteggApp.getPermissionEntitlements(key);
-        this.getEntitlements = (_entitlements: User['entitlements'], entitledToOptions: EntitledToOptions) => fronteggApp.getEntitlements(entitledToOptions);
+        // _user was added for to make the computed property reactive, then it will get updated
+        this.getFeatureEntitlements = (_user: User | undefined | null, key: string, customAttributes?: CustomAttributes) => fronteggApp.getFeatureEntitlements(key, customAttributes);
+        this.getPermissionEntitlements = (_user: User | undefined | null, key: string, customAttributes?: CustomAttributes) => fronteggApp.getPermissionEntitlements(key, customAttributes);
+        this.getEntitlements = (_user: User | undefined | null, entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes) => fronteggApp.getEntitlements(entitledToOptions, customAttributes);
         this.loadEntitlements = loadEntitlements;
 
         connectMapState(this);
