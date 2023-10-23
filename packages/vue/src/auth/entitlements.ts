@@ -1,6 +1,6 @@
 // @ts-ignore
 import { inject, computed } from 'vue';
-import { EntitledToOptions, Entitlement, CustomAttributes, Attributes } from '@frontegg/types';
+import { EntitledToOptions, Entitlement, CustomAttributes, Attributes, JwtAttributes } from '@frontegg/types';
 
 import {
   getFeatureEntitlements,
@@ -41,10 +41,10 @@ const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
   const entitlements = user?.entitlements;
   const isV2 = useIsV2API();
 
-  const attributes = {
+  const attributes: Attributes | undefined = {
     custom: customAttributes,
-    frontegg: user,
-  } as Attributes | undefined;
+    jwt: user as JwtAttributes | undefined,
+  };
 
   return {
     entitlements,
