@@ -1,13 +1,11 @@
-name: Publish Pre-Release to NPM
+name: "(▶) Publish Alpha Version"
+
 on:
-  # When standard Pull Request is merged
-  pull_request:
+  workflow_dispatch:
     branches:
-      - master
-    types: [ closed ]
+      FR-13901-rule-based-entitlementss
 jobs:
   createReleasePullRequest:
-    if: "!contains(join(github.event.pull_request.labels.*.name, ','), 'Release') && github.event.pull_request.merged == true"
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.13.0-chrome80-ff74
     steps:
@@ -66,28 +64,6 @@ jobs:
             const {default: fs} = await import('fs');
             const {version} = JSON.parse(fs.readFileSync('./lerna.json', {encoding: "utf-8"}));
             return version;
-      - name: Commit changes
-        shell: bash -ex {0}
-        run: |
-          git add . && git commit -m "chore(release): publish ${{ steps.incremented-version.outputs.result }}"
-      - name: Create Release Pull Request
-        id: cpr
-        uses: peter-evans/create-pull-request@v3.5.1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          path: ${{ secrets.GITHUB_WORKSPACE }}
-          commit-message: "Update v${{ steps.incremented-version.outputs.result }}"
-          committer: GitHub <noreply@github.com>
-          author: "${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>"
-          title: 'v${{ steps.incremented-version.outputs.result }}'
-          body: |
-            # v${{ steps.incremented-version.outputs.result }}
-
-            ${{steps.generated-changelog.outputs.result}}
-
-          labels: "Type: Release"
-          branch: "release/next"
-
       - name: Publish Pre-Release version to NPM
         id: publish_pre_release_version
         run: |
@@ -95,8 +71,6 @@ jobs:
           echo "::set-output name=LIB_VERSION::${version}"
           echo "Publishing DEV version - v${version}-alpha.${{ github.run_id }}"
           make prerelease-version-upgrade-${version}-alpha.${{ github.run_id }}
-          git add .
-          git commit -m "chore: prerelease version"
           make publish-packages-next
         env:
           NPM_TOKEN: ${{ secrets.NPM_PUBLISH_TOKEN }}
