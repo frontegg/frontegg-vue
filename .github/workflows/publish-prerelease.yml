@@ -2,7 +2,7 @@ name: Publish Pre-Release to NPM
 on:
   push:
     branches:
-      - FR-13901-rule-based-entitlementssss
+      - FR-13901-rule-based-entitlements
 jobs:
   createReleasePullRequest:
     runs-on: ubuntu-latest
