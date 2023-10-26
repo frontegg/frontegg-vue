@@ -2,10 +2,8 @@ name: "(▶) Publish Alpha Version"
 
 on:
   workflow_dispatch:
-    branches:
-      FR-13901-rule-based-entitlementss
 jobs:
-  createReleasePullRequest:
+  createAlphaVersion:
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.13.0-chrome80-ff74
     steps:
