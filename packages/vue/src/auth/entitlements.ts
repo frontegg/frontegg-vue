@@ -9,10 +9,10 @@ import {
   AuthState,
 } from '@frontegg/redux-store';
 
-import { FeatureFlags, USE_ENTITLEMENTS_V2_ENDPOINT_FF } from '@frontegg/rest-api';
+import { USE_ENTITLEMENTS_V2_ENDPOINT_FF } from '@frontegg/rest-api';
 
 import { authStateKey } from '../constants';
-import { useFronteggStore } from '../auth/mapAuthState';
+import { useFeatureFlag } from '../auth/mapAuthState';
 
 /**
  * @returns user state 
@@ -26,9 +26,7 @@ const useGetUserState = () => {
  * @returns true when need to use entitlements V2 API
  */
 const useIsV2API = () => {
-  // TODO: check should it be immediate or we can recursively inject (check when app name change?)
-  const { appName } = useFronteggStore();
-  const [useEntitlementsV2] = FeatureFlags.getFeatureFlags([USE_ENTITLEMENTS_V2_ENDPOINT_FF], appName);
+  const [useEntitlementsV2] = useFeatureFlag([USE_ENTITLEMENTS_V2_ENDPOINT_FF]);
   return useEntitlementsV2;
 };
 
@@ -41,7 +39,7 @@ const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
   const entitlements = user?.entitlements;
   const isV2 = useIsV2API();
 
-  const attributes: Attributes | undefined = {
+  const attributes: Attributes = {
     custom: customAttributes,
     jwt: user as JwtAttributes | undefined,
   };

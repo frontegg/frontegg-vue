@@ -1,5 +1,6 @@
 // @ts-ignore
 import { inject, onUpdated, onMounted, reactive, onBeforeUnmount, computed } from 'vue';
+import { FeatureFlags } from '@frontegg/rest-api';
 import { defaultGetterGenerator, objectMappers } from '../helpers';
 import {
   AcceptInvitationActions,
@@ -152,6 +153,11 @@ export const useFronteggAuth = () => {
 
 export const useLoadEntitlements = () => {
   return inject(loadEntitlementsKey);
+};
+
+export const useFeatureFlag = (keys: string[]) => {
+  const { appName } = useFronteggStore();
+  return FeatureFlags.getFeatureFlags(keys, appName);
 };
 
 export const useFrontegg = () => {
