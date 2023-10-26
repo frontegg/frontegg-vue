@@ -1,7 +1,7 @@
 name: "(▶) Publish Alpha Version"
 
 on:
-  workflow_dispatch:
+  push:
     branches:
       - 'FR-13967-alpha-creation-manually'
 jobs:
