@@ -1,9 +1,7 @@
 name: "(▶) Publish Alpha Version"
 
 on:
-  push:
-    branches:
-      - 'FR-13967-alpha-creation-manually'
+  workflow_dispatch:
 jobs:
   createAlphaVersion:
     runs-on: ubuntu-latest
