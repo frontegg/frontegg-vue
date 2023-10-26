@@ -3,7 +3,7 @@ name: "(▶) Publish Alpha Version"
 on:
   workflow_dispatch:
 jobs:
-  createReleasePullRequest:
+  createAlphaVersion:
     runs-on: ubuntu-latest
     container: cypress/browsers:node12.13.0-chrome80-ff74
     steps:
