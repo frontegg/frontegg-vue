@@ -1,14 +1,22 @@
 # Change Log
 
+## [3.0.7](https://github.com/frontegg/frontegg-vue/compare/v3.0.6...v3.0.7) (2023-11-1)
+
+- FR-13327 - Update modern theme grey palette
+- FR-13834 - Added Rule based entitlements
+- FR-13508 - Mobile native module bridge
+- FR-13772 - Fixed issue on edit user roles modal - at least 1 role is required
+- FR-13808 - Support Login with SMS
+- FR-13786 - Support tab per tenant
+
+# Change Log
+
 ## [3.0.6](https://github.com/frontegg/frontegg-vue/compare/v3.0.5...v3.0.6) (2023-10-24)
 
 - FR-13772 - Fixed issue on edit user roles modal - at least 1 role is required
 - FR-13808 - Support Login with SMS
 - FR-13786 - Support tab per tenant
 
-
-### VueJS Wrapper 3.0.6:
-- FR-12821 - Rule Based Entitlements - preparation for upgrading rest-api
 # Change Log
 
 ## [3.0.5](https://github.com/frontegg/frontegg-vue/compare/v3.0.4...v3.0.5) (2023-10-11)
