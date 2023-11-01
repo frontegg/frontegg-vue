@@ -1,5 +1,23 @@
 # Change Log
 
+## [3.0.7](https://github.com/frontegg/frontegg-vue/compare/v3.0.6...v3.0.7) (2023-11-1)
+
+- FR-14000 - Fix time zone
+- FR-13834 - rule based entitlements - upgrade entitlements lib
+- FR-13327 - update modern theme grey palette
+- FR-13834 - Added Rule based entitlements
+
+- FR-13508 - Mobile native module bridge
+- FR-13772 - Fixed issue on edit user roles modal - at least 1 role is required
+- FR-13808 - Support Login with SMS
+- FR-13786 - Support tab per tenant
+
+
+### VueJS Wrapper 3.0.7:
+- FR-13967 - Allow creating alpha version manually
+- FR-13901 - Rule Based Entitlements
+# Change Log
+
 ## [3.0.6](https://github.com/frontegg/frontegg-vue/compare/v3.0.5...v3.0.6) (2023-10-24)
 
 - FR-13772 - Fixed issue on edit user roles modal - at least 1 role is required
