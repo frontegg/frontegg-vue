@@ -17,9 +17,6 @@
 - FR-13808 - Support Login with SMS
 - FR-13786 - Support tab per tenant
 
-
-### VueJS Wrapper 3.0.6:
-- FR-12821 - Rule Based Entitlements - preparation for upgrading rest-api
 # Change Log
 
 ## [3.0.5](https://github.com/frontegg/frontegg-vue/compare/v3.0.4...v3.0.5) (2023-10-11)
