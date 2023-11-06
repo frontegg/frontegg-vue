@@ -1,5 +1,12 @@
 # Change Log
 
+## [3.0.8](https://github.com/frontegg/frontegg-vue/compare/v3.0.7...v3.0.8) (2023-11-6)
+
+- FR-14102 - Fixed entitlements Frontegg user-id attribute usage 
+- FR-13123 - Added support to provide scopes for social logins
+
+# Change Log
+
 ## [3.0.7](https://github.com/frontegg/frontegg-vue/compare/v3.0.6...v3.0.7) (2023-11-1)
 
 - FR-13327 - Update modern theme grey palette
