@@ -4,6 +4,7 @@ import App from './App.vue';
 import { createRouter, createWebHistory } from 'vue-router';
 
 import { Frontegg } from '@frontegg/vue';
+import Entitlement from '@/Entitlement.vue';
 
 const router = createRouter({
   history: createWebHistory('/'),
@@ -11,16 +12,21 @@ const router = createRouter({
 });
 
 const app = Vue.createApp(App);
+app.component('Entitlement', Entitlement);
 
 app.use(router);
 
 app.use(Frontegg, {
   contextOptions: {
-    baseUrl: 'https://doglaza.stg.frontegg.com',
-    clientId: '52d4bdc4-27fa-46c5-9bfd-76eeb1c8d474',
-  },
+    baseUrl: 'https://app-o1uurvajm1on.stg.frontegg.com',
+    // baseUrl: process.env.PUBLIC_URL || process.env.REACT_APP_BASE_URL,
+    clientId: '9e23d2c9-b45a-4f6a-a879-1418469b1c89', //process.env.REACT_APP_CLIENT_ID,
+},
   authOptions: {
     keepSessionAlive: true, // Uncomment this in order to maintain the session alive
+  },
+  entitlementsOptions: {
+    enabled: true,
   },
   hostedLoginBox: false,
   router,

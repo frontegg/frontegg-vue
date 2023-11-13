@@ -9,6 +9,7 @@ export const authStateKey = Symbol('authState');
 export const unsubscribeFronteggStoreKey = Symbol('unsubscribeFronteggStore');
 export const fronteggAuthKey = Symbol('fronteggAuth');
 export const loadEntitlementsKey = Symbol('loadEntitlements');
+export const stepUpKey = Symbol('stepUp');
 export const routerKey = Symbol('router');
 export const fronteggOptionsKey = Symbol('fronteggOptions');
 export const fronteggStoreKey = Symbol('fronteggStore');

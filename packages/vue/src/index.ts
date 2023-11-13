@@ -27,6 +27,7 @@ import {
   routerKey,
   unsubscribeFronteggStoreKey,
   loadEntitlementsKey,
+  stepUpKey,
 } from './constants';
 import sdkVersion from './sdkVersion';
 import VuePkg from 'vue/package.json';
@@ -209,6 +210,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     }
 
     const loadEntitlements = fronteggApp.loadEntitlements.bind(fronteggApp);
+    const stepUp = fronteggApp.stepUp.bind(fronteggApp);
 
     if (isVue3) {
       // @ts-ignore - provide will exist only in vue 3 app
@@ -232,6 +234,8 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       Vue.provide(fronteggStoreKey, store);
       // @ts-ignore
       Vue.provide(loadEntitlementsKey, loadEntitlements);
+      // @ts-ignore
+      Vue.provide(stepUpKey, stepUp);
     }
 
     Vue.mixin({
@@ -248,6 +252,10 @@ const Frontegg: PluginObject<PluginOptions> | any = {
         this.getPermissionEntitlements = (_user: User | undefined | null, key: string, customAttributes?: CustomAttributes) => fronteggApp.getPermissionEntitlements(key, customAttributes);
         this.getEntitlements = (_user: User | undefined | null, entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes) => fronteggApp.getEntitlements(entitledToOptions, customAttributes);
         this.loadEntitlements = loadEntitlements;
+        // maybe should be binded
+        this.stepUp = stepUp;
+        // maybe should be binded
+        this.isSteppedUp = (_user: User | undefined | null) => fronteggApp.isSteppedUp();
 
         connectMapState(this);
       },

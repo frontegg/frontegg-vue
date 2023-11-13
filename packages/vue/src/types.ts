@@ -48,5 +48,16 @@ declare module 'vue/types/vue' {
      * @param callback called on request completed with true if succeeded, false if failed
      */
     loadEntitlements: (callback?: LoadEntitlementsCallback) => void;
+    
+    /**
+     * Trigger a step up operation
+     * @param maxAge TOOD
+     */
+    stepUp: (maxAge?: number) => void;
+
+    /**
+     * Returns true when user is stepped up, o.w false
+     */
+    isSteppedUp: (_user: User | undefined | null) => boolean;
   }
 }

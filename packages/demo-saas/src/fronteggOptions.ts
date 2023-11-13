@@ -5,8 +5,12 @@ const fronteggOptions: FronteggAppOptions =
   window.CYPRESS_CONFIG ||
   ({
     contextOptions: {
-      baseUrl: 'https://test.frontegg.com',
-      clientId: '8dc80b14-2599-482c-8cb6-29fd3c8d5448',
+      baseUrl: 'https://app-o1uurvajm1on.stg.frontegg.com',
+      // baseUrl: process.env.PUBLIC_URL || process.env.REACT_APP_BASE_URL,
+      clientId: '9e23d2c9-b45a-4f6a-a879-1418469b1c89', //process.env.REACT_APP_CLIENT_ID,
+    },
+    entitlementsOptions: {
+      enabled: true,
     },
   } as FronteggAppOptions);
 

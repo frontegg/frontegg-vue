@@ -19,7 +19,7 @@ import {
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthState, EnhancedStore } from '@frontegg/redux-store';
+import { AuthState, EnhancedStore/*, isSteppedUp*/ } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
@@ -31,6 +31,7 @@ import {
   routerKey,
   unsubscribeFronteggStoreKey,
   loadEntitlementsKey,
+  stepUpKey,
 } from '../constants';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
@@ -155,6 +156,18 @@ export const useLoadEntitlements = () => {
   return inject(loadEntitlementsKey);
 };
 
+export const useStepUp = () => {
+  return inject(stepUpKey);
+};
+
+export const useIsSteppedUp = () => {
+  return computed(() => {
+    // const { user } = inject(authStateKey);
+    return true;
+    // return isSteppedUp(user);
+  });
+};
+
 export const useFeatureFlag = (keys: string[]) => {
   const { appName } = useFronteggStore();
   return FeatureFlags.getFeatureFlags(keys, appName);
@@ -166,6 +179,8 @@ export const useFrontegg = () => {
   const authState = useAuthState();
   const fronteggAuth = useFronteggAuth();
   const loadEntitlements = useLoadEntitlements();
+  const stepUp = useStepUp();
+  const isSteppedUp = useIsSteppedUp();
 
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
@@ -186,7 +201,9 @@ export const useFrontegg = () => {
     authState,
     fronteggAuth,
     loginWithRedirect,
-    loadEntitlements
+    loadEntitlements,
+    stepUp,
+    isSteppedUp
   };
 };
 
