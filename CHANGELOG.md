@@ -2,8 +2,7 @@
 
 ## [3.0.10](https://github.com/frontegg/frontegg-vue/compare/v3.0.9...v3.0.10) (2023-11-29)
 
-- FR-13527 - Added a11y support for admin portal pages: sso, security, profile, personal tokens, users, groups, provisioning, audit logs, api tokens, webhooks, account details.
-
+- FR-13527 - Added a11y support for admin portal pages: SSO, security, profile, personal tokens, users, groups, provisioning, audit logs, API tokens, webhooks, and account details.
 
 
 ## [3.0.9](https://github.com/frontegg/frontegg-vue/compare/v3.0.8...v3.0.9) (2023-11-20)
