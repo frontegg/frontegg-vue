@@ -3,15 +3,8 @@
 ## [3.0.11](https://github.com/frontegg/frontegg-vue/compare/v3.0.10...v3.0.11) (2023-12-17)
 
 - FR-10692 - Remove the ability to select a full category on webhooks page
-
-
-- FR-14324 - Fix android native module and add option for direct social login
-
 - FR-14287 - Fix grammar of 1 day expiry of api tokens
-
-
 - FR-14308 - Fixed alignment issue with icon in custom social login button
-
 
 # Change Log
 
