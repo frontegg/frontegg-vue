@@ -1,5 +1,22 @@
 # Change Log
 
+## [3.0.12](https://github.com/frontegg/frontegg-vue/compare/v3.0.11...v3.0.12) (2023-12-31)
+
+- FR-14578 - Fixed custom login without tenant alias
+- FR-14638 - Missing exp on user interface
+- FR-14560 - added temporary users feature
+
+
+- FR-14644 - Fixed enroll authenticator app missing error message when code is wrong
+
+
+- FR-14219 - Step up - Embedded flow
+
+- FR-14324 - Fix direct login custom social login
+
+
+# Change Log
+
 ## [3.0.11](https://github.com/frontegg/frontegg-vue/compare/v3.0.10...v3.0.11) (2023-12-17)
 
 - FR-10692 - Remove the ability to select a full category on webhooks page
