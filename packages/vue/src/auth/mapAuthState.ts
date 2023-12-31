@@ -34,7 +34,7 @@ import {
 } from '../constants';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
-  function() {
+  function () {
     const obj = { [propertyName ?? statePrefix.substring('auth.'.length)]: (state: any) => state };
     // @ts-ignore
     return objectMappers(statePrefix, obj, defaultGetterGenerator).bind(this)();
@@ -190,7 +190,7 @@ export const useFrontegg = () => {
   };
 };
 
-export const useFronteggAuthGuard = () => {
+export const useFronteggAuthGuard = (redirectUrl?: string) => {
   const fronteggAuth = useFronteggAuth();
   const fronteggOptions = inject(fronteggOptionsKey) as any;
   const authState = useAuthState();
@@ -208,7 +208,7 @@ export const useFronteggAuthGuard = () => {
     if (!isAuthRoutes(fronteggAuth.router?.currentRoute.path!) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
-        fronteggAuth.loginActions.requestHostedLoginAuthorize();
+        fronteggAuth.loginActions.requestHostedLoginAuthorize(redirectUrl ? { "redirect_uri": redirectUrl } : undefined);
       } else {
         router.push(authState.routes.loginUrl);
       }
