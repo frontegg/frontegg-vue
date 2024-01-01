@@ -19,7 +19,7 @@ import {
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthState, EnhancedStore } from '@frontegg/redux-store';
+import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
@@ -190,7 +190,15 @@ export const useFrontegg = () => {
   };
 };
 
-export const useFronteggAuthGuard = (redirectUrl?: string) => {
+type FronteggAuthGuardOptions = {
+  redirectUrl?: string;
+};
+/**
+ * Redirect to login page if the user is not authenticated
+ * @param redirectUrl the url to redirect after hosted login
+ */
+export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
+  const { redirectUrl } = options ?? {}
   const fronteggAuth = useFronteggAuth();
   const fronteggOptions = inject(fronteggOptionsKey) as any;
   const authState = useAuthState();
@@ -209,7 +217,7 @@ export const useFronteggAuthGuard = (redirectUrl?: string) => {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
         if (redirectUrl) {
-          localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', redirectUrl);
+          localStorage.setItem(FRONTEGG_AFTER_AUTH_REDIRECT_URL, redirectUrl);
         }
         fronteggAuth.loginActions.requestHostedLoginAuthorize();
       } else {
