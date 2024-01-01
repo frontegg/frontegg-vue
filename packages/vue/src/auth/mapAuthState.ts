@@ -32,6 +32,7 @@ import {
   unsubscribeFronteggStoreKey,
   loadEntitlementsKey,
 } from '../constants';
+import { FronteggAuthGuardOptions } from './interfaces';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
   function () {
@@ -190,9 +191,6 @@ export const useFrontegg = () => {
   };
 };
 
-type FronteggAuthGuardOptions = {
-  redirectUrl?: string;
-};
 /**
  * Redirect to login page if the user is not authenticated
  * @param redirectUrl the url to redirect after hosted login
