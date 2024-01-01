@@ -208,7 +208,10 @@ export const useFronteggAuthGuard = (redirectUrl?: string) => {
     if (!isAuthRoutes(fronteggAuth.router?.currentRoute.path!) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
-        fronteggAuth.loginActions.requestHostedLoginAuthorize(redirectUrl ? { "redirect_uri": redirectUrl } : undefined);
+        if (redirectUrl) {
+          localStorage.setItem('FRONTEGG_AFTER_AUTH_REDIRECT_URL', redirectUrl);
+        }
+        fronteggAuth.loginActions.requestHostedLoginAuthorize();
       } else {
         router.push(authState.routes.loginUrl);
       }
