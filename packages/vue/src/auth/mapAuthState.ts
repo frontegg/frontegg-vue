@@ -19,7 +19,7 @@ import {
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL } from '@frontegg/redux-store';
+import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL, isSteppedUp, IsSteppedUpOptions } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
@@ -31,6 +31,7 @@ import {
   routerKey,
   unsubscribeFronteggStoreKey,
   loadEntitlementsKey,
+  stepUpKey,
 } from '../constants';
 import { FronteggAuthGuardOptions } from './interfaces';
 
@@ -156,6 +157,26 @@ export const useLoadEntitlements = () => {
   return inject(loadEntitlementsKey);
 };
 
+/**
+  @param options.maxAge max age in seconds
+  @returns whether the user is stepped up
+*/
+export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
+  return computed(() => {
+    const { user } = inject(authStateKey);
+    console.log(user)
+    return isSteppedUp(user, options);
+  });
+};
+
+/**
+  @param options.maxAge max age in seconds
+  @returns step up function that triggers the flow to step up the user if needed
+*/
+export const useStepUp = () => {
+  return inject(stepUpKey);
+};
+
 export const useFeatureFlag = (keys: string[]) => {
   const { appName } = useFronteggStore();
   return FeatureFlags.getFeatureFlags(keys, appName);
@@ -167,6 +188,7 @@ export const useFrontegg = () => {
   const authState = useAuthState();
   const fronteggAuth = useFronteggAuth();
   const loadEntitlements = useLoadEntitlements();
+  const stepUp = useStepUp();
 
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
@@ -187,7 +209,8 @@ export const useFrontegg = () => {
     authState,
     fronteggAuth,
     loginWithRedirect,
-    loadEntitlements
+    loadEntitlements,
+    stepUp,
   };
 };
 
@@ -217,7 +240,9 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
         if (redirectUrl) {
           localStorage.setItem(FRONTEGG_AFTER_AUTH_REDIRECT_URL, redirectUrl);
         }
-        fronteggAuth.loginActions.requestHostedLoginAuthorize();
+
+        // first time is not a good naming. Here we pass true to check if the active url is oauth/callback to avoid silent refresh and fix a step up bug related to Fallback route
+        fronteggAuth.loginActions.requestHostedLoginAuthorizeV2({firstTime: true, shouldRedirectToLogin: true});
       } else {
         router.push(authState.routes.loginUrl);
       }

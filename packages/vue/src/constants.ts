@@ -12,3 +12,4 @@ export const loadEntitlementsKey = Symbol('loadEntitlements');
 export const routerKey = Symbol('router');
 export const fronteggOptionsKey = Symbol('fronteggOptions');
 export const fronteggStoreKey = Symbol('fronteggStore');
+export const stepUpKey = Symbol('stepUp');
