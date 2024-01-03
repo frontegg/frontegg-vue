@@ -90,3 +90,7 @@ declare module 'vue/types/vue' {
     mapTenantsState: () => { tenantsState: TenantsState };
   }
 }
+
+export type FronteggAuthGuardOptions = {
+  redirectUrl?: string;
+};
