@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.13](https://github.com/frontegg/frontegg-vue/compare/v3.0.12...v3.0.13) (2024-1-3)
+
+
+### VueJS Wrapper 3.0.13:
+- FR-14757 - Add redirect uri to frontegg auth guard
+
 ## [3.0.12](https://github.com/frontegg/frontegg-vue/compare/v3.0.11...v3.0.12) (2023-12-31)
 
 - FR-14578 - Fixed custom login without tenant alias
