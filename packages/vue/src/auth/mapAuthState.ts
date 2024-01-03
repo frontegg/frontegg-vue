@@ -164,7 +164,6 @@ export const useLoadEntitlements = () => {
 export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
   return computed(() => {
     const { user } = inject(authStateKey);
-    console.log(user)
     return isSteppedUp(user, options);
   });
 };
