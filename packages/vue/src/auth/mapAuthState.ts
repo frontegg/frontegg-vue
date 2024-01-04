@@ -216,7 +216,6 @@ export const useFrontegg = () => {
 /**
  * Redirect to login page if the user is not authenticated
  * @param redirectUrl the url to redirect after hosted login
- * @param isRequestHostedLoginAuthorizedV2 whether to use the 2nd version of hosted login authorized flow
  */
 export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const { redirectUrl } = options ?? {}
@@ -240,7 +239,6 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
         if (redirectUrl) {
           localStorage.setItem(FRONTEGG_AFTER_AUTH_REDIRECT_URL, redirectUrl);
         }
-
         fronteggAuth.loginActions.requestHostedLoginAuthorize();
       } else {
         router.push(authState.routes.loginUrl);
