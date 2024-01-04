@@ -158,7 +158,7 @@ export const useLoadEntitlements = () => {
 };
 
 /**
-  @param options.maxAge max age in seconds
+  @param options.maxAge max time in seconds for a valid login authentication session. The user will be require to re-login if the maxAge is not valid
   @returns whether the user is stepped up
 */
 export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
@@ -169,7 +169,7 @@ export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
 };
 
 /**
-  @param options.maxAge max age in seconds
+  @param options.maxAge max time in seconds for a valid login authentication session. The user will be require to re-login if the maxAge is not valid
   @returns step up function that triggers the flow to step up the user if needed
 */
 export const useStepUp = () => {
