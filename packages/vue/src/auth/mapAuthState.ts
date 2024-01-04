@@ -163,7 +163,7 @@ export const useLoadEntitlements = () => {
 */
 export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
   return computed(() => {
-    const { user } = inject(authStateKey);
+    const { user } = inject(authStateKey) || {};
     return isSteppedUp(user, options);
   });
 };
@@ -239,12 +239,6 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
         if (redirectUrl) {
           localStorage.setItem(FRONTEGG_AFTER_AUTH_REDIRECT_URL, redirectUrl);
-        }
-
-        if (options?.isRequestHostedLoginAuthorizedV2) {
-          // first time is not a good naming. Here we pass true to check if the active url is oauth/callback to avoid silent refresh and fix a step up bug related to Fallback route
-          fronteggAuth.loginActions.requestHostedLoginAuthorizeV2({firstTime: true, shouldRedirectToLogin: true});
-          return;
         }
 
         fronteggAuth.loginActions.requestHostedLoginAuthorize();
