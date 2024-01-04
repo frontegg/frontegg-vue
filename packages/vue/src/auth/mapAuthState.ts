@@ -216,6 +216,7 @@ export const useFrontegg = () => {
 /**
  * Redirect to login page if the user is not authenticated
  * @param redirectUrl the url to redirect after hosted login
+ * @param isRequestHostedLoginAuthorizedV2 whether to use the 2nd version of hosted login authorized flow
  */
 export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const { redirectUrl } = options ?? {}
@@ -240,8 +241,13 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
           localStorage.setItem(FRONTEGG_AFTER_AUTH_REDIRECT_URL, redirectUrl);
         }
 
-        // first time is not a good naming. Here we pass true to check if the active url is oauth/callback to avoid silent refresh and fix a step up bug related to Fallback route
-        fronteggAuth.loginActions.requestHostedLoginAuthorizeV2({firstTime: true, shouldRedirectToLogin: true});
+        if (options?.isRequestHostedLoginAuthorizedV2) {
+          // first time is not a good naming. Here we pass true to check if the active url is oauth/callback to avoid silent refresh and fix a step up bug related to Fallback route
+          fronteggAuth.loginActions.requestHostedLoginAuthorizeV2({firstTime: true, shouldRedirectToLogin: true});
+          return;
+        }
+
+        fronteggAuth.loginActions.requestHostedLoginAuthorize();
       } else {
         router.push(authState.routes.loginUrl);
       }

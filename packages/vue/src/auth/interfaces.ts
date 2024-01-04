@@ -93,4 +93,5 @@ declare module 'vue/types/vue' {
 
 export type FronteggAuthGuardOptions = {
   redirectUrl?: string;
+  isRequestHostedLoginAuthorizedV2?: boolean;
 };
