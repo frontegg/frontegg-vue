@@ -135,6 +135,8 @@ export const connectFronteggStoreV3 = (store: CachedEnhancedStore) => {
     unsubscribe();
   };
 
+  store.previousAuthState = authState;
+  store.previousUnsubscribe = unsubscribeWrapper;
   return { authState, unsubscribe: unsubscribeWrapper };
 };
 
