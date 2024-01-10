@@ -33,7 +33,7 @@ import {
   loadEntitlementsKey,
   stepUpKey,
 } from '../constants';
-import { FronteggAuthGuardOptions } from './interfaces';
+import { CachedEnhancedStore, FronteggAuthGuardOptions } from './interfaces';
 
 const mapSubState = (statePrefix: string, propertyName?: string) =>
   function () {
@@ -107,12 +107,20 @@ export const mapSsoActions = <K extends keyof SSOActions>(action: K): SSOActions
 export const mapTeamActions = <K extends keyof TeamActions>(action: K): TeamActions[K] => actionGetter(action);
 export const mapTenantsActions = <K extends keyof TenantsActions>(action: K): TenantsActions[K] => actionGetter(action);
 
-export const connectFronteggStoreV3 = (store: EnhancedStore) => {
+export const connectFronteggStoreV3 = (store: CachedEnhancedStore) => {
   const initialState = store.getState();
+
+  // Using for managing the store resubscription / unsubscribing to make sure we have only one subscription. Subscribe only when store unsubscribed
+  if (store.subscribed) {
+    // David suggestion: return the previous state and unsubscribe function if the store is already subscribed to fix unsubscribe issue when working with router-view
+    return { authState: store.previousAuthState, unsubscribe: store.previousUnsubscribe };
+  }
 
   const authState = reactive({ ...initialState.auth });
 
   const unsubscribe = store.subscribe(() => {
+    store.subscribed = true
+
     const state = store.getState().auth;
 
     Object.entries(state).forEach(([key, value]) => {
@@ -122,7 +130,12 @@ export const connectFronteggStoreV3 = (store: EnhancedStore) => {
     });
   });
 
-  return { authState, unsubscribe };
+  const unsubscribeWrapper = () => {
+    store.subscribed = false;
+    unsubscribe();
+  };
+
+  return { authState, unsubscribe: unsubscribeWrapper };
 };
 
 export const useFronteggLoaded = () => {
@@ -158,12 +171,21 @@ export const useLoadEntitlements = () => {
 };
 
 /**
+ * @returns user state 
+ */
+const useGetUserState = () => {
+  const authState = inject(authStateKey) as AuthState;
+  return authState.user;
+};
+
+
+/**
   @param options.maxAge max time in seconds for a valid login authentication session. The user will be require to re-login if the maxAge is not valid
   @returns whether the user is stepped up
 */
 export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
   return computed(() => {
-    const { user } = inject(authStateKey) || {};
+    const user = useGetUserState();
     return isSteppedUp(user, options);
   });
 };
@@ -183,7 +205,6 @@ export const useFeatureFlag = (keys: string[]) => {
 
 export const useFrontegg = () => {
   const fronteggLoaded = useFronteggLoaded();
-  const unsubscribeFronteggStore = useUnsubscribeFronteggStore();
   const authState = useAuthState();
   const fronteggAuth = useFronteggAuth();
   const loadEntitlements = useLoadEntitlements();
@@ -198,10 +219,6 @@ export const useFrontegg = () => {
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
   };
-
-  onBeforeUnmount(() => {
-    unsubscribeFronteggStore();
-  });
 
   return {
     fronteggLoaded,
