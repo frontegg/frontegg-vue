@@ -1,5 +1,5 @@
 // @ts-ignore
-import { inject, computed } from 'vue';
+import { inject, computed, ComputedRef } from 'vue';
 import { EntitledToOptions, Entitlement, CustomAttributes, Attributes, JwtAttributes } from '@frontegg/types';
 
 import {
@@ -57,7 +57,7 @@ const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
   @returns if the user is entitled to the given feature. Attaching the justification if not
   @throws when entitlement is not enabled via frontegg options
 */
-export const useFeatureEntitlements = (key: string, customAttributes?: CustomAttributes): Entitlement => {
+export const useFeatureEntitlements = (key: string, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
     const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
     return getFeatureEntitlements(entitlements, key, attributes, isV2)
@@ -70,7 +70,7 @@ export const useFeatureEntitlements = (key: string, customAttributes?: CustomAtt
   @returns if the user is entitled to the given permission. Attaching the justification if not
   @throws when entitlement is not enabled via frontegg options
 */    
-export const usePermissionEntitlements = (key: string, customAttributes?: CustomAttributes): Entitlement => {
+export const usePermissionEntitlements = (key: string, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
     const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
     return getPermissionEntitlements(entitlements, key, attributes, isV2)
@@ -83,7 +83,7 @@ export const usePermissionEntitlements = (key: string, customAttributes?: Custom
   @returns if the user is entitled to the given permission or feature. Attaching the justification if not
   @throws when entitlement is not enabled via frontegg options
 */
-export const useEntitlements = (entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes): Entitlement => {
+export const useEntitlements = (entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
     const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
     return getEntitlements(entitlements as any, entitledToOptions, attributes, isV2)
