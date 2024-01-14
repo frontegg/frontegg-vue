@@ -1,5 +1,5 @@
 // @ts-ignore
-import { inject, onUpdated, onMounted, reactive, onBeforeUnmount, computed } from 'vue';
+import { inject, onUpdated, onMounted, reactive, onBeforeUnmount, computed, ComputedRef } from 'vue';
 import { FeatureFlags } from '@frontegg/rest-api';
 import { defaultGetterGenerator, objectMappers } from '../helpers';
 import {
@@ -185,7 +185,7 @@ const useGetUserState = () => {
   @param options.maxAge max time in seconds for a valid login authentication session. The user will be require to re-login if the maxAge is not valid
   @returns whether the user is stepped up
 */
-export const useIsSteppedUp = (options?: IsSteppedUpOptions) => {
+export const useIsSteppedUp = (options?: IsSteppedUpOptions): ComputedRef<boolean> => {
   return computed(() => {
     const user = useGetUserState();
     return isSteppedUp(user, options);
