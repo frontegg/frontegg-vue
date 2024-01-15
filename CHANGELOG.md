@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.14](https://github.com/frontegg/frontegg-vue/compare/v3.0.13...v3.0.14) (2024-1-15)
+
+
+### VueJS Wrapper 3.0.14:
+- FR-14866 - Fixed Vue 3 entitlement type
+
 ## [3.0.13](https://github.com/frontegg/frontegg-vue/compare/v3.0.12...v3.0.13) (2024-1-3)
 
 
