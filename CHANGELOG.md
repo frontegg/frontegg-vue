@@ -1,5 +1,9 @@
 # Change Log
 
+## [3.0.15](https://github.com/frontegg/frontegg-vue/compare/v3.0.14...v3.0.15) (2024-1-16)
+
+
+
 ## [3.0.14](https://github.com/frontegg/frontegg-vue/compare/v3.0.13...v3.0.14) (2024-1-15)
 
 
