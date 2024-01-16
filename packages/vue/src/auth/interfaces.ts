@@ -13,7 +13,7 @@ import {
   TeamState,
 } from '@frontegg/redux-store';
 import VueRouter from 'vue-router';
-import { TenantsState } from '@frontegg/redux-store';
+import { TenantsState, EnhancedStore } from '@frontegg/redux-store';
 
 // export type AuthPageRoutes = {
 //   /**
@@ -93,4 +93,13 @@ declare module 'vue/types/vue' {
 
 export type FronteggAuthGuardOptions = {
   redirectUrl?: string;
+};
+
+/**
+ * Using for managing the store resubscription / unsubscribing to make sure we have only one subscription
+ */
+export type CachedEnhancedStore = EnhancedStore & {
+  subscribed?: boolean;
+  previousAuthState: AuthState;
+  previousUnsubscribe: () => void;
 };
