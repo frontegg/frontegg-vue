@@ -1,6 +1,6 @@
 {
   "name": "@frontegg/vue",
-  "version": "3.0.12",
+  "version": "3.0.14",
   "description": "",
   "main": "dist/index.ssr.js",
   "browser": "dist/index.js",
@@ -22,7 +22,7 @@
     "build:unpkg": "cross-env NODE_ENV=production rollup --config rollup.config.js --format iife"
   },
   "dependencies": {
-    "@frontegg/js": "6.167.0",
+    "@frontegg/js": "6.172.0",
     "get-value": "^3.0.1",
     "set-value": "^4.0.1"
   },
