@@ -6,8 +6,6 @@ FR-14855 - Add support for social login consent, by default it's false.
 FR-14813 - Add support for open app page with basename
 FR-14813 - Fix texts in open app
 FR-14813 - Support mobile deep link redirect page
-FR-14807 - Fixed step up double call to generate step up session
-FR-14753 - Fixed step up key removing when user doesn't finish step up flow
 FR-14228 - Added Step Up feature to allow a second layer of authentication for sensitive actions
 
 ### VueJS Wrapper 3.0.15:
