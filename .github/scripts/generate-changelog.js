@@ -14,14 +14,25 @@ export default async ({context, github}) => {
   });
 
   let changelogStr = ''
+  console.log('pullsData', pullsData)
 
   const mergedPulls = pullsData.filter(pull => pull.merged_at != null);
+  console.log('mergedPulls', mergedPulls)
+
   const lastReleaseIndex = mergedPulls.findIndex(pull => pull.head.ref === 'release/next')
+  console.log('lastReleaseIndex', lastReleaseIndex)
+
   const lastRelease = mergedPulls[lastReleaseIndex]
+  console.log('lastRelease', lastRelease)
+
   const pullsFromLastRelease = mergedPulls.slice(0, lastReleaseIndex);
+  console.log('pullsFromLastRelease', pullsFromLastRelease)
 
   const reactChanges = pullsFromLastRelease.filter(pull => pull.head.ref !== 'upgrade-admin-portal')
   const adminPortalChanges = pullsFromLastRelease.filter(pull => pull.head.ref === 'upgrade-admin-portal')
+
+  console.log('reactChanges', reactChanges)
+  console.log('adminPortalChanges', adminPortalChanges)
 
 
   adminPortalChanges.forEach(pull => {
@@ -34,6 +45,8 @@ export default async ({context, github}) => {
   reactChanges.forEach(pull => {
     changelogStr += `- ${pull.title}\n`
   });
+
+  console.log('changelogStr', changelogStr)
 
   changelog = changelog.replace(/# Change Log\n/g, '');
   const dateNow = new Date();
