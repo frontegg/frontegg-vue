@@ -1,5 +1,16 @@
 # Change Log
 
+## [3.0.15](https://github.com/frontegg/frontegg-vue/compare/v3.0.14...v3.0.15) (2024-1-16)
+
+- FR-14855 - Add support for social login consent, by default it's false.
+- FR-14813 - Add support for open app page with basename
+- FR-14813 - Fix texts in open app
+- FR-14813 - Support mobile deep link redirect page
+- FR-14228 - Added Step Up feature to allow a second layer of authentication for sensitive actions
+
+### VueJS Wrapper 3.0.15:
+- FR-14228 - Added Step Up feature to allow a second layer of authentication for sensitive actions
+
 ## [3.0.14](https://github.com/frontegg/frontegg-vue/compare/v3.0.13...v3.0.14) (2024-1-15)
 
 
