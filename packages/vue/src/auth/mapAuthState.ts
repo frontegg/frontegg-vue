@@ -173,7 +173,7 @@ export const useLoadEntitlements = () => {
 };
 
 /**
- * @returns user state 
+ * @returns user state
  */
 const useGetUserState = () => {
   const authState = inject(authStateKey) as AuthState;
@@ -216,7 +216,8 @@ export const useFrontegg = () => {
 
   const loginWithRedirect = () => {
     // @ts-ignore
-    if (!fronteggAuth.router?.currentRoute.path.startsWith(authState.routes.hostedLoginRedirectUrl)) {
+    const path = fronteggAuth.router?.currentRoute?.path ?? fronteggAuth.router?.currentRoute?.value?.fullPath ?? "/";
+    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl)) {
       fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
@@ -252,7 +253,11 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   };
 
   const checkGuard = () => {
-    if (!isAuthRoutes(fronteggAuth.router?.currentRoute.path!) && !authState.isAuthenticated && !authState.isLoading) {
+
+    // @ts-ignore
+    const route = fronteggAuth.router?.currentRoute?.path ?? fronteggAuth.router?.currentRoute?.value?.fullPath ?? "/";
+
+    if (!isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
         if (redirectUrl) {
