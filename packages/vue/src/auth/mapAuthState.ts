@@ -215,9 +215,8 @@ export const useFrontegg = () => {
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
   const loginWithRedirect = () => {
-    // @ts-ignore
-    const path = fronteggAuth.router?.currentRoute?.path ?? fronteggAuth.router?.currentRoute?.value?.fullPath ?? "/";
-    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl)) {
+    const path = fronteggAuth.getCurrentRoute()
+    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? "/oauth/callback")) {
       fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
@@ -246,16 +245,17 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
   const isAuthRoutes = (path: string) => {
+    const pathname = new URL(path, window.location.origin).pathname
     const { routes } = authState;
     return Object.values(routes)
-      .filter(path => path !== routes.authenticatedUrl)
-      .includes(path);
+      .filter(route => route !== routes.authenticatedUrl)
+      .includes(pathname);
   };
 
   const checkGuard = () => {
 
     // @ts-ignore
-    const route = fronteggAuth.router?.currentRoute?.path ?? fronteggAuth.router?.currentRoute?.value?.fullPath ?? "/";
+    const route = fronteggAuth.getCurrentRoute();
 
     if (!isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {

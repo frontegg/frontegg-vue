@@ -109,7 +109,7 @@ export class FronteggAuthService implements FronteggPluginService {
       apiTokensActions,
       securityPolicyActions,
       tenantsActions,
-    }).forEach(([key, actions]: any) => {
+    }).forEach(([ key, actions ]: any) => {
       Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
     });
 
@@ -151,5 +151,21 @@ export class FronteggAuthService implements FronteggPluginService {
         this.accessTokenUpdaterRef = setInterval(this.loginActions.requestAuthorize, ttl);
       }
     }
+  };
+
+
+  getCurrentRoute = () => {
+    let route: string = '/';
+    if (this.router?.currentRoute?.path) {
+      // vue-router v3
+      route = this.router?.currentRoute?.path;
+    }
+    // @ts-ignore vue-router v4
+    if (this.router?.currentRoute?.value?.path) {
+      // @ts-ignore vue-router v4
+      route = this.router?.currentRoute?.value?.fullPath;
+    }
+
+    return route
   };
 }

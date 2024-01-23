@@ -177,10 +177,11 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     }, 10);
 
     const isAuthRoutes = (path: string) => {
+      const pathname = new URL(path, window.location.origin).pathname
       const { routes } = Vue.fronteggAuth;
       return Object.values(routes)
-        .filter(path => path != routes.authenticatedUrl)
-        .includes(path);
+        .filter(route => route != routes.authenticatedUrl)
+        .includes(pathname);
     };
 
     const authorizedContentGuard = (_this: any) => {
