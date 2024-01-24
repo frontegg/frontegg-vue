@@ -154,14 +154,14 @@ export class FronteggAuthService implements FronteggPluginService {
   };
 
 
-  getCurrentRoute = () => {
+  getCurrentRoute = (): string => {
     let route: string = '/';
     if (this.router?.currentRoute?.path) {
       // vue-router v3
       route = this.router?.currentRoute?.path;
     }
     // @ts-ignore vue-router v4
-    if (this.router?.currentRoute?.value?.path) {
+    if (this.router?.currentRoute?.value?.fullPath) {
       // @ts-ignore vue-router v4
       route = this.router?.currentRoute?.value?.fullPath;
     }

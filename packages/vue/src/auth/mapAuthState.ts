@@ -253,8 +253,6 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   };
 
   const checkGuard = () => {
-
-    // @ts-ignore
     const route = fronteggAuth.getCurrentRoute();
 
     if (!isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
