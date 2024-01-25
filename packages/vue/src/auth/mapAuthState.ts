@@ -245,7 +245,7 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
   const isAuthRoutes = (path: string) => {
-    const pathname = new URL(path, window.location.origin).pathname
+    const pathname = new URL(path, window.location.origin).pathname;
     const { routes } = authState;
     return Object.values(routes)
       .filter(route => route !== routes.authenticatedUrl)
