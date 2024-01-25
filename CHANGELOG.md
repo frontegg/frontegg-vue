@@ -2,7 +2,6 @@
 
 ## [3.0.16](https://github.com/frontegg/frontegg-vue/compare/v3.0.15...v3.0.16) (2024-1-25)
 
-- FR-14963 - custom roles main page
 - FR-14197 - Added Canada to MFA sms list of countries
 - FR-14859 - fix roles filtering for MSP
 
