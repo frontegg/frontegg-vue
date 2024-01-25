@@ -1,5 +1,14 @@
 # Change Log
 
+## [3.0.16](https://github.com/frontegg/frontegg-vue/compare/v3.0.15...v3.0.16) (2024-1-25)
+
+- FR-14963 - custom roles main page
+- FR-14197 - Added Canada to MFA sms list of countries
+- FR-14859 - fix roles filtering for MSP
+
+
+# Change Log
+
 ## [3.0.15](https://github.com/frontegg/frontegg-vue/compare/v3.0.14...v3.0.15) (2024-1-16)
 
 - FR-14855 - Add support for social login consent, by default it's false.
