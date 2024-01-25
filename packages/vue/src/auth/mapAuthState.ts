@@ -19,7 +19,7 @@ import {
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL, isSteppedUp, IsSteppedUpOptions } from '@frontegg/redux-store';
+import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL, isSteppedUp, IsSteppedUpOptions, defaultFronteggRoutes } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
@@ -216,7 +216,7 @@ export const useFrontegg = () => {
 
   const loginWithRedirect = () => {
     const path = fronteggAuth.getCurrentRoute();
-    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? "/oauth/callback")) {
+    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? defaultFronteggRoutes.hostedLoginRedirectUrl)) {
       fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
