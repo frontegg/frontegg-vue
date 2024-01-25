@@ -166,6 +166,13 @@ export class FronteggAuthService implements FronteggPluginService {
       route = this.router?.currentRoute?.value?.fullPath;
     }
 
-    return route
+    return route;
+  };
+
+  isAuthRoutes = (path: string): boolean => {
+    const pathname = new URL(path, window.location.origin).pathname;
+    return Object.values(this.routes)
+      .filter(route => route != this.routes.authenticatedUrl)
+      .includes(pathname);
   };
 }

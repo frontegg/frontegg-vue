@@ -244,18 +244,10 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const router = inject(routerKey) as VueRouter;
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
-  const isAuthRoutes = (path: string) => {
-    const pathname = new URL(path, window.location.origin).pathname;
-    const { routes } = authState;
-    return Object.values(routes)
-      .filter(route => route !== routes.authenticatedUrl)
-      .includes(pathname);
-  };
-
   const checkGuard = () => {
     const route = fronteggAuth.getCurrentRoute();
 
-    if (!isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
+    if (!fronteggAuth.isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
         if (redirectUrl) {
