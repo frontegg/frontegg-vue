@@ -7,7 +7,8 @@
 
 
 ### VueJS Wrapper 3.0.17:
-- FR-14963 - Fix CHANGELOG
+- FR-14999 - Fixed support for vue-router 4 in vue 3
+
 # Change Log
 
 ## [3.0.16](https://github.com/frontegg/frontegg-vue/compare/v3.0.15...v3.0.16) (2024-1-25)
