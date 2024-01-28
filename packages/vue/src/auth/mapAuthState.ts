@@ -19,7 +19,7 @@ import {
   AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
-import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL, isSteppedUp, IsSteppedUpOptions } from '@frontegg/redux-store';
+import { AuthState, EnhancedStore, FRONTEGG_AFTER_AUTH_REDIRECT_URL, isSteppedUp, IsSteppedUpOptions, defaultFronteggRoutes } from '@frontegg/redux-store';
 import { FronteggAuthService } from './service';
 import VueRouter from 'vue-router';
 import {
@@ -173,7 +173,7 @@ export const useLoadEntitlements = () => {
 };
 
 /**
- * @returns user state 
+ * @returns user state
  */
 const useGetUserState = () => {
   const authState = inject(authStateKey) as AuthState;
@@ -215,8 +215,8 @@ export const useFrontegg = () => {
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
   const loginWithRedirect = () => {
-    // @ts-ignore
-    if (!fronteggAuth.router?.currentRoute.path.startsWith(authState.routes.hostedLoginRedirectUrl)) {
+    const path = fronteggAuth.getCurrentRoute();
+    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? defaultFronteggRoutes.hostedLoginRedirectUrl)) {
       fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }
@@ -244,15 +244,10 @@ export const useFronteggAuthGuard = (options?: FronteggAuthGuardOptions) => {
   const router = inject(routerKey) as VueRouter;
   const fronteggStore = useFronteggStore() as EnhancedStore;
 
-  const isAuthRoutes = (path: string) => {
-    const { routes } = authState;
-    return Object.values(routes)
-      .filter(path => path !== routes.authenticatedUrl)
-      .includes(path);
-  };
-
   const checkGuard = () => {
-    if (!isAuthRoutes(fronteggAuth.router?.currentRoute.path!) && !authState.isAuthenticated && !authState.isLoading) {
+    const route = fronteggAuth.getCurrentRoute();
+
+    if (!fronteggAuth.isAuthRoutes(route) && !authState.isAuthenticated && !authState.isLoading) {
       if (fronteggOptions.hostedLoginBox) {
         fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
         if (redirectUrl) {

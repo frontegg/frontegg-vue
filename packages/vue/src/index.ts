@@ -176,15 +176,9 @@ const Frontegg: PluginObject<PluginOptions> | any = {
       }
     }, 10);
 
-    const isAuthRoutes = (path: string) => {
-      const { routes } = Vue.fronteggAuth;
-      return Object.values(routes)
-        .filter(path => path != routes.authenticatedUrl)
-        .includes(path);
-    };
 
     const authorizedContentGuard = (_this: any) => {
-      if (!_this.authorizedContent || isAuthRoutes(_this.$route.path)) {
+      if (!_this.authorizedContent || Vue.fronteggAuth.isAuthRoutes(_this.$route.path)) {
         return;
       }
       if (!Vue.fronteggAuth.loading && !Vue.fronteggAuth.isAuthenticated) {
