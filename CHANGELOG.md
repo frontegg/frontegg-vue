@@ -1,5 +1,15 @@
 # Change Log
 
+## [3.0.17](https://github.com/frontegg/frontegg-vue/compare/v3.0.16...v3.0.17) (2024-1-28)
+
+- FR-14910 - Fixed handling entitlements errors 
+- FR-14740 - Send tenant alias for hosted custom login auth user
+
+
+### VueJS Wrapper 3.0.17:
+- FR-14963 - Fix CHANGELOG
+# Change Log
+
 ## [3.0.16](https://github.com/frontegg/frontegg-vue/compare/v3.0.15...v3.0.16) (2024-1-25)
 
 - FR-14197 - Added Canada to MFA sms list of countries
