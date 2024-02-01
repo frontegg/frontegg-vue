@@ -1,5 +1,16 @@
 # Change Log
 
+## [3.0.18](https://github.com/frontegg/frontegg-vue/compare/v3.0.17...v3.0.18) (2024-2-1)
+
+- FR-15087 - Added oidc support for linkedin
+- FR-14997 - Fixed invite user dialog UI issues
+
+- FR-14910 - Fixed handling entitlements errors 
+- FR-14740 - Send tenant alias for hosted custom login auth user
+
+
+# Change Log
+
 ## [3.0.17](https://github.com/frontegg/frontegg-vue/compare/v3.0.16...v3.0.17) (2024-1-28)
 
 - FR-14910 - Fixed handling entitlements errors 
