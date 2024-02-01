@@ -5,9 +5,6 @@
 - FR-15087 - Added oidc support for linkedin
 - FR-14997 - Fixed invite user dialog UI issues
 
-- FR-14910 - Fixed handling entitlements errors 
-- FR-14740 - Send tenant alias for hosted custom login auth user
-
 
 # Change Log
 
