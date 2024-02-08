@@ -2,15 +2,8 @@
 
 ## [3.0.19](https://github.com/frontegg/frontegg-vue/compare/v3.0.18...v3.0.19) (2024-2-8)
 
-- FR-14855 - add option to enable promptConsent from authOptions
-- FR-14855 - Fix MS prompt value for custom configuration
-
-
-- FR-15126 - fix msp invite user dialog
-- FR-15015 - add roles search bar
-- FR-12954 - Publish Storybook to cdn by Branch & Version + setup storybook controls + infra changes
-- FR-11923 - jest unit test env and more tests
-
+- FR-14855 - Add option to enable promptConsent from authOptions
+- FR-14855 - Fix Microsoft prompt value for custom configuration
 - FR-15100 - Fix Apple custom SSO scopes
 
 
