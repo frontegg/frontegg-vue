@@ -117,5 +117,5 @@ export const simpleMappers = (subState: string, props: any, getter: any) => func
  * @returns router base name
  */
 export const getRouterBaseName = (router?: VueRouter): string | undefined => {
-  return router?.options.base || (router?.options as any).history?.base
+  return router?.options.base ?? (router?.options as any).history?.base
 }
