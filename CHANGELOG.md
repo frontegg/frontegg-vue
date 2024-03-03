@@ -5,9 +5,6 @@
 - FR-15270 - Added new roles page to the Admin Portal
 - FR-15395 - Fixed tab tenant not cleared after logout
 
-- FR-15376 - fixed null group description exception
-
-
 # Change Log
 
 ## [3.0.20](https://github.com/frontegg/frontegg-vue/compare/v3.0.19...v3.0.20) (2024-2-28)
