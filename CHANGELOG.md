@@ -1,5 +1,10 @@
 # Change Log
 
+## [3.0.22](https://github.com/frontegg/frontegg-vue/compare/v3.0.21...v3.0.22) (2024-3-4)
+
+
+# Change Log
+
 ## [3.0.21](https://github.com/frontegg/frontegg-vue/compare/v3.0.20...v3.0.21) (2024-3-3)
 
 - FR-15270 - Added new roles page to the Admin Portal
