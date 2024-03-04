@@ -2,7 +2,7 @@
 import _Vue, { PluginObject, reactive, ref } from 'vue';
 import { PluginOptions } from './interfaces';
 import { User } from '@frontegg/redux-store';
-import { setupOnRedirectTo, syncStateWithComponent } from './helpers';
+import { getRouterBaseName, setupOnRedirectTo, syncStateWithComponent } from './helpers';
 import {
   getStoreBinding,
   loadingUnsubscribe,
@@ -105,7 +105,7 @@ const Frontegg: PluginObject<PluginOptions> | any = {
     fronteggApp = initialize({
       ...rest,
       onRedirectTo,
-      basename: router?.options.base,
+      basename: getRouterBaseName(router),
     } as any);
 
     const store = fronteggApp.store;

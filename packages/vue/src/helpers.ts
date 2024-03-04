@@ -8,7 +8,7 @@ import { StoreHolder } from './StoreHolder';
 import * as Vue from 'vue';
 
 export const setupOnRedirectTo = (router: VueRouter, routes?: Partial<AuthPageRoutes>) => {
-  const baseName = router.options.base || '';
+  const baseName = getRouterBaseName(router) || '';
   StoreHolder.setBasename(baseName);
   const onRedirectTo = (_path: string, opts?: RedirectOptions) => {
     let path = _path;
@@ -109,3 +109,13 @@ export const simpleMappers = (subState: string, props: any, getter: any) => func
 
   return slices.reduce((result, prop) => Object.assign({}, result, { [prop]: getter(prop)(state) }), {});
 };
+
+
+/**
+ * vue-router base name was changed in v4 from `base` to `history.base`
+ * @param router VueRouter v3 or v4
+ * @returns router base name
+ */
+export const getRouterBaseName = (router?: VueRouter): string | undefined => {
+  return router?.options.base ?? (router?.options as any).history?.base
+}
