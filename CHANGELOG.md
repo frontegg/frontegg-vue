@@ -1,10 +1,12 @@
 # Change Log
 
+## [3.0.24](https://github.com/frontegg/frontegg-vue/compare/v3.0.23...v3.0.24) (2024-3-24)
+
+
+
 ## [3.0.23](https://github.com/frontegg/frontegg-vue/compare/v3.0.22...v3.0.23) (2024-3-20)
 
 - FR-15233 - Fix autocomplete popper
-
-
 - FR-13828 - Add option to specify prompt consent from loginDirectAction
 - FR-15315 - Added sort for role selections in Admin Portal 
 
