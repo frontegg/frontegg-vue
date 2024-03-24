@@ -9,10 +9,7 @@ import {
   AuthState,
 } from '@frontegg/redux-store';
 
-import { USE_ENTITLEMENTS_V2_ENDPOINT_FF } from '@frontegg/rest-api';
-
 import { authStateKey } from '../constants';
-import { useFeatureFlag } from '../auth/mapAuthState';
 
 /**
  * @returns user state 
@@ -23,21 +20,12 @@ const useGetUserState = () => {
 };
 
 /**
- * @returns true when need to use entitlements V2 API
- */
-const useIsV2API = () => {
-  const [useEntitlementsV2] = useFeatureFlag([USE_ENTITLEMENTS_V2_ENDPOINT_FF]);
-  return useEntitlementsV2;
-};
-
-/**
  * @param customAttributes consumer attributes
- * @returns is entitled query data including: entitltments state, final attributes (consumer and frontegg) and API version to use
+ * @returns is entitled query data including: entitlements state and final attributes (consumer and frontegg)
  */
 const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
   const user = useGetUserState();
   const entitlements = user?.entitlements;
-  const isV2 = useIsV2API();
 
   const attributes: Attributes = {
     custom: customAttributes,
@@ -47,7 +35,6 @@ const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
   return {
     entitlements,
     attributes,
-    isV2
   };
 };
 
@@ -59,8 +46,8 @@ const useEntitlementsQueryData = (customAttributes?: CustomAttributes) => {
 */
 export const useFeatureEntitlements = (key: string, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
-    const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
-    return getFeatureEntitlements(entitlements, key, attributes, isV2)
+    const { entitlements, attributes } = useEntitlementsQueryData(customAttributes);
+    return getFeatureEntitlements(entitlements, key, attributes, true)
   });
 };
 
@@ -72,8 +59,8 @@ export const useFeatureEntitlements = (key: string, customAttributes?: CustomAtt
 */    
 export const usePermissionEntitlements = (key: string, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
-    const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
-    return getPermissionEntitlements(entitlements, key, attributes, isV2)
+    const { entitlements, attributes } = useEntitlementsQueryData(customAttributes);
+    return getPermissionEntitlements(entitlements, key, attributes, true)
   });
 };
 
@@ -85,7 +72,7 @@ export const usePermissionEntitlements = (key: string, customAttributes?: Custom
 */
 export const useEntitlements = (entitledToOptions: EntitledToOptions, customAttributes?: CustomAttributes): ComputedRef<Entitlement> => {
   return computed(() => {
-    const { entitlements, attributes, isV2 } = useEntitlementsQueryData(customAttributes);
-    return getEntitlements(entitlements as any, entitledToOptions, attributes, isV2)
+    const { entitlements, attributes } = useEntitlementsQueryData(customAttributes);
+    return getEntitlements(entitlements, entitledToOptions, attributes, true)
   });
 };
