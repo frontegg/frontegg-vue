@@ -2,9 +2,7 @@
 
 ## [3.0.25](https://github.com/frontegg/frontegg-vue/compare/v3.0.24...v3.0.25) (2024-4-2)
 
-- FR-15863 - Improved chip list design in admin portal
-
-
+- FR-15863 - Changed chip list design in admin portal
 - FR-15367 - Fixed user logo upload for SCIM users
 - FR-15111 - Fixed impersonation embedded redirection
 
