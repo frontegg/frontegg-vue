@@ -1,5 +1,36 @@
 # Change Log
 
+## [3.0.23](https://github.com/frontegg/frontegg-vue/compare/v3.0.22...v3.0.23) (2024-3-20)
+
+- FR-15233 - Fix autocomplete popper
+
+
+- FR-13828 - Add option to specify prompt consent from loginDirectAction
+- FR-15315 - Added sort for role selections in Admin Portal 
+
+
+
+## [3.0.22](https://github.com/frontegg/frontegg-vue/compare/v3.0.21...v3.0.22) (2024-3-4)
+
+
+# Change Log
+
+## [3.0.21](https://github.com/frontegg/frontegg-vue/compare/v3.0.20...v3.0.21) (2024-3-3)
+
+- FR-15270 - Added new roles page to the Admin Portal
+- FR-15395 - Fixed tab tenant not cleared after logout
+
+# Change Log
+
+## [3.0.20](https://github.com/frontegg/frontegg-vue/compare/v3.0.19...v3.0.20) (2024-2-28)
+
+- FR-15376 - fixed null group description exception
+- FR-15305 - Fixed changed fields sent on edit group to support SCIM group update
+- FR-15219 - Fixed missing row actions in users table when using MSP
+
+
+# Change Log
+
 ## [3.0.19](https://github.com/frontegg/frontegg-vue/compare/v3.0.18...v3.0.19) (2024-2-8)
 
 - FR-14855 - Add option to enable promptConsent from authOptions
