@@ -1,5 +1,12 @@
 # Change Log
 
+## [3.0.26](https://github.com/frontegg/frontegg-vue/compare/v3.0.25...v3.0.26) (2024-4-18)
+
+- FR-16088 - Suppot hosted admin portal
+- FR-FR-15124 - Support multi-apps 
+
+# Change Log
+
 ## [3.0.25](https://github.com/frontegg/frontegg-vue/compare/v3.0.24...v3.0.25) (2024-4-2)
 
 - FR-15863 - Changed chip list design in admin portal
