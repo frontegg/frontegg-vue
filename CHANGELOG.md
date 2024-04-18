@@ -2,10 +2,9 @@
 
 ## [3.0.26](https://github.com/frontegg/frontegg-vue/compare/v3.0.25...v3.0.26) (2024-4-18)
 
-- FR-16088 - Hosted portal from frontegg app (supoport angular and vanilla)
+- FR-16088 - Suppot hosted admin portal
+- FR-FR-15124 - Support multi-apps 
 
-### VueJS Wrapper 3.0.26:
-- Update Frontegg AdminPortal to 6.188.0
 # Change Log
 
 ## [3.0.25](https://github.com/frontegg/frontegg-vue/compare/v3.0.24...v3.0.25) (2024-4-2)
