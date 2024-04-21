@@ -3,7 +3,7 @@
 ## [3.0.27](https://github.com/frontegg/frontegg-vue/compare/v3.0.26...v3.0.27) (2024-4-21)
 
 - FR-15737 - Added an option for accounts to open sub-account management for their sub-accounts
-- FR-15603 - Support embedded SCIM guides
+- FR-15603 - Added support for embedded SCIM guides
 
 # Change Log
 
