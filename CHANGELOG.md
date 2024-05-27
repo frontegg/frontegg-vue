@@ -1,5 +1,12 @@
 # Change Log
 
+## [3.0.28](https://github.com/frontegg/frontegg-vue/compare/v3.0.27...v3.0.28) (2024-5-27)
+
+- FR-16463 - Removed domain restrictions validation when invite user from All Accounts page
+- FR-16421 - Fixed error handling in edit phone number dialog
+
+# Change Log
+
 ## [3.0.27](https://github.com/frontegg/frontegg-vue/compare/v3.0.26...v3.0.27) (2024-4-21)
 
 - FR-15737 - Added an option for accounts to open sub-account management for their sub-accounts
