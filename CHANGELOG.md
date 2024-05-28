@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.29](https://github.com/frontegg/frontegg-vue/compare/v3.0.28...v3.0.29) (2024-5-28)
+
+- FR-16341 - Support hiding columns in admin portal users table
+
+
+
 ## [3.0.28](https://github.com/frontegg/frontegg-vue/compare/v3.0.27...v3.0.28) (2024-5-27)
 
 - FR-16463 - Removed domain restrictions validation when invite user from All Accounts page
