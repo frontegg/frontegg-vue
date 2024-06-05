@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.30](https://github.com/frontegg/frontegg-vue/compare/v3.0.29...v3.0.30) (2024-6-5)
+
+- FR-16513 - Show client id on all tokens in API tokens table 
+
+
+
 ## [3.0.29](https://github.com/frontegg/frontegg-vue/compare/v3.0.28...v3.0.29) (2024-5-28)
 
 - FR-16341 - Support hiding columns in admin portal users table
