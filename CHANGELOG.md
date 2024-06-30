@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.31](https://github.com/frontegg/frontegg-vue/compare/v3.0.30...v3.0.31) (2024-6-30)
+
+FR-15484 - Fix update tenant state after account settings change
+FR-16613 - Add automatic sub-account access in MSP
+
+
 ## [3.0.30](https://github.com/frontegg/frontegg-vue/compare/v3.0.29...v3.0.30) (2024-6-5)
 
 - FR-16513 - Show client id on all tokens in API tokens table 
