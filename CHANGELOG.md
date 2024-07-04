@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.0.32](https://github.com/frontegg/frontegg-vue/compare/v3.0.31...v3.0.32) (2024-7-4)
+
+- FR-16881 - Fixed hosted login redirect url when using basename
+- FR-16812 - Fixed dark theme disabled input palette
+- FR-16704 - Fixed password meter unsuspended async component
+
+
+
 ## [3.0.31](https://github.com/frontegg/frontegg-vue/compare/v3.0.30...v3.0.31) (2024-6-30)
 
 FR-15484 - Fix update tenant state after account settings change
