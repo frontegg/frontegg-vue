@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.33](https://github.com/frontegg/frontegg-vue/compare/v3.0.32...v3.0.33) (2024-7-9)
+
+- FR-16737 - Allow terms and conditions checkbox on sign up form being optional
+
+
+
 ## [3.0.32](https://github.com/frontegg/frontegg-vue/compare/v3.0.31...v3.0.32) (2024-7-4)
 
 - FR-16881 - Fixed hosted login redirect url when using basename
