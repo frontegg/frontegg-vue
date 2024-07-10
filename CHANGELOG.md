@@ -1,5 +1,12 @@
 # Change Log
 
+## [3.0.34](https://github.com/frontegg/frontegg-vue/compare/v3.0.33...v3.0.34) (2024-7-10)
+
+- FR-16987 - Add additional params to vanilla js loginWithRedircet
+- FR-16960 - Fix typography color in SSO guides dark mode
+
+
+
 ## [3.0.33](https://github.com/frontegg/frontegg-vue/compare/v3.0.32...v3.0.33) (2024-7-9)
 
 - FR-16737 - Allow terms and conditions checkbox on sign up form being optional
