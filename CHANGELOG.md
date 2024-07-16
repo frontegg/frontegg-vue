@@ -1,5 +1,11 @@
 # Change Log
 
+## [3.0.35](https://github.com/frontegg/frontegg-vue/compare/v3.0.34...v3.0.35) (2024-7-16)
+
+* FR-17055 - Fix SSO redirect race condition
+
+
+
 ## [3.0.34](https://github.com/frontegg/frontegg-vue/compare/v3.0.33...v3.0.34) (2024-7-10)
 
 - FR-16987 - Add additional params to vanilla js loginWithRedircet
