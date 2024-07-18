@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.0.36](https://github.com/frontegg/frontegg-vue/compare/v3.0.35...v3.0.36) (2024-7-18)
+
+- FR-17009 - Add the option to disable&#x2F;enable users from users table
+
+
+### VueJS Wrapper 3.0.36:
+- FR-16067 - fix pipeline release version
+
 ## [3.0.35](https://github.com/frontegg/frontegg-vue/compare/v3.0.34...v3.0.35) (2024-7-16)
 
 * FR-17055 - Fix SSO redirect race condition
