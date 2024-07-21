@@ -1,8 +1,7 @@
 import { AuthPluginOptions } from './interfaces';
 import { FronteggPluginService, PluginConfig, PluginOptions } from '../interfaces';
-import { FronteggStore } from '@frontegg/redux-store';
+import { defaultFronteggRoutes, FronteggStore } from '@frontegg/redux-store';
 import {
-  authActions,
   LoginActions,
   SocialLoginActions,
   ActivateAccountActions,
@@ -15,25 +14,10 @@ import {
   TeamActions,
   ApiTokensActions,
   SecurityPolicyActions,
-  tenantsActions,
-  loginActions,
-  socialLoginsActions,
-  activateAccountActions,
-  acceptInvitationActions,
-  forgotPasswordActions,
-  signUpActions,
-  profileActions,
-  ssoActions,
-  mfaActions,
-  teamActions,
-  apiTokensActions,
-  securityPolicyActions,
   User,
   AuthState,
-  authInitialState,
   TenantsActions,
   AuthPageRoutes,
-  AuthActions,
 } from '@frontegg/redux-store';
 import { ActionsHolder } from './ActionsHolder';
 import VueRouter from 'vue-router';
@@ -42,8 +26,8 @@ export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
   router?: VueRouter | null;
   private readonly _routes!: AuthPageRoutes;
-  private store?: FronteggStore;
-  private state: AuthState = authInitialState;
+  private store!: FronteggStore;
+  private state!: AuthState;
   loginActions!: LoginActions;
   socialLoginsActions!: SocialLoginActions;
   activateAccountActions!: ActivateAccountActions;
@@ -60,7 +44,7 @@ export class FronteggAuthService implements FronteggPluginService {
 
   constructor({ router, ...options }: AuthPluginOptions) {
     this._routes = {
-      ...authInitialState.routes,
+      ...defaultFronteggRoutes,
       ...(options as any).routes,
     };
     this.router = router;
@@ -88,26 +72,22 @@ export class FronteggAuthService implements FronteggPluginService {
   init = (options: PluginOptions, store: FronteggStore) => {
     this.store = store;
 
-    Object.entries({
-      loginActions,
-      socialLoginsActions,
-      activateAccountActions,
-      acceptInvitationActions,
-      forgotPasswordActions,
-      signUpActions,
-      profileActions,
-      ssoActions,
-      mfaActions,
-      teamActions,
-      apiTokensActions,
-      securityPolicyActions,
-      tenantsActions,
-    }).forEach(([ key, actions ]: any) => {
-      Object.assign(this, { [key]: bindActionCreators(actions, this.store!.dispatch) });
-    });
 
-    const detachableActions: any = bindActionCreators(authActions, this.store!.dispatch);
-    ActionsHolder.setActions(detachableActions);
+    this.loginActions = store.stateActions.auth.loginActions;
+    this.socialLoginsActions = store.stateActions.auth.socialLoginActions;
+    this.activateAccountActions = store.stateActions.auth.activateAccountActions;
+    this.acceptInvitationActions = store.stateActions.auth.acceptInvitationActions;
+    this.forgotPasswordActions = store.stateActions.auth.forgotPasswordActions;
+    this.signUpActions = store.stateActions.auth.signUpActions;
+    this.profileActions = store.stateActions.auth.profileActions;
+    this.ssoActions = store.stateActions.auth.ssoActions;
+    this.mfaActions = store.stateActions.auth.mfaActions;
+    this.teamActions = store.stateActions.auth.teamActions;
+    this.apiTokensActions = store.stateActions.auth.apiTokensActions;
+    this.securityPolicyActions = store.stateActions.auth.securityPolicyActions;
+    this.tenantsActions = store.stateActions.auth.tenantsActions;
+
+    ActionsHolder.setActions(store.actions);
 
     if (!options.hostedLoginBox) {
       this.store.subscribe(this.storeSubscriber);
@@ -115,7 +95,7 @@ export class FronteggAuthService implements FronteggPluginService {
   };
 
   storeSubscriber = () => {
-    this.state = this.store!.getState().auth;
+    this.state = this.store.getState().auth;
 
     let notifyChange = false;
     if (this.state.user !== this.userRef) {
