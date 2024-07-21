@@ -1,7 +1,6 @@
 import { AuthPluginOptions } from './interfaces';
-import { FronteggPluginService, FronteggStore, PluginConfig, PluginOptions } from '../interfaces';
-import { EnhancedStore } from '@reduxjs/toolkit';
-import { bindActionCreators, CaseReducerActions, SliceCaseReducers } from '@frontegg/redux-store';
+import { FronteggPluginService, PluginConfig, PluginOptions } from '../interfaces';
+import { FronteggStore } from '@frontegg/redux-store';
 import {
   authActions,
   LoginActions,
@@ -39,17 +38,11 @@ import {
 import { ActionsHolder } from './ActionsHolder';
 import VueRouter from 'vue-router';
 
-export const sliceReducerActionsBy = <T extends SliceCaseReducers<any>>(reducer: T): CaseReducerActions<T> => {
-  const reducerKeys = Object.keys(reducer);
-  const reducerActions = reducerKeys.map(key => ({ [key]: (authActions as any)[key as keyof AuthActions] }));
-  return reducerActions.reduce((p, n) => ({ ...p, ...n }), {}) as CaseReducerActions<T>;
-};
-
 export class FronteggAuthService implements FronteggPluginService {
   pluginConfig!: PluginConfig;
   router?: VueRouter | null;
   private readonly _routes!: AuthPageRoutes;
-  private store?: EnhancedStore<FronteggStore>;
+  private store?: FronteggStore;
   private state: AuthState = authInitialState;
   loginActions!: LoginActions;
   socialLoginsActions!: SocialLoginActions;
@@ -92,7 +85,7 @@ export class FronteggAuthService implements FronteggPluginService {
     return this.store?.getState().auth.user;
   }
 
-  init = (options: PluginOptions, store: EnhancedStore<FronteggStore>) => {
+  init = (options: PluginOptions, store: FronteggStore) => {
     this.store = store;
 
     Object.entries({

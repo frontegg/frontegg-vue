@@ -216,7 +216,7 @@ export const useFrontegg = () => {
 
   const loginWithRedirect = () => {
     const path = fronteggAuth.getCurrentRoute();
-    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? defaultFronteggRoutes.hostedLoginRedirectUrl)) {
+    if (!path.startsWith(authState.routes.hostedLoginRedirectUrl ?? defaultFronteggRoutes.hostedLoginRedirectUrl ?? "oauth/callback")) {
       fronteggStore.dispatch({ type: 'auth/setState', payload: { isLoading: true } });
       fronteggAuth.loginActions.requestHostedLoginAuthorize();
     }

@@ -1,9 +1,9 @@
-import { EnhancedStore } from '@reduxjs/toolkit';
+import { FronteggStore } from '@frontegg/redux-store';
 
 
 export class StoreHolder {
   private static instance: StoreHolder;
-  private store!: EnhancedStore;
+  private store!: FronteggStore;
   private baseName: string | undefined;
 
   private static getInstance() {
@@ -13,11 +13,11 @@ export class StoreHolder {
     return StoreHolder.instance;
   }
 
-  static setStore(store: EnhancedStore) {
+  static setStore(store: FronteggStore) {
     StoreHolder.getInstance().store = store;
   }
 
-  static getStore(): EnhancedStore {
+  static getStore(): FronteggStore {
     return StoreHolder.getInstance().store;
   }
 
