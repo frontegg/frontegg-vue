@@ -1,5 +1,13 @@
 # Change Log
 
+## [3.0.37](https://github.com/frontegg/frontegg-vue/compare/v3.0.36...v3.0.37) (2024-7-22)
+
+- FR-16990 - Fixed social logins container styling
+- FR-17117 - Added URL validation to direct login action
+
+
+# Change Log
+
 ## [3.0.36](https://github.com/frontegg/frontegg-vue/compare/v3.0.35...v3.0.36) (2024-7-18)
 
 - FR-17009 - Add the option to disable/enable users from users table
