@@ -1,5 +1,10 @@
 # Change Log
 
+## [4.0.1](https://github.com/frontegg/frontegg-vue/compare/v3.0.37...v4.0.1) (2024-8-5)
+
+
+# Change Log
+
 ## [3.0.37](https://github.com/frontegg/frontegg-vue/compare/v3.0.36...v3.0.37) (2024-7-22)
 
 - FR-16990 - Fixed social logins container styling
