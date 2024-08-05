@@ -75,7 +75,6 @@ const external = [
   'redux-saga/effects',
   'set-value',
   'get-value',
-  '@reduxjs/toolkit',
 ];
 
 // UMD/IIFE shared settings: output.globals
@@ -87,7 +86,6 @@ const globals = {
   '@frontegg/redux-store': 'fronteggReduxStore',
   '@frontegg/rest-api': 'fronteggRestApi',
   'vue-moment': 'vueMoment',
-  '@reduxjs/toolkit': 'ReduxjsToolkit',
   'redux-saga': 'reduxSaga',
   'redux-saga/effects': 'reduxSagaEffects',
   'set-value': 'setValue',

@@ -1,11 +1,11 @@
 import _Vue from 'vue';
-import { EnhancedStore } from '@reduxjs/toolkit';
+import { FronteggStore } from '@frontegg/redux-store';
 import { FRONTEGG_REDUX_BINDINGS, FRONTEGG_STORE_KEY, FRONTEGG_UNSUBSCRIBE, FRONTEGG_LOADER_UNSUBSCRIBE } from './constants';
 // import { mapState } from './map-state';
 import { FronteggPluginService } from './interfaces';
 
-export const setStoreKey = (instance: any, store: EnhancedStore) => instance[FRONTEGG_STORE_KEY] = instance[FRONTEGG_STORE_KEY] ?? store;
-export const getStore = (instance: any): EnhancedStore => instance[FRONTEGG_STORE_KEY];
+export const setStoreKey = (instance: any, store: FronteggStore) => instance[FRONTEGG_STORE_KEY] = instance[FRONTEGG_STORE_KEY] ?? store;
+export const getStore = (instance: any): FronteggStore => instance[FRONTEGG_STORE_KEY];
 export const getStoreBinding = (instance: any) => instance[FRONTEGG_REDUX_BINDINGS];
 export const setStoreBinding = (instance: any, data: any) => instance[FRONTEGG_REDUX_BINDINGS] = data;
 export const setStoreUnsubscribe = (instance: any, unsubscribe: () => void) => instance[FRONTEGG_UNSUBSCRIBE] = unsubscribe;
