@@ -5,8 +5,8 @@ const fronteggOptions: FronteggAppOptions =
   window.CYPRESS_CONFIG ||
   ({
     contextOptions: {
-      baseUrl: 'https://auth.davidantoon.me',
-      clientId: 'b6adfe4c-d695-4c04-b95f-3ec9fd0c6cca',
+      baseUrl: 'https://test.frontegg.com',
+      clientId: '8dc80b14-2599-482c-8cb6-29fd3c8d5448',
     },
   } as FronteggAppOptions);
 
