@@ -24,7 +24,7 @@
   "dependencies": {
     "@frontegg/js": "7.2.0",
     "get-value": "^3.0.1",
-    "set-value": "^4.0.0"
+    "set-value": "^4.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
