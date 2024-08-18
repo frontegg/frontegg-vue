@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.0.1](https://github.com/frontegg/frontegg-vue/compare/v4.0.0...v4.0.1) (2024-8-18)
+
+null
+
+# Change Log
+
 ## [4.0.0](https://github.com/frontegg/frontegg-vue/compare/v3.0.37...v4.0.0) (2024-8-5)
 
 ### 🚀 Major Changes
