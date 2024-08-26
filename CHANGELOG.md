@@ -1,5 +1,10 @@
 # Change Log
 
+## [4.0.2](https://github.com/frontegg/frontegg-vue/compare/v4.0.1...v4.0.2) (2024-8-26)
+
+
+# Change Log
+
 ## [4.0.1](https://github.com/frontegg/frontegg-vue/compare/v4.0.0...v4.0.1) (2024-8-18)
 
 - FR-17169 - Added support in send unlock account email
