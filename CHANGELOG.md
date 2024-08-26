@@ -2,8 +2,6 @@
 
 ## [4.0.2](https://github.com/frontegg/frontegg-vue/compare/v4.0.1...v4.0.2) (2024-8-26)
 
-null
-null
 
 # Change Log
 
