@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.0.3](https://github.com/frontegg/frontegg-vue/compare/v4.0.2...v4.0.3) (2024-8-28)
+
+- FR-17626 - Fix clientId on request authorize for multi-apps
+- FR-17182 - Fix copy invite user link in hosted admin portal
+
+
+# Change Log
+
 ## [4.0.2](https://github.com/frontegg/frontegg-vue/compare/v4.0.1...v4.0.2) (2024-8-26)
 
 
