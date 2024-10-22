@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.0.5](https://github.com/frontegg/frontegg-vue/compare/v4.0.4...v4.0.5) (2024-10-22)
+
+- FR-18356 - Fixed validations localization override type
+
+
+
 ## [4.0.4](https://github.com/frontegg/frontegg-vue/compare/v4.0.3...v4.0.4) (2024-10-10)
 
 - FR-18217 - Fixed impersonation on embedded
