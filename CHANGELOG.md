@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.0.6](https://github.com/frontegg/frontegg-vue/compare/v4.0.5...v4.0.6) (2024-10-29)
+
+- FR-17943 - Added code pages
+
+
+- FR-18427 - Added Support for triggering MFA after native passkeys &#x2F; iOS apple login
+- FR-18211 - Fixed email overlapping roles field
+
+
+
 ## [4.0.5](https://github.com/frontegg/frontegg-vue/compare/v4.0.4...v4.0.5) (2024-10-22)
 
 - FR-18356 - Fixed validations localization override type
