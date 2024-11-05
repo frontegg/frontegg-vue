@@ -1,5 +1,18 @@
 # Change Log
 
+## [4.0.7](https://github.com/frontegg/frontegg-vue/compare/v4.0.6...v4.0.7) (2024-11-5)
+
+- FR-18529 - Fixed empty roles field bug when appName is provided
+
+
+- FR-18353 - Fixed tooltips mount component
+- FR-18476 - Added url for beforeRequestInterceptor function
+- FR-18476 - Added request interceptor
+- FR-18472 - Fixed Google one tap login stuck after unmounting login
+- FR-18436 - Fixed activate account with empty redirect bug
+
+
+
 ## [4.0.6](https://github.com/frontegg/frontegg-vue/compare/v4.0.5...v4.0.6) (2024-10-29)
 
 - FR-17943 - Added code pages
