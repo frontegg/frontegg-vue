@@ -59,7 +59,7 @@ jobs:
       - name: Commit Version UP
         run: |
           yarn lerna version $VERSION_TYPE --no-git-tag-version --yes --no-push --force-publish
-          yarn update-version
+          make update-version
           
       - name: "Set Generated changelog"
         uses: actions/github-script@v6
