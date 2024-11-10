@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.0.8](https://github.com/frontegg/frontegg-vue/compare/v4.0.7...v4.0.8) (2024-11-10)
+
+- FR-18561 - Fixed get ip metadata when app name is provided
+- FR-17091 - Fixed long name in groups and roles
+
+
+### VueJS Wrapper 4.0.8:
+- FR-18541: fix update version script
+- FR-18541: support minor versions
+
 ## [4.0.7](https://github.com/frontegg/frontegg-vue/compare/v4.0.6...v4.0.7) (2024-11-5)
 
 - FR-18529 - Fixed empty roles field bug when appName is provided
