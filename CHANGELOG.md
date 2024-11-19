@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.0.10](https://github.com/frontegg/frontegg-vue/compare/v4.0.9...v4.0.10) (2024-11-19)
+
+- FR-18341 - Fixed social login button size
+- FR-12722 - Fixed Incorrect order of social logins display
+- FR-18646 - Fixed missing permissions with wildcard on custom roles
+- FR-18341 - Fixed Google Chrome Translate feature causes a crash
+- FR-16902 - Fixed login box scroll on mobile browsers
+
+
+
 ## [4.0.9](https://github.com/frontegg/frontegg-vue/compare/v4.0.8...v4.0.9) (2024-11-12)
 
 - FR-18594 - Fixed blinking bug On IP and domain page
