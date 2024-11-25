@@ -1,5 +1,12 @@
 # Change Log
 
+## [4.1.0](https://github.com/frontegg/frontegg-vue/compare/v4.0.10...v4.1.0) (2024-11-21)
+
+- FR-18699 - Removed entitlements automatic 30 seconds refresh mechanism
+- FR-18138 - Added logic to improve login box and admin portal stability and resiliency
+
+
+
 ## [4.0.10](https://github.com/frontegg/frontegg-vue/compare/v4.0.9...v4.0.10) (2024-11-19)
 
 - FR-18341 - Fixed social login button size
