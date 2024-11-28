@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.2.0](https://github.com/frontegg/frontegg-vue/compare/v4.1.0...v4.2.0) (2024-11-28)
+
+- FR-18838 - Added MFA with email code
+- FR-17593 - Fixed SAML enable with non SSO user try to login not throwing an error
+
+
+# Change Log
+
 ## [4.1.0](https://github.com/frontegg/frontegg-vue/compare/v4.0.10...v4.1.0) (2024-11-21)
 
 - FR-18699 - Removed entitlements automatic 30 seconds refresh mechanism
