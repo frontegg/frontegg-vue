@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.2.1](https://github.com/frontegg/frontegg-vue/compare/v4.2.0...v4.2.1) (2024-12-3)
+
+- FR-18925 - Fixed wrong ip presented in Audit logs table IP column
+
+
+- FR-18682 - Changed country flags image
+
+
 ## [4.2.0](https://github.com/frontegg/frontegg-vue/compare/v4.1.0...v4.2.0) (2024-11-28)
 
 - FR-18838 - Added MFA with email code
