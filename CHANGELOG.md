@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.3.0](https://github.com/frontegg/frontegg-vue/compare/v4.2.2...v4.3.0) (2024-12-15)
+
+- FR-18941 - Fixed permissions evaluation without permissions in JWT
+- FR-18966 - Added override error message infrastructure
+
+
+- FR-18896 - Added RTL support
+
+
+
 ## [4.2.2](https://github.com/frontegg/frontegg-vue/compare/v4.2.1...v4.2.2) (2024-12-5)
 
 FR-18954 - Fixed MFA with email active state, step and missing erros
