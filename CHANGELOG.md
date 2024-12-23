@@ -1,5 +1,14 @@
 # Change Log
 
+## [4.4.0](https://github.com/frontegg/frontegg-vue/compare/v4.3.1...v4.4.0) (2024-12-23)
+
+- FR-19047 - Fixed permissions evalutaion when have more than one permission
+- FR-18988 - Fixed missing email on MFA verification description
+- FR-19068 - Fixed MFA error appears after clicking on verify another way
+- FR-18917 - Fixed user roles deletion
+
+
+
 ## [4.3.1](https://github.com/frontegg/frontegg-vue/compare/v4.3.0...v4.3.1) (2024-12-19)
 
 - FR-18683 - Changed phone number selector input
