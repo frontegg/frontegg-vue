@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.4.1](https://github.com/frontegg/frontegg-vue/compare/v4.4.0...v4.4.1) (2024-12-24)
+
+- FR-19079 - Added Suggest Save password in mobile sdk
+
+
+
 ## [4.4.0](https://github.com/frontegg/frontegg-vue/compare/v4.3.1...v4.4.0) (2024-12-23)
 
 - FR-19047 - Fixed permissions evalutaion when have more than one permission
