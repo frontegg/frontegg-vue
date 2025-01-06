@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.4.4](https://github.com/frontegg/frontegg-vue/compare/v4.4.3...v4.4.4) (2025-1-6)
+
+- FR-19272 - Fixed sso input
+
+
+- FR-19068 - Fixed MFA error appears after reset
+
+
 ## [4.4.3](https://github.com/frontegg/frontegg-vue/compare/v4.4.2...v4.4.3) (2024-12-31)
 
 - FR-19220 - Fixed roles selection for MSP users
