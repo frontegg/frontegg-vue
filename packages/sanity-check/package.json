@@ -1,7 +1,7 @@
 {
   "name": "frontegg-angular-sanity-check",
   "private": true,
-  "version": "4.4.4",
+  "version": "4.4.5",
   "scripts": {
     "build": "docker-compose build test",
     "build:dev": "docker-compose build test --no-cache",
