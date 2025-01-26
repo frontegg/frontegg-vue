@@ -1,5 +1,12 @@
 # Change Log
 
+## [4.4.7](https://github.com/frontegg/frontegg-vue/compare/v4.4.6...v4.4.7) (2025-1-26)
+
+- FR-19351 - Fixed MFA with SMS error and inital state bugs
+- FR-19269 - Changed initial requests to run in parallel
+
+
+
 ## [4.4.6](https://github.com/frontegg/frontegg-vue/compare/v4.4.5...v4.4.6) (2025-1-16)
 
 - FR-19387 - Fixed login with apple in iOS devices
