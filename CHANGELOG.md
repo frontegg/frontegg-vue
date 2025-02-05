@@ -1,5 +1,12 @@
 # Change Log
 
+## [4.4.9](https://github.com/frontegg/frontegg-vue/compare/v4.4.8...v4.4.9) (2025-2-5)
+
+- FR-19618 - Fixed FRONTEGG_AFTER_AUTH_REDIRECT_URL usage on custom login
+- FR-19509 - Fixed sms as main auth strategy validation
+
+
+
 ## [4.4.8](https://github.com/frontegg/frontegg-vue/compare/v4.4.7...v4.4.8) (2025-2-2)
 
 - FR-19573 - Fixed redundant required asterisk on optional field
