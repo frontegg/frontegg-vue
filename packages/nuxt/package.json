@@ -1,6 +1,6 @@
 {
   "name": "@frontegg/nuxt",
-  "version": "4.4.9",
+  "version": "4.5.0",
   "description": "",
   "main": "lib/module.js",
   "types": "types/index.d.ts",
@@ -8,6 +8,6 @@
     "lib"
   ],
   "dependencies": {
-    "@frontegg/vue": "^4.4.9"
+    "@frontegg/vue": "^4.5.0"
   }
 }
