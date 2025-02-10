@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.5.1](https://github.com/frontegg/frontegg-vue/compare/v4.5.0...v4.5.1) (2025-2-10)
+
+- FR-19547 - Changed prestep component to get t instead of texts
+
+
+
 ## [4.5.0](https://github.com/frontegg/frontegg-vue/compare/v4.4.9...v4.5.0) (2025-2-10)
 
 - FR-19547 - Added prestep support for auth flows
