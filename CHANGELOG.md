@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.6.2](https://github.com/frontegg/frontegg-vue/compare/v4.6.1...v4.6.2) (2025-3-5)
+
+- FR-19452 - Added a &quot;silent refresh&quot; to switchTenant
+
+
+
 ## [4.6.1](https://github.com/frontegg/frontegg-vue/compare/v4.6.0...v4.6.1) (2025-3-4)
 
 - FR-19752 - Fixed error not shown in custom role creation
