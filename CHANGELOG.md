@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.6.3](https://github.com/frontegg/frontegg-vue/compare/v4.6.2...v4.6.3) (2025-3-13)
+
+- FR-13869 - Fixed autocomplete overrides input theme
+- FR-19956 - Fixed missing email for unenreolled MFA users
+- FR-20037 - Fixed input focus on user invite dialog
+
+
+
 ## [4.6.2](https://github.com/frontegg/frontegg-vue/compare/v4.6.1...v4.6.2) (2025-3-5)
 
 - FR-19452 - Added a &quot;silent refresh&quot; to switchTenant
