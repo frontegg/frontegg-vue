@@ -3,7 +3,7 @@
 ## [4.6.4](https://github.com/frontegg/frontegg-vue/compare/v4.6.3...v4.6.4) (2025-3-23)
 
 - FR-19299 - Fixed Hebrew translation of password rotation
-- FR-17951 - Changed the api routes of  profile page&#39;s phone number
+- FR-17951 - Changed the api routes of  profile pages phone number
 
 - FR-20068 - Added password config custom tests
 
