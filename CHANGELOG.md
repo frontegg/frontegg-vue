@@ -1,5 +1,14 @@
 # Change Log
 
+## [4.7.0](https://github.com/frontegg/frontegg-vue/compare/v4.6.5...v4.7.0) (2025-4-14)
+
+- FR-18986 - Added tooltip functionality for individual chips in GroupsChipsList component
+- FR-20385 - Fixed user impersonation with identifiers
+- FR-20254 - Added localizations for activate with social logins
+- FR-20280 - Added support for signup with phone number
+
+
+
 ## [4.6.5](https://github.com/frontegg/frontegg-vue/compare/v4.6.4...v4.6.5) (2025-3-31)
 
 - FR-20267 - Added support for direction by metadata
