@@ -1,5 +1,17 @@
 # Change Log
 
+## [4.7.2](https://github.com/frontegg/frontegg-vue/compare/v4.7.1...v4.7.2) (2025-5-20)
+
+- FR-20337 - Fixed errors not displayed on submit
+
+- FR-19738 - Added support for CMC components
+
+- FR-20047 - Added support for overrideSignupFields as string js code
+- FR-19797 - Fixed bug duplicate request on double click
+- FR-20479 - Added type error validation method to yup interfaces
+
+
+
 ## [4.7.1](https://github.com/frontegg/frontegg-vue/compare/v4.7.0...v4.7.1) (2025-5-5)
 
 - FR-20047 - Added support for overrideSignupFields as string js code
