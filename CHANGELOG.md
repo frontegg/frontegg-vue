@@ -1,5 +1,19 @@
 # Change Log
 
+## [4.8.0](https://github.com/frontegg/frontegg-vue/compare/v4.7.2...v4.8.0) (2025-5-27)
+
+- FR-20899 - Changed logout user session button
+- FR-20901 - Fixed select actions menu item
+- FR-20871 - Added support for default language
+- FR-20894 - Added support regex in string input
+
+
+- FR-19718 - Added username strategies
+
+- FR-20337 - Fixed errors not displayed on submit
+
+
+
 ## [4.7.2](https://github.com/frontegg/frontegg-vue/compare/v4.7.1...v4.7.2) (2025-5-20)
 
 - FR-20337 - Fixed errors not displayed on submit
