@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.9.0](https://github.com/frontegg/frontegg-vue/compare/v4.8.0...v4.9.0) (2025-6-12)
+
+- FR-20862 - Fixed useLoginHint and add tests to simulate hosted prelogin flow
+- FR-21121 - Added reset password with email&#x2F;sms actions and a Forgot password sms otc page 
+- FR-21097 - Added suspense to renderCMCComponent
+- FR-21120 - Added BaseOTC component and use it in login otc flows
+- FR-21112 - Added password recovery selector and a determinePasswordRecoveryStrategy function
+- FR-21118 - Fixed default language handle
+- FR-20838 - Added search functionality to roles popper
+- FR-20178 - Added generic IdentifierField and used it in login and forgot password flows
+- FR-20945 - Added username in profile
+- FR-20868 - Added usernames
+
+- FR-21024 - Added callback to reset password cmc
+- FR-20953 - Added Display specific countries for phone number
+- FR-20733 - Fixed Screen flickering after forget password success
+- FR-20104 - Fixed Issue with search term persistence in the Personal and non-Personal API Tokens modals
+- FR-20811 - Fixed optional localizations deep partial type
+- FR-20407 - Added localization support for 25 languages
+
+
+
 ## [4.8.0](https://github.com/frontegg/frontegg-vue/compare/v4.7.2...v4.8.0) (2025-5-27)
 
 - FR-20899 - Changed logout user session button
