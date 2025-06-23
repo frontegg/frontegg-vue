@@ -1,5 +1,30 @@
 # Change Log
 
+## [4.9.1](https://github.com/frontegg/frontegg-vue/compare/v4.9.0...v4.9.1) (2025-6-23)
+
+- FR-20838 - Added search for role in the edit roles dialog of users page
+- FR-21222 - Fixed reset password selector icons to be aligned to the center
+- FR-21206 - Fixed user goes to &quot;Forget password?&quot; page after clicking on &quot;Try another method&quot;
+- FR-21208 - Added support for dynamic redirect url after signup
+- FR-21174 - Changed forgot password sms option translation
+- FR-21173 - Fixed password reset success state handling
+
+
+- FR-0000 - Fixed node version
+- FR-21160 - Removed exclusion of set user email policy state
+- FR-20862 - Fixed useLoginHint and add tests to simulate hosted prelogin flow
+- FR-21121 - Added reset password with email&#x2F;sms actions and a Forgot password sms otc page 
+- FR-21097 - Added suspense to renderCMCComponent
+- FR-21120 - Added BaseOTC component and use it in login otc flows
+- FR-21112 - Added password recovery selector and a determinePasswordRecoveryStrategy function
+- FR-21118 - Fixed default language handle
+- FR-20838 - Added search functionality to roles popper
+- FR-20178 - Added generic IdentifierField and used it in login and forgot password flows
+- FR-20945 - Added username in profile
+- FR-20868 - Added usernames
+
+
+
 ## [4.9.0](https://github.com/frontegg/frontegg-vue/compare/v4.8.0...v4.9.0) (2025-6-12)
 
 - FR-20862 - Fixed useLoginHint and add tests to simulate hosted prelogin flow
