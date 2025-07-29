@@ -1,5 +1,16 @@
 # Change Log
 
+## [4.10.0](https://github.com/frontegg/frontegg-vue/compare/v4.9.1...v4.10.0) (2025-7-29)
+
+- FR-21351 - Changed user loading methods to use the new V3 API
+- FR-21350 - Added usage for tenant-application access types in hosted Admin box
+ - FR-20601 - Fixed metadata sync when using custom signup fields
+- FR-20601 - Fixed custom signup fields visiblity
+- FR-21194 - Fixed translations options to have all supported languages
+- FR-21242 - Added customization for select phone number country codes
+
+
+
 ## [4.9.1](https://github.com/frontegg/frontegg-vue/compare/v4.9.0...v4.9.1) (2025-6-23)
 
 - FR-20838 - Added search for role in the edit roles dialog of users page
