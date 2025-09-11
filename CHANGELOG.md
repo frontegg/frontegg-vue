@@ -1,5 +1,13 @@
 # Change Log
 
+## [4.10.3](https://github.com/frontegg/frontegg-vue/compare/v4.10.2...v4.10.3) (2025-9-10)
+
+- FR-22001 - Added Embedded Social Login in MobileSDK
+
+- FR-22006 - Fixed signup login direct action with basename
+
+
+
 ## [4.10.2](https://github.com/frontegg/frontegg-vue/compare/v4.10.1...v4.10.2) (2025-9-3)
 
 - FR-21916 - Added username field to InviteUserForm with validation
