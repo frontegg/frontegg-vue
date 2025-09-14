@@ -1,5 +1,11 @@
 # Change Log
 
+## [4.10.4](https://github.com/frontegg/frontegg-vue/compare/v4.10.3...v4.10.4) (2025-9-14)
+
+- FR-22130 - Removed autoFocus from invite user&#39;s email field 
+
+
+
 ## [4.10.3](https://github.com/frontegg/frontegg-vue/compare/v4.10.2...v4.10.3) (2025-9-10)
 
 - FR-22001 - Added Embedded Social Login in MobileSDK
