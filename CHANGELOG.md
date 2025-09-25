@@ -1,5 +1,19 @@
 # Change Log
 
+## [4.10.5](https://github.com/frontegg/frontegg-vue/compare/v4.10.4...v4.10.5) (2025-9-25)
+
+- FR-22238 - Added a &#39;Back&#39; button when both link and form invitations …
+- FR-22167 - Fixed username field to be hidden by default in the invite…
+
+
+- FR-22185 - Fixed running afterAuthRedirect in social login callback
+- FR-22201 - Added invitation user form state preservation for enhanced…
+
+
+- FR-22185 - Added support for whitelisting direct login action with metadataOverrides
+
+
+
 ## [4.10.4](https://github.com/frontegg/frontegg-vue/compare/v4.10.3...v4.10.4) (2025-9-14)
 
 - FR-22130 - Removed autoFocus from invite user&#39;s email field 
