@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.10.6](https://github.com/frontegg/frontegg-vue/compare/v4.10.5...v4.10.6) (2025-10-19)
+
+- FR-22210 - Added Netherlands
+- FR-22239 - Fixed share link design and texts
+
+
+- FR-22258 - Added approval flow
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Upgrade Frontegg JS SDK to 7.92.0 in the Vue package, aligning related Frontegg dependencies.
+> 
+> - **Dependencies**:
+>   - Update `packages/vue/package.json`: bump `@frontegg/js` from `7.90.0` to `7.92.0`.
+>   - Align Frontegg ecosystem versions in lockfile: `@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api` to `7.92.0`.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit ed20b934cd816999ff290141cd9b30880f91255d. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.5](https://github.com/frontegg/frontegg-vue/compare/v4.10.4...v4.10.5) (2025-9-25)
 
 - FR-22238 - Added a &#39;Back&#39; button when both link and form invitations …
