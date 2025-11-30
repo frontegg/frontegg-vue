@@ -1,5 +1,23 @@
 # Change Log
 
+## [4.10.7](https://github.com/frontegg/frontegg-vue/compare/v4.10.6...v4.10.7) (2025-11-30)
+
+- FR-22193 - Added admin portal support for searching by username, email, name, etc. in the users table
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Upgrade Frontegg JS SDK to 7.93.0 and align related Frontegg packages in yarn.lock.
+> 
+> - **Dependencies**:
+>   - Bump `@frontegg/js` to `7.93.0` in `packages/vue/package.json`.
+>   - Update lockfile to `7.93.0` for related packages: `@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 417623b16711d4e7b6df3aab797d7bf626f64441. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.6](https://github.com/frontegg/frontegg-vue/compare/v4.10.5...v4.10.6) (2025-10-19)
 
 - FR-22210 - Added Netherlands
