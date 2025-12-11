@@ -1,5 +1,37 @@
 # Change Log
 
+## [4.10.8](https://github.com/frontegg/frontegg-vue/compare/v4.10.7...v4.10.8) (2025-12-11)
+
+- FR-21830 - Fixed IP location
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Bumps `@frontegg/js` to 7.95.0 and updates related Frontegg packages in the lockfile.
+> 
+> - **Dependencies**:
+>   - Upgrade `@frontegg/js` to `7.95.0` in `packages/vue/package.json`.
+>   - Align `yarn.lock` to `7.95.0` for `@frontegg/js`, `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api`.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 4b2596a7dd8cfa3bccc549873d9ab3e9ee09fe1b. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-22289 - Added support new columns in users table
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Updates @frontegg/js to 7.94.0 and refreshes related Frontegg dependencies in yarn.lock.
+> 
+> - **Dependencies**:
+>   - Bump `@frontegg/js` to `7.94.0` in `packages/vue/package.json`.
+>   - Update lockfile to `@frontegg/*` `7.94.0` (`js`, `types`, `redux-store`, `rest-api`).
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 072c460ec9997a7f61b29ecaabc04150fb6f7c6c. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.7](https://github.com/frontegg/frontegg-vue/compare/v4.10.6...v4.10.7) (2025-11-30)
 
 - FR-22193 - Added admin portal support for searching by username, email, name, etc. in the users table
