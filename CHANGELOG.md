@@ -1,5 +1,36 @@
 # Change Log
 
+## [4.10.9](https://github.com/frontegg/frontegg-vue/compare/v4.10.8...v4.10.9) (2026-1-5)
+
+- FR-17084 - Fixed loader
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Dependency upgrade**
+> 
+> - Bumps `@frontegg/js` from `7.95.0` to `7.96.0` in `packages/vue/package.json`
+> - Updates `yarn.lock` to `7.96.0` for transitive Frontegg packages: `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api`
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit b374baa18c35aca24a33aefd0119a85193f79ff6. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-21830 - Fixed IP location
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Bumps `@frontegg/js` to 7.95.0 and updates related Frontegg packages in the lockfile.
+> 
+> - **Dependencies**:
+>   - Upgrade `@frontegg/js` to `7.95.0` in `packages/vue/package.json`.
+>   - Align `yarn.lock` to `7.95.0` for `@frontegg/js`, `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api`.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 4b2596a7dd8cfa3bccc549873d9ab3e9ee09fe1b. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.8](https://github.com/frontegg/frontegg-vue/compare/v4.10.7...v4.10.8) (2025-12-11)
 
 - FR-21830 - Fixed IP location
