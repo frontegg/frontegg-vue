@@ -1,5 +1,24 @@
 # Change Log
 
+## [4.10.10](https://github.com/frontegg/frontegg-vue/compare/v4.10.9...v4.10.10) (2026-1-14)
+
+- FR-23141 - Added username edit config
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Dependency upgrade**
+> 
+> - Bumps `@frontegg/js` from `7.96.0` to `7.97.0` in `packages/vue/package.json`
+> - Updates lockfile to `@frontegg/js@7.97.0` and aligned transitive deps: `@frontegg/types@7.97.0`, `@frontegg/redux-store@7.97.0`, `@frontegg/rest-api@7.97.0`
+> 
+> *Scope/Risk*: Dependency-only change; no source code modifications.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 6979fa195aabeabee21eda71492c57da9607ca3c. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.9](https://github.com/frontegg/frontegg-vue/compare/v4.10.8...v4.10.9) (2026-1-5)
 
 - FR-17084 - Fixed loader
