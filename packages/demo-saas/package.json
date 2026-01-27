@@ -1,6 +1,6 @@
 {
   "name": "vue-demo-saas",
-  "version": "4.10.10",
+  "version": "4.10.11",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
@@ -8,7 +8,7 @@
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "@frontegg/vue": "^4.10.10",
+    "@frontegg/vue": "^4.10.11",
     "vue": "^2.6.11",
     "vue-router": "^3.2.0"
   },
