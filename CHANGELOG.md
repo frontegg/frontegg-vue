@@ -1,5 +1,24 @@
 # Change Log
 
+## [4.10.11](https://github.com/frontegg/frontegg-vue/compare/v4.10.10...v4.10.11) (2026-1-27)
+
+- FR-22263 - Fixed publish
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> Updates Frontegg dependencies to the latest 7.99.0 release.
+> 
+> - Bumps `@frontegg/js` to `7.99.0` in `packages/vue/package.json`
+> - Refreshes `yarn.lock` to `7.99.0` for transitive Frontegg packages (`@frontegg/types`, `@frontegg/rest-api`, `@frontegg/redux-store`)
+> 
+> No source code changes.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit e49d9f6f1c0286f6170dddfc3bc0f4f957de2575. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.10](https://github.com/frontegg/frontegg-vue/compare/v4.10.9...v4.10.10) (2026-1-14)
 
 - FR-23141 - Added username edit config
