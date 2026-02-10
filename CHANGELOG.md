@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.10.12](https://github.com/frontegg/frontegg-vue/compare/v4.10.11...v4.10.12) (2026-2-10)
+
+- FR-23484 - Added an option to render SSO guides outside of admin box
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only version bump with no source code changes; risk is limited to behavior changes introduced by the upstream Frontegg packages.
+> 
+> **Overview**
+> Updates the `@frontegg/vue` package to depend on `@frontegg/js` `7.100.0` (from `7.99.0`).
+> 
+> Refreshes `yarn.lock` to pull the matching `7.100.0` Frontegg dependency set (`@frontegg/js`, `@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 404c40de2195c9b29b282700358ba56fd41f258d. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.11](https://github.com/frontegg/frontegg-vue/compare/v4.10.10...v4.10.11) (2026-1-27)
 
 - FR-22263 - Fixed publish
