@@ -1,5 +1,26 @@
 # Change Log
 
+## [4.10.13](https://github.com/frontegg/frontegg-vue/compare/v4.10.12...v4.10.13) (2026-2-16)
+
+- FR-22346 - Fixed enable session per tenant data mismatch between user jwt and sdk    
+- FR-22346 - Fixed enable session per tenant data mismatch between user jwt and sdk    
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no in-repo logic changes; primary risk is behavioral change/regression coming from the updated Frontegg SDK.
+> 
+> **Overview**
+> Updates `@frontegg/vue` to depend on `@frontegg/js` `7.101.0` (from `7.100.0`).
+> 
+> Refreshes `yarn.lock` to pull the matching `7.101.0` Frontegg package set (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit 35b40f1e3de097fb63ff365e55c18de0475d90d1. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.12](https://github.com/frontegg/frontegg-vue/compare/v4.10.11...v4.10.12) (2026-2-10)
 
 - FR-23484 - Added an option to render SSO guides outside of admin box
