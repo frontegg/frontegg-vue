@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.10.14](https://github.com/frontegg/frontegg-vue/compare/v4.10.13...v4.10.14) (2026-3-8)
+
+- FR-22979 - Changed callback in InviteUserForm to handle errors and reset form state
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only update, but it bumps the Frontegg SDK and its transitive `@frontegg/*` packages, which may change authentication/admin-portal behavior at runtime.
+> 
+> **Overview**
+> Updates `@frontegg/vue` to depend on `@frontegg/js@7.102.0` (from `7.101.0`).
+> 
+> Regenerates `yarn.lock` accordingly, moving the pinned `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api` packages to `7.102.0` to match.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit a0129bf3e5ae458d533cbe2342196516f5cabc6f. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.13](https://github.com/frontegg/frontegg-vue/compare/v4.10.12...v4.10.13) (2026-2-16)
 
 - FR-22346 - Fixed enable session per tenant data mismatch between user jwt and sdk    
