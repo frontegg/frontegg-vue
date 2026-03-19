@@ -1,5 +1,26 @@
 # Change Log
 
+## [4.10.15](https://github.com/frontegg/frontegg-vue/compare/v4.10.14...v4.10.15) (2026-3-19)
+
+- FR-23610 - Added login completed GTM
+- FR-23421 - Added support for CMC SCIM guide dialog and fix SSO guide
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Low risk dependency bump limited to the Vue package; behavior changes come only from upstream `@frontegg/*` packages and should be validated with smoke/regression tests.
+> 
+> **Overview**
+> Updates the `@frontegg/vue` package to depend on `@frontegg/js` `7.103.0` (from `7.102.0`).
+> 
+> Regenerates `yarn.lock` to pull in matching `@frontegg/*` transitive version bumps (`types`, `redux-store`, `rest-api`) aligned to `7.103.0`.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit e50decf54640fa19b2d02428a3f51a4da2768b51. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.14](https://github.com/frontegg/frontegg-vue/compare/v4.10.13...v4.10.14) (2026-3-8)
 
 - FR-22979 - Changed callback in InviteUserForm to handle errors and reset form state
