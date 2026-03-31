@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.10.16](https://github.com/frontegg/frontegg-vue/compare/v4.10.15...v4.10.16) (2026-3-31)
+
+- FR-23900 - Added validation for reset password token and improved user feedback for expired links
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Moderate risk because this updates a core third-party auth/admin SDK and its transitive packages, which can change runtime behavior without local code changes.
+> 
+> **Overview**
+> Updates the Vue package to use `@frontegg/js@7.104.0`, with `yarn.lock` reflecting the corresponding bumps to `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api`.
+> 
+> No application code changes are included; the PR is purely a dependency/lockfile upgrade.
+> 
+> <sup>Written by [Cursor Bugbot](https://cursor.com/dashboard?tab=bugbot) for commit f8399726c614fb62e54ec62247facbcb015a6197. This will update automatically on new commits. Configure [here](https://cursor.com/dashboard?tab=bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.15](https://github.com/frontegg/frontegg-vue/compare/v4.10.14...v4.10.15) (2026-3-19)
 
 - FR-23610 - Added login completed GTM
