@@ -1,5 +1,43 @@
 # Change Log
 
+## [4.10.17](https://github.com/frontegg/frontegg-vue/compare/v4.10.16...v4.10.17) (2026-5-5)
+
+- FR-24187 - Fixed CPU issues
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Low-risk dependency update, but it may introduce behavior/performance changes from the upstream `@frontegg/*` packages at runtime.
+> 
+> **Overview**
+> Updates the `@frontegg/vue` package to depend on `@frontegg/js` `7.106.0` (from `7.105.0`).
+> 
+> Regenerates `yarn.lock` to pull in the corresponding `7.106.0` versions of related transitive Frontegg packages (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit b2af4f5010ebbe85aba9301ad776b3b5844a5af2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-23435 - Added country restriction features to Security Center
+- FR-23515 - Fixed wrong audit log tooltips
+- FR-23524 - Added guidesCdnUrl to SSOPage
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only update, but it upgrades the core `@frontegg/js` bundle (and transitive `@frontegg/*` packages), which could change AdminPortal/auth behavior at runtime.
+> 
+> **Overview**
+> Updates the Vue package to use `@frontegg/js` `7.105.0` (from `7.104.0`).
+> 
+> Refreshes `yarn.lock` to pull the matching `7.105.0` versions of `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api`.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 95ef6c5e0e0819bab4793ff66f705def64f3db1b. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.16](https://github.com/frontegg/frontegg-vue/compare/v4.10.15...v4.10.16) (2026-3-31)
 
 - FR-23900 - Added validation for reset password token and improved user feedback for expired links
