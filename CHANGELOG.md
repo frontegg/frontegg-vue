@@ -1,5 +1,45 @@
 # Change Log
 
+## [4.11.0](https://github.com/frontegg/frontegg-vue/compare/v4.10.17...v4.11.0) (2026-5-17)
+
+- FR-24663 - Fixed country restriction dark theme input
+- FR-24664 - Fixed country field background in modern theme
+- FR-24693 - Fixed country restriction admin portal not full list of countries display for allow deny lists
+- FR-24661 - Fixed country restriction tip counter updates
+- FR-24667 - Added country restriction admin portal current country is not added to the list after enabling the counter restriction toggle
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Low risk dependency-only change; behavior changes are limited to whatever updates ship in `@frontegg/js` and its transitive packages.
+> 
+> **Overview**
+> Updates the Vue package to use `@frontegg/js` `7.107.0` (from `7.106.0`).
+> 
+> Refreshes `yarn.lock` accordingly, pulling in the matching `7.107.0` versions of Frontegg transitive deps (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 90e70a3d2070a696b47aa1a5ce4e4d3b7fb67f03. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-24187 - Fixed CPU issues
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Low-risk dependency update, but it may introduce behavior/performance changes from the upstream `@frontegg/*` packages at runtime.
+> 
+> **Overview**
+> Updates the `@frontegg/vue` package to depend on `@frontegg/js` `7.106.0` (from `7.105.0`).
+> 
+> Regenerates `yarn.lock` to pull in the corresponding `7.106.0` versions of related transitive Frontegg packages (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit b2af4f5010ebbe85aba9301ad776b3b5844a5af2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.10.17](https://github.com/frontegg/frontegg-vue/compare/v4.10.16...v4.10.17) (2026-5-5)
 
 - FR-24187 - Fixed CPU issues
