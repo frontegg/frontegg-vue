@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.11.1](https://github.com/frontegg/frontegg-vue/compare/v4.11.0...v4.11.1) (2026-5-19)
+
+- FR-23507 - Fixed custom login box favicon not displaying pulls from main login box instead
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Low risk dependency bump in the Vue package; primary risk is unintended behavior changes introduced by the upstream Frontegg release.
+> 
+> **Overview**
+> Updates the `@frontegg/vue` package to depend on `@frontegg/js@7.108.0` (from `7.107.0`).
+> 
+> Regenerates `yarn.lock` to pull in the aligned `7.108.0` Frontegg transitive packages (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit e7f0311cc87f3f688a123b6863b73afdd34f625b. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.0](https://github.com/frontegg/frontegg-vue/compare/v4.10.17...v4.11.0) (2026-5-17)
 
 - FR-24663 - Fixed country restriction dark theme input
