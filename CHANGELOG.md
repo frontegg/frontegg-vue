@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.11.2](https://github.com/frontegg/frontegg-vue/compare/v4.11.1...v4.11.2) (2026-6-1)
+
+- FR-25022 - Changed phone validations
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only change, but it pulls in altered phone validation in the Frontegg Admin Portal path, which can affect user profile/signup flows.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.108.0** to **7.109.0** and refreshes **`yarn.lock`** so transitive **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** align on **7.109.0**.
+> 
+> Per the release notes, **7.109.0** includes **FR-25022** (updated **phone validation** behavior in the Admin Portal stack). There are **no other code changes** in this repo—only the version pins.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 6cd80e3c895a9c7166a5fce76b5384c1affbbfcb. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.1](https://github.com/frontegg/frontegg-vue/compare/v4.11.0...v4.11.1) (2026-5-19)
 
 - FR-23507 - Fixed custom login box favicon not displaying pulls from main login box instead
