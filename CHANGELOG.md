@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.11.3](https://github.com/frontegg/frontegg-vue/compare/v4.11.2...v4.11.3) (2026-6-4)
+
+- FR-25111 - Fixed tenant regex
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Version pin and lockfile update only; no application logic changed in this repository.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.109.0** to **7.110.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`redux-store`**, and **`rest-api`** packages resolve at the same version.
+> 
+> This is a **dependency-only** change in this repo; the Admin Portal behavior called out in the PR (e.g. **FR-25111** tenant regex fix) ships in the upstream Frontegg release, not in local source edits here.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit eac88848150ce56c3a8d660b926cc50153b2dce9. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.2](https://github.com/frontegg/frontegg-vue/compare/v4.11.1...v4.11.2) (2026-6-1)
 
 - FR-25022 - Changed phone validations
