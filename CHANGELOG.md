@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.11.4](https://github.com/frontegg/frontegg-vue/compare/v4.11.3...v4.11.4) (2026-6-21)
+
+- FR-24579 - Added native token bridge for the admin portal (no second login)
+- FR-20973 - Fixed sso with username
+- FR-20975 - Fixed description username login with magic code
+- FR-22194 - Fixed error massage of username already exists missing from UI
+- FR-20977 - Fixed resend with username in magic link
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no local code changes; risk is limited to upstream 7.111.0 behavior in auth/admin flows.
+> 
+> **Overview**
+> Updates the Vue package to **`@frontegg/js` 7.111.0** (from 7.110.0) and locks **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** to the matching 7.111.0 versions in `yarn.lock`. There are **no application source changes** in this repo—behavior comes from the upstream release (admin portal native token bridge, SSO/username and magic-link fixes per the PR notes).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 4b76ec3a0ab76b81def9c1f4a6266be0688f6fb2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.3](https://github.com/frontegg/frontegg-vue/compare/v4.11.2...v4.11.3) (2026-6-4)
 
 - FR-25111 - Fixed tenant regex
