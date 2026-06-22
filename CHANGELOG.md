@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.11.6](https://github.com/frontegg/frontegg-vue/compare/v4.11.5...v4.11.6) (2026-6-22)
+
+- FR-24579 - Fixed admin-portal white screen in mobile SDK by refreshing session from native tokens
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Version pin and lockfile update only; auth/session behavior changes live in the upstream `@frontegg/js` package rather than local code.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.112.0** to **7.113.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries move to the same version.
+> 
+> There are no application source changes in this repo; consumers of **`@frontegg/vue`** pick up upstream **7.113.0** behavior, including the admin-portal fix for a mobile SDK white screen by refreshing the session from native tokens (**FR-24579**).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 7fe5480c41dff9486d1c7b1f0fef1b71902648c7. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.5](https://github.com/frontegg/frontegg-vue/compare/v4.11.4...v4.11.5) (2026-6-22)
 
 - FR-24579 - Fixed admin-portal redirect race on native auth handoff
