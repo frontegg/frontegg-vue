@@ -1,5 +1,26 @@
 # Change Log
 
+## [4.11.5](https://github.com/frontegg/frontegg-vue/compare/v4.11.4...v4.11.5) (2026-6-22)
+
+- FR-24579 - Fixed admin-portal redirect race on native auth handoff
+- FR-24579 - Fixed admin-portal mobile bridge capability gating and stuck loading
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Touches auth/admin-portal behavior via an SDK upgrade, but scope is limited to a patch dependency bump with no local logic changes.
+> 
+> **Overview**
+> Bumps **`@frontegg/js`** from **7.111.0** to **7.112.0** in `packages/vue` and refreshes **`yarn.lock`** for the linked **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages at the same version.
+> 
+> This pulls in upstream Admin Portal fixes (FR-24579): redirect race on native auth handoff and mobile bridge capability gating that could leave loading stuck. No application source in this repo changes—only the SDK dependency pin.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit b2aad4e2c939ec5cd409c5c3310830fed538da4d. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.4](https://github.com/frontegg/frontegg-vue/compare/v4.11.3...v4.11.4) (2026-6-21)
 
 - FR-24579 - Added native token bridge for the admin portal (no second login)
