@@ -1,5 +1,26 @@
 # Change Log
 
+## [4.11.7](https://github.com/frontegg/frontegg-vue/compare/v4.11.6...v4.11.7) (2026-6-25)
+
+- FR-24988 - Fixed hosted login box accessibility issues
+- FR-25494 - fixed stale frontegg oauth stale
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Version pin and lockfile update only; behavior changes live in the external `@frontegg/js` package rather than modified local logic.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.113.0** to **7.114.0** and refreshes **`yarn.lock`** so the aligned Frontegg stack (`@frontegg/types`, `@frontegg/redux-store`, `@frontegg/rest-api`) resolves to **7.114.0** as well.
+> 
+> There are **no application source changes** in this repo—consumers pick up upstream fixes from that release, including **hosted login box accessibility** (FR-24988) and **stale Frontegg OAuth** handling (FR-25494).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit c7e1b3574ac818d377d447ef52dc1dfda6912dea. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.6](https://github.com/frontegg/frontegg-vue/compare/v4.11.5...v4.11.6) (2026-6-22)
 
 - FR-24579 - Fixed admin-portal white screen in mobile SDK by refreshing session from native tokens
