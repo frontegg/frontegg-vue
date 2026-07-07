@@ -1,5 +1,42 @@
 # Change Log
 
+## [4.11.8](https://github.com/frontegg/frontegg-vue/compare/v4.11.7...v4.11.8) (2026-7-6)
+
+- FR-23757 - Fixed the actor of system audit logs to not be unknown
+
+- FR-25580 - Fixed token refresh resilience with retry backoff
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Touches auth-related upstream SDK versions (token refresh behavior) without local code review in this PR; regression risk is mainly in login/session flows after upgrade.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.115.0** to **7.117.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries move to **7.117.0** as well. There are no application source changes in this repo—consumers pick up upstream Admin Portal / SDK behavior from the new release (e.g. improved token refresh with retry backoff per FR-25580).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 5c3a2539d9acc308629506863a8d0b8d84f710c2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-24939 - Fixed step-up gate ignoring max_age when the token has no auth_time
+- FR-24939 - Fixed mobile SDK step-up looping to a blank&#x2F;error page instead of the MFA challenge
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only bump, but it ships auth step-up/MFA behavior changes in `@frontegg/js` that can affect login and sensitive-action flows.
+> 
+> **Overview**
+> Bumps the Vue package’s `@frontegg/js` dependency from **7.114.0** to **7.115.0** and refreshes `yarn.lock` so the aligned `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api` packages move to **7.115.0** as well. There are no changes to Vue SDK source in this PR.
+> 
+> Consumers of `@frontegg/vue` pick up upstream Admin Portal / JS fixes described for this release, including step-up handling when tokens lack `auth_time` (`max_age` respected) and a fix for mobile SDK step-up routing to a blank or error page instead of the MFA challenge (FR-24939).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 55f732a5a71cec64937458df104eb87160acda13. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.7](https://github.com/frontegg/frontegg-vue/compare/v4.11.6...v4.11.7) (2026-6-25)
 
 - FR-24988 - Fixed hosted login box accessibility issues
