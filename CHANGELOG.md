@@ -1,5 +1,58 @@
 # Change Log
 
+## [4.11.9](https://github.com/frontegg/frontegg-vue/compare/v4.11.8...v4.11.9) (2026-7-23)
+
+- FR-26014 - Added admin-box addressType redux branch (external instant-nav) [7.119.x]
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Scope is limited to upgrading Frontegg SDK packages; behavior changes come from the upstream 7.119.0 release rather than local code edits.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.118.0** to **7.119.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages move to the same version.
+> 
+> This pulls in Admin Portal **7.119.x**, including **FR-26014** (admin-box **`addressType`** redux branch for external instant-nav). There are no application source changes in this repo—only the version pins.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 248a634c133f0cd6073b32beffc59003c4351040. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-24939 - Fixed native step-up challenge not rendering in the embedded login WebView
+- FR-24853 - Removed identifiers flag
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Login and step-up flows change via upstream auth SDK behavior even though this repo only bumps versions; regression risk is moderate for embedded WebView and identifier-related config.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.117.0** to **7.118.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries move to the same version.
+> 
+> There are no changes to Vue wrapper source in this PR; consumers pick up upstream AdminPortal behavior from **7.118.0**, including fixes for **native step-up challenge rendering in the embedded login WebView** (FR-24939) and **removal of the identifiers flag** (FR-24853).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit b3830c214bda967512e272ac6ddeb30d50372782. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-23757 - Fixed the actor of system audit logs to not be unknown
+
+- FR-25580 - Fixed token refresh resilience with retry backoff
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Touches auth-related upstream SDK versions (token refresh behavior) without local code review in this PR; regression risk is mainly in login/session flows after upgrade.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.115.0** to **7.117.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries move to **7.117.0** as well. There are no application source changes in this repo—consumers pick up upstream Admin Portal / SDK behavior from the new release (e.g. improved token refresh with retry backoff per FR-25580).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 5c3a2539d9acc308629506863a8d0b8d84f710c2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.8](https://github.com/frontegg/frontegg-vue/compare/v4.11.7...v4.11.8) (2026-7-6)
 
 - FR-23757 - Fixed the actor of system audit logs to not be unknown
