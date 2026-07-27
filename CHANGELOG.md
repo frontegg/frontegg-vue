@@ -1,5 +1,42 @@
 # Change Log
 
+## [4.12.0](https://github.com/frontegg/frontegg-vue/compare/v4.11.9...v4.12.0) (2026-7-27)
+
+- FR-25731 - Fixed chooser load-error state seeding when switchable list empties after opening
+
+
+- FR-25731 - Added post-auth Choose Organization step in login-box (forward-port of #2864 to v7.120.x)
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Login and organization-selection flows come from the upgraded Frontegg SDK; risk is moderate because auth UX changes without local code review in this PR.
+> 
+> **Overview**
+> Bumps the Vue package’s `@frontegg/js` dependency from **7.119.0** to **7.121.0** and refreshes `yarn.lock` so the linked `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api` packages align on **7.121.0**. There are no application source changes in this repo—consumers pick up upstream Admin Portal / login-box behavior from that release (e.g. post-auth **Choose Organization** and chooser load-error handling per FR-25731).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 46a4b821d0d7b2ee1fbb643ac4563cc912fe7842. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-26014 - Added admin-box addressType redux branch (external instant-nav) [7.119.x]
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Scope is limited to upgrading Frontegg SDK packages; behavior changes come from the upstream 7.119.0 release rather than local code edits.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.118.0** to **7.119.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages move to the same version.
+> 
+> This pulls in Admin Portal **7.119.x**, including **FR-26014** (admin-box **`addressType`** redux branch for external instant-nav). There are no application source changes in this repo—only the version pins.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 248a634c133f0cd6073b32beffc59003c4351040. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.11.9](https://github.com/frontegg/frontegg-vue/compare/v4.11.8...v4.11.9) (2026-7-23)
 
 - FR-26014 - Added admin-box addressType redux branch (external instant-nav) [7.119.x]
