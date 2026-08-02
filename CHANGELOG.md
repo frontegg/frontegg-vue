@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.13.0](https://github.com/frontegg/frontegg-vue/compare/v4.12.0...v4.13.0) (2026-8-2)
+
+- FR-24113 - Added mobile-friendly authenticator setup-key enrollment UI
+- FR-24965 - Added remember last used MFA factor preference
+- FR-26112 - Fixed iOS Password AutoFill on the embedded login page
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only change, but the upgraded SDK touches MFA enrollment, MFA preference, and embedded login/AutoFill—auth flows that warrant regression testing even without local code edits.
+> 
+> **Overview**
+> Updates **`@frontegg/js`** in `packages/vue/package.json` from **7.121.0** to **7.122.0**, with **`yarn.lock`** pinned to the matching **`@frontegg/types`**, **`redux-store`**, and **`rest-api`** **7.122.0** artifacts. No local Vue source changes—consumers pick up upstream Admin Portal / auth UI behavior from the new SDK release.
+> 
+> Per release notes, **7.122.0** brings mobile-friendly authenticator setup-key enrollment, remembering the last used MFA factor, and an iOS Password AutoFill fix on the embedded login page.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 544b7d562a7be5671bb86e24297d797354906fe2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.12.0](https://github.com/frontegg/frontegg-vue/compare/v4.11.9...v4.12.0) (2026-7-27)
 
 - FR-25731 - Fixed chooser load-error state seeding when switchable list empties after opening
