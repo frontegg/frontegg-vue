@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.13.2](https://github.com/frontegg/frontegg-vue/compare/v4.13.1...v4.13.2) (2026-8-17)
+
+- FR-26036 - Fixed tenant selection takes precedence over skipUserLoading
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only version bump with no local code changes; risk is limited to upstream Frontegg SDK behavior in auth/tenant loading flows.
+> 
+> **Overview**
+> Bumps the Vue package’s `@frontegg/js` dependency from **7.123.0** to **7.124.0** and refreshes `yarn.lock` so related `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api` resolve to the same version.
+> 
+> Consumers of `@frontegg/vue` pick up upstream **7.124.0** behavior, including the fix for **FR-26036** where tenant selection no longer incorrectly overrides `skipUserLoading`.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 708a44f3f148c4542bd6911674b97ede1fc09678. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.13.1](https://github.com/frontegg/frontegg-vue/compare/v4.13.0...v4.13.1) (2026-8-17)
 
 - FR-26036 - Added tenantChoicePending to fix the hosted postlogin vs tenant-chooser race
