@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.13.1](https://github.com/frontegg/frontegg-vue/compare/v4.13.0...v4.13.1) (2026-8-17)
+
+- FR-26036 - Added tenantChoicePending to fix the hosted postlogin vs tenant-chooser race
+- FR-26413 - Fixed the identifier field showing the default keyboard instead of the email keyboard on iOS
+- FR-23291 - Added Admin Portal users filter by role UI
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only change, but it updates auth/login and Admin Portal flows (tenant selection race, login UI), so regression risk is in those user-facing paths rather than in this repo’s code.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.122.0** to **7.123.0** and refreshes **`yarn.lock`** for the matching **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** versions. There are no local source changes in this repo—consumers pick up upstream Admin Portal / SDK behavior from the new release.
+> 
+> Notable fixes and features carried in via **7.123.0** (per release notes): **`tenantChoicePending`** to address a hosted post-login vs tenant-chooser race, correct **email keyboard** on iOS for the identifier field, and **Admin Portal users filter by role** UI.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit f633f6e10b43f1e6149e9badcf0af25d3e556e7d. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.13.0](https://github.com/frontegg/frontegg-vue/compare/v4.12.0...v4.13.0) (2026-8-2)
 
 - FR-24113 - Added mobile-friendly authenticator setup-key enrollment UI
