@@ -1,5 +1,29 @@
 # Change Log
 
+## [4.14.0](https://github.com/frontegg/frontegg-vue/compare/v4.13.2...v4.14.0) (2026-9-6)
+
+- FR-26860 - Fixed lastTermsCheck missing on signup when terms are text-only
+- FR-25906 - Fixed the passkey button reading as disabled after a cancelled credential sheet
+- FR-26334 - Fixed the MFA method-selection page painting without layout on iOS
+- FR-23613 - Changed role pickers to restrict equal-level assignment
+- FR-26112 - Fixed email keyboard and passkey autofill on the login identifier
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Touches auth, signup, MFA, passkeys, and role assignment via a third-party bump; no local logic changes, but regressions would affect security-sensitive flows.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.124.0** to **7.125.0** and refreshes **`yarn.lock`** for the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages.
+> 
+> This pulls in AdminPortal **7.125.0** fixes: **`lastTermsCheck`** on text-only signup terms, passkey UI after a cancelled credential sheet, MFA method-selection layout on iOS, equal-level restrictions on role pickers, and login identifier email keyboard / passkey autofill.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit ab497708c7e71273c1d125921dc8594d2fdc4c2f. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.13.2](https://github.com/frontegg/frontegg-vue/compare/v4.13.1...v4.13.2) (2026-8-17)
 
 - FR-26036 - Fixed tenant selection takes precedence over skipUserLoading
