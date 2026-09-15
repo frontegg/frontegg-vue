@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.15.0](https://github.com/frontegg/frontegg-vue/compare/v4.14.0...v4.15.0) (2026-9-15)
+
+- FR-27031 - Added the @frontegg&#x2F;js SDK identifier to outgoing requests
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only version bump with no local logic changes; risk is limited to upstream SDK behavior in API request headers/metadata.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.125.0** to **7.126.0** and refreshes **`yarn.lock`** for the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** versions.
+> 
+> There are no application code changes in this repo; consumers pick up **7.126.0** behavior (including FR-27031: attaching the **`@frontegg/js`** SDK identifier on outgoing requests) via the updated SDK.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit fadb3c5343cc7a6511296bae940b694357d7067b. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.14.0](https://github.com/frontegg/frontegg-vue/compare/v4.13.2...v4.14.0) (2026-9-6)
 
 - FR-26860 - Fixed lastTermsCheck missing on signup when terms are text-only
