@@ -1,5 +1,23 @@
 # Change Log
 
+## [4.15.1](https://github.com/frontegg/frontegg-vue/compare/v4.15.0...v4.15.1) (2026-9-22)
+
+- FR-27124 - Fixed the edit account name action showing on the root account
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no local logic changes; risk is limited to upstream 7.127.0 behavior in the Admin Portal.
+> 
+> **Overview**
+> Bumps the Vue SDK’s **`@frontegg/js`** dependency from **7.126.0** to **7.127.0** and refreshes **`yarn.lock`** so related **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries align on **7.127.0**. There are no application or library source edits in this repo—the Admin Portal behavior change (FR-27124: hide **edit account name** on the root account) ships in the updated Frontegg packages consumed by **`@frontegg/vue`**.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit fff00c80b79436130018eac005a03d880b3134a2. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.15.0](https://github.com/frontegg/frontegg-vue/compare/v4.14.0...v4.15.0) (2026-9-15)
 
 - FR-27031 - Added the @frontegg&#x2F;js SDK identifier to outgoing requests
