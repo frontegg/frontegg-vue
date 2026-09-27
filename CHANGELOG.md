@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.16.0](https://github.com/frontegg/frontegg-vue/compare/v4.15.1...v4.16.0) (2026-9-27)
+
+- FR-26965 - Added request details, title and a clearer layout to the approval flow page
+- FR-26993 - Added invite link V1 fallback stranded on next&#x2F;v7.125.x
+- FR-24962 - Changed the MFA SMS factor label to &#39;Phone number&#39; in LoginBox and the Admin Portal
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no local logic changes; behavior shifts come from the upstream Frontegg release and should be validated in auth/admin flows.
+> 
+> **Overview**
+> Bumps the Vue SDK’s **`@frontegg/js`** dependency from **7.127.0** to **7.128.0** and refreshes **`yarn.lock`** for the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages. There are no application code changes in this repo—the update pulls in the Admin Portal / shared JS release that includes approval-flow UI improvements (request details, title, clearer layout), an invite-link V1 fallback, and renaming the MFA SMS factor label to **Phone number** in LoginBox and Admin Portal.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit f87d5c7305a05daf54b2d258f98d2e2ab653ad4b. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.15.1](https://github.com/frontegg/frontegg-vue/compare/v4.15.0...v4.15.1) (2026-9-22)
 
 - FR-27124 - Fixed the edit account name action showing on the root account
