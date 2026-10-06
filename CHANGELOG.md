@@ -1,5 +1,28 @@
 # Change Log
 
+## [4.16.1](https://github.com/frontegg/frontegg-vue/compare/v4.16.0...v4.16.1) (2026-10-6)
+
+- FR-26746 - Fixed the infinite loader on Resend invitation email failure
+
+
+- FR-27326 - Fixed double redirect to sso
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no local code changes; SSO redirect behavior may change via the updated @frontegg/js runtime.
+> 
+> **Overview**
+> Bumps the **`@frontegg/vue`** package’s **`@frontegg/js`** dependency from **7.128.0** to **7.130.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages move to **7.130.0** as well.
+> 
+> There are **no application source changes** in this repo—only the version pin and lockfile. Per the PR notes, the upstream release is intended to address **FR-27326** (double redirect during SSO).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 494ea31b6c61b437fbf473e6b377aa39c4587ce1. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.16.0](https://github.com/frontegg/frontegg-vue/compare/v4.15.1...v4.16.0) (2026-9-27)
 
 - FR-26965 - Added request details, title and a clearer layout to the approval flow page
