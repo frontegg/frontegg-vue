@@ -1,5 +1,23 @@
 # Change Log
 
+## [4.17.0](https://github.com/frontegg/frontegg-vue/compare/v4.16.1...v4.17.0) (2026-10-8)
+
+- FR-27075 - Added SSO enforcement handling on tenant switch and token refresh
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Upgrades auth-related Frontegg SDK behavior (SSO enforcement on tenant switch and token refresh) via dependency only, with no local code review of those paths.
+> 
+> **Overview**
+> Bumps the Vue package’s `@frontegg/js` dependency from **7.130.0** to **7.131.0** and refreshes `yarn.lock` for the aligned `@frontegg/types`, `@frontegg/redux-store`, and `@frontegg/rest-api` versions. There are no application code changes in this repo; consumers of `@frontegg/vue` pick up upstream **7.131.0** behavior, including SSO enforcement handling on tenant switch and token refresh (FR-27075).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 76cbe983c2f78b61f1518d042cdf45ef34f337b5. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.16.1](https://github.com/frontegg/frontegg-vue/compare/v4.16.0...v4.16.1) (2026-10-6)
 
 - FR-26746 - Fixed the infinite loader on Resend invitation email failure
