@@ -1,5 +1,41 @@
 # Change Log
 
+## [4.17.1](https://github.com/frontegg/frontegg-vue/compare/v4.17.0...v4.17.1) (2026-10-29)
+
+- FR-28081 - Fixed the admin portal rendering before the metadata overrides load
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only bump with no local code changes; risk is limited to upstream 7.133.0 behavior in the admin portal loading path.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.132.0** to **7.133.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** packages move to the same version.
+> 
+> There are no application code changes in this repo—the update pulls in upstream **Admin Portal** behavior from **7.133.0**, including **FR-28081**, which fixes the admin portal rendering before metadata overrides finish loading.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 5a9e8a9bacee5d969fe55ceda16f01dd3ebada52. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+- FR-27164 - Added roleVisibility option for the Admin Portal Roles page
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency version bump only with lockfile updates; no local logic changes, though consumers inherit new Admin Portal configuration from the upstream release.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.131.0** to **7.132.0** and refreshes **`yarn.lock`** so the aligned **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** entries move to **7.132.0** as well.
+> 
+> There are no application or wrapper code changes in this repo—the update pulls in upstream Admin Portal behavior from that release, including the **`roleVisibility`** option for the Roles page (FR-27164) described in the PR notes.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit 280ca3076feb988b49516522ef93752a61d7d369. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.17.0](https://github.com/frontegg/frontegg-vue/compare/v4.16.1...v4.17.0) (2026-10-25)
 
 - FR-27164 - Added roleVisibility option for the Admin Portal Roles page
