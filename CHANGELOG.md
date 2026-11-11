@@ -1,5 +1,25 @@
 # Change Log
 
+## [4.17.2](https://github.com/frontegg/frontegg-vue/compare/v4.17.1...v4.17.2) (2026-11-11)
+
+- FR-28071 - Fixed environment roles hidden for accounts targeted by tenant
+- FR-28071 - Fixed new environments missing until a page refresh
+- FR-28071 - Fixed the roles +N cut off for long role names
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Low Risk**
+> Dependency-only version bump with no local source changes; risk is limited to behavior changes in the pinned Frontegg release.
+> 
+> **Overview**
+> Bumps the Vue package’s **`@frontegg/js`** dependency from **7.133.0** to **7.134.0**, with **`yarn.lock`** updated for the matching **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** versions. No application code in this repo changes; consumers of **`@frontegg/vue`** pick up upstream Admin Portal fixes (FR-28071) for tenant-targeted environment roles visibility, new environments showing without refresh, and long role-name **+N** display.
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit e582b5c2e445c5a628cc67b2b7f5155ad374988b. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.17.1](https://github.com/frontegg/frontegg-vue/compare/v4.17.0...v4.17.1) (2026-10-29)
 
 - FR-28081 - Fixed the admin portal rendering before the metadata overrides load
