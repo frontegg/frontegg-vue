@@ -1,5 +1,27 @@
 # Change Log
 
+## [4.17.3](https://github.com/frontegg/frontegg-vue/compare/v4.17.2...v4.17.3) (2026-11-16)
+
+- FR-28071 - Added environment roles to the invite user dialog
+
+- FR-28423 - Fixed activation losing the redirect when another user is signed in (behind flag)
+
+<!-- CURSOR_SUMMARY -->
+---
+
+> [!NOTE]
+> **Medium Risk**
+> Dependency-only change, but it ships auth/admin UX fixes (invites and activation redirect) that can affect user onboarding flows.
+> 
+> **Overview**
+> Bumps **`@frontegg/js`** in **`packages/vue`** from **7.134.0** to **7.136.0**, with **`yarn.lock`** updated for the matching **`@frontegg/types`**, **`@frontegg/redux-store`**, and **`@frontegg/rest-api`** pins.
+> 
+> Consumers of the Vue SDK pick up Admin Portal **7.136.0** behavior, including **environment roles in the invite-user dialog** (FR-28071) and a fix for **activation redirect loss when another user is already signed in**, gated behind a feature flag (FR-28423).
+> 
+> <sup>Reviewed by [Cursor Bugbot](https://cursor.com/bugbot) for commit e2f584276ec3ed71e484b034f899fe3a90f23615. Bugbot is set up for automated code reviews on this repo. Configure [here](https://www.cursor.com/dashboard/bugbot).</sup>
+<!-- /CURSOR_SUMMARY -->
+
+
 ## [4.17.2](https://github.com/frontegg/frontegg-vue/compare/v4.17.1...v4.17.2) (2026-11-11)
 
 - FR-28071 - Fixed environment roles hidden for accounts targeted by tenant
