@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.18.0](https://github.com/frontegg/frontegg-vue/compare/v4.17.3...v4.18.0) (2026-11-26)
+
+- FR-28678 - Fixed ua-parser-js ReDoS in the admin portal
+- FR-27878 - Added WhatsApp channel to MFA SMS pre-verify
+
+
+- FR-28670 - Added option to skip the SSO issuer URL check when the page CSP blocks it (behind flag)
+
+
+
 ## [4.17.3](https://github.com/frontegg/frontegg-vue/compare/v4.17.2...v4.17.3) (2026-11-16)
 
 - FR-28071 - Added environment roles to the invite user dialog
